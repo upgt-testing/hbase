@@ -32,7 +32,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * <code>null</code>, it implies full table access.
  */
 @InterfaceAudience.Public
-public class TablePermission extends Permission {
+public class TablePermission extends Permission implements TablePermissionJVMInterface {
 
   private TableName table;
   private byte[] family;

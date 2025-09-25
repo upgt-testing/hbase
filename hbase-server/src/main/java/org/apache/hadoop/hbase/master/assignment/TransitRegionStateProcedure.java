@@ -110,7 +110,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.RegionServerStatusProto
  */
 @InterfaceAudience.Private
 public class TransitRegionStateProcedure
-  extends AbstractStateMachineRegionProcedure<RegionStateTransitionState> {
+  extends AbstractStateMachineRegionProcedure<RegionStateTransitionState> implements TransitRegionStateProcedureJVMInterface {
 
   private static final Logger LOG = LoggerFactory.getLogger(TransitRegionStateProcedure.class);
 

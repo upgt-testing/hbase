@@ -55,7 +55,7 @@ import org.apache.hbase.thirdparty.com.google.common.collect.ImmutableSet;
 
 @InterfaceAudience.LimitedPrivate(HBaseInterfaceAudience.COPROC)
 @InterfaceStability.Evolving
-public class AccessChecker {
+public class AccessChecker implements AccessCheckerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(AccessChecker.class);
   private static final Logger AUDITLOG =
     LoggerFactory.getLogger("SecurityLogger." + AccessChecker.class.getName());

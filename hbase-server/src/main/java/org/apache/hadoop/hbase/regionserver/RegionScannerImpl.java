@@ -58,7 +58,7 @@ import org.apache.hbase.thirdparty.com.google.common.base.Preconditions;
  * RegionScannerImpl is used to combine scanners from multiple Stores (aka column families).
  */
 @InterfaceAudience.Private
-class RegionScannerImpl implements RegionScanner, Shipper, RpcCallback {
+class RegionScannerImpl implements RegionScanner, Shipper, RpcCallback, RegionScannerImplJVMInterface {
 
   private static final Logger LOG = LoggerFactory.getLogger(RegionScannerImpl.class);
 

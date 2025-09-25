@@ -51,7 +51,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.HFileProtos;
  * type.
  */
 @InterfaceAudience.Private
-public class FixedFileTrailer {
+public class FixedFileTrailer implements FixedFileTrailerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(FixedFileTrailer.class);
 
   /**

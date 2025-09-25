@@ -44,7 +44,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.HBaseProtos;
  * time via an instance of {@link TimeRange} to test if Cells fit the StoreFile TimeRange.
  */
 @InterfaceAudience.Private
-public abstract class TimeRangeTracker {
+public abstract class TimeRangeTracker implements TimeRangeTrackerJVMInterface {
 
   public enum Type {
     // thread-unsafe

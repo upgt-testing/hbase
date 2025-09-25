@@ -74,7 +74,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.ProcedureProtos.Procedu
  * via isFinished(procId) and get the result via getResult(procId)
  */
 @InterfaceAudience.Private
-public class ProcedureExecutor<TEnvironment> {
+public class ProcedureExecutor<TEnvironment> implements ProcedureExecutorJVMInterface<TEnvironment> {
   private static final Logger LOG = LoggerFactory.getLogger(ProcedureExecutor.class);
 
   public static final String CHECK_OWNER_SET_CONF_KEY = "hbase.procedure.check.owner.set";

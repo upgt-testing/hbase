@@ -31,7 +31,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * details. Hence, this class is basically the compaction.
  */
 @InterfaceAudience.Private
-public abstract class CompactionContext {
+public abstract class CompactionContext implements CompactionContextJVMInterface {
   protected CompactionRequestImpl request = null;
 
   /**

@@ -45,7 +45,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * {@link #addColumn(byte[], byte[], long)} method.
  */
 @InterfaceAudience.Public
-public class Increment extends Mutation {
+public class Increment extends Mutation implements IncrementJVMInterface {
   private static final int HEAP_OVERHEAD = ClassSize.REFERENCE + ClassSize.TIMERANGE;
   private TimeRange tr = TimeRange.allTime();
 

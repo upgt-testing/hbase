@@ -28,7 +28,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * details or info regarding the operation status in future.
  */
 @InterfaceAudience.LimitedPrivate(HBaseInterfaceAudience.COPROC)
-public class OperationStatus {
+public class OperationStatus implements OperationStatusJVMInterface {
 
   /** Singleton for successful operations. */
   public static final OperationStatus SUCCESS = new OperationStatus(OperationStatusCode.SUCCESS);

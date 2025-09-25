@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.LongAdder;
 import org.apache.yetus.audience.InterfaceAudience;
 
 @InterfaceAudience.Private
-public class BloomFilterMetrics {
+public class BloomFilterMetrics implements BloomFilterMetricsJVMInterface {
 
   private final LongAdder eligibleRequests = new LongAdder();
   private final LongAdder requests = new LongAdder();

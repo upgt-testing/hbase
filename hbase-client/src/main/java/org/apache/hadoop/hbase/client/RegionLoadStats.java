@@ -23,7 +23,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * POJO representing region server load
  */
 @InterfaceAudience.Public
-public class RegionLoadStats {
+public class RegionLoadStats implements RegionLoadStatsJVMInterface {
   int memstoreLoad;
   int heapOccupancy;
   int compactionPressure;

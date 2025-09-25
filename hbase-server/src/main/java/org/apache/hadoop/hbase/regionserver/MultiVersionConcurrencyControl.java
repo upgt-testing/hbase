@@ -34,7 +34,7 @@ import org.apache.hbase.thirdparty.com.google.common.base.MoreObjects.ToStringHe
  * writes for readers to read (thus forming atomic transactions).
  */
 @InterfaceAudience.Private
-public class MultiVersionConcurrencyControl {
+public class MultiVersionConcurrencyControl implements MultiVersionConcurrencyControlJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(MultiVersionConcurrencyControl.class);
   private static final long READPOINT_ADVANCE_WAIT_TIME = 10L;
 

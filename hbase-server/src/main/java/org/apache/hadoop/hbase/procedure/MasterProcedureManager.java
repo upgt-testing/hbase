@@ -50,7 +50,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.HBaseProtos.ProcedureDe
  * methods on both classes are called to clean up the data associated with the procedure.
  */
 @InterfaceAudience.Private
-public abstract class MasterProcedureManager extends ProcedureManager implements Stoppable {
+public abstract class MasterProcedureManager extends ProcedureManager implements Stoppable, MasterProcedureManagerJVMInterface {
   /**
    * Initialize a globally barriered procedure for master.
    * @param master Master service interface

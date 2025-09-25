@@ -53,7 +53,7 @@ import org.apache.hbase.thirdparty.com.google.common.collect.ListMultimap;
  * </p>
  */
 @InterfaceAudience.Private
-public final class AuthManager {
+public final class AuthManager implements AuthManagerJVMInterface {
 
   /**
    * Cache of permissions, it is thread safe.

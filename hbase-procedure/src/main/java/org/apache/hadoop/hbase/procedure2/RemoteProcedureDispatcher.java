@@ -55,7 +55,7 @@ import org.apache.hbase.thirdparty.com.google.common.util.concurrent.ThreadFacto
  * Call {@link #start()} and then {@link #submitTask(Runnable)}. When done, call {@link #stop()}.
  */
 @InterfaceAudience.Private
-public abstract class RemoteProcedureDispatcher<TEnv, TRemote extends Comparable<TRemote>> {
+public abstract class RemoteProcedureDispatcher<TEnv, TRemote extends Comparable<TRemote>> implements RemoteProcedureDispatcherJVMInterface<TEnv, TRemote> {
   private static final Logger LOG = LoggerFactory.getLogger(RemoteProcedureDispatcher.class);
 
   public static final String THREAD_POOL_SIZE_CONF_KEY =

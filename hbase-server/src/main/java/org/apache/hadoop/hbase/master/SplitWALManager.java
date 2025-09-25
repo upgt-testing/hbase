@@ -64,7 +64,7 @@ import org.slf4j.LoggerFactory;
  * @see SplitLogManager for the original distributed split WAL manager.
  */
 @InterfaceAudience.Private
-public class SplitWALManager {
+public class SplitWALManager implements SplitWALManagerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(SplitWALManager.class);
 
   private final MasterServices master;

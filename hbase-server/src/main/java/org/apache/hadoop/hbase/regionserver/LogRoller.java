@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
  * than the Chore sleep time which is invariant. TODO: change to a pool of threads
  */
 @InterfaceAudience.Private
-public class LogRoller extends AbstractWALRoller<RegionServerServices> {
+public class LogRoller extends AbstractWALRoller<RegionServerServices> implements LogRollerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(LogRoller.class);
 
   public LogRoller(RegionServerServices services) {

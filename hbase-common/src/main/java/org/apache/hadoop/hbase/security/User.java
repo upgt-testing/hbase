@@ -49,7 +49,7 @@ import org.apache.hbase.thirdparty.com.google.common.cache.LoadingCache;
  * </p>
  */
 @InterfaceAudience.Public
-public abstract class User {
+public abstract class User implements UserJVMInterface {
   public static final String HBASE_SECURITY_CONF_KEY = "hbase.security.authentication";
   public static final String HBASE_SECURITY_AUTHORIZATION_CONF_KEY = "hbase.security.authorization";
 

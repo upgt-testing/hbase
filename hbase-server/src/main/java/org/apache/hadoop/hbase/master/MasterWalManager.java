@@ -49,7 +49,7 @@ import org.slf4j.LoggerFactory;
  * finding log files, dirs etc.
  */
 @InterfaceAudience.Private
-public class MasterWalManager {
+public class MasterWalManager implements MasterWalManagerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(MasterWalManager.class);
 
   /**

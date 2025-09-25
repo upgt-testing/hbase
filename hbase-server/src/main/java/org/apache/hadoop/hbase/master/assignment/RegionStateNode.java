@@ -65,7 +65,7 @@ import org.slf4j.LoggerFactory;
  * the current state, you'd better have the lock...
  */
 @InterfaceAudience.Private
-public class RegionStateNode implements Comparable<RegionStateNode> {
+public class RegionStateNode implements Comparable<RegionStateNode>, RegionStateNodeJVMInterface {
 
   private static final Logger LOG = LoggerFactory.getLogger(RegionStateNode.class);
 

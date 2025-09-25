@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * Calling this method ensures that all scheduled chores are cancelled and cleaned up properly.
  */
 @InterfaceAudience.Private
-public class ChoreService {
+public class ChoreService implements ChoreServiceJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(ChoreService.class);
 
   /**

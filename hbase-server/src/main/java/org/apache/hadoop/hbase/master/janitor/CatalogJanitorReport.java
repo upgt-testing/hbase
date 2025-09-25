@@ -34,7 +34,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * Report made by ReportMakingVisitor
  */
 @InterfaceAudience.Private
-public class CatalogJanitorReport {
+public class CatalogJanitorReport implements CatalogJanitorReportJVMInterface {
   private final long now = EnvironmentEdgeManager.currentTime();
 
   // Keep Map of found split parents. These are candidates for cleanup.

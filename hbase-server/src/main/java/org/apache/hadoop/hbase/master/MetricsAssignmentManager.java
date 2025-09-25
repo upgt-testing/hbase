@@ -24,7 +24,7 @@ import org.apache.hadoop.hbase.procedure2.ProcedureMetrics;
 import org.apache.yetus.audience.InterfaceAudience;
 
 @InterfaceAudience.Private
-public class MetricsAssignmentManager {
+public class MetricsAssignmentManager implements MetricsAssignmentManagerJVMInterface {
   private final MetricsAssignmentManagerSource assignmentManagerSource;
 
   private final ProcedureMetrics assignProcMetrics;

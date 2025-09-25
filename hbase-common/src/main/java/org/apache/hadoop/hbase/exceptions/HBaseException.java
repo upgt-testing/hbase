@@ -25,7 +25,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  */
 @SuppressWarnings("serial")
 @InterfaceAudience.Private
-public class HBaseException extends Exception {
+public class HBaseException extends Exception implements HBaseExceptionJVMInterface {
   public HBaseException() {
     super();
   }

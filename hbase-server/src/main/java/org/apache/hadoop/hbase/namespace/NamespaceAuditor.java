@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
  * creation.
  */
 @InterfaceAudience.Private
-public class NamespaceAuditor {
+public class NamespaceAuditor implements NamespaceAuditorJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(NamespaceAuditor.class);
   private NamespaceStateManager stateManager;
   private MasterServices masterServices;

@@ -43,7 +43,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * shipped to RPC client.
  */
 @InterfaceAudience.Private
-public class MobCell implements Closeable {
+public class MobCell implements Closeable, MobCellJVMInterface {
 
   private final Cell cell;
   private final StoreFileScanner sfScanner;

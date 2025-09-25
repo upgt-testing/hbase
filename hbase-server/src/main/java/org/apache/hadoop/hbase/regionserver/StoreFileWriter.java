@@ -86,7 +86,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.ProtobufUtil;
  * an implementation detail of the HBase regionserver.
  */
 @InterfaceAudience.Private
-public class StoreFileWriter implements CellSink, ShipperListener {
+public class StoreFileWriter implements CellSink, ShipperListener, StoreFileWriterJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(StoreFileWriter.class.getName());
   public static final String ENABLE_HISTORICAL_COMPACTION_FILES =
     "hbase.enable.historical.compaction.files";

@@ -27,7 +27,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * NOT(!)
  */
 @InterfaceAudience.Public
-public class CellVisibility {
+public class CellVisibility implements CellVisibilityJVMInterface {
 
   private String expression;
 

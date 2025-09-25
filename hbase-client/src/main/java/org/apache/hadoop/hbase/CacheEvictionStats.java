@@ -24,7 +24,7 @@ import org.apache.hadoop.hbase.client.RegionInfo;
 import org.apache.yetus.audience.InterfaceAudience;
 
 @InterfaceAudience.Public
-public final class CacheEvictionStats {
+public final class CacheEvictionStats implements CacheEvictionStatsJVMInterface {
 
   private final long evictedBlocks;
   private final long maxCacheSize;

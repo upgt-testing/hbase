@@ -124,7 +124,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.SnapshotProtos.Snapshot
  */
 @InterfaceAudience.LimitedPrivate(HBaseInterfaceAudience.CONFIG)
 @InterfaceStability.Unstable
-public class SnapshotManager extends MasterProcedureManager implements Stoppable {
+public class SnapshotManager extends MasterProcedureManager implements Stoppable, SnapshotManagerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(SnapshotManager.class);
 
   /** By default, check to see if the snapshot is complete every WAKE MILLIS (ms) */

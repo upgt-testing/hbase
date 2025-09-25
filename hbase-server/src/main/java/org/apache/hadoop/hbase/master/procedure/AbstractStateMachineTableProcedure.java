@@ -42,7 +42,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  */
 @InterfaceAudience.Private
 public abstract class AbstractStateMachineTableProcedure<TState>
-  extends StateMachineProcedure<MasterProcedureEnv, TState> implements TableProcedureInterface {
+  extends StateMachineProcedure<MasterProcedureEnv, TState> implements TableProcedureInterface, AbstractStateMachineTableProcedureJVMInterface<TState> {
 
   // used for compatibility with old clients
   private final ProcedurePrepareLatch syncLatch;

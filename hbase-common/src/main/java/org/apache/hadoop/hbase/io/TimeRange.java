@@ -34,7 +34,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * Immutable. Thread-safe.
  */
 @InterfaceAudience.Public
-public class TimeRange {
+public class TimeRange implements TimeRangeJVMInterface {
   public static final long INITIAL_MIN_TIMESTAMP = 0L;
   public static final long INITIAL_MAX_TIMESTAMP = Long.MAX_VALUE;
   private static final TimeRange ALL_TIME =

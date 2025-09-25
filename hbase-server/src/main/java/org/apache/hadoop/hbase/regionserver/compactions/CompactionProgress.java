@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
  * number of Key/Value pairs already compacted vs. total amount scheduled to be compacted.
  */
 @InterfaceAudience.Private
-public class CompactionProgress {
+public class CompactionProgress implements CompactionProgressJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(CompactionProgress.class);
 
   /** the total compacting key values in currently running compaction */

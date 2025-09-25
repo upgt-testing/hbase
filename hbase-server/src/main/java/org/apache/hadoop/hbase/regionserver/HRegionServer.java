@@ -271,7 +271,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.RegionServerStatusProto
 @InterfaceAudience.LimitedPrivate(HBaseInterfaceAudience.TOOLS)
 @SuppressWarnings({ "deprecation" })
 public class HRegionServer extends Thread
-  implements RegionServerServices, LastSequenceId, ConfigurationObserver {
+  implements RegionServerServices, LastSequenceId, ConfigurationObserver, HRegionServerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(HRegionServer.class);
 
   int unitMB = 1024 * 1024;

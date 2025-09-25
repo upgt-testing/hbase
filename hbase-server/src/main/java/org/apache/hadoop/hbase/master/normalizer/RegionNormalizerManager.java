@@ -38,7 +38,7 @@ import org.apache.hbase.thirdparty.com.google.common.util.concurrent.ThreadFacto
  * This class encapsulates the details of the {@link RegionNormalizer} subsystem.
  */
 @InterfaceAudience.Private
-public class RegionNormalizerManager implements PropagatingConfigurationObserver {
+public class RegionNormalizerManager implements PropagatingConfigurationObserver, RegionNormalizerManagerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(RegionNormalizerManager.class);
 
   private final RegionNormalizerStateStore regionNormalizerStateStore;

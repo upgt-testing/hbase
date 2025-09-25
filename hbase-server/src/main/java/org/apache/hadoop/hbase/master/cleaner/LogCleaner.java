@@ -50,7 +50,7 @@ import org.apache.hbase.thirdparty.com.google.common.base.Preconditions;
  */
 @InterfaceAudience.Private
 public class LogCleaner extends CleanerChore<BaseLogCleanerDelegate>
-  implements ConfigurationObserver {
+  implements ConfigurationObserver, LogCleanerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(LogCleaner.class);
 
   public static final String OLD_WALS_CLEANER_THREAD_SIZE = "hbase.oldwals.cleaner.thread.size";

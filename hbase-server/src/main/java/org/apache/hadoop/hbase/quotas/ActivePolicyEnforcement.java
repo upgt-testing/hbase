@@ -37,7 +37,7 @@ import org.apache.yetus.audience.InterfaceStability;
  */
 @InterfaceAudience.Private
 @InterfaceStability.Evolving
-public class ActivePolicyEnforcement {
+public class ActivePolicyEnforcement implements ActivePolicyEnforcementJVMInterface {
   private final Map<TableName, SpaceViolationPolicyEnforcement> activePolicies;
   private final Map<TableName, SpaceQuotaSnapshot> snapshots;
   private final RegionServerServices rss;

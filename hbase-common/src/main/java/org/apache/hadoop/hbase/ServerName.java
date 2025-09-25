@@ -53,7 +53,7 @@ import org.apache.hbase.thirdparty.com.google.common.net.InetAddresses;
  * Immutable.
  */
 @InterfaceAudience.Public
-public class ServerName implements Comparable<ServerName>, Serializable {
+public class ServerName implements Comparable<ServerName>, Serializable, ServerNameJVMInterface {
   private static final long serialVersionUID = 1367463982557264981L;
 
   /**

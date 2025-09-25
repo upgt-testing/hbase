@@ -59,7 +59,7 @@ import org.apache.hbase.thirdparty.com.google.common.collect.Sets;
  * read/write/deletes to favored nodes.
  */
 @InterfaceAudience.Private
-public class FavoredNodesManager {
+public class FavoredNodesManager implements FavoredNodesManagerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(FavoredNodesManager.class);
 
   private final FavoredNodesPlan globalFavoredNodesAssignmentPlan;

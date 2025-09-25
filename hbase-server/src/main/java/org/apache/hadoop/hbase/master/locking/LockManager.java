@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
  * Functions to acquire lock on table/namespace/regions.
  */
 @InterfaceAudience.Private
-public final class LockManager {
+public final class LockManager implements LockManagerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(LockManager.class);
   private final HMaster master;
   private final RemoteLocks remoteLocks;

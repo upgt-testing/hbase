@@ -57,7 +57,7 @@ import org.apache.hbase.thirdparty.io.netty.util.internal.ObjectUtil;
  * </pre>
  */
 @InterfaceAudience.Private
-public abstract class ByteBuff implements HBaseReferenceCounted {
+public abstract class ByteBuff implements HBaseReferenceCounted, ByteBuffJVMInterface {
   private static final String REFERENCE_COUNT_NAME = "ReferenceCount";
   private static final int NIO_BUFFER_LIMIT = 64 * 1024; // should not be more than 64KB.
 

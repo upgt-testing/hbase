@@ -41,7 +41,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.ProcedureProtos.StateMa
  */
 @InterfaceAudience.Private
 @InterfaceStability.Evolving
-public abstract class StateMachineProcedure<TEnvironment, TState> extends Procedure<TEnvironment> {
+public abstract class StateMachineProcedure<TEnvironment, TState> extends Procedure<TEnvironment> implements StateMachineProcedureJVMInterface<TEnvironment, TState> {
   private static final Logger LOG = LoggerFactory.getLogger(StateMachineProcedure.class);
 
   private static final int EOF_STATE = Integer.MIN_VALUE;

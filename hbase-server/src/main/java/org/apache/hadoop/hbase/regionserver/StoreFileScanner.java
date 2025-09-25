@@ -45,7 +45,7 @@ import org.apache.yetus.audience.InterfaceStability;
  */
 @InterfaceAudience.LimitedPrivate(HBaseInterfaceAudience.PHOENIX)
 @InterfaceStability.Evolving
-public class StoreFileScanner implements KeyValueScanner {
+public class StoreFileScanner implements KeyValueScanner, StoreFileScannerJVMInterface {
   // the reader it comes from:
   private final StoreFileReader reader;
   private final HFileScanner hfs;

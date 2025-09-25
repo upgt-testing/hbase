@@ -35,7 +35,7 @@ import org.apache.hbase.thirdparty.com.google.common.base.Preconditions;
  * This class holds all logical details necessary to run a compaction.
  */
 @InterfaceAudience.Private
-public class CompactionRequestImpl implements CompactionRequest {
+public class CompactionRequestImpl implements CompactionRequest, CompactionRequestImplJVMInterface {
 
   // was this compaction promoted to an off-peak
   private boolean isOffPeak = false;

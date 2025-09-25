@@ -1,0 +1,8 @@
+metric	count
+totalInterfaces	722
+generated	270
+skipped	452
+protobuf	323
+inner-class-no-implementation	23
+interface	66
+enum	40

@@ -37,7 +37,7 @@ import org.apache.hbase.thirdparty.com.google.common.util.concurrent.ThreadFacto
  * at the region level.
  */
 @InterfaceAudience.Private
-public class RegionServicesForStores {
+public class RegionServicesForStores implements RegionServicesForStoresJVMInterface {
 
   private final HRegion region;
   private final RegionServerServices rsServices;

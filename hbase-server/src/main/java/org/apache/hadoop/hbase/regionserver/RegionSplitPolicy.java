@@ -38,7 +38,7 @@ import org.apache.hbase.thirdparty.com.google.common.base.Preconditions;
  * @see ConstantSizeRegionSplitPolicy Default split policy before 0.94.0
  */
 @InterfaceAudience.LimitedPrivate(HBaseInterfaceAudience.CONFIG)
-public abstract class RegionSplitPolicy extends Configured {
+public abstract class RegionSplitPolicy extends Configured implements RegionSplitPolicyJVMInterface {
   private static final Class<? extends RegionSplitPolicy> DEFAULT_SPLIT_POLICY_CLASS =
     SteppingSplitPolicy.class;
 

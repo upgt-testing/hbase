@@ -49,7 +49,7 @@ import org.slf4j.LoggerFactory;
  * Describe a StoreFile (hfile, reference, link)
  */
 @InterfaceAudience.Private
-public class StoreFileInfo implements Configurable {
+public class StoreFileInfo implements Configurable, StoreFileInfoJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(StoreFileInfo.class);
 
   /**

@@ -30,7 +30,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.HBaseProtos;
  * Represents table state.
  */
 @InterfaceAudience.Private
-public class TableState {
+public class TableState implements TableStateJVMInterface {
 
   @InterfaceAudience.Private
   @InterfaceStability.Evolving

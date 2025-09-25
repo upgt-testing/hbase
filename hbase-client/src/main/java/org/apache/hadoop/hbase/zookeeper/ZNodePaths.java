@@ -31,7 +31,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * Class that hold all the paths of znode for HBase.
  */
 @InterfaceAudience.Private
-public class ZNodePaths {
+public class ZNodePaths implements ZNodePathsJVMInterface {
   // TODO: Replace this with ZooKeeper constant when ZOOKEEPER-277 is resolved.
   public static final char ZNODE_PATH_SEPARATOR = '/';
 

@@ -29,7 +29,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * if changed
  */
 @InterfaceAudience.Private
-public class MetaLocationSyncer extends ClientZKSyncer {
+public class MetaLocationSyncer extends ClientZKSyncer implements MetaLocationSyncerJVMInterface {
 
   private volatile int metaReplicaCount = 1;
 

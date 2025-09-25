@@ -58,7 +58,7 @@ import org.apache.hbase.thirdparty.com.google.common.collect.SetMultimap;
  * have no active references to) mob files that were referenced from the current RS.
  */
 @InterfaceAudience.Private
-public class RSMobFileCleanerChore extends ScheduledChore {
+public class RSMobFileCleanerChore extends ScheduledChore implements RSMobFileCleanerChoreJVMInterface {
 
   private static final Logger LOG = LoggerFactory.getLogger(RSMobFileCleanerChore.class);
   private final HRegionServer rs;

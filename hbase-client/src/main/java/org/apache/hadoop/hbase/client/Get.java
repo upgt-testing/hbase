@@ -62,7 +62,7 @@ import org.slf4j.LoggerFactory;
  * To add a filter, call {@link #setFilter(Filter) setFilter}.
  */
 @InterfaceAudience.Public
-public class Get extends Query implements Row {
+public class Get extends Query implements Row, GetJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(Get.class);
 
   private byte[] row = null;

@@ -34,7 +34,7 @@ import org.apache.hbase.thirdparty.com.google.common.collect.Lists;
  * they will automatically be removed one by one when the specified heap usage is exhausted.
  */
 @InterfaceAudience.Private
-public class MemoryBoundedLogMessageBuffer {
+public class MemoryBoundedLogMessageBuffer implements MemoryBoundedLogMessageBufferJVMInterface {
   private final long maxSizeBytes;
   private long usage = 0;
   private LinkedList<LogMessage> messages;

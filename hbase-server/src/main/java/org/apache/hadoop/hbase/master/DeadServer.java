@@ -45,7 +45,7 @@ import org.apache.hbase.thirdparty.com.google.common.base.Preconditions;
  * list to be processing and vice versa).
  */
 @InterfaceAudience.Private
-public class DeadServer {
+public class DeadServer implements DeadServerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(DeadServer.class);
 
   /**

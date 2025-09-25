@@ -31,7 +31,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.MasterProtos;
  * with
  */
 @InterfaceAudience.Private
-public class NamedQueueGetRequest {
+public class NamedQueueGetRequest implements NamedQueueGetRequestJVMInterface {
 
   private AdminProtos.SlowLogResponseRequest slowLogResponseRequest;
   private NamedQueuePayload.NamedQueueEvent namedQueueEvent;

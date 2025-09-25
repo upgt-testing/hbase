@@ -72,7 +72,7 @@ import org.slf4j.LoggerFactory;
  * @see "http://wiki.apache.org/hadoop/ZooKeeper/ErrorHandling"
  */
 @InterfaceAudience.Private
-public class RecoverableZooKeeper {
+public class RecoverableZooKeeper implements RecoverableZooKeeperJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(RecoverableZooKeeper.class);
   // the actual ZooKeeper client instance
   private ZooKeeper zk;

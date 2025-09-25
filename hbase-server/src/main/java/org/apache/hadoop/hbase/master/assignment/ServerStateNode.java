@@ -32,7 +32,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * State of Server; list of hosted regions, etc.
  */
 @InterfaceAudience.Private
-public class ServerStateNode implements Comparable<ServerStateNode> {
+public class ServerStateNode implements Comparable<ServerStateNode>, ServerStateNodeJVMInterface {
   private final Set<RegionStateNode> regions;
   private final ServerName serverName;
   // the lock here is for fencing SCP and TRSP, so not all operations need to hold this lock

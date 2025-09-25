@@ -64,7 +64,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.HFileProtos;
  * @see HFileContext
  */
 @InterfaceAudience.Private
-public class HFileInfo implements SortedMap<byte[], byte[]> {
+public class HFileInfo implements SortedMap<byte[], byte[]>, HFileInfoJVMInterface {
 
   private static final Logger LOG = LoggerFactory.getLogger(HFileInfo.class);
 

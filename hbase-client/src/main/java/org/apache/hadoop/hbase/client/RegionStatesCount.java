@@ -20,7 +20,7 @@ package org.apache.hadoop.hbase.client;
 import org.apache.yetus.audience.InterfaceAudience;
 
 @InterfaceAudience.Private
-public final class RegionStatesCount {
+public final class RegionStatesCount implements RegionStatesCountJVMInterface {
 
   private int openRegions;
   private int splitRegions;

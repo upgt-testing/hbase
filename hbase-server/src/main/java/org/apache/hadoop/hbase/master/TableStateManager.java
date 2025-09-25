@@ -52,7 +52,7 @@ import org.apache.hbase.thirdparty.com.google.common.collect.Sets;
  */
 // TODO: Make this a guava Service
 @InterfaceAudience.Private
-public class TableStateManager {
+public class TableStateManager implements TableStateManagerJVMInterface {
 
   private static final Logger LOG = LoggerFactory.getLogger(TableStateManager.class);
   /**

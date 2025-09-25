@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
  */
 @InterfaceStability.Evolving
 @InterfaceAudience.Private
-public class MetricsMaster {
+public class MetricsMaster implements MetricsMasterJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(MetricsMaster.class);
   private MetricsMasterSource masterSource;
   private MetricsMasterProcSource masterProcSource;

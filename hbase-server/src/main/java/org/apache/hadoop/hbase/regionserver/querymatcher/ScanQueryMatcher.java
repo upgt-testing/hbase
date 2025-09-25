@@ -46,7 +46,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * A query matcher that is specifically designed for the scan case.
  */
 @InterfaceAudience.Private
-public abstract class ScanQueryMatcher implements ShipperListener {
+public abstract class ScanQueryMatcher implements ShipperListener, ScanQueryMatcherJVMInterface {
 
   /**
    * {@link #match} return codes. These instruct the scanner moving through memstores and StoreFiles

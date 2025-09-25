@@ -32,7 +32,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * the class is public) All the access to this class is thread-safe.
  */
 @InterfaceAudience.Private
-public class FavoredNodesPlan {
+public class FavoredNodesPlan implements FavoredNodesPlanJVMInterface {
   /** The map between each region name and its favored region server list */
   private final Map<String, List<ServerName>> favoredNodesMap;
 

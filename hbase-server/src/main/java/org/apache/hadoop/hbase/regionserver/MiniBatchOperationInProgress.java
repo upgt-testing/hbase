@@ -34,7 +34,7 @@ import org.apache.hbase.thirdparty.com.google.common.base.Preconditions;
  * @param T Pair&lt;Mutation, Integer&gt; pair of Mutations and associated rowlock ids .
  */
 @InterfaceAudience.LimitedPrivate(HBaseInterfaceAudience.COPROC)
-public class MiniBatchOperationInProgress<T> {
+public class MiniBatchOperationInProgress<T> implements MiniBatchOperationInProgressJVMInterface<T> {
   private final T[] operations;
   private Mutation[][] operationsFromCoprocessors;
   private final OperationStatus[] retCodeDetails;

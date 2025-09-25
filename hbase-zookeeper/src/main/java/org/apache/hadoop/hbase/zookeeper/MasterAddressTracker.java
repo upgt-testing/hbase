@@ -55,7 +55,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.ZooKeeperProtos;
  * the znode content.
  */
 @InterfaceAudience.Private
-public class MasterAddressTracker extends ZKNodeTracker {
+public class MasterAddressTracker extends ZKNodeTracker implements MasterAddressTrackerJVMInterface {
 
   private volatile List<ServerName> backupMasters = Collections.emptyList();
 

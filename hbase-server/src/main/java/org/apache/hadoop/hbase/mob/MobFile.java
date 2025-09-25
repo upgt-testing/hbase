@@ -35,7 +35,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * The mob file.
  */
 @InterfaceAudience.Private
-public class MobFile {
+public class MobFile implements MobFileJVMInterface {
 
   private HStoreFile sf;
 

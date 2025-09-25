@@ -47,7 +47,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.AdminProtos;
 
 @InterfaceAudience.Private
 public class RegionServerCoprocessorHost
-  extends CoprocessorHost<RegionServerCoprocessor, RegionServerCoprocessorEnvironment> {
+  extends CoprocessorHost<RegionServerCoprocessor, RegionServerCoprocessorEnvironment> implements RegionServerCoprocessorHostJVMInterface {
 
   private static final Logger LOG = LoggerFactory.getLogger(RegionServerCoprocessorHost.class);
 

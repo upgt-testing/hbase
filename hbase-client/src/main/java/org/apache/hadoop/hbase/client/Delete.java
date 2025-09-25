@@ -58,7 +58,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * take a timestamp. The constructor timestamp is not referenced.
  */
 @InterfaceAudience.Public
-public class Delete extends Mutation {
+public class Delete extends Mutation implements DeleteJVMInterface {
   /**
    * Create a Delete operation for the specified row.
    * <p>

@@ -41,7 +41,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * {@link #addColumn(byte[], byte[], long, byte[]) add} if setting the timestamp.
  */
 @InterfaceAudience.Public
-public class Put extends Mutation implements HeapSize {
+public class Put extends Mutation implements HeapSize, PutJVMInterface {
   /**
    * Create a Put operation for the specified row.
    * @param row row key

@@ -27,7 +27,7 @@ import org.apache.yetus.audience.InterfaceStability;
  */
 @InterfaceAudience.LimitedPrivate({ HBaseInterfaceAudience.COPROC, HBaseInterfaceAudience.PHOENIX })
 @InterfaceStability.Evolving
-public abstract class RpcScheduler {
+public abstract class RpcScheduler implements RpcSchedulerJVMInterface {
 
   public static final String IPC_SERVER_MAX_CALLQUEUE_LENGTH =
     "hbase.ipc.server.max.callqueue.length";

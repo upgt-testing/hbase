@@ -29,7 +29,7 @@ import org.apache.hbase.thirdparty.com.google.common.collect.ImmutableMap;
  */
 @InterfaceAudience.Public
 @SuppressWarnings("checkstyle:VisibilityModifier") // See HBASE-27757
-public class ServerSideScanMetrics {
+public class ServerSideScanMetrics implements ServerSideScanMetricsJVMInterface {
   /**
    * Hash to hold the String -&gt; Atomic Long mappings for each metric
    */

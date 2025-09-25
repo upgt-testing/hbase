@@ -1,0 +1,723 @@
+interfaceFqn	status	reason	path
+org.apache.hadoop.hbase.executor.ExecutorServiceJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/executor/ExecutorServiceJVMInterface.java
+org.apache.hadoop.hbase.master.procedure.MasterProcedureSchedulerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/MasterProcedureSchedulerJVMInterface.java
+org.apache.hadoop.hbase.security.access.UserPermissionJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/security/access/UserPermissionJVMInterface.java
+org.apache.hadoop.hbase.client.metrics.ServerSideScanMetricsJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/metrics/ServerSideScanMetricsJVMInterface.java
+org.apache.hadoop.hbase.util.IdLockJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/util/IdLockJVMInterface.java
+org.apache.hadoop.hbase.executor.EventHandlerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/executor/EventHandlerJVMInterface.java
+org.apache.hadoop.hbase.master.locking.LockManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/locking/LockManagerJVMInterface.java
+org.apache.hadoop.hbase.filter.ByteArrayComparableJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/filter/ByteArrayComparableJVMInterface.java
+org.apache.hadoop.hbase.favored.FavoredNodesPlanJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/favored/FavoredNodesPlanJVMInterface.java
+org.apache.hadoop.hbase.client.locking.EntityLockJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/client/locking/EntityLockJVMInterface.java
+org.apache.hadoop.hbase.master.MasterFileSystemJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/MasterFileSystemJVMInterface.java
+org.apache.hadoop.hbase.master.zksyncer.MetaLocationSyncerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/zksyncer/MetaLocationSyncerJVMInterface.java
+org.apache.hadoop.hbase.quotas.ActivePolicyEnforcementJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/ActivePolicyEnforcementJVMInterface.java
+org.apache.hadoop.hbase.regionserver.compactions.CompactionProgressJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/compactions/CompactionProgressJVMInterface.java
+org.apache.hadoop.hbase.nio.RefCntJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/nio/RefCntJVMInterface.java
+org.apache.hadoop.hbase.regionserver.SystemExitWhenAbortTimeoutJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/SystemExitWhenAbortTimeoutJVMInterface.java
+org.apache.hadoop.hbase.master.locking.LockProcedureJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/locking/LockProcedureJVMInterface.java
+org.apache.hadoop.hbase.regionserver.OperationStatusJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/OperationStatusJVMInterface.java
+org.apache.hadoop.hbase.StoppableJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/StoppableJVMInterface.java
+org.apache.hadoop.hbase.regionserver.RSRpcServicesJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RSRpcServicesJVMInterface.java
+org.apache.hadoop.hbase.regionserver.ShipperJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/ShipperJVMInterface.java
+org.apache.hadoop.hbase.client.RowMutationsJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/RowMutationsJVMInterface.java
+org.apache.hadoop.hbase.regionserver.RegionSplitPolicyJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionSplitPolicyJVMInterface.java
+org.apache.hadoop.hbase.mob.MobFileCacheJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/mob/MobFileCacheJVMInterface.java
+org.apache.hadoop.hbase.regionserver.CompactionCheckerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/CompactionCheckerJVMInterface.java
+org.apache.hadoop.hbase.regionserver.MemStoreSizeJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/MemStoreSizeJVMInterface.java
+org.apache.hadoop.hbase.wal.WALEditJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/wal/WALEditJVMInterface.java
+org.apache.hadoop.hbase.master.MetricsAssignmentManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/MetricsAssignmentManagerJVMInterface.java
+org.apache.hadoop.hbase.master.normalizer.RegionNormalizerManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/normalizer/RegionNormalizerManagerJVMInterface.java
+org.apache.hadoop.hbase.regionserver.CompactSplitJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/CompactSplitJVMInterface.java
+org.apache.hadoop.hbase.regionserver.StoreConfigInformationJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/StoreConfigInformationJVMInterface.java
+org.apache.hadoop.hbase.quotas.SpaceQuotaSnapshotJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/quotas/SpaceQuotaSnapshotJVMInterface.java
+org.apache.hadoop.hbase.regionserver.MiniBatchOperationInProgressJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/MiniBatchOperationInProgressJVMInterface.java
+org.apache.hadoop.hbase.exceptions.HBaseExceptionJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/exceptions/HBaseExceptionJVMInterface.java
+org.apache.hadoop.hbase.regionserver.compactions.CompactionConfigurationJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/compactions/CompactionConfigurationJVMInterface.java
+org.apache.hadoop.hbase.regionserver.ScannerContextJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/ScannerContextJVMInterface.java
+org.apache.hadoop.hbase.regionserver.RegionCoprocessorHostJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionCoprocessorHostJVMInterface.java
+org.apache.hadoop.hbase.client.RegionLoadStatsJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/RegionLoadStatsJVMInterface.java
+org.apache.hadoop.hbase.conf.PropagatingConfigurationObserverJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/conf/PropagatingConfigurationObserverJVMInterface.java
+org.apache.hadoop.hbase.regionserver.HRegionJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HRegionJVMInterface.java
+org.apache.hadoop.hbase.regionserver.RegionJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionJVMInterface.java
+org.apache.hadoop.hbase.master.cleaner.CleanerChoreJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/cleaner/CleanerChoreJVMInterface.java
+org.apache.hadoop.hbase.nio.SingleByteBuffJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/nio/SingleByteBuffJVMInterface.java
+org.apache.hadoop.hbase.monitoring.TaskGroupJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/monitoring/TaskGroupJVMInterface.java
+org.apache.hadoop.hbase.client.OperationJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/OperationJVMInterface.java
+org.apache.hadoop.hbase.regionserver.MemStoreSnapshotJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/MemStoreSnapshotJVMInterface.java
+org.apache.hadoop.hbase.procedure2.ProcedureSchedulerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/ProcedureSchedulerJVMInterface.java
+org.apache.hadoop.hbase.regionserver.TimeRangeTrackerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/TimeRangeTrackerJVMInterface.java
+org.apache.hadoop.hbase.io.hfile.ReaderContextJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/io/hfile/ReaderContextJVMInterface.java
+org.apache.hadoop.hbase.regionserver.StoreJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/StoreJVMInterface.java
+org.apache.hadoop.hbase.master.HMasterJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/HMasterJVMInterface.java
+org.apache.hadoop.hbase.nio.ByteBuffJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/nio/ByteBuffJVMInterface.java
+org.apache.hadoop.hbase.client.RegionInfoJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/RegionInfoJVMInterface.java
+org.apache.hadoop.hbase.CacheEvictionStatsJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/CacheEvictionStatsJVMInterface.java
+org.apache.hadoop.hbase.security.visibility.AuthorizationsJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/security/visibility/AuthorizationsJVMInterface.java
+org.apache.hadoop.hbase.procedure2.ProcedureDequeJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/ProcedureDequeJVMInterface.java
+org.apache.hadoop.hbase.procedure2.ProcedureExecutorJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/ProcedureExecutorJVMInterface.java
+org.apache.hadoop.hbase.regionserver.HStoreJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HStoreJVMInterface.java
+org.apache.hadoop.hbase.client.MutationJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/MutationJVMInterface.java
+org.apache.hadoop.hbase.quotas.QuotaSettingsJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/quotas/QuotaSettingsJVMInterface.java
+org.apache.hadoop.hbase.namequeues.request.NamedQueueGetRequestJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/namequeues/request/NamedQueueGetRequestJVMInterface.java
+org.apache.hadoop.hbase.monitoring.MonitoredTaskJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/monitoring/MonitoredTaskJVMInterface.java
+org.apache.hadoop.hbase.regionserver.StoreFileJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/StoreFileJVMInterface.java
+org.apache.hadoop.hbase.ServerNameJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/ServerNameJVMInterface.java
+org.apache.hadoop.hbase.procedure2.ProcedureInMemoryChoreJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/ProcedureInMemoryChoreJVMInterface.java
+org.apache.hadoop.hbase.security.visibility.CellVisibilityJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/security/visibility/CellVisibilityJVMInterface.java
+org.apache.hadoop.hbase.procedure2.RemoteProcedureExceptionJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/RemoteProcedureExceptionJVMInterface.java
+org.apache.hadoop.hbase.security.access.TablePermissionJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/security/access/TablePermissionJVMInterface.java
+org.apache.hadoop.hbase.regionserver.SecureBulkLoadManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/SecureBulkLoadManagerJVMInterface.java
+org.apache.hadoop.hbase.quotas.QuotaObserverChoreJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/QuotaObserverChoreJVMInterface.java
+org.apache.hadoop.hbase.regionserver.RegionScannerImplJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionScannerImplJVMInterface.java
+org.apache.hadoop.hbase.filter.FilterJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/filter/FilterJVMInterface.java
+org.apache.hadoop.hbase.procedure2.ProcedureEventJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/ProcedureEventJVMInterface.java
+org.apache.hadoop.hbase.io.hfile.BloomFilterMetricsJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/io/hfile/BloomFilterMetricsJVMInterface.java
+org.apache.hadoop.hbase.security.access.ZKPermissionWatcherJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/security/access/ZKPermissionWatcherJVMInterface.java
+org.apache.hadoop.hbase.regionserver.StoreEngineJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/StoreEngineJVMInterface.java
+org.apache.hadoop.hbase.io.ByteBuffAllocatorJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/io/ByteBuffAllocatorJVMInterface.java
+org.apache.hadoop.hbase.ipc.RpcCallbackJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/ipc/RpcCallbackJVMInterface.java
+org.apache.hadoop.hbase.quotas.GlobalQuotaSettingsJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/GlobalQuotaSettingsJVMInterface.java
+org.apache.hadoop.hbase.client.RegionStatesCountJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/RegionStatesCountJVMInterface.java
+org.apache.hadoop.hbase.ClusterIdJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/ClusterIdJVMInterface.java
+org.apache.hadoop.hbase.master.cleaner.LogCleanerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/cleaner/LogCleanerJVMInterface.java
+org.apache.hadoop.hbase.regionserver.CompactedHFilesDischargerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/CompactedHFilesDischargerJVMInterface.java
+org.apache.hadoop.hbase.master.cleaner.HFileCleanerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/cleaner/HFileCleanerJVMInterface.java
+org.apache.hadoop.hbase.regionserver.ShipperListenerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/ShipperListenerJVMInterface.java
+org.apache.hadoop.hbase.client.GetJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/GetJVMInterface.java
+org.apache.hadoop.hbase.quotas.MasterQuotaManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/MasterQuotaManagerJVMInterface.java
+org.apache.hadoop.hbase.master.MasterWalManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/MasterWalManagerJVMInterface.java
+org.apache.hadoop.hbase.nio.HBaseReferenceCountedJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/nio/HBaseReferenceCountedJVMInterface.java
+org.apache.hadoop.hbase.ipc.PriorityFunctionJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/ipc/PriorityFunctionJVMInterface.java
+org.apache.hadoop.hbase.procedure2.StateMachineProcedureJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/StateMachineProcedureJVMInterface.java
+org.apache.hadoop.hbase.master.MasterCoprocessorHostJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/MasterCoprocessorHostJVMInterface.java
+org.apache.hadoop.hbase.master.RegionStateJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/master/RegionStateJVMInterface.java
+org.apache.hadoop.hbase.master.zksyncer.ClientZKSyncerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/zksyncer/ClientZKSyncerJVMInterface.java
+org.apache.hadoop.hbase.regionserver.StoreFileWriterJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/StoreFileWriterJVMInterface.java
+org.apache.hadoop.hbase.master.assignment.AssignmentManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/AssignmentManagerJVMInterface.java
+org.apache.hadoop.hbase.master.RackManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/RackManagerJVMInterface.java
+org.apache.hadoop.hbase.http.InfoServerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-http/src/main/java/org/apache/hadoop/hbase/http/InfoServerJVMInterface.java
+org.apache.hadoop.hbase.namequeues.NamedQueueRecorderJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/namequeues/NamedQueueRecorderJVMInterface.java
+org.apache.hadoop.hbase.master.procedure.ServerRemoteProcedureJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/ServerRemoteProcedureJVMInterface.java
+org.apache.hadoop.hbase.master.hbck.HbckChoreJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/hbck/HbckChoreJVMInterface.java
+org.apache.hadoop.hbase.mob.MobFileJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/mob/MobFileJVMInterface.java
+org.apache.hadoop.hbase.fs.HFileSystemJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/fs/HFileSystemJVMInterface.java
+org.apache.hadoop.hbase.master.assignment.SplitTableRegionProcedureJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/SplitTableRegionProcedureJVMInterface.java
+org.apache.hadoop.hbase.master.procedure.AbstractStateMachineRegionProcedureJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/AbstractStateMachineRegionProcedureJVMInterface.java
+org.apache.hadoop.hbase.regionserver.StoreFlusherJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/StoreFlusherJVMInterface.java
+org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeperJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-zookeeper/src/main/java/org/apache/hadoop/hbase/zookeeper/RecoverableZooKeeperJVMInterface.java
+org.apache.hadoop.hbase.io.ReferenceJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/io/ReferenceJVMInterface.java
+org.apache.hadoop.hbase.zookeeper.ZKNodeTrackerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-zookeeper/src/main/java/org/apache/hadoop/hbase/zookeeper/ZKNodeTrackerJVMInterface.java
+org.apache.hadoop.hbase.RawCellJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/RawCellJVMInterface.java
+org.apache.hadoop.hbase.master.janitor.CatalogJanitorReportJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/janitor/CatalogJanitorReportJVMInterface.java
+org.apache.hadoop.hbase.master.procedure.TruncateRegionProcedureJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/TruncateRegionProcedureJVMInterface.java
+org.apache.hadoop.hbase.util.ObjectIntPairJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/util/ObjectIntPairJVMInterface.java
+org.apache.hadoop.hbase.CellJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/CellJVMInterface.java
+org.apache.hadoop.hbase.client.CheckAndMutateJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/CheckAndMutateJVMInterface.java
+org.apache.hadoop.hbase.master.TableDescriptorGetterJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/TableDescriptorGetterJVMInterface.java
+org.apache.hadoop.hbase.net.AddressJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/net/AddressJVMInterface.java
+org.apache.hadoop.hbase.io.hfile.FixedFileTrailerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/io/hfile/FixedFileTrailerJVMInterface.java
+org.apache.hadoop.hbase.zookeeper.ZKListenerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-zookeeper/src/main/java/org/apache/hadoop/hbase/zookeeper/ZKListenerJVMInterface.java
+org.apache.hadoop.hbase.zookeeper.ZNodePathsJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/zookeeper/ZNodePathsJVMInterface.java
+org.apache.hadoop.hbase.client.QueryJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/QueryJVMInterface.java
+org.apache.hadoop.hbase.ipc.CallRunnerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/ipc/CallRunnerJVMInterface.java
+org.apache.hadoop.hbase.replication.ReplicationPeerConfigJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/replication/ReplicationPeerConfigJVMInterface.java
+org.apache.hadoop.hbase.monitoring.MonitoredTaskImplJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/monitoring/MonitoredTaskImplJVMInterface.java
+org.apache.hadoop.hbase.master.procedure.TableProcedureInterfaceJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/TableProcedureInterfaceJVMInterface.java
+org.apache.hadoop.hbase.client.DeleteJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/DeleteJVMInterface.java
+org.apache.hadoop.hbase.client.AttributesJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/AttributesJVMInterface.java
+org.apache.hadoop.hbase.procedure2.RemoteProcedureDispatcherJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/RemoteProcedureDispatcherJVMInterface.java
+org.apache.hadoop.hbase.security.access.AuthManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/security/access/AuthManagerJVMInterface.java
+org.apache.hadoop.hbase.util.PairJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/util/PairJVMInterface.java
+org.apache.hadoop.hbase.master.procedure.AbstractStateMachineTableProcedureJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/AbstractStateMachineTableProcedureJVMInterface.java
+org.apache.hadoop.hbase.util.NettyEventLoopGroupConfigJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/util/NettyEventLoopGroupConfigJVMInterface.java
+org.apache.hadoop.hbase.quotas.RpcQuotaManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/RpcQuotaManagerJVMInterface.java
+org.apache.hadoop.hbase.procedure2.RemoteProcedureJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/RemoteProcedureJVMInterface.java
+org.apache.hadoop.hbase.namequeues.NamedQueuePayloadJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/namequeues/NamedQueuePayloadJVMInterface.java
+org.apache.hadoop.hbase.regionserver.InternalScannerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/InternalScannerJVMInterface.java
+org.apache.hadoop.hbase.AbortableJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/AbortableJVMInterface.java
+org.apache.hadoop.hbase.client.metrics.ScanMetricsJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/metrics/ScanMetricsJVMInterface.java
+org.apache.hadoop.hbase.master.TableStateManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/TableStateManagerJVMInterface.java
+org.apache.hadoop.hbase.ServerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/ServerJVMInterface.java
+org.apache.hadoop.hbase.regionserver.MetricsRegionJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/MetricsRegionJVMInterface.java
+org.apache.hadoop.hbase.ipc.CallQueueInfoJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/ipc/CallQueueInfoJVMInterface.java
+org.apache.hadoop.hbase.quotas.RegionServerSpaceQuotaManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/RegionServerSpaceQuotaManagerJVMInterface.java
+org.apache.hadoop.hbase.client.CursorJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/CursorJVMInterface.java
+org.apache.hadoop.hbase.io.HeapSizeJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/io/HeapSizeJVMInterface.java
+org.apache.hadoop.hbase.regionserver.CreateStoreFileWriterParamsJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/CreateStoreFileWriterParamsJVMInterface.java
+org.apache.hadoop.hbase.master.assignment.RegionStateNodeJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/RegionStateNodeJVMInterface.java
+org.apache.hadoop.hbase.security.access.AuthResultJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/security/access/AuthResultJVMInterface.java
+org.apache.hadoop.hbase.mob.MobCellJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/mob/MobCellJVMInterface.java
+org.apache.hadoop.hbase.client.NormalizeTableFilterParamsJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/NormalizeTableFilterParamsJVMInterface.java
+org.apache.hadoop.hbase.master.RegionPlanJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/RegionPlanJVMInterface.java
+org.apache.hadoop.hbase.client.IncrementJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/IncrementJVMInterface.java
+org.apache.hadoop.hbase.favored.FavoredNodesManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/favored/FavoredNodesManagerJVMInterface.java
+org.apache.hadoop.hbase.quotas.RegionServerRpcQuotaManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/RegionServerRpcQuotaManagerJVMInterface.java
+org.apache.hadoop.hbase.namequeues.response.NamedQueueGetResponseJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/namequeues/response/NamedQueueGetResponseJVMInterface.java
+org.apache.hadoop.hbase.master.procedure.RSProcedureDispatcherJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/RSProcedureDispatcherJVMInterface.java
+org.apache.hadoop.hbase.HRegionInfoJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/HRegionInfoJVMInterface.java
+org.apache.hadoop.hbase.procedure2.ProcedureJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/ProcedureJVMInterface.java
+org.apache.hadoop.hbase.client.BalanceRequestJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/BalanceRequestJVMInterface.java
+org.apache.hadoop.hbase.conf.ConfigurationManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/conf/ConfigurationManagerJVMInterface.java
+org.apache.hadoop.hbase.io.hfile.CacheConfigJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/io/hfile/CacheConfigJVMInterface.java
+org.apache.hadoop.hbase.regionserver.PeriodicMemStoreFlusherJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/PeriodicMemStoreFlusherJVMInterface.java
+org.apache.hadoop.hbase.client.BalanceResponseJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/BalanceResponseJVMInterface.java
+org.apache.hadoop.hbase.regionserver.LastSequenceIdJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/LastSequenceIdJVMInterface.java
+org.apache.hadoop.hbase.master.hbck.HbckReportJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/hbck/HbckReportJVMInterface.java
+org.apache.hadoop.hbase.HRegionLocationJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/HRegionLocationJVMInterface.java
+org.apache.hadoop.hbase.regionserver.querymatcher.ScanQueryMatcherJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/querymatcher/ScanQueryMatcherJVMInterface.java
+org.apache.hadoop.hbase.regionserver.RegionServerAccountingJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionServerAccountingJVMInterface.java
+org.apache.hadoop.hbase.client.SnapshotDescriptionJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/SnapshotDescriptionJVMInterface.java
+org.apache.hadoop.hbase.procedure.ProcedureManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/ProcedureManagerJVMInterface.java
+org.apache.hadoop.hbase.regionserver.HStoreFileJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HStoreFileJVMInterface.java
+org.apache.hadoop.hbase.master.SnapshotOfRegionAssignmentFromMetaJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/SnapshotOfRegionAssignmentFromMetaJVMInterface.java
+org.apache.hadoop.hbase.regionserver.LeaseManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/LeaseManagerJVMInterface.java
+org.apache.hadoop.hbase.master.region.MasterRegionJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/region/MasterRegionJVMInterface.java
+org.apache.hadoop.hbase.io.TimeRangeJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/io/TimeRangeJVMInterface.java
+org.apache.hadoop.hbase.regionserver.MetricsRegionServerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/MetricsRegionServerJVMInterface.java
+org.apache.hadoop.hbase.regionserver.MutableOnlineRegionsJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/MutableOnlineRegionsJVMInterface.java
+org.apache.hadoop.hbase.master.procedure.MasterProcedureEnvJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/MasterProcedureEnvJVMInterface.java
+org.apache.hadoop.hbase.namespace.NamespaceAuditorJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/namespace/NamespaceAuditorJVMInterface.java
+org.apache.hadoop.hbase.coprocessor.CoprocessorHostJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/coprocessor/CoprocessorHostJVMInterface.java
+org.apache.hadoop.hbase.CellScannerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/CellScannerJVMInterface.java
+org.apache.hadoop.hbase.master.MasterServicesJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/MasterServicesJVMInterface.java
+org.apache.hadoop.hbase.zookeeper.MasterAddressTrackerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-zookeeper/src/main/java/org/apache/hadoop/hbase/zookeeper/MasterAddressTrackerJVMInterface.java
+org.apache.hadoop.hbase.procedure.ProcedureManagerHostJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/ProcedureManagerHostJVMInterface.java
+org.apache.hadoop.hbase.regionserver.StoreFileScannerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/StoreFileScannerJVMInterface.java
+org.apache.hadoop.hbase.regionserver.compactions.CompactionRequestJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/compactions/CompactionRequestJVMInterface.java
+org.apache.hadoop.hbase.client.CheckAndMutateResultJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/CheckAndMutateResultJVMInterface.java
+org.apache.hadoop.hbase.regionserver.KeyValueScannerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/KeyValueScannerJVMInterface.java
+org.apache.hadoop.hbase.master.SplitWALManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/SplitWALManagerJVMInterface.java
+org.apache.hadoop.hbase.regionserver.HeapMemoryManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HeapMemoryManagerJVMInterface.java
+org.apache.hadoop.hbase.security.UserJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/security/UserJVMInterface.java
+org.apache.hadoop.hbase.namespace.NamespaceTableAndRegionInfoJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/namespace/NamespaceTableAndRegionInfoJVMInterface.java
+org.apache.hadoop.hbase.master.janitor.CatalogJanitorJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/janitor/CatalogJanitorJVMInterface.java
+org.apache.hadoop.hbase.master.snapshot.SnapshotManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/snapshot/SnapshotManagerJVMInterface.java
+org.apache.hadoop.hbase.ScheduledChoreJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/ScheduledChoreJVMInterface.java
+org.apache.hadoop.hbase.regionserver.CellSinkJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/CellSinkJVMInterface.java
+org.apache.hadoop.hbase.wal.AbstractWALRollerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/wal/AbstractWALRollerJVMInterface.java
+org.apache.hadoop.hbase.ExtendedCellJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/ExtendedCellJVMInterface.java
+org.apache.hadoop.hbase.regionserver.compactions.CompactionRequestImplJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/compactions/CompactionRequestImplJVMInterface.java
+org.apache.hadoop.hbase.regionserver.HRegionFileSystemJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HRegionFileSystemJVMInterface.java
+org.apache.hadoop.hbase.regionserver.RegionServerCoprocessorHostJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionServerCoprocessorHostJVMInterface.java
+org.apache.hadoop.hbase.master.replication.ReplicationPeerManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/replication/ReplicationPeerManagerJVMInterface.java
+org.apache.hadoop.hbase.regionserver.FavoredNodesForRegionJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/FavoredNodesForRegionJVMInterface.java
+org.apache.hadoop.hbase.master.DeadServerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/DeadServerJVMInterface.java
+org.apache.hadoop.hbase.mob.RSMobFileCleanerChoreJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/mob/RSMobFileCleanerChoreJVMInterface.java
+org.apache.hadoop.hbase.security.access.AccessCheckerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/security/access/AccessCheckerJVMInterface.java
+org.apache.hadoop.hbase.monitoring.MemoryBoundedLogMessageBufferJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/monitoring/MemoryBoundedLogMessageBufferJVMInterface.java
+org.apache.hadoop.hbase.regionserver.compactions.CompactionPolicyJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/compactions/CompactionPolicyJVMInterface.java
+org.apache.hadoop.hbase.master.assignment.ServerStateNodeJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/ServerStateNodeJVMInterface.java
+org.apache.hadoop.hbase.client.RowJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/RowJVMInterface.java
+org.apache.hadoop.hbase.TableNameJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/TableNameJVMInterface.java
+org.apache.hadoop.hbase.regionserver.OnlineRegionsJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/OnlineRegionsJVMInterface.java
+org.apache.hadoop.hbase.CellScannableJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/CellScannableJVMInterface.java
+org.apache.hadoop.hbase.regionserver.BrokenStoreFileCleanerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/BrokenStoreFileCleanerJVMInterface.java
+org.apache.hadoop.hbase.regionserver.metrics.MetricsTableRequestsJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/metrics/MetricsTableRequestsJVMInterface.java
+org.apache.hadoop.hbase.regionserver.ServerNonceManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/ServerNonceManagerJVMInterface.java
+org.apache.hadoop.hbase.regionserver.StoreFileReaderJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/StoreFileReaderJVMInterface.java
+org.apache.hadoop.hbase.ipc.RpcSchedulerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/ipc/RpcSchedulerJVMInterface.java
+org.apache.hadoop.hbase.master.assignment.MergeTableRegionsProcedureJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/MergeTableRegionsProcedureJVMInterface.java
+org.apache.hadoop.hbase.io.hfile.HFileContextJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/io/hfile/HFileContextJVMInterface.java
+org.apache.hadoop.hbase.io.hfile.HFileInfoJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/io/hfile/HFileInfoJVMInterface.java
+org.apache.hadoop.hbase.ipc.HBaseRPCErrorHandlerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/ipc/HBaseRPCErrorHandlerJVMInterface.java
+org.apache.hadoop.hbase.master.ServerListenerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerListenerJVMInterface.java
+org.apache.hadoop.hbase.regionserver.compactions.CompactionContextJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/compactions/CompactionContextJVMInterface.java
+org.apache.hadoop.hbase.regionserver.LogRollerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/LogRollerJVMInterface.java
+org.apache.hadoop.hbase.client.AppendJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/AppendJVMInterface.java
+org.apache.hadoop.hbase.master.assignment.TransitRegionStateProcedureJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/TransitRegionStateProcedureJVMInterface.java
+org.apache.hadoop.hbase.regionserver.RegionServicesForStoresJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionServicesForStoresJVMInterface.java
+org.apache.hadoop.hbase.master.assignment.RegionStatesJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/RegionStatesJVMInterface.java
+org.apache.hadoop.hbase.master.procedure.SnapshotVerifyProcedureJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/SnapshotVerifyProcedureJVMInterface.java
+org.apache.hadoop.hbase.MetaRegionLocationCacheJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/MetaRegionLocationCacheJVMInterface.java
+org.apache.hadoop.hbase.procedure2.LockedResourceJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/LockedResourceJVMInterface.java
+org.apache.hadoop.hbase.regionserver.RegionScannerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionScannerJVMInterface.java
+org.apache.hadoop.hbase.HDFSBlocksDistributionJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/HDFSBlocksDistributionJVMInterface.java
+org.apache.hadoop.hbase.conf.ConfigurationObserverJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/conf/ConfigurationObserverJVMInterface.java
+org.apache.hadoop.hbase.master.assignment.RegionStateStoreJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/RegionStateStoreJVMInterface.java
+org.apache.hadoop.hbase.procedure2.ProcedureExceptionJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/ProcedureExceptionJVMInterface.java
+org.apache.hadoop.hbase.master.MetricsMasterJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/MetricsMasterJVMInterface.java
+org.apache.hadoop.hbase.client.TableStateJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/TableStateJVMInterface.java
+org.apache.hadoop.hbase.regionserver.compactions.CompactorJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/compactions/CompactorJVMInterface.java
+org.apache.hadoop.hbase.procedure.MasterProcedureManagerHostJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/MasterProcedureManagerHostJVMInterface.java
+org.apache.hadoop.hbase.regionserver.MemStoreFlusherJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/MemStoreFlusherJVMInterface.java
+org.apache.hadoop.hbase.client.ScanJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/ScanJVMInterface.java
+org.apache.hadoop.hbase.client.PutJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/PutJVMInterface.java
+org.apache.hadoop.hbase.io.FSDataInputStreamWrapperJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/io/FSDataInputStreamWrapperJVMInterface.java
+org.apache.hadoop.hbase.RegionStateListenerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/RegionStateListenerJVMInterface.java
+org.apache.hadoop.hbase.master.MasterRpcServicesJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/MasterRpcServicesJVMInterface.java
+org.apache.hadoop.hbase.KeyValueJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/KeyValueJVMInterface.java
+org.apache.hadoop.hbase.regionserver.ScanInfoJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/ScanInfoJVMInterface.java
+org.apache.hadoop.hbase.regionserver.FlushRequesterJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/FlushRequesterJVMInterface.java
+org.apache.hadoop.hbase.ChoreServiceJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/ChoreServiceJVMInterface.java
+org.apache.hadoop.hbase.zookeeper.ZKWatcherJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-zookeeper/src/main/java/org/apache/hadoop/hbase/zookeeper/ZKWatcherJVMInterface.java
+org.apache.hadoop.hbase.master.ServerManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManagerJVMInterface.java
+org.apache.hadoop.hbase.metrics.MetricRegistryInfoJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-metrics-api/src/main/java/org/apache/hadoop/hbase/metrics/MetricRegistryInfoJVMInterface.java
+org.apache.hadoop.hbase.quotas.SpaceQuotaSnapshotViewJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/quotas/SpaceQuotaSnapshotViewJVMInterface.java
+org.apache.hadoop.hbase.regionserver.HRegionServerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HRegionServerJVMInterface.java
+org.apache.hadoop.hbase.util.NonceKeyJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/util/NonceKeyJVMInterface.java
+org.apache.hadoop.hbase.client.OperationWithAttributesJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/OperationWithAttributesJVMInterface.java
+org.apache.hadoop.hbase.regionserver.MovedRegionInfoJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/MovedRegionInfoJVMInterface.java
+org.apache.hadoop.hbase.regionserver.StoreFileInfoJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/StoreFileInfoJVMInterface.java
+org.apache.hadoop.hbase.NamespaceDescriptorJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/NamespaceDescriptorJVMInterface.java
+org.apache.hadoop.hbase.master.SplitOrMergeStateStoreJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/SplitOrMergeStateStoreJVMInterface.java
+org.apache.hadoop.hbase.procedure.MasterProcedureManagerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/MasterProcedureManagerJVMInterface.java
+org.apache.hadoop.hbase.procedure2.AbstractProcedureSchedulerJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/AbstractProcedureSchedulerJVMInterface.java
+org.apache.hadoop.hbase.regionserver.MultiVersionConcurrencyControlJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/MultiVersionConcurrencyControlJVMInterface.java
+org.apache.hadoop.hbase.regionserver.compactions.CompactionRequesterJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/compactions/CompactionRequesterJVMInterface.java
+org.apache.hadoop.hbase.regionserver.RegionServerServicesJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionServerServicesJVMInterface.java
+org.apache.hadoop.hbase.client.ResultJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/ResultJVMInterface.java
+org.apache.hadoop.hbase.security.access.PermissionJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/security/access/PermissionJVMInterface.java
+org.apache.hadoop.hbase.quotas.SnapshotQuotaObserverChoreJVMInterface	generated	ok	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/SnapshotQuotaObserverChoreJVMInterface.java
+org.apache.hadoop.hbase.ClusterMetricsJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.shaded.protobuf.generated.CompactionStateJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.client.TableDescriptorJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.procedure2.store.ProcedureStoreJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.client.ColumnFamilyDescriptorJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.quotas.SpaceQuotaSnapshotNotifierJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SnapshotDescriptionJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.client.MasterSwitchTypeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.master.ClusterSchemaJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.client.CompactionStateJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.master.LoadBalancerJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.wal.WALJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.throttle.ThroughputControllerJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.quotas.RegionSizeStoreJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.ipc.RpcServerInterfaceJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.CoordinatedStateManagerJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.RegionStateTransitionContextJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RegionStoreSequenceIdsJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.client.ConnectionJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.TableDescriptorsJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RegionLoadJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.regionserver.ReplicationSourceServiceJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.client.ClusterConnectionJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.PostOpenDeployContextJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.client.StateJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.master.locking.MasterLockJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.procedure2.LockTypeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.master.locking.RemoteLocksJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.client.ResultScannerJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.master.region.UpdateMasterRegionJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.FlushResultJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ForeignExceptionMessageJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ListTableDescriptorsByStateResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ListTableDescriptorsByStateRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.LogEntryJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.LogRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.LockHeartbeatResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.LockHeartbeatRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ReportProcedureDoneResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ReportProcedureDoneRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.UnassignRegionResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.UnassignRegionRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetProceduresResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetProceduresRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.DecommissionRegionServersResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.DecommissionRegionServersRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ListTableNamesByStateResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ListTableNamesByStateRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetLastFlushedSequenceIdResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetLastFlushedSequenceIdRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetNamespaceDescriptorResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetNamespaceDescriptorRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SetSplitOrMergeEnabledResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SetSplitOrMergeEnabledRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetCompletedSnapshotsResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetCompletedSnapshotsRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.MajorCompactionTimestampResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.MajorCompactionTimestampRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetReplicationPeerConfigResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetReplicationPeerConfigRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetTableNamesResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetTableNamesRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.AssignsResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.AssignsRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GrantResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GrantRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.TruncateTableResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.TruncateTableRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RegionSpaceUseReportResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RegionSpaceUseReportRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ListNamespaceDescriptorsResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ListNamespaceDescriptorsRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ListTableNamesByNamespaceResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ListTableNamesByNamespaceRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.MajorCompactionTimestampForRegionRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsCatalogJanitorEnabledResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsCatalogJanitorEnabledRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.UnassignsResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.UnassignsRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SecurityCapabilitiesResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SecurityCapabilitiesRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetClusterStatusResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetClusterStatusRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RestoreSnapshotResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RestoreSnapshotRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.AssignRegionResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.AssignRegionRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ModifyColumnResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ModifyColumnRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsReplicationPeerModificationEnabledResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsReplicationPeerModificationEnabledRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetTableStateResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetTableStateRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RunCleanerChoreResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RunCleanerChoreRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.FileArchiveNotificationResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.FileArchiveNotificationRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetSpaceQuotaRegionSizesResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetSpaceQuotaRegionSizesRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.UpdateReplicationPeerConfigResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.UpdateReplicationPeerConfigRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ExecProcedureResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ExecProcedureRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetLiveRegionServersResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetLiveRegionServersRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.EnableTableResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.EnableTableRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetReplicationPeerModificationProceduresResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetReplicationPeerModificationProceduresRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.StopMasterResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.StopMasterRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SetRegionStateInMetaResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SetRegionStateInMetaRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.FixMetaResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.FixMetaRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsMasterRunningResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsMasterRunningRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetQuotaStatesResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetQuotaStatesRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.LockResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.LockRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsNormalizerEnabledResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsNormalizerEnabledRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.DisableReplicationPeerResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.DisableReplicationPeerRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ReplicationPeerModificationSwitchResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ReplicationPeerModificationSwitchRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetSchemaAlterStatusResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetSchemaAlterStatusRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ModifyTableResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ModifyTableRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ModifyNamespaceResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ModifyNamespaceRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.BypassProcedureResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.BypassProcedureRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.DeleteNamespaceResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.DeleteNamespaceRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RegionServerReportResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RegionServerReportRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.AddReplicationPeerResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.AddReplicationPeerRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsBalancerEnabledResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsBalancerEnabledRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.EnableCatalogJanitorResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.EnableCatalogJanitorRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.CreateTableResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.CreateTableRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ShutdownResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ShutdownRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.EnableReplicationPeerResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.EnableReplicationPeerRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RunCatalogScanResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RunCatalogScanRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsRpcThrottleEnabledResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsRpcThrottleEnabledRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ScheduleSCPsForUnknownServersResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ScheduleSCPsForUnknownServersRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SwitchRpcThrottleResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SwitchRpcThrottleRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsSnapshotCleanupEnabledResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsSnapshotCleanupEnabledRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.BalanceResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.BalanceRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetRegionInfoResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetRegionInfoRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.HasUserPermissionsResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.HasUserPermissionsRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.MoveRegionResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.MoveRegionRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ReportRegionStateTransitionResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ReportRegionStateTransitionRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ListTableDescriptorsByNamespaceResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ListTableDescriptorsByNamespaceRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.CompactRegionResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.CompactRegionRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.NormalizeResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.NormalizeRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SetTableStateInMetaRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsSplitOrMergeEnabledResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsSplitOrMergeEnabledRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ListDecommissionedRegionServersResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ListDecommissionedRegionServersRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SetBalancerRunningResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SetBalancerRunningRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetReplicationPeerStateResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetReplicationPeerStateRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.AbortProcedureResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.AbortProcedureRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetCachedFilesListResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetCachedFilesListRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.MergeTableRegionsResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.MergeTableRegionsRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ReportRSFatalErrorResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ReportRSFatalErrorRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsInMaintenanceModeResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsInMaintenanceModeRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SetCleanerChoreRunningResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SetCleanerChoreRunningRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ModifyTableStoreFileTrackerResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ModifyTableStoreFileTrackerRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SplitTableRegionResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SplitTableRegionRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RegionServerStartupResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RegionServerStartupRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SetNormalizerRunningResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SetNormalizerRunningRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RemoveReplicationPeerResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RemoveReplicationPeerRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.DeleteColumnResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.DeleteColumnRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetProcedureResultResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetProcedureResultRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetUserPermissionsResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetUserPermissionsRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsSnapshotDoneResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsSnapshotDoneRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsProcedureDoneResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsProcedureDoneRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RecommissionRegionServerResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RecommissionRegionServerRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SetQuotaResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SetQuotaRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ClearDeadServersResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ClearDeadServersRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.CoprocessorServiceResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.CoprocessorServiceRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.AddColumnResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.AddColumnRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.FlushTableResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.FlushTableRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ListNamespacesResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ListNamespacesRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.OfflineRegionResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.OfflineRegionRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.DisableTableResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.DisableTableRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ModifyColumnStoreFileTrackerResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ModifyColumnStoreFileTrackerRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ScheduleServerCrashProcedureResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ScheduleServerCrashProcedureRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetTableDescriptorsResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetTableDescriptorsRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.DeleteSnapshotResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.DeleteSnapshotRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SnapshotResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SnapshotRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.FlushMasterStoreResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.FlushMasterStoreRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.CreateNamespaceResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.CreateNamespaceRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsCleanerChoreEnabledResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.IsCleanerChoreEnabledRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.DeleteTableResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.DeleteTableRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetLocksResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetLocksRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RevokeResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RevokeRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SetSnapshotCleanupResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SetSnapshotCleanupRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SwitchExceedThrottleQuotaResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SwitchExceedThrottleQuotaRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.TruncateRegionResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.TruncateRegionRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ListReplicationPeersResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ListReplicationPeersRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RunHbckChoreResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RunHbckChoreRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.coprocessor.MasterCoprocessorJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.master.MasterEnvironmentJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.master.MetricsMasterSourceJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.master.MetricsMasterQuotaSourceJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.procedure2.ProcedureMetricsJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.master.MetricsMasterProcSourceJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.replication.ReplicationQueueStorageJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.procedure2.ProcedureExecutorListenerJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.master.assignment.RegionInTransitionStatJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.ServerMetricsJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.shaded.protobuf.generated.BlockingInterfaceJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.master.ServerLiveStateJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.master.normalizer.PlanTypeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ProcedureDescriptionJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.master.SnapshotSentinelJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.FlushTypeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.namequeues.NamedQueueEventJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.quotas.OperationQuotaJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.quotas.OperationTypeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ScanRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetBootstrapNodesResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetBootstrapNodesRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.FlushRegionResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.FlushRegionRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetActiveMasterResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetActiveMasterRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.StopServerResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.StopServerRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetMastersResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetMastersRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetServerInfoResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetServerInfoRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.CompactionSwitchResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.CompactionSwitchRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.MutateResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.MutateRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.MultiResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.MultiRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.WarmupRegionResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.WarmupRegionRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetClusterIdResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetClusterIdRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SlowLogResponsesJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.SlowLogResponseRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetStoreFileResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetStoreFileRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.UpdateConfigurationResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.UpdateConfigurationRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ClearCompactionQueuesResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ClearCompactionQueuesRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ScanResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RegionSpecifierJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ExecuteProceduresResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ExecuteProceduresRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetAllBootstrapNodesResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetAllBootstrapNodesRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetSpaceQuotaSnapshotsResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetSpaceQuotaSnapshotsRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetOnlineRegionResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetOnlineRegionRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ClearSlowLogResponsesJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ClearSlowLogResponseRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ReplicateWALEntryResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ReplicateWALEntryRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.PrepareBulkLoadResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.PrepareBulkLoadRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RollWALWriterResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RollWALWriterRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.CleanupBulkLoadResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.CleanupBulkLoadRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetRegionLoadResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetRegionLoadRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RequestHeaderJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetMetaRegionLocationsResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.GetMetaRegionLocationsRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.UpdateFavoredNodesResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.UpdateFavoredNodesRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.CloseRegionResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.CloseRegionRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.OpenRegionResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.OpenRegionRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ClearRegionBlockCacheResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ClearRegionBlockCacheRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.BulkLoadHFileResponseJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.BulkLoadHFileRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.regionserver.MetricsUserAggregateJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.MetricsRegionServerWrapperJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.MetricsRegionServerSourceJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.RowLockJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.shaded.protobuf.generated.CoprocessorServiceCallJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.regionserver.compactions.CompactionLifeCycleTrackerJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.BulkLoadListenerJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.client.IsolationLevelJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.regionserver.OperationJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.CompareOperatorJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.regionserver.FlushLifeCycleTrackerJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.CellComparatorJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.FlushResultImplJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.errorhandling.ForeignExceptionSnareJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.io.hfile.BlockCacheJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RegionLoadStatsJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.regionserver.RowProcessorJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.wal.MutationReplayJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.regionserver.FlushRequestListenerJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.security.access.ActionJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.executor.ExecutorConfigJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.executor.ExecutorTypeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.regionserver.HeapMemoryTuneObserverJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.coprocessor.RegionServerCoprocessorJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.RegionServerEnvironmentJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.shaded.protobuf.generated.WALEntryJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.replication.ReplicationEndpointJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.LeaseJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.regionserver.LeaseListenerJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.shaded.protobuf.generated.TableStateJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ClusterIdJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.client.ReadTypeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.client.ConsistencyJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.security.access.ScopeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.client.SnapshotTypeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.quotas.QuotaTypeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.master.procedure.TableOperationTypeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.util.EntryJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ProcedureStateJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.TransitionCodeJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.master.MetricsAssignmentManagerSourceJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.master.assignment.RegionFailedOpenJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.master.StateJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.master.assignment.RegionStateVisitorJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.monitoring.StateJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.procedure2.LockedResourceTypeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.shaded.protobuf.generated.BalancerDecisionsRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.shaded.protobuf.generated.BalancerRejectionsRequestJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.ipc.ContextJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.wal.WALKeyJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.querymatcher.DeleteTrackerJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.RegionEnvironmentJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.coprocessor.RegionCoprocessorJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.ScanTypeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.filter.ReturnCodeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.OperationStatusCodeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.client.DurabilityJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.HostAndWeightJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.regionserver.WriteEntryJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.regionserver.ChangedReadersObserverJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.shaded.protobuf.generated.CompactionDescriptorJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.regionserver.MemStoreSizingJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.io.hfile.HFileDataBlockEncoderJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.StoreFlushContextJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.MetricsRegionWrapperJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.security.access.ParamsJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.executor.EventTypeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.quotas.SpaceQuotaStatusJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.quotas.SpaceViolationPolicyEnforcementJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.master.procedure.RemoteProcedureResolverJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.shaded.protobuf.generated.RegionStateJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.master.assignment.ServerStateJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.ipc.RpcCallJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.monitoring.MonitoredRPCHandlerJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.codec.DecoderJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.KeepDeletedCellsJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.io.hfile.ReaderJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.io.hfile.BlockTypeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.io.hfile.HFileScannerJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.BloomTypeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.io.hfile.BlockCategoryJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.shaded.protobuf.generated.ReferenceJVMInterface	skipped	protobuf	
+org.apache.hadoop.hbase.io.RangeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.regionserver.querymatcher.MatchCodeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.regionserver.IOExceptionRunnableJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.regionserver.StoreFileManagerJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.quotas.SpaceQuotaStatusViewJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.KVComparatorJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.io.hfile.ReaderTypeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.io.compress.AlgorithmJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.io.hfile.ByteArrayKeyBlockIndexReaderJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.io.hfile.CellBasedKeyBlockIndexReaderJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.io.RecyclerJVMInterface	skipped	interface	
+org.apache.hadoop.hbase.io.crypto.ContextJVMInterface	skipped	inner-class-no-implementation	
+org.apache.hadoop.hbase.io.encoding.IndexBlockEncodingJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.util.ChecksumTypeJVMInterface	skipped	enum	
+org.apache.hadoop.hbase.io.encoding.DataBlockEncodingJVMInterface	skipped	enum	

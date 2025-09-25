@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * TODO: change to a pool of threads
  */
 @InterfaceAudience.Private
-public abstract class AbstractWALRoller<T extends Abortable> extends Thread implements Closeable {
+public abstract class AbstractWALRoller<T extends Abortable> extends Thread implements Closeable, AbstractWALRollerJVMInterface<T> {
   private static final Logger LOG = LoggerFactory.getLogger(AbstractWALRoller.class);
 
   protected static final String WAL_ROLL_PERIOD_KEY = "hbase.regionserver.logroll.period";

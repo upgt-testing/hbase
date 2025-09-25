@@ -34,7 +34,7 @@ import org.apache.yetus.audience.InterfaceStability;
  */
 @InterfaceStability.Evolving
 @InterfaceAudience.Private
-public class MetricsRegionServer {
+public class MetricsRegionServer implements MetricsRegionServerJVMInterface {
   public static final String RS_ENABLE_SERVER_QUERY_METER_METRICS_KEY =
     "hbase.regionserver.enable.server.query.meter";
   public static final boolean RS_ENABLE_SERVER_QUERY_METER_METRICS_KEY_DEFAULT = true;

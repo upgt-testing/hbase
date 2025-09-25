@@ -44,7 +44,7 @@ import org.apache.hbase.thirdparty.com.google.protobuf.Message;
  */
 @InterfaceAudience.LimitedPrivate({ HBaseInterfaceAudience.COPROC, HBaseInterfaceAudience.PHOENIX })
 @InterfaceStability.Evolving
-public class CallRunner {
+public class CallRunner implements CallRunnerJVMInterface {
 
   private static final CallDroppedException CALL_DROPPED_EXCEPTION = new CallDroppedException();
 

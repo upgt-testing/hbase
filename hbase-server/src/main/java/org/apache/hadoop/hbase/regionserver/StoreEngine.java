@@ -91,7 +91,7 @@ import org.apache.hbase.thirdparty.org.apache.commons.collections4.CollectionUti
  */
 @InterfaceAudience.Private
 public abstract class StoreEngine<SF extends StoreFlusher, CP extends CompactionPolicy,
-  C extends Compactor<?>, SFM extends StoreFileManager> {
+  C extends Compactor<?>, SFM extends StoreFileManager> implements StoreEngineJVMInterface<SF, CP, C, SFM> {
 
   private static final Logger LOG = LoggerFactory.getLogger(StoreEngine.class);
 

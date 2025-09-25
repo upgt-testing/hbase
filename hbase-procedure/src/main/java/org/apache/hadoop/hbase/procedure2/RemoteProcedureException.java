@@ -39,7 +39,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.ErrorHandlingProtos.For
 @InterfaceAudience.Private
 @InterfaceStability.Evolving
 @SuppressWarnings("serial")
-public class RemoteProcedureException extends ProcedureException {
+public class RemoteProcedureException extends ProcedureException implements RemoteProcedureExceptionJVMInterface {
   /**
    * Name of the throwable's source such as a host or thread name. Must be non-null.
    */

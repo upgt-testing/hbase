@@ -23,7 +23,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * A generic class for pair of an Object and and a primitive int value.
  */
 @InterfaceAudience.Private
-public class ObjectIntPair<T> {
+public class ObjectIntPair<T> implements ObjectIntPairJVMInterface<T> {
 
   private T first;
   private int second;

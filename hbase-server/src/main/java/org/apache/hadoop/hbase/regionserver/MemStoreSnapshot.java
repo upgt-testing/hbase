@@ -33,7 +33,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * must call their close method to invoke {@link Segment#decScannerCount}.
  */
 @InterfaceAudience.Private
-public class MemStoreSnapshot {
+public class MemStoreSnapshot implements MemStoreSnapshotJVMInterface {
   private final long id;
   private final int cellsCount;
   private final MemStoreSize memStoreSize;

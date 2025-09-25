@@ -62,7 +62,7 @@ import org.apache.hbase.thirdparty.com.google.common.io.ByteStreams;
 
 @InterfaceAudience.Public
 public abstract class Mutation extends OperationWithAttributes
-  implements Row, CellScannable, HeapSize {
+  implements Row, CellScannable, HeapSize, MutationJVMInterface {
   public static final long MUTATION_OVERHEAD = ClassSize.align(
     // This
     ClassSize.OBJECT +

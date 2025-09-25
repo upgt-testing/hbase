@@ -24,7 +24,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * {@link Result#isCursor()} {@link Result#getCursor()}
  */
 @InterfaceAudience.Public
-public class Cursor {
+public class Cursor implements CursorJVMInterface {
 
   private final byte[] row;
 

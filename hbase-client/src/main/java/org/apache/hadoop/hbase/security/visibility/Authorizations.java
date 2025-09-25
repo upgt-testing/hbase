@@ -27,7 +27,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * current scan/get can access.
  */
 @InterfaceAudience.Public
-public class Authorizations {
+public class Authorizations implements AuthorizationsJVMInterface {
 
   private List<String> labels;
 

@@ -109,7 +109,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.RegionServerStatusProto
  * are triggered by DisableTable, Split, Merge
  */
 @InterfaceAudience.Private
-public class AssignmentManager {
+public class AssignmentManager implements AssignmentManagerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(AssignmentManager.class);
 
   // TODO: AMv2

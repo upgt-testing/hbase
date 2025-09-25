@@ -39,7 +39,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.ProtobufUtil;
  * Base class for HBase read operations; e.g. Scan and Get.
  */
 @InterfaceAudience.Public
-public abstract class Query extends OperationWithAttributes {
+public abstract class Query extends OperationWithAttributes implements QueryJVMInterface {
   private static final String ISOLATION_LEVEL = "_isolationlevel_";
   protected Filter filter = null;
   protected int targetReplicaId = -1;

@@ -30,7 +30,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.QuotaProtos;
  * A point-in-time view of a space quota on a table.
  */
 @InterfaceAudience.Private
-public class SpaceQuotaSnapshot implements SpaceQuotaSnapshotView {
+public class SpaceQuotaSnapshot implements SpaceQuotaSnapshotView, SpaceQuotaSnapshotJVMInterface {
   private static final SpaceQuotaSnapshot NO_SUCH_SNAPSHOT =
     new SpaceQuotaSnapshot(SpaceQuotaStatus.notInViolation(), 0, Long.MAX_VALUE);
   private final SpaceQuotaStatus quotaStatus;

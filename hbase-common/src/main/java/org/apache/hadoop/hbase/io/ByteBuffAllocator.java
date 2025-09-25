@@ -57,7 +57,7 @@ import org.apache.hbase.thirdparty.com.google.common.collect.Sets;
  * to the upper layer.
  */
 @InterfaceAudience.Private
-public class ByteBuffAllocator {
+public class ByteBuffAllocator implements ByteBuffAllocatorJVMInterface {
 
   private static final Logger LOG = LoggerFactory.getLogger(ByteBuffAllocator.class);
 

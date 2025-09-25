@@ -79,7 +79,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.MasterProcedureProtos.M
  */
 @InterfaceAudience.Private
 public class MergeTableRegionsProcedure
-  extends AbstractStateMachineTableProcedure<MergeTableRegionsState> {
+  extends AbstractStateMachineTableProcedure<MergeTableRegionsState> implements MergeTableRegionsProcedureJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(MergeTableRegionsProcedure.class);
   private ServerName regionLocation;
 

@@ -43,7 +43,7 @@ import org.apache.hbase.thirdparty.com.google.common.base.Preconditions;
  * </p>
  */
 @InterfaceAudience.Public
-public final class TableName implements Comparable<TableName> {
+public final class TableName implements Comparable<TableName>, TableNameJVMInterface {
 
   /** See {@link #createTableNameIfNecessary(ByteBuffer, ByteBuffer)} */
   private static final Set<TableName> tableCache = new CopyOnWriteArraySet<>();

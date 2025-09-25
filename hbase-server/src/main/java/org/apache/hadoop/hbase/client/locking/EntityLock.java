@@ -73,7 +73,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.LockServiceProtos.LockS
  * </code>
  */
 @InterfaceAudience.Public
-public class EntityLock {
+public class EntityLock implements EntityLockJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(EntityLock.class);
 
   public static final String HEARTBEAT_TIME_BUFFER = "hbase.client.locks.heartbeat.time.buffer.ms";

@@ -36,7 +36,7 @@ import org.apache.hbase.thirdparty.com.google.common.net.HostAndPort;
  * classes in our API hence this Type.
  */
 @InterfaceAudience.Public
-public class Address implements Comparable<Address> {
+public class Address implements Comparable<Address>, AddressJVMInterface {
   private final HostAndPort hostAndPort;
 
   private Address(HostAndPort hostAndPort) {

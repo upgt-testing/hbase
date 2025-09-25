@@ -33,7 +33,7 @@ import org.apache.yetus.audience.InterfaceAudience;
 // Has to be public for PartitionedMobCompactor to access; ditto on tests making use of a few of
 // the accessors below. Shutdown access. TODO
 @InterfaceAudience.Private
-public class ScanInfo {
+public class ScanInfo implements ScanInfoJVMInterface {
   private byte[] family;
   private int minVersions;
   private int maxVersions;

@@ -52,7 +52,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.FSProtos;
  * References are cleaned up by compactions.
  */
 @InterfaceAudience.Private
-public class Reference {
+public class Reference implements ReferenceJVMInterface {
   private byte[] splitkey;
   private Range region;
 

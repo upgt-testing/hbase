@@ -21,7 +21,7 @@ import java.util.List;
 import org.apache.yetus.audience.InterfaceAudience;
 
 @InterfaceAudience.Private
-public class LockedResource {
+public class LockedResource implements LockedResourceJVMInterface {
   private final LockedResourceType resourceType;
   private final String resourceName;
   private final LockType lockType;

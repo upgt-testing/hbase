@@ -71,7 +71,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.RegionServerStatusProto
  */
 @InterfaceAudience.Private
 @InterfaceStability.Evolving
-public class MasterQuotaManager implements RegionStateListener {
+public class MasterQuotaManager implements RegionStateListener, MasterQuotaManagerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(MasterQuotaManager.class);
   private static final Map<RegionInfo, Long> EMPTY_MAP =
     Collections.unmodifiableMap(new HashMap<>());

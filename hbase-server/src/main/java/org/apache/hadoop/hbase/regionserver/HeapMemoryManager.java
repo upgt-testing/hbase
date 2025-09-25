@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
  * dynamically, as per the R/W load on the servers.
  */
 @InterfaceAudience.Private
-public class HeapMemoryManager {
+public class HeapMemoryManager implements HeapMemoryManagerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(HeapMemoryManager.class);
   private static final int CONVERT_TO_PERCENTAGE = 100;
   private static final int CLUSTER_MINIMUM_MEMORY_THRESHOLD =

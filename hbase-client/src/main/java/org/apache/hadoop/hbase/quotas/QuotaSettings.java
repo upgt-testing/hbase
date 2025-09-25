@@ -30,7 +30,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.ProtobufUtil;
 import org.apache.hadoop.hbase.shaded.protobuf.generated.MasterProtos.SetQuotaRequest;
 
 @InterfaceAudience.Public
-public abstract class QuotaSettings {
+public abstract class QuotaSettings implements QuotaSettingsJVMInterface {
   private final String userName;
   private final String namespace;
   private final TableName tableName;

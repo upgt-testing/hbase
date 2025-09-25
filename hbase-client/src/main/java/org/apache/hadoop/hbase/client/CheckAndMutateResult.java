@@ -23,7 +23,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * Represents a result of a CheckAndMutate operation
  */
 @InterfaceAudience.Public
-public class CheckAndMutateResult {
+public class CheckAndMutateResult implements CheckAndMutateResultJVMInterface {
   private final boolean success;
   private final Result result;
 

@@ -34,7 +34,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.ZooKeeperProtos;
  * Tracks the switch of split and merge states.
  */
 @InterfaceAudience.Private
-public class SplitOrMergeStateStore {
+public class SplitOrMergeStateStore implements SplitOrMergeStateStoreJVMInterface {
 
   private static final String SPLIT_STATE_NAME = "split_enabled";
 

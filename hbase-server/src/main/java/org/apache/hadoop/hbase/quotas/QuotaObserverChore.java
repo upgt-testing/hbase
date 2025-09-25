@@ -53,7 +53,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.QuotaProtos.SpaceQuota;
  * a defined quota.
  */
 @InterfaceAudience.Private
-public class QuotaObserverChore extends ScheduledChore {
+public class QuotaObserverChore extends ScheduledChore implements QuotaObserverChoreJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(QuotaObserverChore.class);
   static final String QUOTA_OBSERVER_CHORE_PERIOD_KEY = "hbase.master.quotas.observer.chore.period";
   static final int QUOTA_OBSERVER_CHORE_PERIOD_DEFAULT = 1000 * 60 * 1; // 1 minutes in millis

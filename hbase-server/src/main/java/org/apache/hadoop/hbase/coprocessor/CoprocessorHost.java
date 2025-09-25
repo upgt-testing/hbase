@@ -54,7 +54,7 @@ import org.apache.hbase.thirdparty.com.google.common.base.Strings;
  * @param <E> type of specific coprocessor environment this host requires. provides
  */
 @InterfaceAudience.Private
-public abstract class CoprocessorHost<C extends Coprocessor, E extends CoprocessorEnvironment<C>> {
+public abstract class CoprocessorHost<C extends Coprocessor, E extends CoprocessorEnvironment<C>> implements CoprocessorHostJVMInterface<C, E> {
   public static final String REGION_COPROCESSOR_CONF_KEY = "hbase.coprocessor.region.classes";
   public static final String REGIONSERVER_COPROCESSOR_CONF_KEY =
     "hbase.coprocessor.regionserver.classes";

@@ -29,7 +29,7 @@ import org.apache.yetus.audience.InterfaceStability;
  */
 @InterfaceAudience.Private
 @InterfaceStability.Evolving
-public abstract class ProcedureInMemoryChore<TEnvironment> extends Procedure<TEnvironment> {
+public abstract class ProcedureInMemoryChore<TEnvironment> extends Procedure<TEnvironment> implements ProcedureInMemoryChoreJVMInterface<TEnvironment> {
   protected ProcedureInMemoryChore(final int timeoutMsec) {
     setTimeout(timeoutMsec);
   }

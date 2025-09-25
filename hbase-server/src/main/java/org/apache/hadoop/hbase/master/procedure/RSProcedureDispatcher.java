@@ -60,7 +60,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.AdminProtos.RemoteProce
  */
 @InterfaceAudience.Private
 public class RSProcedureDispatcher extends RemoteProcedureDispatcher<MasterProcedureEnv, ServerName>
-  implements ServerListener {
+  implements ServerListener, RSProcedureDispatcherJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(RSProcedureDispatcher.class);
 
   public static final String RS_RPC_STARTUP_WAIT_TIME_CONF_KEY =

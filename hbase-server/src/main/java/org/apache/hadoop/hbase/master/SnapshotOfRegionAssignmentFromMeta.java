@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * mapping for regions.
  */
 @InterfaceAudience.Private
-public class SnapshotOfRegionAssignmentFromMeta {
+public class SnapshotOfRegionAssignmentFromMeta implements SnapshotOfRegionAssignmentFromMetaJVMInterface {
   private static final Logger LOG =
     LoggerFactory.getLogger(SnapshotOfRegionAssignmentFromMeta.class.getName());
 

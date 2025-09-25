@@ -61,7 +61,7 @@ import org.slf4j.LoggerFactory;
  */
 @InterfaceAudience.LimitedPrivate(HBaseInterfaceAudience.PHOENIX)
 @InterfaceStability.Evolving
-public class StoreFileReader {
+public class StoreFileReader implements StoreFileReaderJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(StoreFileReader.class.getName());
 
   protected BloomFilter generalBloomFilter = null;

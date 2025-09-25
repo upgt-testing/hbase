@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
  */
 
 @InterfaceAudience.Private
-public class CompactionConfiguration {
+public class CompactionConfiguration implements CompactionConfigurationJVMInterface {
 
   private static final Logger LOG = LoggerFactory.getLogger(CompactionConfiguration.class);
 

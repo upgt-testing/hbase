@@ -27,7 +27,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * will be blocked when invoking methods in listeners so they must not be long-running.
  */
 @InterfaceAudience.Private
-public abstract class ZKListener {
+public abstract class ZKListener implements ZKListenerJVMInterface {
 
   // Reference to the zk watcher which also contains configuration and constants
   protected ZKWatcher watcher;

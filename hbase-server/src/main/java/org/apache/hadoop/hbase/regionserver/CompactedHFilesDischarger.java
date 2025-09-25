@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
  * entries.
  */
 @InterfaceAudience.Private
-public class CompactedHFilesDischarger extends ScheduledChore {
+public class CompactedHFilesDischarger extends ScheduledChore implements CompactedHFilesDischargerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(CompactedHFilesDischarger.class);
   private RegionServerServices regionServerServices;
   // Default is to use executor

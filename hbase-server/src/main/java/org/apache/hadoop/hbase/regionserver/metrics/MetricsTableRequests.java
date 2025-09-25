@@ -28,7 +28,7 @@ import org.apache.hadoop.hbase.metrics.MetricRegistryInfo;
 import org.apache.yetus.audience.InterfaceAudience;
 
 @InterfaceAudience.Private
-public class MetricsTableRequests {
+public class MetricsTableRequests implements MetricsTableRequestsJVMInterface {
 
   public static final String ENABLE_TABLE_LATENCIES_METRICS_KEY =
     "hbase.regionserver.enable.table.latencies";

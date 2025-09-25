@@ -97,7 +97,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.MasterProcedureProtos.S
  */
 @InterfaceAudience.Private
 public class SplitTableRegionProcedure
-  extends AbstractStateMachineRegionProcedure<SplitTableRegionState> {
+  extends AbstractStateMachineRegionProcedure<SplitTableRegionState> implements SplitTableRegionProcedureJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(SplitTableRegionProcedure.class);
   private RegionInfo daughterOneRI;
   private RegionInfo daughterTwoRI;

@@ -51,7 +51,7 @@ import org.slf4j.LoggerFactory;
  * holding regions.
  */
 @InterfaceAudience.Private
-public class RegionStates {
+public class RegionStates implements RegionStatesJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(RegionStates.class);
 
   // This comparator sorts the RegionStates by time stamp then Region name.

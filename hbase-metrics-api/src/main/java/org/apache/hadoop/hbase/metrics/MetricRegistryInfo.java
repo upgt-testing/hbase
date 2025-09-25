@@ -26,7 +26,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * name and description and JMX related context names for such group of metrics.
  */
 @InterfaceAudience.Private
-public class MetricRegistryInfo {
+public class MetricRegistryInfo implements MetricRegistryInfoJVMInterface {
 
   protected final String metricsName;
   protected final String metricsDescription;

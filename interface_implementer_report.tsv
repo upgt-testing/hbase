@@ -1,0 +1,271 @@
+interfaceFqn	originalClassFile	outcome	bridgesAdded	reason
+org.apache.hadoop.hbase.metrics.MetricRegistryInfoJVMInterface	/Users/allenwang/xlab/hbase/hbase-metrics-api/src/main/java/org/apache/hadoop/hbase/metrics/MetricRegistryInfo.java	implemented	0	
+org.apache.hadoop.hbase.security.access.PermissionJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/security/access/Permission.java	implemented	0	
+org.apache.hadoop.hbase.security.access.UserPermissionJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/security/access/UserPermission.java	implemented	0	
+org.apache.hadoop.hbase.security.access.TablePermissionJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/security/access/TablePermission.java	implemented	0	
+org.apache.hadoop.hbase.security.visibility.AuthorizationsJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/security/visibility/Authorizations.java	implemented	0	
+org.apache.hadoop.hbase.security.visibility.CellVisibilityJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/security/visibility/CellVisibility.java	implemented	0	
+org.apache.hadoop.hbase.quotas.SpaceQuotaSnapshotViewJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/quotas/SpaceQuotaSnapshotView.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.quotas.SpaceQuotaSnapshotJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/quotas/SpaceQuotaSnapshot.java	implemented	0	
+org.apache.hadoop.hbase.quotas.QuotaSettingsJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/quotas/QuotaSettings.java	implemented	0	
+org.apache.hadoop.hbase.AbortableJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/Abortable.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.zookeeper.ZNodePathsJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/zookeeper/ZNodePaths.java	implemented	0	
+org.apache.hadoop.hbase.HRegionLocationJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/HRegionLocation.java	implemented	0	
+org.apache.hadoop.hbase.master.RegionStateJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/master/RegionState.java	implemented	0	
+org.apache.hadoop.hbase.HRegionInfoJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/HRegionInfo.java	implemented	0	
+org.apache.hadoop.hbase.replication.ReplicationPeerConfigJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/replication/ReplicationPeerConfig.java	implemented	0	
+org.apache.hadoop.hbase.CacheEvictionStatsJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/CacheEvictionStats.java	implemented	0	
+org.apache.hadoop.hbase.filter.FilterJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/filter/Filter.java	implemented	0	
+org.apache.hadoop.hbase.ClusterIdJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/ClusterId.java	implemented	0	
+org.apache.hadoop.hbase.client.RegionLoadStatsJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/RegionLoadStats.java	implemented	0	
+org.apache.hadoop.hbase.client.metrics.ScanMetricsJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/metrics/ScanMetrics.java	implemented	0	
+org.apache.hadoop.hbase.client.metrics.ServerSideScanMetricsJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/metrics/ServerSideScanMetrics.java	implemented	0	
+org.apache.hadoop.hbase.client.RowJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/Row.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.client.PutJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/Put.java	implemented	0	
+org.apache.hadoop.hbase.client.TableStateJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/TableState.java	implemented	0	
+org.apache.hadoop.hbase.client.RegionStatesCountJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/RegionStatesCount.java	implemented	0	
+org.apache.hadoop.hbase.client.DeleteJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/Delete.java	implemented	0	
+org.apache.hadoop.hbase.client.NormalizeTableFilterParamsJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/NormalizeTableFilterParams.java	implemented	0	
+org.apache.hadoop.hbase.client.RowMutationsJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/RowMutations.java	implemented	0	
+org.apache.hadoop.hbase.client.ResultJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/Result.java	implemented	0	
+org.apache.hadoop.hbase.client.OperationWithAttributesJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/OperationWithAttributes.java	implemented	0	
+org.apache.hadoop.hbase.client.MutationJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/Mutation.java	implemented	0	
+org.apache.hadoop.hbase.client.GetJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/Get.java	implemented	0	
+org.apache.hadoop.hbase.client.QueryJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/Query.java	implemented	0	
+org.apache.hadoop.hbase.client.CheckAndMutateJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/CheckAndMutate.java	implemented	0	
+org.apache.hadoop.hbase.client.ScanJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/Scan.java	implemented	0	
+org.apache.hadoop.hbase.client.CursorJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/Cursor.java	implemented	0	
+org.apache.hadoop.hbase.client.IncrementJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/Increment.java	implemented	0	
+org.apache.hadoop.hbase.client.OperationJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/Operation.java	implemented	0	
+org.apache.hadoop.hbase.client.SnapshotDescriptionJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/SnapshotDescription.java	implemented	0	
+org.apache.hadoop.hbase.client.CheckAndMutateResultJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/CheckAndMutateResult.java	implemented	0	
+org.apache.hadoop.hbase.client.RegionInfoJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/RegionInfo.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.client.BalanceResponseJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/BalanceResponse.java	implemented	0	
+org.apache.hadoop.hbase.client.BalanceRequestJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/BalanceRequest.java	implemented	0	
+org.apache.hadoop.hbase.client.AppendJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/Append.java	implemented	0	
+org.apache.hadoop.hbase.client.AttributesJVMInterface	/Users/allenwang/xlab/hbase/hbase-client/src/main/java/org/apache/hadoop/hbase/client/Attributes.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.zookeeper.ZKListenerJVMInterface	/Users/allenwang/xlab/hbase/hbase-zookeeper/src/main/java/org/apache/hadoop/hbase/zookeeper/ZKListener.java	implemented	0	
+org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeperJVMInterface	/Users/allenwang/xlab/hbase/hbase-zookeeper/src/main/java/org/apache/hadoop/hbase/zookeeper/RecoverableZooKeeper.java	implemented	0	
+org.apache.hadoop.hbase.zookeeper.ZKWatcherJVMInterface	/Users/allenwang/xlab/hbase/hbase-zookeeper/src/main/java/org/apache/hadoop/hbase/zookeeper/ZKWatcher.java	implemented	0	
+org.apache.hadoop.hbase.zookeeper.ZKNodeTrackerJVMInterface	/Users/allenwang/xlab/hbase/hbase-zookeeper/src/main/java/org/apache/hadoop/hbase/zookeeper/ZKNodeTracker.java	implemented	0	
+org.apache.hadoop.hbase.zookeeper.MasterAddressTrackerJVMInterface	/Users/allenwang/xlab/hbase/hbase-zookeeper/src/main/java/org/apache/hadoop/hbase/zookeeper/MasterAddressTracker.java	implemented	0	
+org.apache.hadoop.hbase.net.AddressJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/net/Address.java	implemented	0	
+org.apache.hadoop.hbase.util.NonceKeyJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/util/NonceKey.java	implemented	0	
+org.apache.hadoop.hbase.util.PairJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/util/Pair.java	implemented	0	
+org.apache.hadoop.hbase.util.ObjectIntPairJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/util/ObjectIntPair.java	implemented	0	
+org.apache.hadoop.hbase.util.IdLockJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/util/IdLock.java	implemented	0	
+org.apache.hadoop.hbase.security.UserJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/security/User.java	implemented	0	
+org.apache.hadoop.hbase.KeyValueJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/KeyValue.java	implemented	0	
+org.apache.hadoop.hbase.ExtendedCellJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/ExtendedCell.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.ScheduledChoreJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/ScheduledChore.java	implemented	0	
+org.apache.hadoop.hbase.io.ByteBuffAllocatorJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/io/ByteBuffAllocator.java	implemented	0	
+org.apache.hadoop.hbase.io.hfile.HFileContextJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/io/hfile/HFileContext.java	implemented	0	
+org.apache.hadoop.hbase.io.HeapSizeJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/io/HeapSize.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.io.TimeRangeJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/io/TimeRange.java	implemented	0	
+org.apache.hadoop.hbase.CellScannerJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/CellScanner.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.exceptions.HBaseExceptionJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/exceptions/HBaseException.java	implemented	0	
+org.apache.hadoop.hbase.ServerNameJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/ServerName.java	implemented	0	
+org.apache.hadoop.hbase.CellScannableJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/CellScannable.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.RawCellJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/RawCell.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.StoppableJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/Stoppable.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.nio.ByteBuffJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/nio/ByteBuff.java	implemented	0	
+org.apache.hadoop.hbase.nio.HBaseReferenceCountedJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/nio/HBaseReferenceCounted.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.nio.SingleByteBuffJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/nio/SingleByteBuff.java	implemented	0	
+org.apache.hadoop.hbase.nio.RefCntJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/nio/RefCnt.java	implemented	0	
+org.apache.hadoop.hbase.CellJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/Cell.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.filter.ByteArrayComparableJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/filter/ByteArrayComparable.java	implemented	0	
+org.apache.hadoop.hbase.TableNameJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/TableName.java	implemented	0	
+org.apache.hadoop.hbase.conf.ConfigurationManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/conf/ConfigurationManager.java	implemented	0	
+org.apache.hadoop.hbase.conf.ConfigurationObserverJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/conf/ConfigurationObserver.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.conf.PropagatingConfigurationObserverJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/conf/PropagatingConfigurationObserver.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.NamespaceDescriptorJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/NamespaceDescriptor.java	implemented	0	
+org.apache.hadoop.hbase.ChoreServiceJVMInterface	/Users/allenwang/xlab/hbase/hbase-common/src/main/java/org/apache/hadoop/hbase/ChoreService.java	implemented	0	
+org.apache.hadoop.hbase.procedure2.AbstractProcedureSchedulerJVMInterface	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/AbstractProcedureScheduler.java	implemented	0	
+org.apache.hadoop.hbase.procedure2.ProcedureExecutorJVMInterface	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/ProcedureExecutor.java	implemented	0	
+org.apache.hadoop.hbase.procedure2.RemoteProcedureJVMInterface	not-found	noClassFound	0	class file not found
+org.apache.hadoop.hbase.procedure2.RemoteProcedureDispatcherJVMInterface	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/RemoteProcedureDispatcher.java	implemented	0	
+org.apache.hadoop.hbase.procedure2.ProcedureExceptionJVMInterface	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/ProcedureException.java	implemented	0	
+org.apache.hadoop.hbase.procedure2.RemoteProcedureExceptionJVMInterface	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/RemoteProcedureException.java	implemented	0	
+org.apache.hadoop.hbase.procedure2.ProcedureSchedulerJVMInterface	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/ProcedureScheduler.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.procedure2.ProcedureDequeJVMInterface	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/ProcedureDeque.java	implemented	0	
+org.apache.hadoop.hbase.procedure2.LockedResourceJVMInterface	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/LockedResource.java	implemented	0	
+org.apache.hadoop.hbase.procedure2.ProcedureJVMInterface	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/Procedure.java	implemented	0	
+org.apache.hadoop.hbase.procedure2.ProcedureEventJVMInterface	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/ProcedureEvent.java	implemented	0	
+org.apache.hadoop.hbase.procedure2.ProcedureInMemoryChoreJVMInterface	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/ProcedureInMemoryChore.java	implemented	0	
+org.apache.hadoop.hbase.procedure2.StateMachineProcedureJVMInterface	/Users/allenwang/xlab/hbase/hbase-procedure/src/main/java/org/apache/hadoop/hbase/procedure2/StateMachineProcedure.java	implemented	0	
+org.apache.hadoop.hbase.util.NettyEventLoopGroupConfigJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/util/NettyEventLoopGroupConfig.java	implemented	0	
+org.apache.hadoop.hbase.wal.AbstractWALRollerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/wal/AbstractWALRoller.java	implemented	0	
+org.apache.hadoop.hbase.wal.WALEditJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/wal/WALEdit.java	implemented	0	
+org.apache.hadoop.hbase.security.access.AccessCheckerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/security/access/AccessChecker.java	implemented	0	
+org.apache.hadoop.hbase.security.access.AuthResultJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/security/access/AuthResult.java	implemented	0	
+org.apache.hadoop.hbase.security.access.AuthManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/security/access/AuthManager.java	implemented	0	
+org.apache.hadoop.hbase.security.access.ZKPermissionWatcherJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/security/access/ZKPermissionWatcher.java	implemented	0	
+org.apache.hadoop.hbase.HDFSBlocksDistributionJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/HDFSBlocksDistribution.java	implemented	0	
+org.apache.hadoop.hbase.favored.FavoredNodesPlanJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/favored/FavoredNodesPlan.java	implemented	0	
+org.apache.hadoop.hbase.favored.FavoredNodesManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/favored/FavoredNodesManager.java	implemented	0	
+org.apache.hadoop.hbase.quotas.QuotaObserverChoreJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/QuotaObserverChore.java	implemented	0	
+org.apache.hadoop.hbase.quotas.MasterQuotaManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/MasterQuotaManager.java	implemented	0	
+org.apache.hadoop.hbase.quotas.RegionServerRpcQuotaManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/RegionServerRpcQuotaManager.java	implemented	0	
+org.apache.hadoop.hbase.quotas.RpcQuotaManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/RpcQuotaManager.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.quotas.ActivePolicyEnforcementJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/ActivePolicyEnforcement.java	implemented	0	
+org.apache.hadoop.hbase.quotas.SnapshotQuotaObserverChoreJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/SnapshotQuotaObserverChore.java	implemented	0	
+org.apache.hadoop.hbase.quotas.RegionServerSpaceQuotaManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/RegionServerSpaceQuotaManager.java	implemented	0	
+org.apache.hadoop.hbase.quotas.GlobalQuotaSettingsJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/quotas/GlobalQuotaSettings.java	implemented	0	
+org.apache.hadoop.hbase.io.FSDataInputStreamWrapperJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/io/FSDataInputStreamWrapper.java	implemented	0	
+org.apache.hadoop.hbase.io.ReferenceJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/io/Reference.java	implemented	0	
+org.apache.hadoop.hbase.io.hfile.CacheConfigJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/io/hfile/CacheConfig.java	implemented	0	
+org.apache.hadoop.hbase.io.hfile.FixedFileTrailerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/io/hfile/FixedFileTrailer.java	implemented	0	
+org.apache.hadoop.hbase.io.hfile.BloomFilterMetricsJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/io/hfile/BloomFilterMetrics.java	implemented	0	
+org.apache.hadoop.hbase.io.hfile.ReaderContextJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/io/hfile/ReaderContext.java	implemented	0	
+org.apache.hadoop.hbase.io.hfile.HFileInfoJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/io/hfile/HFileInfo.java	implemented	0	
+org.apache.hadoop.hbase.namequeues.response.NamedQueueGetResponseJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/namequeues/response/NamedQueueGetResponse.java	implemented	0	
+org.apache.hadoop.hbase.namequeues.NamedQueueRecorderJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/namequeues/NamedQueueRecorder.java	implemented	0	
+org.apache.hadoop.hbase.namequeues.NamedQueuePayloadJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/namequeues/NamedQueuePayload.java	implemented	0	
+org.apache.hadoop.hbase.namequeues.request.NamedQueueGetRequestJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/namequeues/request/NamedQueueGetRequest.java	implemented	0	
+org.apache.hadoop.hbase.coprocessor.CoprocessorHostJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/coprocessor/CoprocessorHost.java	implemented	0	
+org.apache.hadoop.hbase.namespace.NamespaceAuditorJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/namespace/NamespaceAuditor.java	implemented	0	
+org.apache.hadoop.hbase.namespace.NamespaceTableAndRegionInfoJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/namespace/NamespaceTableAndRegionInfo.java	implemented	0	
+org.apache.hadoop.hbase.procedure.ProcedureManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/ProcedureManager.java	implemented	0	
+org.apache.hadoop.hbase.procedure.ProcedureManagerHostJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/ProcedureManagerHost.java	implemented	0	
+org.apache.hadoop.hbase.procedure.MasterProcedureManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/MasterProcedureManager.java	implemented	0	
+org.apache.hadoop.hbase.procedure.MasterProcedureManagerHostJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/procedure/MasterProcedureManagerHost.java	implemented	0	
+org.apache.hadoop.hbase.RegionStateListenerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/RegionStateListener.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.StoreFileWriterJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/StoreFileWriter.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.CellSinkJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/CellSink.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.RegionJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/Region.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.metrics.MetricsTableRequestsJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/metrics/MetricsTableRequests.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.RegionServerServicesJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionServerServices.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.CreateStoreFileWriterParamsJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/CreateStoreFileWriterParams.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.PeriodicMemStoreFlusherJVMInterface	not-found	noClassFound	0	class file not found
+org.apache.hadoop.hbase.regionserver.OperationStatusJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/OperationStatus.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.HeapMemoryManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HeapMemoryManager.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.StoreFileScannerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/StoreFileScanner.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.ShipperJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/Shipper.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.CompactSplitJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/CompactSplit.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.HStoreJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HStore.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.MutableOnlineRegionsJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/MutableOnlineRegions.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.MovedRegionInfoJVMInterface	not-found	noClassFound	0	class file not found
+org.apache.hadoop.hbase.regionserver.MetricsRegionJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/MetricsRegion.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.LastSequenceIdJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/LastSequenceId.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.HStoreFileJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HStoreFile.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.CompactedHFilesDischargerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/CompactedHFilesDischarger.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.RegionScannerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionScanner.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.InternalScannerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/InternalScanner.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.RegionScannerImplJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionScannerImpl.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.CompactionCheckerJVMInterface	not-found	noClassFound	0	class file not found
+org.apache.hadoop.hbase.regionserver.MiniBatchOperationInProgressJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/MiniBatchOperationInProgress.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.RegionServerCoprocessorHostJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionServerCoprocessorHost.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.HRegionFileSystemJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HRegionFileSystem.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.KeyValueScannerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/KeyValueScanner.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.MetricsRegionServerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/MetricsRegionServer.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.RegionCoprocessorHostJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionCoprocessorHost.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.FavoredNodesForRegionJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/FavoredNodesForRegion.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.OnlineRegionsJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/OnlineRegions.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.RegionSplitPolicyJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionSplitPolicy.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.StoreJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/Store.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.querymatcher.ScanQueryMatcherJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/querymatcher/ScanQueryMatcher.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.ScanInfoJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/ScanInfo.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.StoreFileJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/StoreFile.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.StoreConfigInformationJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/StoreConfigInformation.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.TimeRangeTrackerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/TimeRangeTracker.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.MemStoreSnapshotJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/MemStoreSnapshot.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.RegionServerAccountingJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionServerAccounting.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.ServerNonceManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/ServerNonceManager.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.StoreFileInfoJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/StoreFileInfo.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.FlushRequesterJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/FlushRequester.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.RSRpcServicesJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RSRpcServices.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.SecureBulkLoadManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/SecureBulkLoadManager.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.StoreEngineJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/StoreEngine.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.compactions.CompactorJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/compactions/Compactor.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.compactions.CompactionConfigurationJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/compactions/CompactionConfiguration.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.compactions.CompactionProgressJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/compactions/CompactionProgress.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.compactions.CompactionRequestJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/compactions/CompactionRequest.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.compactions.CompactionContextJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/compactions/CompactionContext.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.compactions.CompactionRequesterJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/compactions/CompactionRequester.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.compactions.CompactionRequestImplJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/compactions/CompactionRequestImpl.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.compactions.CompactionPolicyJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/compactions/CompactionPolicy.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.ScannerContextJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/ScannerContext.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.HRegionServerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HRegionServer.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.ShipperListenerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/ShipperListener.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.regionserver.LeaseManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/LeaseManager.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.MemStoreFlusherJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/MemStoreFlusher.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.MultiVersionConcurrencyControlJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/MultiVersionConcurrencyControl.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.StoreFileReaderJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/StoreFileReader.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.HRegionJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/HRegion.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.StoreFlusherJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/StoreFlusher.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.BrokenStoreFileCleanerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/BrokenStoreFileCleaner.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.RegionServicesForStoresJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/RegionServicesForStores.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.SystemExitWhenAbortTimeoutJVMInterface	not-found	noClassFound	0	class file not found
+org.apache.hadoop.hbase.regionserver.MemStoreSizeJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/MemStoreSize.java	implemented	0	
+org.apache.hadoop.hbase.regionserver.LogRollerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/regionserver/LogRoller.java	implemented	0	
+org.apache.hadoop.hbase.master.ServerListenerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerListener.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.master.HMasterJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/HMaster.java	implemented	0	
+org.apache.hadoop.hbase.master.snapshot.SnapshotManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/snapshot/SnapshotManager.java	implemented	0	
+org.apache.hadoop.hbase.master.hbck.HbckChoreJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/hbck/HbckChore.java	implemented	0	
+org.apache.hadoop.hbase.master.hbck.HbckReportJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/hbck/HbckReport.java	implemented	0	
+org.apache.hadoop.hbase.master.RackManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/RackManager.java	implemented	0	
+org.apache.hadoop.hbase.master.RegionPlanJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/RegionPlan.java	implemented	0	
+org.apache.hadoop.hbase.master.TableStateManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/TableStateManager.java	implemented	0	
+org.apache.hadoop.hbase.master.MasterFileSystemJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/MasterFileSystem.java	implemented	0	
+org.apache.hadoop.hbase.master.locking.LockManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/locking/LockManager.java	implemented	0	
+org.apache.hadoop.hbase.master.locking.LockProcedureJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/locking/LockProcedure.java	implemented	0	
+org.apache.hadoop.hbase.master.assignment.SplitTableRegionProcedureJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/SplitTableRegionProcedure.java	implemented	0	
+org.apache.hadoop.hbase.master.assignment.MergeTableRegionsProcedureJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/MergeTableRegionsProcedure.java	implemented	0	
+org.apache.hadoop.hbase.master.assignment.RegionStateNodeJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/RegionStateNode.java	implemented	0	
+org.apache.hadoop.hbase.master.assignment.RegionStateStoreJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/RegionStateStore.java	implemented	0	
+org.apache.hadoop.hbase.master.assignment.ServerStateNodeJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/ServerStateNode.java	implemented	0	
+org.apache.hadoop.hbase.master.assignment.TransitRegionStateProcedureJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/TransitRegionStateProcedure.java	implemented	0	
+org.apache.hadoop.hbase.master.assignment.RegionStatesJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/RegionStates.java	implemented	0	
+org.apache.hadoop.hbase.master.assignment.AssignmentManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/AssignmentManager.java	implemented	0	
+org.apache.hadoop.hbase.master.SnapshotOfRegionAssignmentFromMetaJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/SnapshotOfRegionAssignmentFromMeta.java	implemented	0	
+org.apache.hadoop.hbase.master.MasterServicesJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/MasterServices.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.master.MasterWalManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/MasterWalManager.java	implemented	0	
+org.apache.hadoop.hbase.master.janitor.CatalogJanitorJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/janitor/CatalogJanitor.java	implemented	0	
+org.apache.hadoop.hbase.master.janitor.CatalogJanitorReportJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/janitor/CatalogJanitorReport.java	implemented	0	
+org.apache.hadoop.hbase.master.procedure.AbstractStateMachineTableProcedureJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/AbstractStateMachineTableProcedure.java	implemented	0	
+org.apache.hadoop.hbase.master.procedure.AbstractStateMachineRegionProcedureJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/AbstractStateMachineRegionProcedure.java	implemented	0	
+org.apache.hadoop.hbase.master.procedure.TableProcedureInterfaceJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/TableProcedureInterface.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.master.procedure.MasterProcedureSchedulerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/MasterProcedureScheduler.java	implemented	0	
+org.apache.hadoop.hbase.master.procedure.ServerRemoteProcedureJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/ServerRemoteProcedure.java	implemented	0	
+org.apache.hadoop.hbase.master.procedure.SnapshotVerifyProcedureJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/SnapshotVerifyProcedure.java	implemented	0	
+org.apache.hadoop.hbase.master.procedure.RSProcedureDispatcherJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/RSProcedureDispatcher.java	implemented	0	
+org.apache.hadoop.hbase.master.procedure.MasterProcedureEnvJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/MasterProcedureEnv.java	implemented	0	
+org.apache.hadoop.hbase.master.procedure.TruncateRegionProcedureJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/procedure/TruncateRegionProcedure.java	implemented	0	
+org.apache.hadoop.hbase.master.region.MasterRegionJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/region/MasterRegion.java	implemented	0	
+org.apache.hadoop.hbase.master.MasterRpcServicesJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/MasterRpcServices.java	implemented	0	
+org.apache.hadoop.hbase.master.DeadServerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/DeadServer.java	implemented	0	
+org.apache.hadoop.hbase.master.MetricsAssignmentManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/MetricsAssignmentManager.java	implemented	0	
+org.apache.hadoop.hbase.master.ServerManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/ServerManager.java	implemented	0	
+org.apache.hadoop.hbase.master.replication.ReplicationPeerManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/replication/ReplicationPeerManager.java	implemented	0	
+org.apache.hadoop.hbase.master.normalizer.RegionNormalizerManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/normalizer/RegionNormalizerManager.java	implemented	0	
+org.apache.hadoop.hbase.master.MasterCoprocessorHostJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/MasterCoprocessorHost.java	implemented	0	
+org.apache.hadoop.hbase.master.cleaner.LogCleanerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/cleaner/LogCleaner.java	implemented	0	
+org.apache.hadoop.hbase.master.cleaner.HFileCleanerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/cleaner/HFileCleaner.java	implemented	0	
+org.apache.hadoop.hbase.master.cleaner.CleanerChoreJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/cleaner/CleanerChore.java	implemented	0	
+org.apache.hadoop.hbase.master.zksyncer.MetaLocationSyncerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/zksyncer/MetaLocationSyncer.java	implemented	0	
+org.apache.hadoop.hbase.master.zksyncer.ClientZKSyncerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/zksyncer/ClientZKSyncer.java	implemented	0	
+org.apache.hadoop.hbase.master.MetricsMasterJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/MetricsMaster.java	implemented	0	
+org.apache.hadoop.hbase.master.SplitOrMergeStateStoreJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/SplitOrMergeStateStore.java	implemented	0	
+org.apache.hadoop.hbase.master.SplitWALManagerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/master/SplitWALManager.java	implemented	0	
+org.apache.hadoop.hbase.master.TableDescriptorGetterJVMInterface	not-found	noClassFound	0	class file not found
+org.apache.hadoop.hbase.ServerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/Server.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.ipc.PriorityFunctionJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/ipc/PriorityFunction.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.ipc.HBaseRPCErrorHandlerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/ipc/HBaseRPCErrorHandler.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.ipc.RpcSchedulerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/ipc/RpcScheduler.java	implemented	0	
+org.apache.hadoop.hbase.ipc.CallRunnerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/ipc/CallRunner.java	implemented	0	
+org.apache.hadoop.hbase.ipc.CallQueueInfoJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/ipc/CallQueueInfo.java	implemented	0	
+org.apache.hadoop.hbase.ipc.RpcCallbackJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/ipc/RpcCallback.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.executor.EventHandlerJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/executor/EventHandler.java	implemented	0	
+org.apache.hadoop.hbase.executor.ExecutorServiceJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/executor/ExecutorService.java	implemented	0	
+org.apache.hadoop.hbase.monitoring.TaskGroupJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/monitoring/TaskGroup.java	implemented	0	
+org.apache.hadoop.hbase.monitoring.MemoryBoundedLogMessageBufferJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/monitoring/MemoryBoundedLogMessageBuffer.java	implemented	0	
+org.apache.hadoop.hbase.monitoring.MonitoredTaskImplJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/monitoring/MonitoredTaskImpl.java	implemented	0	
+org.apache.hadoop.hbase.monitoring.MonitoredTaskJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/monitoring/MonitoredTask.java	skippedNoConcreteClass	0	no matching concrete declaration
+org.apache.hadoop.hbase.MetaRegionLocationCacheJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/MetaRegionLocationCache.java	implemented	0	
+org.apache.hadoop.hbase.fs.HFileSystemJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/fs/HFileSystem.java	implemented	0	
+org.apache.hadoop.hbase.mob.MobFileJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/mob/MobFile.java	implemented	0	
+org.apache.hadoop.hbase.mob.MobCellJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/mob/MobCell.java	implemented	0	
+org.apache.hadoop.hbase.mob.MobFileCacheJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/mob/MobFileCache.java	implemented	0	
+org.apache.hadoop.hbase.mob.RSMobFileCleanerChoreJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/mob/RSMobFileCleanerChore.java	implemented	0	
+org.apache.hadoop.hbase.client.locking.EntityLockJVMInterface	/Users/allenwang/xlab/hbase/hbase-server/src/main/java/org/apache/hadoop/hbase/client/locking/EntityLock.java	implemented	0	
+org.apache.hadoop.hbase.http.InfoServerJVMInterface	/Users/allenwang/xlab/hbase/hbase-http/src/main/java/org/apache/hadoop/hbase/http/InfoServer.java	implemented	0	

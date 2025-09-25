@@ -37,7 +37,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * </ul>
  */
 @InterfaceAudience.Public
-public final class NormalizeTableFilterParams {
+public final class NormalizeTableFilterParams implements NormalizeTableFilterParamsJVMInterface {
   private final List<TableName> tableNames;
   private final String regex;
   private final String namespace;

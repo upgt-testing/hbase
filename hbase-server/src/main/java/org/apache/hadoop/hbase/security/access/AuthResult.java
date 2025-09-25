@@ -33,7 +33,7 @@ import org.apache.hbase.thirdparty.com.google.common.base.Joiner;
  * Represents the result of an authorization check for logging and error reporting.
  */
 @InterfaceAudience.Private
-public class AuthResult {
+public class AuthResult implements AuthResultJVMInterface {
   private boolean allowed;
   private final String namespace;
   private final TableName table;

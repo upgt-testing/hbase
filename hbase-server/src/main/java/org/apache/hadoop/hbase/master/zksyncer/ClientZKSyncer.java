@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * The target znode(s) is given through {@link #getPathsToWatch()} method
  */
 @InterfaceAudience.Private
-public abstract class ClientZKSyncer extends ZKListener {
+public abstract class ClientZKSyncer extends ZKListener implements ClientZKSyncerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(ClientZKSyncer.class);
   private final Server server;
   private final ZKWatcher clientZkWatcher;

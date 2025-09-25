@@ -91,7 +91,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.RegionServerStatusProto
  * only after the handler is fully enabled and has completed the handling.
  */
 @InterfaceAudience.Private
-public class ServerManager implements ConfigurationObserver {
+public class ServerManager implements ConfigurationObserver, ServerManagerJVMInterface {
   public static final String WAIT_ON_REGIONSERVERS_MAXTOSTART =
     "hbase.master.wait.on.regionservers.maxtostart";
 

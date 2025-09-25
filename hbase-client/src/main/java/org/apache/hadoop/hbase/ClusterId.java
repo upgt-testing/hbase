@@ -31,7 +31,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.ClusterIdProtos;
  * is a container for the id. Also knows how to serialize and deserialize the cluster id.
  */
 @InterfaceAudience.Private
-public class ClusterId {
+public class ClusterId implements ClusterIdJVMInterface {
   private final String id;
 
   /**

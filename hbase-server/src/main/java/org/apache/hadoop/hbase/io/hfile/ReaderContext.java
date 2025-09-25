@@ -27,7 +27,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * Carries the information on some of the meta data about the HFile Reader
  */
 @InterfaceAudience.Private
-public class ReaderContext {
+public class ReaderContext implements ReaderContextJVMInterface {
   @InterfaceAudience.Private
   public enum ReaderType {
     PREAD,

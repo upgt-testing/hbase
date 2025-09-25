@@ -97,7 +97,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos;
  */
 @InterfaceAudience.Private
 public class RegionCoprocessorHost
-  extends CoprocessorHost<RegionCoprocessor, RegionCoprocessorEnvironment> {
+  extends CoprocessorHost<RegionCoprocessor, RegionCoprocessorEnvironment> implements RegionCoprocessorHostJVMInterface {
 
   private static final Logger LOG = LoggerFactory.getLogger(RegionCoprocessorHost.class);
   // The shared data map

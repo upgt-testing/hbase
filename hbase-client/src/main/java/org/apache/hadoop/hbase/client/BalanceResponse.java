@@ -23,7 +23,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * Response returned from a balancer invocation
  */
 @InterfaceAudience.Public
-public final class BalanceResponse {
+public final class BalanceResponse implements BalanceResponseJVMInterface {
 
   /**
    * Used in HMaster to build a {@link BalanceResponse} for returning results of a balance

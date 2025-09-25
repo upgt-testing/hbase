@@ -51,7 +51,7 @@ import org.apache.hbase.thirdparty.com.google.common.util.concurrent.ThreadFacto
  * {@link AuthManager} permission cache.
  */
 @InterfaceAudience.Private
-public class ZKPermissionWatcher extends ZKListener implements Closeable {
+public class ZKPermissionWatcher extends ZKListener implements Closeable, ZKPermissionWatcherJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(ZKPermissionWatcher.class);
   // parent node for permissions lists
   static final String ACL_NODE = "acl";

@@ -25,7 +25,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * gives more understanding that it's a queue of waiting procedures.
  */
 @InterfaceAudience.Private
-public class ProcedureDeque extends ArrayDeque<Procedure> {
+public class ProcedureDeque extends ArrayDeque<Procedure> implements ProcedureDequeJVMInterface {
   public ProcedureDeque() {
     // Default is 16 for a list that is rarely used; elements will resize if too small.
     super(2);

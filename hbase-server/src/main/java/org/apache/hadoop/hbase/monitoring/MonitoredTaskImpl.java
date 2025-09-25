@@ -33,7 +33,7 @@ import org.apache.hbase.thirdparty.com.google.common.collect.ImmutableList;
 import org.apache.hbase.thirdparty.com.google.gson.Gson;
 
 @InterfaceAudience.Private
-class MonitoredTaskImpl implements MonitoredTask {
+class MonitoredTaskImpl implements MonitoredTask, MonitoredTaskImplJVMInterface {
   private long startTime;
   private long statusTime;
   private long stateTime;

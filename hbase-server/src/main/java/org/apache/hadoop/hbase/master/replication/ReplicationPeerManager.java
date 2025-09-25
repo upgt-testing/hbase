@@ -65,7 +65,7 @@ import org.apache.zookeeper.KeeperException;
  * supporting migrating across different replication peer storages without restarting master.
  */
 @InterfaceAudience.Private
-public class ReplicationPeerManager implements ConfigurationObserver {
+public class ReplicationPeerManager implements ConfigurationObserver, ReplicationPeerManagerJVMInterface {
 
   private volatile ReplicationPeerStorage peerStorage;
 

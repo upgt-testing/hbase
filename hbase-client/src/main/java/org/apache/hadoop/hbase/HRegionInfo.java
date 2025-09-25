@@ -71,7 +71,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.HBaseProtos;
  */
 @Deprecated
 @InterfaceAudience.Public
-public class HRegionInfo implements RegionInfo {
+public class HRegionInfo implements RegionInfo, HRegionInfoJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(HRegionInfo.class);
 
   /**

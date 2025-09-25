@@ -31,7 +31,7 @@ import org.apache.zookeeper.KeeperException;
  * manager through this class.
  */
 @InterfaceAudience.Private
-public class MasterProcedureManagerHost extends ProcedureManagerHost<MasterProcedureManager> {
+public class MasterProcedureManagerHost extends ProcedureManagerHost<MasterProcedureManager> implements MasterProcedureManagerHostJVMInterface {
 
   private Hashtable<String, MasterProcedureManager> procedureMgrMap = new Hashtable<>();
 

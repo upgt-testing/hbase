@@ -24,7 +24,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * storage in either HMaster or RegionServer. e.g slowLog responses
  */
 @InterfaceAudience.Private
-public class NamedQueuePayload {
+public class NamedQueuePayload implements NamedQueuePayloadJVMInterface {
 
   public enum NamedQueueEvent {
     SLOW_LOG(0),

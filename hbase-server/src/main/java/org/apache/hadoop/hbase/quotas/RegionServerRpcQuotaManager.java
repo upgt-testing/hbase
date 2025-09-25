@@ -43,7 +43,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos;
  */
 @InterfaceAudience.Private
 @InterfaceStability.Evolving
-public class RegionServerRpcQuotaManager implements RpcQuotaManager {
+public class RegionServerRpcQuotaManager implements RpcQuotaManager, RegionServerRpcQuotaManagerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(RegionServerRpcQuotaManager.class);
 
   private final RegionServerServices rsServices;

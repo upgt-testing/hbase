@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  * system like creating the initial layout, checking file system status, etc.
  */
 @InterfaceAudience.Private
-public class MasterFileSystem {
+public class MasterFileSystem implements MasterFileSystemJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(MasterFileSystem.class);
 
   /** Parameter name for HBase instance root directory permission */

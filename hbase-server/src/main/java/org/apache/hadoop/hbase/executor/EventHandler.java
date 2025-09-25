@@ -47,7 +47,7 @@ import org.slf4j.MDC;
  * @see ExecutorService
  */
 @InterfaceAudience.Private
-public abstract class EventHandler implements Runnable, Comparable<EventHandler> {
+public abstract class EventHandler implements Runnable, Comparable<EventHandler>, EventHandlerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(EventHandler.class);
 
   // type of event this object represents

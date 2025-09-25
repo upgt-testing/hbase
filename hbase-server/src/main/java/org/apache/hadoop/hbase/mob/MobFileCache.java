@@ -47,7 +47,7 @@ import org.apache.hbase.thirdparty.com.google.common.util.concurrent.ThreadFacto
  * We just keep references open.
  */
 @InterfaceAudience.Private
-public class MobFileCache {
+public class MobFileCache implements MobFileCacheJVMInterface {
 
   private static final Logger LOG = LoggerFactory.getLogger(MobFileCache.class);
 

@@ -70,7 +70,7 @@ import org.slf4j.LoggerFactory;
 // problem does not mess up 'results'.
 // TODO: Do more by way of 'repair'; see note on unknownServers below.
 @InterfaceAudience.Private
-public class CatalogJanitor extends ScheduledChore {
+public class CatalogJanitor extends ScheduledChore implements CatalogJanitorJVMInterface {
 
   public static final int DEFAULT_HBASE_CATALOGJANITOR_INTERVAL = 300 * 1000;
 

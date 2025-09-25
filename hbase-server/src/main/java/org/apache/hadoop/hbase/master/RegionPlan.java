@@ -32,7 +32,7 @@ import org.apache.yetus.audience.InterfaceStability;
  */
 @InterfaceAudience.LimitedPrivate("Coprocessors")
 @InterfaceStability.Evolving
-public class RegionPlan implements Comparable<RegionPlan> {
+public class RegionPlan implements Comparable<RegionPlan>, RegionPlanJVMInterface {
   private final RegionInfo hri;
   private final ServerName source;
   private ServerName dest;

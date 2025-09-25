@@ -232,7 +232,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.WALProtos.StoreDescript
  */
 @SuppressWarnings("deprecation")
 @InterfaceAudience.Private
-public class HRegion implements HeapSize, PropagatingConfigurationObserver, Region {
+public class HRegion implements HeapSize, PropagatingConfigurationObserver, Region, HRegionJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(HRegion.class);
 
   public static final String LOAD_CFS_ON_DEMAND_CONFIG_KEY =
@@ -8599,5 +8599,10 @@ public class HRegion implements HeapSize, PropagatingConfigurationObserver, Regi
       allowedOnPath = ".*/src/test/.*")
   boolean isReadsEnabled() {
     return this.writestate.readsEnabled;
+  }
+
+  public boolean equalsTableName(int hashCode, String nameAsString) {
+    return this.htableDescriptor.getTableName().hashCode() == hashCode
+        && this.htableDescriptor.getTableName().getNameAsString().equals(nameAsString);
   }
 }

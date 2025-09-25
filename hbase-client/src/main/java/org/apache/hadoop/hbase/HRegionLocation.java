@@ -32,7 +32,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * This interface has been marked InterfaceAudience.Public in 0.96 and 0.98.
  */
 @InterfaceAudience.Public
-public class HRegionLocation implements Comparable<HRegionLocation> {
+public class HRegionLocation implements Comparable<HRegionLocation>, HRegionLocationJVMInterface {
   private final RegionInfo regionInfo;
   private final ServerName serverName;
   private final long seqNum;

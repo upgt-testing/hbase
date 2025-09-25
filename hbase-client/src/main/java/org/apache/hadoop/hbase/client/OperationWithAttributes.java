@@ -28,7 +28,7 @@ import org.apache.hadoop.hbase.util.ClassSize;
 import org.apache.yetus.audience.InterfaceAudience;
 
 @InterfaceAudience.Public
-public abstract class OperationWithAttributes extends Operation implements Attributes {
+public abstract class OperationWithAttributes extends Operation implements Attributes, OperationWithAttributesJVMInterface {
   // An opaque blob of attributes
   private Map<String, byte[]> attributes;
 

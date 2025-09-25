@@ -55,7 +55,7 @@ import org.apache.hbase.thirdparty.com.google.common.base.Preconditions;
  */
 @InterfaceAudience.Public
 @InterfaceStability.Evolving
-public final class CheckAndMutate implements Row {
+public final class CheckAndMutate implements Row, CheckAndMutateJVMInterface {
 
   /**
    * A builder class for building a CheckAndMutate object.

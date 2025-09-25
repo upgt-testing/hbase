@@ -23,7 +23,7 @@ import java.util.Set;
 import org.apache.yetus.audience.InterfaceAudience;
 
 @InterfaceAudience.Private
-public class CallQueueInfo {
+public class CallQueueInfo implements CallQueueInfoJVMInterface {
   private final Map<String, Map<String, Long>> callQueueMethodCountsSummary;
   private final Map<String, Map<String, Long>> callQueueMethodSizeSummary;
 

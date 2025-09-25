@@ -71,7 +71,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.WALProtos.RegionEventDe
  */
 @InterfaceAudience.LimitedPrivate({ HBaseInterfaceAudience.REPLICATION,
   HBaseInterfaceAudience.COPROC })
-public class WALEdit implements HeapSize {
+public class WALEdit implements HeapSize, WALEditJVMInterface {
   // Below defines are for writing WALEdit 'meta' Cells..
   // TODO: Get rid of this system of special 'meta' Cells. See HBASE-8457. It suggests
   // adding a type to WALEdit itself for use denoting meta Edits and their types.

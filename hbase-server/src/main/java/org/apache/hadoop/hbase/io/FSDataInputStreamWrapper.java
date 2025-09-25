@@ -35,7 +35,7 @@ import org.apache.hbase.thirdparty.com.google.common.io.Closeables;
  * comments.
  */
 @InterfaceAudience.Private
-public class FSDataInputStreamWrapper implements Closeable {
+public class FSDataInputStreamWrapper implements Closeable, FSDataInputStreamWrapperJVMInterface {
 
   private final HFileSystem hfs;
   private final Path path;

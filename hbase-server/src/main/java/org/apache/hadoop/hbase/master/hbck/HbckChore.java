@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
  */
 @InterfaceAudience.Private
 @InterfaceStability.Evolving
-public class HbckChore extends ScheduledChore {
+public class HbckChore extends ScheduledChore implements HbckChoreJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(HbckChore.class.getName());
 
   private static final String HBCK_CHORE_INTERVAL = "hbase.master.hbck.chore.interval";

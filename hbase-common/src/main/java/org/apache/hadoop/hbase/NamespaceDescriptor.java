@@ -33,7 +33,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * opposed to a more tangible container.
  */
 @InterfaceAudience.Public
-public class NamespaceDescriptor {
+public class NamespaceDescriptor implements NamespaceDescriptorJVMInterface {
 
   /** System namespace name. */
   public static final byte[] SYSTEM_NAMESPACE_NAME = Bytes.toBytes("hbase");

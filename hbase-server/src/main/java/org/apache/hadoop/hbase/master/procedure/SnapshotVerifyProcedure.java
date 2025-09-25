@@ -51,7 +51,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.SnapshotProtos.Snapshot
  */
 @InterfaceAudience.Private
 public class SnapshotVerifyProcedure extends ServerRemoteProcedure
-  implements TableProcedureInterface {
+  implements TableProcedureInterface, SnapshotVerifyProcedureJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(SnapshotVerifyProcedure.class);
 
   private SnapshotDescription snapshot;

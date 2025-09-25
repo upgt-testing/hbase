@@ -35,7 +35,7 @@ import org.apache.hbase.thirdparty.org.apache.commons.collections4.CollectionUti
  * or using them as keys in Maps.
  */
 @InterfaceAudience.Public
-public class RowMutations implements Row {
+public class RowMutations implements Row, RowMutationsJVMInterface {
 
   /**
    * Create a {@link RowMutations} with the specified mutations.

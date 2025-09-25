@@ -44,7 +44,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * @see FilterBase
  */
 @InterfaceAudience.Public
-public abstract class Filter {
+public abstract class Filter implements FilterJVMInterface {
   protected transient boolean reversed;
 
   /**

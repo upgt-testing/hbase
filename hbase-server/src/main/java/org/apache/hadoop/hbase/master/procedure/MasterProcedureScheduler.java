@@ -90,7 +90,7 @@ import org.slf4j.LoggerFactory;
  * </ul>
  */
 @InterfaceAudience.Private
-public class MasterProcedureScheduler extends AbstractProcedureScheduler {
+public class MasterProcedureScheduler extends AbstractProcedureScheduler implements MasterProcedureSchedulerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(MasterProcedureScheduler.class);
 
   private static final AvlKeyComparator<ServerQueue> SERVER_QUEUE_KEY_COMPARATOR =

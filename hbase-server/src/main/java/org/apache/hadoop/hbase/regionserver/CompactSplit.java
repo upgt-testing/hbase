@@ -62,7 +62,7 @@ import org.apache.hbase.thirdparty.com.google.common.util.concurrent.ThreadFacto
  * Compact region on request and then run split if appropriate
  */
 @InterfaceAudience.Private
-public class CompactSplit implements CompactionRequester, PropagatingConfigurationObserver {
+public class CompactSplit implements CompactionRequester, PropagatingConfigurationObserver, CompactSplitJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(CompactSplit.class);
 
   // Configuration key for the large compaction threads.

@@ -48,7 +48,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.RegionServerStatusProto
  * updates the state on <code>this</code>.
  */
 @InterfaceAudience.Private
-public class RegionServerSpaceQuotaManager {
+public class RegionServerSpaceQuotaManager implements RegionServerSpaceQuotaManagerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(RegionServerSpaceQuotaManager.class);
 
   private final RegionServerServices rsServices;

@@ -23,7 +23,7 @@ import org.apache.yetus.audience.InterfaceStability;
 
 @InterfaceAudience.Private
 @InterfaceStability.Stable
-public class ProcedureException extends HBaseException {
+public class ProcedureException extends HBaseException implements ProcedureExceptionJVMInterface {
   /** default constructor */
   public ProcedureException() {
     super();

@@ -36,7 +36,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.MasterProcedureProtos.T
 
 @InterfaceAudience.Private
 public class TruncateRegionProcedure
-  extends AbstractStateMachineRegionProcedure<TruncateRegionState> {
+  extends AbstractStateMachineRegionProcedure<TruncateRegionState> implements TruncateRegionProcedureJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(TruncateRegionProcedure.class);
 
   @SuppressWarnings("unused")

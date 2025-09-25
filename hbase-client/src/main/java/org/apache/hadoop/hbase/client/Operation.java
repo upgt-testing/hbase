@@ -27,7 +27,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * Delete, Scan, Next, etc.) Contains methods for exposure to logging and debugging tools.
  */
 @InterfaceAudience.Public
-public abstract class Operation {
+public abstract class Operation implements OperationJVMInterface {
   // TODO make this configurable
   // TODO Do we need this anymore now we have protobuffed it all?
   private static final int DEFAULT_MAX_COLS = 5;

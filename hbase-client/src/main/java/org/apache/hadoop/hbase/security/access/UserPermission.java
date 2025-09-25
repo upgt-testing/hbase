@@ -25,7 +25,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * Namespace, Table] permission.
  */
 @InterfaceAudience.Public
-public class UserPermission {
+public class UserPermission implements UserPermissionJVMInterface {
 
   private String user;
   private Permission permission;

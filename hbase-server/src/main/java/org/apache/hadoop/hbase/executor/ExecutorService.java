@@ -57,7 +57,7 @@ import org.apache.hbase.thirdparty.com.google.common.util.concurrent.ThreadFacto
  * In order to use the service created above, call {@link #submit(EventHandler)}.
  */
 @InterfaceAudience.Private
-public class ExecutorService {
+public class ExecutorService implements ExecutorServiceJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(ExecutorService.class);
 
   // hold the all the executors created in a map addressable by their names

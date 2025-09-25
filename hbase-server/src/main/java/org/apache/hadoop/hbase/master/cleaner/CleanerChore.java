@@ -51,7 +51,7 @@ import org.apache.hbase.thirdparty.com.google.common.collect.Lists;
  * @param <T> Cleaner delegate class that is dynamically loaded from configuration
  */
 @InterfaceAudience.Private
-public abstract class CleanerChore<T extends FileCleanerDelegate> extends ScheduledChore {
+public abstract class CleanerChore<T extends FileCleanerDelegate> extends ScheduledChore implements CleanerChoreJVMInterface<T> {
 
   private static final Logger LOG = LoggerFactory.getLogger(CleanerChore.class);
   private static final int AVAIL_PROCESSORS = Runtime.getRuntime().availableProcessors();

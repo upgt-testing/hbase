@@ -29,7 +29,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * @see MemStoreSizing
  */
 @InterfaceAudience.LimitedPrivate(HBaseInterfaceAudience.COPROC)
-public class MemStoreSize {
+public class MemStoreSize implements MemStoreSizeJVMInterface {
   /**
    * 'dataSize' tracks the Cell's data bytes size alone (Key bytes, value bytes). A cell's data can
    * be in on heap or off heap area depending on the MSLAB and its configuration to be using on heap

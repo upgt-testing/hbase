@@ -49,7 +49,7 @@ import org.apache.yetus.audience.InterfaceStability;
  */
 @InterfaceAudience.LimitedPrivate(HBaseInterfaceAudience.COPROC)
 @InterfaceStability.Evolving
-public class ScannerContext {
+public class ScannerContext implements ScannerContextJVMInterface {
 
   LimitFields limits;
   /**

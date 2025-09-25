@@ -76,7 +76,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.MasterProcedureProtos;
  * should be able to find out this operation not work and send a operation to another server.
  */
 public abstract class ServerRemoteProcedure extends Procedure<MasterProcedureEnv>
-  implements RemoteProcedureDispatcher.RemoteProcedure<MasterProcedureEnv, ServerName> {
+  implements RemoteProcedureDispatcher.RemoteProcedure<MasterProcedureEnv, ServerName>, ServerRemoteProcedureJVMInterface {
   protected static final Logger LOG = LoggerFactory.getLogger(ServerRemoteProcedure.class);
   protected ProcedureEvent<?> event;
   protected ServerName targetServer;

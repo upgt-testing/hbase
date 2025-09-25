@@ -32,7 +32,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * overhead. It also tracks the replay edits per region.
  */
 @InterfaceAudience.Private
-public class RegionServerAccounting {
+public class RegionServerAccounting implements RegionServerAccountingJVMInterface {
   // memstore data size
   private final LongAdder globalMemStoreDataSize = new LongAdder();
   // memstore heap size.

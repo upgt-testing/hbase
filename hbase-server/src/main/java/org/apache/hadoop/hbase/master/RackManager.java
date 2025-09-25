@@ -32,7 +32,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * resolution from hosts to the racks they belong to.
  */
 @InterfaceAudience.Private
-public class RackManager {
+public class RackManager implements RackManagerJVMInterface {
   public static final String UNKNOWN_RACK = "Unknown Rack";
 
   private DNSToSwitchMapping switchMapping;

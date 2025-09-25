@@ -31,7 +31,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * for this. So they are defined under scan operation for now.
  */
 @InterfaceAudience.Public
-public class ScanMetrics extends ServerSideScanMetrics {
+public class ScanMetrics extends ServerSideScanMetrics implements ScanMetricsJVMInterface {
 
   // AtomicLongs to hold the metrics values. These are all updated through ClientScanner and
   // ScannerCallable. They are atomic longs so that atomic getAndSet can be used to reset the

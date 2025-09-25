@@ -36,7 +36,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * Custom implementation can be provided.
  */
 @InterfaceAudience.Private
-abstract class StoreFlusher {
+abstract class StoreFlusher implements StoreFlusherJVMInterface {
   protected Configuration conf;
   protected HStore store;
 

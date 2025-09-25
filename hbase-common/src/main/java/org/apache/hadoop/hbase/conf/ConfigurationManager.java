@@ -61,7 +61,7 @@ import org.slf4j.LoggerFactory;
  */
 @InterfaceAudience.Private
 @InterfaceStability.Evolving
-public class ConfigurationManager {
+public class ConfigurationManager implements ConfigurationManagerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(ConfigurationManager.class);
 
   // The set of Configuration Observers. These classes would like to get

@@ -76,7 +76,7 @@ import org.apache.hbase.thirdparty.com.google.common.io.Closeables;
  * effectively final. 'keepSeqIdPeriod' is an exception to this rule because unit tests may set it.
  */
 @InterfaceAudience.Private
-public abstract class Compactor<T extends CellSink> {
+public abstract class Compactor<T extends CellSink> implements CompactorJVMInterface<T> {
   private static final Logger LOG = LoggerFactory.getLogger(Compactor.class);
   protected static final long COMPACTION_PROGRESS_LOG_INTERVAL = 60 * 1000;
   protected final Configuration conf;

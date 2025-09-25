@@ -29,7 +29,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * to generate the compacted files.
  */
 @InterfaceAudience.Private
-public abstract class CompactionPolicy {
+public abstract class CompactionPolicy implements CompactionPolicyJVMInterface {
   protected CompactionConfiguration comConf;
   protected StoreConfigInformation storeConfigInfo;
 

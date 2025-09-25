@@ -24,7 +24,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  */
 // TODO: we could use pure byte arrays, but then we wouldn't be able to use hash map.
 @InterfaceAudience.Private
-public class NonceKey {
+public class NonceKey implements NonceKeyJVMInterface {
   private long group;
   private long nonce;
 

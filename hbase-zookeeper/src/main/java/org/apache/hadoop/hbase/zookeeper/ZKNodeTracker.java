@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
  * This is the base class used by trackers in both the Master and RegionServers.
  */
 @InterfaceAudience.Private
-public abstract class ZKNodeTracker extends ZKListener {
+public abstract class ZKNodeTracker extends ZKListener implements ZKNodeTrackerJVMInterface {
   // LOG is being used in subclasses, hence keeping it protected
   protected static final Logger LOG = LoggerFactory.getLogger(ZKNodeTracker.class);
   /** Path of node being tracked */

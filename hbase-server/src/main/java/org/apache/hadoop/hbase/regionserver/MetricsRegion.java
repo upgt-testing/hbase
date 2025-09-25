@@ -26,7 +26,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * (hbase-hadoop1-compat or hbase-hadoop2-compat).
  */
 @InterfaceAudience.Private
-public class MetricsRegion {
+public class MetricsRegion implements MetricsRegionJVMInterface {
   private final MetricsRegionSource source;
   private final MetricsUserAggregate userAggregate;
   private MetricsRegionWrapper regionWrapper;

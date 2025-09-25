@@ -30,7 +30,7 @@ import org.apache.yetus.audience.InterfaceAudience;
 // with a more generic one which says it compares bytes (not necessary a byte array only)
 // BytesComparable implements Comparable<Byte> will work?
 @SuppressWarnings("ComparableType") // Should this move to Comparator usage?
-public abstract class ByteArrayComparable implements Comparable<byte[]> {
+public abstract class ByteArrayComparable implements Comparable<byte[]>, ByteArrayComparableJVMInterface {
 
   byte[] value;
 

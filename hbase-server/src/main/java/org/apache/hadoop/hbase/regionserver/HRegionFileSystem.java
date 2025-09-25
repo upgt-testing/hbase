@@ -71,7 +71,7 @@ import org.apache.hbase.thirdparty.com.google.common.collect.Lists;
  * region data.
  */
 @InterfaceAudience.Private
-public class HRegionFileSystem {
+public class HRegionFileSystem implements HRegionFileSystemJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(HRegionFileSystem.class);
 
   /** Name of the region info file that resides just under the region directory. */

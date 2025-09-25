@@ -36,7 +36,7 @@ import org.apache.hbase.thirdparty.io.netty.util.concurrent.DefaultThreadFactory
  * Event loop group related config.
  */
 @InterfaceAudience.Private
-public class NettyEventLoopGroupConfig {
+public class NettyEventLoopGroupConfig implements NettyEventLoopGroupConfigJVMInterface {
 
   public static final String NETTY_WORKER_COUNT_KEY = "hbase.netty.worker.count";
   public static final int DEFAULT_NETTY_WORKER_COUNT = 0;

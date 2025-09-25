@@ -72,7 +72,7 @@ import org.slf4j.LoggerFactory;
  * length and actual tag bytes length.
  */
 @InterfaceAudience.Private
-public class KeyValue implements ExtendedCell, Cloneable {
+public class KeyValue implements ExtendedCell, Cloneable, KeyValueJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(KeyValue.class);
 
   public static final int FIXED_OVERHEAD = ClassSize.OBJECT + // the KeyValue object itself

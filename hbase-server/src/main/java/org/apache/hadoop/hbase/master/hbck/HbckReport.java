@@ -33,7 +33,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * The result of an {@link HbckChore} execution.
  */
 @InterfaceAudience.Private
-public class HbckReport {
+public class HbckReport implements HbckReportJVMInterface {
 
   private final Map<String, HbckRegionInfo> regionInfoMap = new HashMap<>();
   private final Set<String> disabledTableRegions = new HashSet<>();

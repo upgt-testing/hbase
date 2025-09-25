@@ -71,7 +71,7 @@ import org.slf4j.LoggerFactory;
  */
 @InterfaceAudience.Private
 public class MasterCoprocessorHost
-  extends CoprocessorHost<MasterCoprocessor, MasterCoprocessorEnvironment> {
+  extends CoprocessorHost<MasterCoprocessor, MasterCoprocessorEnvironment> implements MasterCoprocessorHostJVMInterface {
 
   private static final Logger LOG = LoggerFactory.getLogger(MasterCoprocessorHost.class);
 

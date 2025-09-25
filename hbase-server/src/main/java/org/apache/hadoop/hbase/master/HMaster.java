@@ -286,7 +286,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.SnapshotProtos.Snapshot
  */
 @InterfaceAudience.LimitedPrivate(HBaseInterfaceAudience.TOOLS)
 @SuppressWarnings("deprecation")
-public class HMaster extends HRegionServer implements MasterServices {
+public class HMaster extends HRegionServer implements MasterServices, HMasterJVMInterface {
 
   private static final Logger LOG = LoggerFactory.getLogger(HMaster.class);
 

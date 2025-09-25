@@ -33,7 +33,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * will be ignored silently.
  */
 @InterfaceAudience.Private
-public class HDFSBlocksDistribution {
+public class HDFSBlocksDistribution implements HDFSBlocksDistributionJVMInterface {
   private Map<String, HostAndWeight> hostAndWeights = null;
   private long uniqueBlocksTotalWeight = 0;
 

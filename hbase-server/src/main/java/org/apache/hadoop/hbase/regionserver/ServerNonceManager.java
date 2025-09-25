@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
  * time; if nonce group/client ID is supplied, nonces are stored by client ID.
  */
 @InterfaceAudience.Private
-public class ServerNonceManager {
+public class ServerNonceManager implements ServerNonceManagerJVMInterface {
   public static final String HASH_NONCE_GRACE_PERIOD_KEY = "hbase.server.hashNonce.gracePeriod";
   private static final Logger LOG = LoggerFactory.getLogger(ServerNonceManager.class);
 

@@ -38,7 +38,7 @@ import org.apache.hbase.thirdparty.org.eclipse.jetty.servlet.ServletHolder;
  * server code from (src/hbase-webapps/&lt;name&gt;)
  */
 @InterfaceAudience.Private
-public class InfoServer {
+public class InfoServer implements InfoServerJVMInterface {
   private static final String HBASE_APP_DIR = "hbase-webapps";
   private final org.apache.hadoop.hbase.http.HttpServer httpServer;
 

@@ -83,7 +83,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos.PrepareBul
  * secret directory.
  */
 @InterfaceAudience.Private
-public class SecureBulkLoadManager {
+public class SecureBulkLoadManager implements SecureBulkLoadManagerJVMInterface {
 
   public static final long VERSION = 0L;
 

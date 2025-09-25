@@ -39,7 +39,7 @@ import org.slf4j.LoggerFactory;
  * an entry being added to a queue, etc.
  */
 @InterfaceAudience.Private
-public abstract class ScheduledChore implements Runnable {
+public abstract class ScheduledChore implements Runnable, ScheduledChoreJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(ScheduledChore.class);
 
   private final String name;

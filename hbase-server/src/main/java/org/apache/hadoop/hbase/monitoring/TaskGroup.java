@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
  * collapsed (probably by default) or expanded.
  */
 @InterfaceAudience.Private
-public class TaskGroup extends MonitoredTaskImpl {
+public class TaskGroup extends MonitoredTaskImpl implements TaskGroupJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(TaskGroup.class);
 
   /** Sub-tasks in the group */

@@ -51,7 +51,7 @@ import org.apache.hbase.thirdparty.com.google.common.collect.Multimap;
  * table which has a space quota.
  */
 @InterfaceAudience.Private
-public class SnapshotQuotaObserverChore extends ScheduledChore {
+public class SnapshotQuotaObserverChore extends ScheduledChore implements SnapshotQuotaObserverChoreJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(SnapshotQuotaObserverChore.class);
   static final String SNAPSHOT_QUOTA_CHORE_PERIOD_KEY = "hbase.master.quotas.snapshot.chore.period";
   static final int SNAPSHOT_QUOTA_CHORE_PERIOD_DEFAULT = 1000 * 60 * 5; // 5 minutes in millis

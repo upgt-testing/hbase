@@ -22,7 +22,7 @@ import org.apache.yetus.audience.InterfaceStability;
 
 @InterfaceAudience.Private
 @InterfaceStability.Evolving
-public abstract class ProcedureManager {
+public abstract class ProcedureManager implements ProcedureManagerJVMInterface {
 
   /**
    * Return the unique signature of the procedure. This signature uniquely identifies the procedure.

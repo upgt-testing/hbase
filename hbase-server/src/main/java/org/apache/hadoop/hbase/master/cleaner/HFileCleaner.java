@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  */
 @InterfaceAudience.Private
 public class HFileCleaner extends CleanerChore<BaseHFileCleanerDelegate>
-  implements ConfigurationObserver {
+  implements ConfigurationObserver, HFileCleanerJVMInterface {
 
   public static final String MASTER_HFILE_CLEANER_PLUGINS = "hbase.master.hfilecleaner.plugins";
 

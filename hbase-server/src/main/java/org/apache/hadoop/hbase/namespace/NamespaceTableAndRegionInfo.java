@@ -32,7 +32,7 @@ import org.apache.hbase.thirdparty.com.google.common.base.Joiner;
  * tables and regions in a namespace.
  */
 @InterfaceAudience.Private
-class NamespaceTableAndRegionInfo {
+class NamespaceTableAndRegionInfo implements NamespaceTableAndRegionInfoJVMInterface {
   private String name;
   private Map<TableName, AtomicInteger> tableAndRegionInfo;
 

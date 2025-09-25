@@ -60,7 +60,7 @@ import org.slf4j.LoggerFactory;
  * flexibility of using separate filesystem objects for reading and writing hfiles and wals.
  */
 @InterfaceAudience.Private
-public class HFileSystem extends FilterFileSystem {
+public class HFileSystem extends FilterFileSystem implements HFileSystemJVMInterface {
   public static final Logger LOG = LoggerFactory.getLogger(HFileSystem.class);
 
   private final FileSystem noChecksumFs; // read hfile data from storage

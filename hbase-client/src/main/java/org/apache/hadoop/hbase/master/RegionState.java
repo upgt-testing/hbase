@@ -31,7 +31,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.ClusterStatusProtos;
  * State of a Region while undergoing transitions. This class is immutable.
  */
 @InterfaceAudience.Private
-public class RegionState {
+public class RegionState implements RegionStateJVMInterface {
 
   @InterfaceAudience.Private
   @InterfaceStability.Evolving

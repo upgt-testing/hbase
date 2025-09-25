@@ -28,7 +28,7 @@ import org.apache.hbase.thirdparty.org.apache.commons.collections4.MapUtils;
  * The POJO equivalent of HBaseProtos.SnapshotDescription
  */
 @InterfaceAudience.Public
-public class SnapshotDescription {
+public class SnapshotDescription implements SnapshotDescriptionJVMInterface {
   private final String name;
   private final TableName table;
   private final SnapshotType snapShotType;

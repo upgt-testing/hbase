@@ -41,7 +41,7 @@ import org.apache.hbase.thirdparty.com.google.common.base.Preconditions;
  * </pre>
  */
 @InterfaceAudience.Private
-public class IdLock {
+public class IdLock implements IdLockJVMInterface {
 
   private static final Logger LOG = LoggerFactory.getLogger(IdLock.class);
 

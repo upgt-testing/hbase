@@ -28,7 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @InterfaceAudience.Private
-public abstract class AbstractProcedureScheduler implements ProcedureScheduler {
+public abstract class AbstractProcedureScheduler implements ProcedureScheduler, AbstractProcedureSchedulerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(AbstractProcedureScheduler.class);
   private final ReentrantLock schedulerLock = new ReentrantLock();
   private final Condition schedWaitCond = schedulerLock.newCondition();

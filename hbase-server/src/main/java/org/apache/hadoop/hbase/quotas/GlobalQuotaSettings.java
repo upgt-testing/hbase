@@ -33,7 +33,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.QuotaProtos.Quotas;
  */
 @InterfaceAudience.LimitedPrivate({ HBaseInterfaceAudience.COPROC })
 @InterfaceStability.Evolving
-public abstract class GlobalQuotaSettings extends QuotaSettings {
+public abstract class GlobalQuotaSettings extends QuotaSettings implements GlobalQuotaSettingsJVMInterface {
 
   protected GlobalQuotaSettings(String userName, TableName tableName, String namespace,
     String regionServer) {

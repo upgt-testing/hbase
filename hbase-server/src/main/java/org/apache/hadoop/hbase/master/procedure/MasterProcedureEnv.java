@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
 
 @InterfaceAudience.Private
 @InterfaceStability.Evolving
-public class MasterProcedureEnv implements ConfigurationObserver {
+public class MasterProcedureEnv implements ConfigurationObserver, MasterProcedureEnvJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(MasterProcedureEnv.class);
 
   @InterfaceAudience.Private

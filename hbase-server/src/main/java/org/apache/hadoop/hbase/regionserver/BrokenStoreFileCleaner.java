@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
  * This Chore, every time it runs, will clear the unsused HFiles in the data folder.
  */
 @InterfaceAudience.Private
-public class BrokenStoreFileCleaner extends ScheduledChore {
+public class BrokenStoreFileCleaner extends ScheduledChore implements BrokenStoreFileCleanerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(BrokenStoreFileCleaner.class);
   public static final String BROKEN_STOREFILE_CLEANER_ENABLED =
     "hbase.region.broken.storefilecleaner.enabled";

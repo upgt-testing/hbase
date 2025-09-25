@@ -94,7 +94,7 @@ import org.apache.hbase.thirdparty.com.google.common.math.IntMath;
  * {@link MasterRegionParams#archivedHFileSuffix()} suffix.
  */
 @InterfaceAudience.Private
-public final class MasterRegion {
+public final class MasterRegion implements MasterRegionJVMInterface {
 
   private static final Logger LOG = LoggerFactory.getLogger(MasterRegion.class);
 

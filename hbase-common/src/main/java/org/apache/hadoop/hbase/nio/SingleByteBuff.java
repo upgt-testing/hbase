@@ -35,7 +35,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * normal BB - offheap or onheap
  */
 @InterfaceAudience.Private
-public class SingleByteBuff extends ByteBuff {
+public class SingleByteBuff extends ByteBuff implements SingleByteBuffJVMInterface {
 
   private static final boolean UNSAFE_AVAIL = HBasePlatformDependent.isUnsafeAvailable();
   private static final boolean UNSAFE_UNALIGNED = HBasePlatformDependent.unaligned();

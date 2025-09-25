@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
  */
 @InterfaceAudience.Private
 @InterfaceStability.Evolving
-public abstract class ProcedureManagerHost<E extends ProcedureManager> {
+public abstract class ProcedureManagerHost<E extends ProcedureManager> implements ProcedureManagerHostJVMInterface<E> {
 
   public static final String REGIONSERVER_PROCEDURE_CONF_KEY =
     "hbase.procedure.regionserver.classes";

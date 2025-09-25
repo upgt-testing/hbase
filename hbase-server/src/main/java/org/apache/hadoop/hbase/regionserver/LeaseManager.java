@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
  * there is something to do, rather than the Chore sleep time which is invariant.
  */
 @InterfaceAudience.Private
-public class LeaseManager extends Thread {
+public class LeaseManager extends Thread implements LeaseManagerJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(LeaseManager.class.getName());
   private static final int MIN_WAIT_TIME = 100;
 

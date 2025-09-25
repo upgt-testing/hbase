@@ -64,7 +64,7 @@ import org.apache.hbase.thirdparty.com.google.common.util.concurrent.ThreadFacto
  * related events and exceptions are handled here.
  */
 @InterfaceAudience.Private
-public class ZKWatcher implements Watcher, Abortable, Closeable {
+public class ZKWatcher implements Watcher, Abortable, Closeable, ZKWatcherJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(ZKWatcher.class);
 
   // Identifier for this watcher (for logging only). It is made of the prefix

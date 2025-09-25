@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
  * {@link #addColumn(byte[], byte[], byte[])} method.
  */
 @InterfaceAudience.Public
-public class Append extends Mutation {
+public class Append extends Mutation implements AppendJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(Append.class);
   private static final long HEAP_OVERHEAD = (long) ClassSize.REFERENCE + ClassSize.TIMERANGE;
   private TimeRange tr = TimeRange.allTime();

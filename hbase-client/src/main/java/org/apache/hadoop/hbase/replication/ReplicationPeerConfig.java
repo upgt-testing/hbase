@@ -34,7 +34,7 @@ import org.apache.hbase.thirdparty.org.apache.commons.collections4.CollectionUti
  * A configuration for the replication peer cluster.
  */
 @InterfaceAudience.Public
-public class ReplicationPeerConfig {
+public class ReplicationPeerConfig implements ReplicationPeerConfigJVMInterface {
 
   private String clusterKey;
   private String replicationEndpointImpl;

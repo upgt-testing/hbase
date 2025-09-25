@@ -54,7 +54,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.ProcedureProtos;
  */
 @InterfaceAudience.Private
 public final class LockProcedure extends Procedure<MasterProcedureEnv>
-  implements TableProcedureInterface {
+  implements TableProcedureInterface, LockProcedureJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(LockProcedure.class);
 
   public static final int DEFAULT_REMOTE_LOCKS_TIMEOUT_MS = 30000; // timeout in ms

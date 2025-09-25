@@ -40,7 +40,7 @@ import org.apache.hbase.thirdparty.com.google.common.collect.ImmutableMap;
  * @see TablePermission
  */
 @InterfaceAudience.Public
-public class Permission extends VersionedWritable {
+public class Permission extends VersionedWritable implements PermissionJVMInterface {
   protected static final byte VERSION = 0;
 
   @InterfaceAudience.Public

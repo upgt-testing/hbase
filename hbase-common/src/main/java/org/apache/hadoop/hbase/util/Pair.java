@@ -24,7 +24,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * A generic class for pairs.
  */
 @InterfaceAudience.Public
-public class Pair<T1, T2> implements Serializable {
+public class Pair<T1, T2> implements Serializable, PairJVMInterface<T1, T2> {
   private static final long serialVersionUID = -3986244606585552569L;
   protected T1 first = null;
   protected T2 second = null;

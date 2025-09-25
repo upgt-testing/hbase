@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
  * Stores all of the cache objects and configuration for a single HFile.
  */
 @InterfaceAudience.Private
-public class CacheConfig implements ConfigurationObserver {
+public class CacheConfig implements ConfigurationObserver, CacheConfigJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(CacheConfig.class.getName());
 
   /**

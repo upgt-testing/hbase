@@ -66,7 +66,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.ProtobufUtil;
  * lot more.
  */
 @InterfaceAudience.Private
-public class HStoreFile implements StoreFile {
+public class HStoreFile implements StoreFile, HStoreFileJVMInterface {
 
   private static final Logger LOG = LoggerFactory.getLogger(HStoreFile.class.getName());
 

@@ -23,7 +23,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * Encapsulates options for executing a run of the Balancer.
  */
 @InterfaceAudience.Public
-public final class BalanceRequest {
+public final class BalanceRequest implements BalanceRequestJVMInterface {
   private static final BalanceRequest DEFAULT = BalanceRequest.newBuilder().build();
 
   /**

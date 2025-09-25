@@ -24,7 +24,7 @@ import org.apache.hadoop.hbase.io.compress.Compression;
 import org.apache.yetus.audience.InterfaceAudience;
 
 @InterfaceAudience.Private
-public final class CreateStoreFileWriterParams {
+public final class CreateStoreFileWriterParams implements CreateStoreFileWriterParamsJVMInterface {
 
   private long maxKeyCount;
 

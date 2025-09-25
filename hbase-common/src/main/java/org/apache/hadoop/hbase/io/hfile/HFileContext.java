@@ -37,7 +37,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * @see HFileContextBuilder
  */
 @InterfaceAudience.Private
-public class HFileContext implements HeapSize, Cloneable {
+public class HFileContext implements HeapSize, Cloneable, HFileContextJVMInterface {
   public static final long FIXED_OVERHEAD = ClassSize.estimateBase(HFileContext.class, false);
 
   private static final int DEFAULT_BYTES_PER_CHECKSUM = 16 * 1024;

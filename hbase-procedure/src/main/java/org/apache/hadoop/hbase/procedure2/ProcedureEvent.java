@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
  * resource to wait on, and a queue for suspended procedures.
  */
 @InterfaceAudience.Private
-public class ProcedureEvent<T> {
+public class ProcedureEvent<T> implements ProcedureEventJVMInterface<T> {
   private static final Logger LOG = LoggerFactory.getLogger(ProcedureEvent.class);
 
   private final T object;

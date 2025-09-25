@@ -33,7 +33,7 @@ import org.apache.hbase.thirdparty.io.netty.util.ResourceLeakTracker;
  * reference count become 0, it'll call {@link Recycler#free()} exactly once.
  */
 @InterfaceAudience.Private
-public class RefCnt extends AbstractReferenceCounted {
+public class RefCnt extends AbstractReferenceCounted implements RefCntJVMInterface {
 
   public static final ResourceLeakDetector<RefCnt> detector =
     ResourceLeakDetectorFactory.instance().newResourceLeakDetector(RefCnt.class);

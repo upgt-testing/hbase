@@ -393,7 +393,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.SnapshotProtos.Snapshot
 @SuppressWarnings("deprecation")
 public class MasterRpcServices extends RSRpcServices
   implements MasterService.BlockingInterface, RegionServerStatusService.BlockingInterface,
-  LockService.BlockingInterface, HbckService.BlockingInterface {
+  LockService.BlockingInterface, HbckService.BlockingInterface, MasterRpcServicesJVMInterface {
 
   private static final Logger LOG = LoggerFactory.getLogger(MasterRpcServices.class.getName());
   private static final Logger AUDITLOG =

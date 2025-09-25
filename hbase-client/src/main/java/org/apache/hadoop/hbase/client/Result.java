@@ -70,7 +70,7 @@ import org.apache.yetus.audience.InterfaceAudience;
  * {@link #copyFrom(Result)}
  */
 @InterfaceAudience.Public
-public class Result implements CellScannable, CellScanner {
+public class Result implements CellScannable, CellScanner, ResultJVMInterface {
   private Cell[] cells;
   private Boolean exists; // if the query was just to check existence.
   private boolean stale = false;

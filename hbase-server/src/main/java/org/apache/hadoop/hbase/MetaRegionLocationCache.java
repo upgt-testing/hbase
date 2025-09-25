@@ -48,7 +48,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.ProtobufUtil;
  * conditions).
  */
 @InterfaceAudience.Private
-public class MetaRegionLocationCache extends ZKListener {
+public class MetaRegionLocationCache extends ZKListener implements MetaRegionLocationCacheJVMInterface {
 
   private static final Logger LOG = LoggerFactory.getLogger(MetaRegionLocationCache.class);
 

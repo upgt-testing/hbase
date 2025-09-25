@@ -84,7 +84,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.ProtobufUtil;
  * instance per usage.
  */
 @InterfaceAudience.Public
-public class Scan extends Query {
+public class Scan extends Query implements ScanJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(Scan.class);
 
   private static final String RAW_ATTR = "_raw_";

@@ -39,7 +39,7 @@ import org.apache.hbase.thirdparty.com.google.common.util.concurrent.ThreadFacto
  */
 @InterfaceAudience.Private
 @InterfaceStability.Evolving
-public class NamedQueueRecorder {
+public class NamedQueueRecorder implements NamedQueueRecorderJVMInterface {
 
   private final Disruptor<RingBufferEnvelope> disruptor;
   private final LogEventHandler logEventHandler;

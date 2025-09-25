@@ -29,7 +29,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.TooSlowLog;
  * Response object to be sent by namedQueue service back to caller
  */
 @InterfaceAudience.Private
-public class NamedQueueGetResponse {
+public class NamedQueueGetResponse implements NamedQueueGetResponseJVMInterface {
 
   private List<TooSlowLog.SlowLogPayload> slowLogPayloads;
   private List<RecentLogs.BalancerDecision> balancerDecisions;

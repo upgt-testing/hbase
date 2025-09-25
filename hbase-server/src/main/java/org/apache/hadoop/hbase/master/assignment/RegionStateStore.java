@@ -62,7 +62,7 @@ import org.apache.hbase.thirdparty.com.google.common.base.Preconditions;
  * Store Region State to hbase:meta table.
  */
 @InterfaceAudience.Private
-public class RegionStateStore {
+public class RegionStateStore implements RegionStateStoreJVMInterface {
   private static final Logger LOG = LoggerFactory.getLogger(RegionStateStore.class);
   private static final Logger METALOG = LoggerFactory.getLogger("org.apache.hadoop.hbase.META");
 
