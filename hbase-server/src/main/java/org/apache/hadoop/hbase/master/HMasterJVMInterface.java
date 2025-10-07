@@ -100,7 +100,7 @@ public interface HMasterJVMInterface extends HRegionServerJVMInterface, MasterSe
 
     org.apache.hadoop.hbase.master.MasterWalManagerJVMInterface getMasterWalManager();
 
-    org.apache.hadoop.hbase.ServerName getServerName();
+    org.apache.hadoop.hbase.ServerNameJVMInterface getServerName();
 
     java.util.List listDecommissionedRegionServers();
 

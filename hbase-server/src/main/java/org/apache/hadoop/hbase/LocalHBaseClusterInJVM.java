@@ -261,18 +261,23 @@ public class LocalHBaseClusterInJVM {
     for (int j = 0; j < noRegionServers; j++) {
       Configuration c = new Configuration(conf);
       c.setClassLoader(regionServerInstance.getLoader());
-      addRegionServer(c, j);
+      addRegionServer(c, j, regionServerInstance);
     }
     regionServerInstance.exit();
   }
 
   public JVMClusterUtilInJVM.RegionServerThread addRegionServer() throws IOException {
-    return addRegionServer(new Configuration(conf), this.regionThreads.size());
+    throw new UpgtException("Use addRegionServer(Configuration, int) instead");
+  }
+
+  public JVMClusterUtilInJVM.RegionServerThread addRegionServer(Configuration config, final int index) {
+    throw new UpgtException("Use addRegionServer(Configuration, int, HRegionServerInstance) instead");
   }
 
   @SuppressWarnings("unchecked")
-  public JVMClusterUtilInJVM.RegionServerThread addRegionServer(Configuration config, final int index)
+  public JVMClusterUtilInJVM.RegionServerThread addRegionServer(Configuration config, final int index, HRegionServerInstance regionServerInstance)
     throws IOException {
+    regionServerInstance.enter();
     // Create each regionserver with its own Configuration instance so each has
     // its Connection instance rather than share (see HBASE_INSTANCES down in
     // the guts of ConnectionManager).
@@ -280,6 +285,7 @@ public class LocalHBaseClusterInJVM {
       JVMClusterUtilInJVM.createRegionServerThread(config, conf.getClass(HConstants.REGION_SERVER_IMPL, this.regionServerClass), index);
 
     this.regionThreads.add(rst);
+    regionServerInstance.exit();
     return rst;
   }
 
@@ -289,6 +295,16 @@ public class LocalHBaseClusterInJVM {
       @Override
       public JVMClusterUtilInJVM.RegionServerThread run() throws Exception {
         return addRegionServer(config, index);
+      }
+    });
+  }
+
+  public JVMClusterUtilInJVM.RegionServerThread addRegionServer(final Configuration config,
+    final int index, User user, HRegionServerInstance regionServerInstance) throws IOException, InterruptedException {
+    return user.runAs(new PrivilegedExceptionAction<JVMClusterUtilInJVM.RegionServerThread>() {
+      @Override
+      public JVMClusterUtilInJVM.RegionServerThread run() throws Exception {
+        return addRegionServer(config, index, regionServerInstance);
       }
     });
   }

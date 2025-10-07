@@ -192,9 +192,12 @@ public class ShutdownHook {
       }
       synchronized (fsShutdownHooks) {
         boolean isFSCacheDisabled = fs.getConf().getBoolean("fs.hdfs.impl.disable.cache", false);
+        boolean isContains = fsShutdownHooks.containsKey(hdfsClientFinalizer);
+        boolean isDeleted = ShutdownHookManager.deleteShutdownHook(hdfsClientFinalizer);
         if (
-          !isFSCacheDisabled && !fsShutdownHooks.containsKey(hdfsClientFinalizer)
-            && !ShutdownHookManager.deleteShutdownHook(hdfsClientFinalizer)
+          //!isFSCacheDisabled && !fsShutdownHooks.containsKey(hdfsClientFinalizer)
+            //&& !ShutdownHookManager.deleteShutdownHook(hdfsClientFinalizer)
+          (!isFSCacheDisabled && !isContains && !isDeleted)
         ) {
           throw new RuntimeException(
             "Failed suppression of fs shutdown hook: " + hdfsClientFinalizer);

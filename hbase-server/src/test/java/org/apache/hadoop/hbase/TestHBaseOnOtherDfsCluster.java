@@ -32,6 +32,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.rules.TestName;
+import java.io.File;
 
 /**
  * Test that an HBase cluster can run on top of an existing MiniDfsCluster
@@ -45,6 +46,32 @@ public class TestHBaseOnOtherDfsCluster {
 
   @Rule
   public TestName name = new TestName();
+
+  @Test
+  public void testOveralyOnOtherClusterInJVM() throws Exception {
+    // run HBase on that HDFS
+    HBaseTestingUtilityInJVM util2 = new HBaseTestingUtilityInJVM();
+    MiniDFSCluster dfs = util2.startMiniDFSCluster(1);
+    // set the dfs
+    util2.setDFSCluster(dfs, false);
+    util2.startMiniCluster();
+
+    FileSystem fs = dfs.getFileSystem();
+    Path randomFile = new Path("/" + util2.getRandomUUID());
+    assertTrue(fs.createNewFile(randomFile));
+    assertTrue(fs.exists(randomFile));
+
+    // do a simple create/write to ensure the cluster works as expected
+    byte[] family = Bytes.toBytes("testfamily");
+    final TableName tablename = TableName.valueOf(name.getMethodName());
+    Table table = util2.createTable(tablename, family);
+    Put p = new Put(new byte[] { 1, 2, 3 });
+    p.addColumn(family, null, new byte[] { 1 });
+    table.put(p);
+
+    // shutdown and make sure cleanly shutting down
+    util2.shutdownMiniCluster();
+  }
 
   @Test
   public void testOveralyOnOtherCluster() throws Exception {

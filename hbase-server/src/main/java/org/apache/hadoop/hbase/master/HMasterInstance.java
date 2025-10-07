@@ -17,12 +17,15 @@ public class HMasterInstance extends UpgradableInstance {
       //CompatibilityFactory.getInstance(MetricsAssertHelper.class).init();
       // Use reflection to call the above init() method
         try {
+          // set TCCL
+          enter();
           Class<?> compatFactoryClass = getLoader().loadClass("org.apache.hadoop.hbase.CompatibilityFactory");
           Class<?> metricsHelperClass = getLoader().loadClass("org.apache.hadoop.hbase.test.MetricsAssertHelper");
           java.lang.reflect.Method getInstance = compatFactoryClass.getMethod("getInstance", Class.class);
           Object metricsHelper = getInstance.invoke(null, metricsHelperClass);
           java.lang.reflect.Method initMethod = metricsHelperClass.getMethod("init");
           initMethod.invoke(metricsHelper);
+          exit();
         } catch (Exception e) {
           throw new RuntimeException("Failed to initialize MetricsAssertHelper: " + e.getMessage(), e);
         }

@@ -1,0 +1,41 @@
+defaults:
+  share_by_default: false
+rules:
+  - kind: package
+    name: com.google
+    action: share
+    recursive: true
+
+  - kind: package
+    name: org.eclipse.jetty
+    action: share
+    recursive: true
+    
+  - kind: package
+    name: org.apache.hadoop.conf
+    action: share
+    recursive: true
+
+  # - kind: package
+  #   name: org.apache.hadoop.fs
+  #   action: share
+  #   recursive: true
+
+  # - kind: package
+  #   name: org.apache.hadoop.util
+  #   action: isolate
+  #   recursive: true
+
+  - kind: package
+    name: org.apache.hadoop.hbase.test
+    action: isolate
+    recursive: true
+    
+  # - kind: package
+  #   name: org.apache.zookeeper
+  #   action: share
+  #   recursive: true
+  
+  # - kind: class
+  #   name: org.apache.zookeeper.KeeperException$Code
+  #   action: share

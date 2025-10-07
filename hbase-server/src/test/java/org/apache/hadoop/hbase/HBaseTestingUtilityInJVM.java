@@ -854,105 +854,105 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
 
   /**
    * Start up a minicluster of hbase, dfs, and zookeeper where WAL's walDir is created separately.
-   * All other options will use default values, defined in {@link StartMiniClusterOption.Builder}.
+   * All other options will use default values, defined in {@link StartMiniClusterOptionInJVM.Builder}.
    * @param createWALDir Whether to create a new WAL directory.
    * @return The mini HBase cluster created.
    * @see #shutdownMiniCluster()
    * @deprecated since 2.2.0 and will be removed in 4.0.0. Use
-   *             {@link #startMiniCluster(StartMiniClusterOption)} instead.
-   * @see #startMiniCluster(StartMiniClusterOption)
+   *             {@link #startMiniCluster(StartMiniClusterOptionInJVM)} instead.
+   * @see #startMiniCluster(StartMiniClusterOptionInJVM)
    * @see <a href="https://issues.apache.org/jira/browse/HBASE-21071">HBASE-21071</a>
    */
   @Deprecated
   public MiniHBaseClusterInJVM startMiniCluster(boolean createWALDir) throws Exception {
-    StartMiniClusterOption option =
-      StartMiniClusterOption.builder().createWALDir(createWALDir).build();
+    StartMiniClusterOptionInJVM option =
+      StartMiniClusterOptionInJVM.builder().createWALDir(createWALDir).build();
     return startMiniCluster(option);
   }
 
   /**
    * Start up a minicluster of hbase, dfs, and zookeeper. All other options will use default values,
-   * defined in {@link StartMiniClusterOption.Builder}.
+   * defined in {@link StartMiniClusterOptionInJVM.Builder}.
    * @param numSlaves     Slave node number, for both HBase region server and HDFS data node.
    * @param createRootDir Whether to create a new root or data directory path.
    * @return The mini HBase cluster created.
    * @see #shutdownMiniCluster()
    * @deprecated since 2.2.0 and will be removed in 4.0.0. Use
-   *             {@link #startMiniCluster(StartMiniClusterOption)} instead.
-   * @see #startMiniCluster(StartMiniClusterOption)
+   *             {@link #startMiniCluster(StartMiniClusterOptionInJVM)} instead.
+   * @see #startMiniCluster(StartMiniClusterOptionInJVM)
    * @see <a href="https://issues.apache.org/jira/browse/HBASE-21071">HBASE-21071</a>
    */
   @Deprecated
   public MiniHBaseClusterInJVM startMiniCluster(int numSlaves, boolean createRootDir) throws Exception {
-    StartMiniClusterOption option = StartMiniClusterOption.builder().numRegionServers(numSlaves)
+    StartMiniClusterOptionInJVM option = StartMiniClusterOptionInJVM.builder().numRegionServers(numSlaves)
       .numDataNodes(numSlaves).createRootDir(createRootDir).build();
     return startMiniCluster(option);
   }
 
   /**
    * Start up a minicluster of hbase, dfs, and zookeeper. All other options will use default values,
-   * defined in {@link StartMiniClusterOption.Builder}.
+   * defined in {@link StartMiniClusterOptionInJVM.Builder}.
    * @param numSlaves     Slave node number, for both HBase region server and HDFS data node.
    * @param createRootDir Whether to create a new root or data directory path.
    * @param createWALDir  Whether to create a new WAL directory.
    * @return The mini HBase cluster created.
    * @see #shutdownMiniCluster()
    * @deprecated since 2.2.0 and will be removed in 4.0.0. Use
-   *             {@link #startMiniCluster(StartMiniClusterOption)} instead.
-   * @see #startMiniCluster(StartMiniClusterOption)
+   *             {@link #startMiniCluster(StartMiniClusterOptionInJVM)} instead.
+   * @see #startMiniCluster(StartMiniClusterOptionInJVM)
    * @see <a href="https://issues.apache.org/jira/browse/HBASE-21071">HBASE-21071</a>
    */
   @Deprecated
   public MiniHBaseClusterInJVM startMiniCluster(int numSlaves, boolean createRootDir,
     boolean createWALDir) throws Exception {
-    StartMiniClusterOption option = StartMiniClusterOption.builder().numRegionServers(numSlaves)
+    StartMiniClusterOptionInJVM option = StartMiniClusterOptionInJVM.builder().numRegionServers(numSlaves)
       .numDataNodes(numSlaves).createRootDir(createRootDir).createWALDir(createWALDir).build();
     return startMiniCluster(option);
   }
 
   /**
    * Start up a minicluster of hbase, dfs, and zookeeper. All other options will use default values,
-   * defined in {@link StartMiniClusterOption.Builder}.
+   * defined in {@link StartMiniClusterOptionInJVM.Builder}.
    * @param numMasters    Master node number.
    * @param numSlaves     Slave node number, for both HBase region server and HDFS data node.
    * @param createRootDir Whether to create a new root or data directory path.
    * @return The mini HBase cluster created.
    * @see #shutdownMiniCluster()
    * @deprecated since 2.2.0 and will be removed in 4.0.0. Use
-   *             {@link #startMiniCluster(StartMiniClusterOption)} instead.
-   * @see #startMiniCluster(StartMiniClusterOption)
+   *             {@link #startMiniCluster(StartMiniClusterOptionInJVM)} instead.
+   * @see #startMiniCluster(StartMiniClusterOptionInJVM)
    * @see <a href="https://issues.apache.org/jira/browse/HBASE-21071">HBASE-21071</a>
    */
   @Deprecated
   public MiniHBaseClusterInJVM startMiniCluster(int numMasters, int numSlaves, boolean createRootDir)
     throws Exception {
-    StartMiniClusterOption option = StartMiniClusterOption.builder().numMasters(numMasters)
+    StartMiniClusterOptionInJVM option = StartMiniClusterOptionInJVM.builder().numMasters(numMasters)
       .numRegionServers(numSlaves).createRootDir(createRootDir).numDataNodes(numSlaves).build();
     return startMiniCluster(option);
   }
 
   /**
    * Start up a minicluster of hbase, dfs, and zookeeper. All other options will use default values,
-   * defined in {@link StartMiniClusterOption.Builder}.
+   * defined in {@link StartMiniClusterOptionInJVM.Builder}.
    * @param numMasters Master node number.
    * @param numSlaves  Slave node number, for both HBase region server and HDFS data node.
    * @return The mini HBase cluster created.
    * @see #shutdownMiniCluster()
    * @deprecated since 2.2.0 and will be removed in 4.0.0. Use
-   *             {@link #startMiniCluster(StartMiniClusterOption)} instead.
-   * @see #startMiniCluster(StartMiniClusterOption)
+   *             {@link #startMiniCluster(StartMiniClusterOptionInJVM)} instead.
+   * @see #startMiniCluster(StartMiniClusterOptionInJVM)
    * @see <a href="https://issues.apache.org/jira/browse/HBASE-21071">HBASE-21071</a>
    */
   @Deprecated
   public MiniHBaseClusterInJVM startMiniCluster(int numMasters, int numSlaves) throws Exception {
-    StartMiniClusterOption option = StartMiniClusterOption.builder().numMasters(numMasters)
+    StartMiniClusterOptionInJVM option = StartMiniClusterOptionInJVM.builder().numMasters(numMasters)
       .numRegionServers(numSlaves).numDataNodes(numSlaves).build();
     return startMiniCluster(option);
   }
 
   /**
    * Start up a minicluster of hbase, dfs, and zookeeper. All other options will use default values,
-   * defined in {@link StartMiniClusterOption.Builder}.
+   * defined in {@link StartMiniClusterOptionInJVM.Builder}.
    * @param numMasters    Master node number.
    * @param numSlaves     Slave node number, for both HBase region server and HDFS data node.
    * @param dataNodeHosts The hostnames of DataNodes to run on. If not null, its size will overwrite
@@ -961,22 +961,22 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
    * @return The mini HBase cluster created.
    * @see #shutdownMiniCluster()
    * @deprecated since 2.2.0 and will be removed in 4.0.0. Use
-   *             {@link #startMiniCluster(StartMiniClusterOption)} instead.
-   * @see #startMiniCluster(StartMiniClusterOption)
+   *             {@link #startMiniCluster(StartMiniClusterOptionInJVM)} instead.
+   * @see #startMiniCluster(StartMiniClusterOptionInJVM)
    * @see <a href="https://issues.apache.org/jira/browse/HBASE-21071">HBASE-21071</a>
    */
   @Deprecated
   public MiniHBaseClusterInJVM startMiniCluster(int numMasters, int numSlaves, String[] dataNodeHosts,
     boolean createRootDir) throws Exception {
-    StartMiniClusterOption option =
-      StartMiniClusterOption.builder().numMasters(numMasters).numRegionServers(numSlaves)
+    StartMiniClusterOptionInJVM option =
+      StartMiniClusterOptionInJVM.builder().numMasters(numMasters).numRegionServers(numSlaves)
         .createRootDir(createRootDir).numDataNodes(numSlaves).dataNodeHosts(dataNodeHosts).build();
     return startMiniCluster(option);
   }
 
   /**
    * Start up a minicluster of hbase, dfs, and zookeeper. All other options will use default values,
-   * defined in {@link StartMiniClusterOption.Builder}.
+   * defined in {@link StartMiniClusterOptionInJVM.Builder}.
    * @param numMasters    Master node number.
    * @param numSlaves     Slave node number, for both HBase region server and HDFS data node.
    * @param dataNodeHosts The hostnames of DataNodes to run on. If not null, its size will overwrite
@@ -984,42 +984,42 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
    * @return The mini HBase cluster created.
    * @see #shutdownMiniCluster()
    * @deprecated since 2.2.0 and will be removed in 4.0.0. Use
-   *             {@link #startMiniCluster(StartMiniClusterOption)} instead.
-   * @see #startMiniCluster(StartMiniClusterOption)
+   *             {@link #startMiniCluster(StartMiniClusterOptionInJVM)} instead.
+   * @see #startMiniCluster(StartMiniClusterOptionInJVM)
    * @see <a href="https://issues.apache.org/jira/browse/HBASE-21071">HBASE-21071</a>
    */
   @Deprecated
   public MiniHBaseClusterInJVM startMiniCluster(int numMasters, int numSlaves, String[] dataNodeHosts)
     throws Exception {
-    StartMiniClusterOption option = StartMiniClusterOption.builder().numMasters(numMasters)
+    StartMiniClusterOptionInJVM option = StartMiniClusterOptionInJVM.builder().numMasters(numMasters)
       .numRegionServers(numSlaves).numDataNodes(numSlaves).dataNodeHosts(dataNodeHosts).build();
     return startMiniCluster(option);
   }
 
   /**
    * Start up a minicluster of hbase, dfs, and zookeeper. All other options will use default values,
-   * defined in {@link StartMiniClusterOption.Builder}.
+   * defined in {@link StartMiniClusterOptionInJVM.Builder}.
    * @param numMasters       Master node number.
    * @param numRegionServers Number of region servers.
    * @param numDataNodes     Number of datanodes.
    * @return The mini HBase cluster created.
    * @see #shutdownMiniCluster()
    * @deprecated since 2.2.0 and will be removed in 4.0.0. Use
-   *             {@link #startMiniCluster(StartMiniClusterOption)} instead.
-   * @see #startMiniCluster(StartMiniClusterOption)
+   *             {@link #startMiniCluster(StartMiniClusterOptionInJVM)} instead.
+   * @see #startMiniCluster(StartMiniClusterOptionInJVM)
    * @see <a href="https://issues.apache.org/jira/browse/HBASE-21071">HBASE-21071</a>
    */
   @Deprecated
   public MiniHBaseClusterInJVM startMiniCluster(int numMasters, int numRegionServers, int numDataNodes)
     throws Exception {
-    StartMiniClusterOption option = StartMiniClusterOption.builder().numMasters(numMasters)
+    StartMiniClusterOptionInJVM option = StartMiniClusterOptionInJVM.builder().numMasters(numMasters)
       .numRegionServers(numRegionServers).numDataNodes(numDataNodes).build();
     return startMiniCluster(option);
   }
 
   /**
    * Start up a minicluster of hbase, dfs, and zookeeper. All other options will use default values,
-   * defined in {@link StartMiniClusterOption.Builder}.
+   * defined in {@link StartMiniClusterOptionInJVM.Builder}.
    * @param numMasters    Master node number.
    * @param numSlaves     Slave node number, for both HBase region server and HDFS data node.
    * @param dataNodeHosts The hostnames of DataNodes to run on. If not null, its size will overwrite
@@ -1029,8 +1029,8 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
    * @return The mini HBase cluster created.
    * @see #shutdownMiniCluster()
    * @deprecated since 2.2.0 and will be removed in 4.0.0. Use
-   *             {@link #startMiniCluster(StartMiniClusterOption)} instead.
-   * @see #startMiniCluster(StartMiniClusterOption)
+   *             {@link #startMiniCluster(StartMiniClusterOptionInJVM)} instead.
+   * @see #startMiniCluster(StartMiniClusterOptionInJVM)
    * @see <a href="https://issues.apache.org/jira/browse/HBASE-21071">HBASE-21071</a>
    */
   /*
@@ -1038,7 +1038,7 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
   public MiniHBaseClusterInJVM startMiniCluster(int numMasters, int numSlaves, String[] dataNodeHosts,
     Class<? extends HMaster> masterClass,
     Class<? extends MiniHBaseClusterInJVM.MiniHBaseClusterRegionServer> rsClass) throws Exception {
-    StartMiniClusterOption option = StartMiniClusterOption.builder().numMasters(numMasters)
+    StartMiniClusterOptionInJVM option = StartMiniClusterOptionInJVM.builder().numMasters(numMasters)
       .masterClass(masterClass).numRegionServers(numSlaves).rsClass(rsClass).numDataNodes(numSlaves)
       .dataNodeHosts(dataNodeHosts).build();
     return startMiniCluster(option);
@@ -1047,7 +1047,7 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
 
   /**
    * Start up a minicluster of hbase, dfs, and zookeeper. All other options will use default values,
-   * defined in {@link StartMiniClusterOption.Builder}.
+   * defined in {@link StartMiniClusterOptionInJVM.Builder}.
    * @param numMasters       Master node number.
    * @param numRegionServers Number of region servers.
    * @param numDataNodes     Number of datanodes.
@@ -1058,8 +1058,8 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
    * @return The mini HBase cluster created.
    * @see #shutdownMiniCluster()
    * @deprecated since 2.2.0 and will be removed in 4.0.0. Use
-   *             {@link #startMiniCluster(StartMiniClusterOption)} instead.
-   * @see #startMiniCluster(StartMiniClusterOption)
+   *             {@link #startMiniCluster(StartMiniClusterOptionInJVM)} instead.
+   * @see #startMiniCluster(StartMiniClusterOptionInJVM)
    * @see <a href="https://issues.apache.org/jira/browse/HBASE-21071">HBASE-21071</a>
    */
   /*
@@ -1067,7 +1067,7 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
   public MiniHBaseClusterInJVM startMiniCluster(int numMasters, int numRegionServers, int numDataNodes,
     String[] dataNodeHosts, Class<? extends HMaster> masterClass,
     Class<? extends MiniHBaseClusterInJVM.MiniHBaseClusterRegionServer> rsClass) throws Exception {
-    StartMiniClusterOption option = StartMiniClusterOption.builder().numMasters(numMasters)
+    StartMiniClusterOptionInJVM option = StartMiniClusterOptionInJVM.builder().numMasters(numMasters)
       .masterClass(masterClass).numRegionServers(numRegionServers).rsClass(rsClass)
       .numDataNodes(numDataNodes).dataNodeHosts(dataNodeHosts).build();
     return startMiniCluster(option);
@@ -1076,7 +1076,7 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
 
   /**
    * Start up a minicluster of hbase, dfs, and zookeeper. All other options will use default values,
-   * defined in {@link StartMiniClusterOption.Builder}.
+   * defined in {@link StartMiniClusterOptionInJVM.Builder}.
    * @param numMasters       Master node number.
    * @param numRegionServers Number of region servers.
    * @param numDataNodes     Number of datanodes.
@@ -1089,8 +1089,8 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
    * @return The mini HBase cluster created.
    * @see #shutdownMiniCluster()
    * @deprecated since 2.2.0 and will be removed in 4.0.0. Use
-   *             {@link #startMiniCluster(StartMiniClusterOption)} instead.
-   * @see #startMiniCluster(StartMiniClusterOption)
+   *             {@link #startMiniCluster(StartMiniClusterOptionInJVM)} instead.
+   * @see #startMiniCluster(StartMiniClusterOptionInJVM)
    * @see <a href="https://issues.apache.org/jira/browse/HBASE-21071">HBASE-21071</a>
    */
   /*
@@ -1099,7 +1099,7 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
     String[] dataNodeHosts, Class<? extends HMaster> masterClass,
     Class<? extends MiniHBaseClusterInJVM.MiniHBaseClusterRegionServer> rsClass, boolean createRootDir,
     boolean createWALDir) throws Exception {
-    StartMiniClusterOption option = StartMiniClusterOption.builder().numMasters(numMasters)
+    StartMiniClusterOptionInJVM option = StartMiniClusterOptionInJVM.builder().numMasters(numMasters)
       .masterClass(masterClass).numRegionServers(numRegionServers).rsClass(rsClass)
       .numDataNodes(numDataNodes).dataNodeHosts(dataNodeHosts).createRootDir(createRootDir)
       .createWALDir(createWALDir).build();
@@ -1109,25 +1109,25 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
 
   /**
    * Start up a minicluster of hbase, dfs and zookeeper clusters with given slave node number. All
-   * other options will use default values, defined in {@link StartMiniClusterOption.Builder}.
+   * other options will use default values, defined in {@link StartMiniClusterOptionInJVM.Builder}.
    * @param numSlaves slave node number, for both HBase region server and HDFS data node.
-   * @see #startMiniCluster(StartMiniClusterOption option)
+   * @see #startMiniCluster(StartMiniClusterOptionInJVM option)
    * @see #shutdownMiniDFSCluster()
    */
   public MiniHBaseClusterInJVM startMiniCluster(int numSlaves) throws Exception {
-    StartMiniClusterOption option =
-      StartMiniClusterOption.builder().numRegionServers(numSlaves).numDataNodes(numSlaves).build();
+    StartMiniClusterOptionInJVM option =
+      StartMiniClusterOptionInJVM.builder().numRegionServers(numSlaves).numDataNodes(numSlaves).build();
     return startMiniCluster(option);
   }
 
   /**
    * Start up a minicluster of hbase, dfs and zookeeper all using default options. Option default
-   * value can be found in {@link StartMiniClusterOption.Builder}.
-   * @see #startMiniCluster(StartMiniClusterOption option)
+   * value can be found in {@link StartMiniClusterOptionInJVM.Builder}.
+   * @see #startMiniCluster(StartMiniClusterOptionInJVM option)
    * @see #shutdownMiniDFSCluster()
    */
   public MiniHBaseClusterInJVM startMiniCluster() throws Exception {
-    return startMiniCluster(StartMiniClusterOption.builder().build());
+    return startMiniCluster(StartMiniClusterOptionInJVM.builder().build());
   }
 
   /**
@@ -1136,7 +1136,7 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
    * under System property test.build.data, to be cleaned up on exit.
    * @see #shutdownMiniDFSCluster()
    */
-  public MiniHBaseClusterInJVM startMiniCluster(StartMiniClusterOption option) throws Exception {
+  public MiniHBaseClusterInJVM startMiniCluster(StartMiniClusterOptionInJVM option) throws Exception {
     LOG.info("Starting up minicluster with option: {}", option);
 
     // If we already put up a cluster, fail.
@@ -1170,10 +1170,10 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
    * Starts up mini hbase cluster. Usually you won't want this. You'll usually want
    * {@link #startMiniCluster()}. This is useful when doing stepped startup of clusters.
    * @return Reference to the hbase mini hbase cluster.
-   * @see #startMiniCluster(StartMiniClusterOption)
+   * @see #startMiniCluster(StartMiniClusterOptionInJVM)
    * @see #shutdownMiniHBaseCluster()
    */
-  public MiniHBaseClusterInJVM startMiniHBaseCluster(StartMiniClusterOption option)
+  public MiniHBaseClusterInJVM startMiniHBaseCluster(StartMiniClusterOptionInJVM option)
     throws IOException, InterruptedException {
     // Now do the mini hbase cluster. Set the hbase.rootdir in config.
     createRootDir(option.isCreateRootDir());
@@ -1217,31 +1217,31 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
 
   /**
    * Starts up mini hbase cluster using default options. Default options can be found in
-   * {@link StartMiniClusterOption.Builder}.
-   * @see #startMiniHBaseCluster(StartMiniClusterOption)
+   * {@link StartMiniClusterOptionInJVM.Builder}.
+   * @see #startMiniHBaseCluster(StartMiniClusterOptionInJVM)
    * @see #shutdownMiniHBaseCluster()
    */
   public MiniHBaseClusterInJVM startMiniHBaseCluster() throws IOException, InterruptedException {
-    return startMiniHBaseCluster(StartMiniClusterOption.builder().build());
+    return startMiniHBaseCluster(StartMiniClusterOptionInJVM.builder().build());
   }
 
   /**
    * Starts up mini hbase cluster. Usually you won't want this. You'll usually want
    * {@link #startMiniCluster()}. All other options will use default values, defined in
-   * {@link StartMiniClusterOption.Builder}.
+   * {@link StartMiniClusterOptionInJVM.Builder}.
    * @param numMasters       Master node number.
    * @param numRegionServers Number of region servers.
    * @return The mini HBase cluster created.
    * @see #shutdownMiniHBaseCluster()
    * @deprecated since 2.2.0 and will be removed in 4.0.0. Use
-   *             {@link #startMiniHBaseCluster(StartMiniClusterOption)} instead.
-   * @see #startMiniHBaseCluster(StartMiniClusterOption)
+   *             {@link #startMiniHBaseCluster(StartMiniClusterOptionInJVM)} instead.
+   * @see #startMiniHBaseCluster(StartMiniClusterOptionInJVM)
    * @see <a href="https://issues.apache.org/jira/browse/HBASE-21071">HBASE-21071</a>
    */
   @Deprecated
   public MiniHBaseClusterInJVM startMiniHBaseCluster(int numMasters, int numRegionServers)
     throws IOException, InterruptedException {
-    StartMiniClusterOption option = StartMiniClusterOption.builder().numMasters(numMasters)
+    StartMiniClusterOptionInJVM option = StartMiniClusterOptionInJVM.builder().numMasters(numMasters)
       .numRegionServers(numRegionServers).build();
     return startMiniHBaseCluster(option);
   }
@@ -1249,21 +1249,21 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
   /**
    * Starts up mini hbase cluster. Usually you won't want this. You'll usually want
    * {@link #startMiniCluster()}. All other options will use default values, defined in
-   * {@link StartMiniClusterOption.Builder}.
+   * {@link StartMiniClusterOptionInJVM.Builder}.
    * @param numMasters       Master node number.
    * @param numRegionServers Number of region servers.
    * @param rsPorts          Ports that RegionServer should use.
    * @return The mini HBase cluster created.
    * @see #shutdownMiniHBaseCluster()
    * @deprecated since 2.2.0 and will be removed in 4.0.0. Use
-   *             {@link #startMiniHBaseCluster(StartMiniClusterOption)} instead.
-   * @see #startMiniHBaseCluster(StartMiniClusterOption)
+   *             {@link #startMiniHBaseCluster(StartMiniClusterOptionInJVM)} instead.
+   * @see #startMiniHBaseCluster(StartMiniClusterOptionInJVM)
    * @see <a href="https://issues.apache.org/jira/browse/HBASE-21071">HBASE-21071</a>
    */
   @Deprecated
   public MiniHBaseClusterInJVM startMiniHBaseCluster(int numMasters, int numRegionServers,
     List<Integer> rsPorts) throws IOException, InterruptedException {
-    StartMiniClusterOption option = StartMiniClusterOption.builder().numMasters(numMasters)
+    StartMiniClusterOptionInJVM option = StartMiniClusterOptionInJVM.builder().numMasters(numMasters)
       .numRegionServers(numRegionServers).rsPorts(rsPorts).build();
     return startMiniHBaseCluster(option);
   }
@@ -1271,7 +1271,7 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
   /**
    * Starts up mini hbase cluster. Usually you won't want this. You'll usually want
    * {@link #startMiniCluster()}. All other options will use default values, defined in
-   * {@link StartMiniClusterOption.Builder}.
+   * {@link StartMiniClusterOptionInJVM.Builder}.
    * @param numMasters       Master node number.
    * @param numRegionServers Number of region servers.
    * @param rsPorts          Ports that RegionServer should use.
@@ -1282,8 +1282,8 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
    * @return The mini HBase cluster created.
    * @see #shutdownMiniHBaseCluster()
    * @deprecated since 2.2.0 and will be removed in 4.0.0. Use
-   *             {@link #startMiniHBaseCluster(StartMiniClusterOption)} instead.
-   * @see #startMiniHBaseCluster(StartMiniClusterOption)
+   *             {@link #startMiniHBaseCluster(StartMiniClusterOptionInJVM)} instead.
+   * @see #startMiniHBaseCluster(StartMiniClusterOptionInJVM)
    * @see <a href="https://issues.apache.org/jira/browse/HBASE-21071">HBASE-21071</a>
    */
   /*
@@ -1292,7 +1292,7 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
     List<Integer> rsPorts, Class<? extends HMaster> masterClass,
     Class<? extends MiniHBaseClusterInJVM.MiniHBaseClusterRegionServer> rsClass, boolean createRootDir,
     boolean createWALDir) throws IOException, InterruptedException {
-    StartMiniClusterOption option = StartMiniClusterOption.builder().numMasters(numMasters)
+    StartMiniClusterOptionInJVM option = StartMiniClusterOptionInJVM.builder().numMasters(numMasters)
       .masterClass(masterClass).numRegionServers(numRegionServers).rsClass(rsClass).rsPorts(rsPorts)
       .createRootDir(createRootDir).createWALDir(createWALDir).build();
     return startMiniHBaseCluster(option);
@@ -1310,13 +1310,13 @@ public class HBaseTestingUtilityInJVM extends HBaseZKTestingUtility {
 
   public void restartHBaseCluster(int servers, List<Integer> ports)
     throws IOException, InterruptedException {
-    StartMiniClusterOption option =
-      StartMiniClusterOption.builder().numRegionServers(servers).rsPorts(ports).build();
+    StartMiniClusterOptionInJVM option =
+      StartMiniClusterOptionInJVM.builder().numRegionServers(servers).rsPorts(ports).build();
     restartHBaseCluster(option);
     invalidateConnection();
   }
 
-  public void restartHBaseCluster(StartMiniClusterOption option)
+  public void restartHBaseCluster(StartMiniClusterOptionInJVM option)
     throws IOException, InterruptedException {
     closeConnection();
     this.hbaseCluster = new MiniHBaseClusterInJVM(this.conf, option.getNumMasters(),

@@ -24,6 +24,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
+import edu.illinois.core.classloader.NodeVersionLoader;
 import edu.illinois.core.runtime.UpgtException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HConstants;
@@ -95,8 +96,9 @@ public class JVMClusterUtilInJVM {
         // check which class loader was used for server and hrsc
         ClassLoader serverLoader = server.getClass().getClassLoader();
         ClassLoader hrscLoader = hrsc.getClassLoader();
-        System.out.println("JVMClusterUtilInJVM.createRegionServerThread: server=" + server.getClass().getName()+ ", serverLoader=" + serverLoader + ", hrsc=" + hrsc.getName() + ", hrscLoader=" + hrscLoader);
-        throw new UpgtException("Check condition ---- Test UPGT exception from JVMClusterUtilInJVM.createMasterThread");
+        if (!(serverLoader instanceof NodeVersionLoader ) && !(hrscLoader instanceof NodeVersionLoader)) {
+          throw new UpgtException("[UPGT-ERROR] The class loaders for HRegionServer are not NodeVersionLoader, something is wrong!");
+        }
       }
     } catch (InvocationTargetException ite) {
       Throwable target = ite.getTargetException();
@@ -148,7 +150,9 @@ public class JVMClusterUtilInJVM {
         ClassLoader serverLoader = server.getClass().getClassLoader();
         ClassLoader hmcLoader = hmc.getClassLoader();
         System.out.println("JVMClusterUtilInJVM.createMasterThread: server=" + server.getClass().getName()+ ", serverLoader=" + serverLoader + ", hmc=" + hmc.getName() + ", hmcLoader=" + hmcLoader);
-        throw new UpgtException("Check condition ---- Test UPGT exception from JVMClusterUtilInJVM.createMasterThread");
+        if (!(serverLoader instanceof NodeVersionLoader ) && !(hmcLoader instanceof NodeVersionLoader)) {
+          throw new UpgtException("[UPGT-ERROR] The class loaders for HMaster are not NodeVersionLoader, something is wrong!");
+        }
       }
     } catch (InvocationTargetException ite) {
       Throwable target = ite.getTargetException();

@@ -170,7 +170,7 @@ public interface HRegionServerJVMInterface extends RegionServerServicesJVMInterf
 
     org.apache.hadoop.hbase.regionserver.MemStoreFlusherJVMInterface getMemStoreFlusher();
 
-    org.apache.hadoop.hbase.ServerName getServerName();
+    org.apache.hadoop.hbase.ServerNameJVMInterface getServerName();
 
     long getStartcode();
 

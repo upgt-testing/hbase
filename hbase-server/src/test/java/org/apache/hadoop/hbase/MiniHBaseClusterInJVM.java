@@ -71,8 +71,7 @@ public class MiniHBaseClusterInJVM extends HBaseCluster {
 
     /**
      * Start a MiniHBaseCluster.
-     * @param conf             Configuration to be used for cluster
-     * @param numRegionServers initial number of region servers to start.
+     * @param conf             Configuration to be used for cluster     * @param numRegionServers initial number of region servers to start.
      */
     public MiniHBaseClusterInJVM(Configuration conf, int numRegionServers) throws IOException, InterruptedException {
         this(conf, 1, numRegionServers);
@@ -94,7 +93,7 @@ public class MiniHBaseClusterInJVM extends HBaseCluster {
      * @param numMasters       initial number of masters to start.
      * @param numRegionServers initial number of region servers to start.
      */
-    public MiniHBaseClusterInJVM(Configuration conf, int numMasters, int numRegionServers, Class<? extends HMaster> masterClass, Class<? extends MiniHBaseCluster.MiniHBaseClusterRegionServer> regionserverClass) throws IOException, InterruptedException {
+    public MiniHBaseClusterInJVM(Configuration conf, int numMasters, int numRegionServers, Class<?> masterClass, Class<?> regionserverClass) throws IOException, InterruptedException {
         this(conf, numMasters, 0, numRegionServers, null, masterClass, regionserverClass);
     }
 
@@ -104,7 +103,7 @@ public class MiniHBaseClusterInJVM extends HBaseCluster {
      *                with different startcode); by default mini hbase clusters choose new arbitrary
      *                ports on each cluster start.
      */
-    public MiniHBaseClusterInJVM(Configuration conf, int numMasters, int numAlwaysStandByMasters, int numRegionServers, List<Integer> rsPorts, Class<? extends HMaster> masterClass, Class<? extends MiniHBaseCluster.MiniHBaseClusterRegionServer> regionserverClass) throws IOException, InterruptedException {
+    public MiniHBaseClusterInJVM(Configuration conf, int numMasters, int numAlwaysStandByMasters, int numRegionServers, List<Integer> rsPorts, Class<?> masterClass, Class<?> regionserverClass) throws IOException, InterruptedException {
         super(conf);
         // Hadoop 2
         CompatibilityFactory.getInstance(MetricsAssertHelper.class).init();
@@ -116,7 +115,7 @@ public class MiniHBaseClusterInJVM extends HBaseCluster {
         return this.conf;
     }
 
-    private void init(final int nMasterNodes, final int numAlwaysStandByMasters, final int nRegionNodes, List<Integer> rsPorts, Class<? extends HMaster> masterClassX, Class<? extends MiniHBaseCluster.MiniHBaseClusterRegionServer> regionserverClassX) throws IOException, InterruptedException {
+    private void init(final int nMasterNodes, final int numAlwaysStandByMasters, final int nRegionNodes, List<Integer> rsPorts, Class<?> masterClassX, Class<?> regionserverClassX) throws IOException, InterruptedException {
         try {
           /*
             if (masterClass == null) {
@@ -137,7 +136,7 @@ public class MiniHBaseClusterInJVM extends HBaseCluster {
                     rsConf.setInt(HConstants.REGIONSERVER_PORT, rsPorts.get(i));
                 }
                 User user = HBaseTestingUtility.getDifferentUser(rsConf, ".hfs." + index++);
-                hbaseCluster.addRegionServer(rsConf, i, user);
+                hbaseCluster.addRegionServer(rsConf, i, user, hRegionServerInstance);
             }
             hbaseCluster.startup();
         } catch (IOException e) {
@@ -372,7 +371,7 @@ public class MiniHBaseClusterInJVM extends HBaseCluster {
      */
     public JVMClusterUtilInJVM.RegionServerThread startRegionServerAndWait(long timeout) throws IOException {
         JVMClusterUtilInJVM.RegionServerThread t = startRegionServer();
-        ServerName rsServerName = t.getRegionServer().getServerName();
+        ServerNameJVMInterface rsServerName = t.getRegionServer().getServerName();
         long start = EnvironmentEdgeManager.currentTime();
         ClusterStatus clusterStatus = getClusterStatus();
         while ((EnvironmentEdgeManager.currentTime() - start) < timeout) {
@@ -793,6 +792,8 @@ public class MiniHBaseClusterInJVM extends HBaseCluster {
         // If there are multiple master threads, the backup master threads
         // should hold some regions. Please refer to #countServedRegions
         // to see how we find out all regions.
+        throw new UpgtException("getServerHoldingRegion not supported in upgradable mini cluster");
+        /*
         HMasterJVMInterface master = getMaster();
         HRegionJVMInterface region = master.getOnlineRegion(regionName);
         if (region != null) {
@@ -803,6 +804,7 @@ public class MiniHBaseClusterInJVM extends HBaseCluster {
             return null;
         }
         return getRegionServer(index).getServerName();
+         */
     }
 
     /**
