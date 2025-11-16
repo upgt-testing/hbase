@@ -872,6 +872,102 @@ public class ProcessBasedMiniHBaseCluster extends HBaseCluster {
     return false;
   }
 
+  /**
+   * Check if the cluster is up and healthy.
+   * @return true if cluster is operational, false otherwise
+   */
+  public boolean isClusterUp() {
+    if (!started) {
+      return false;
+    }
+
+    try (Connection conn = ConnectionFactory.createConnection(conf)) {
+      Admin admin = conn.getAdmin();
+      ClusterMetrics metrics = admin.getClusterMetrics();
+
+      // Check master is available
+      ServerName masterName = metrics.getMasterName();
+      if (masterName == null || masterName.getHostname().isEmpty()) {
+        return false;
+      }
+
+      // Check all region servers are online
+      int expectedRs = rsVersions.size();
+      int actualRs = metrics.getLiveServerMetrics().size();
+
+      return actualRs >= expectedRs;
+    } catch (Exception e) {
+      LOG.debug("Cluster health check failed", e);
+      return false;
+    }
+  }
+
+  /**
+   * Get the number of live region servers.
+   * @return number of live region servers
+   * @throws IOException if unable to get cluster metrics
+   */
+  public int getNumLiveRegionServers() throws IOException {
+    try (Connection conn = ConnectionFactory.createConnection(conf)) {
+      Admin admin = conn.getAdmin();
+      ClusterMetrics metrics = admin.getClusterMetrics();
+      return metrics.getLiveServerMetrics().size();
+    }
+  }
+
+  /**
+   * Perform a rolling upgrade of all RegionServers.
+   * This method reads the target version from the system property "hbase.upgrade.home"
+   * and performs a rolling upgrade of all region servers one by one.
+   *
+   * <p>Each RegionServer is stopped, restarted with the new version, and verified
+   * to be healthy before moving to the next. Node identity (hostname:port) is
+   * preserved during the upgrade.
+   *
+   * @throws IOException if the upgrade fails
+   */
+  public void upgrade() throws IOException {
+    String upgradeHome = System.getProperty("hbase.upgrade.home");
+    if (upgradeHome == null || upgradeHome.isEmpty()) {
+      throw new IOException("System property 'hbase.upgrade.home' is not set. "
+          + "Please set it to the HBase distribution to upgrade to.");
+    }
+
+    LOG.info("Starting rolling upgrade to version: {}", upgradeHome);
+
+    // Register the upgrade version if not already registered
+    if (!versionRegistry.isRegistered(upgradeHome)) {
+      versionRegistry.register(upgradeHome);
+    }
+
+    // Perform rolling upgrade of region servers
+    for (int i = 0; i < regionServerProcesses.size(); i++) {
+      LOG.info("Upgrading RegionServer {}/{}", i + 1, regionServerProcesses.size());
+
+      // Change version (this stops, updates version, and restarts)
+      changeRegionServerVersion(i, upgradeHome);
+
+      // Wait for cluster to stabilize
+      waitClusterUp();
+
+      LOG.info("RegionServer {} upgraded successfully", i);
+    }
+
+    // Optionally upgrade masters (if specified)
+    String upgradeMasters = System.getProperty("hbase.upgrade.masters", "false");
+    if (Boolean.parseBoolean(upgradeMasters)) {
+      LOG.info("Also upgrading masters");
+      for (int i = 0; i < masterProcesses.size(); i++) {
+        LOG.info("Upgrading Master {}/{}", i + 1, masterProcesses.size());
+        changeMasterVersion(i, upgradeHome);
+        waitForActiveAndReadyMaster(60000);
+        LOG.info("Master {} upgraded successfully", i);
+      }
+    }
+
+    LOG.info("Rolling upgrade completed successfully");
+  }
+
   @Override
   public void suspendRegionServer(ServerName serverName) throws IOException {
     throw new UnsupportedOperationException(
