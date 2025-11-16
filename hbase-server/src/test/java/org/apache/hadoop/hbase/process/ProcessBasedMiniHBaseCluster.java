@@ -115,6 +115,18 @@ public class ProcessBasedMiniHBaseCluster extends HBaseCluster {
       versionRegistry.register(entry.getKey(), entry.getValue());
     }
 
+    // Auto-register distributions specified via per-node methods
+    for (String hbaseHome : builder.masterVersions.values()) {
+      if (hbaseHome != null && !hbaseHome.equals(builder.defaultHBaseHome)) {
+        versionRegistry.register(hbaseHome);
+      }
+    }
+    for (String hbaseHome : builder.rsVersions.values()) {
+      if (hbaseHome != null && !hbaseHome.equals(builder.defaultHBaseHome)) {
+        versionRegistry.register(hbaseHome);
+      }
+    }
+
     // Initialize master processes
     for (int i = 0; i < builder.numMasters; i++) {
       String version = builder.masterVersions.getOrDefault(i, builder.defaultHBaseHome);
@@ -598,8 +610,10 @@ public class ProcessBasedMiniHBaseCluster extends HBaseCluster {
       throw new IOException("Invalid region server index: " + rsIndex);
     }
 
+    // Auto-register the new version if not already registered
     if (!versionRegistry.isRegistered(newVersion)) {
-      throw new IOException("HBase version not registered: " + newVersion);
+      LOG.info("Auto-registering HBase distribution: {}", newVersion);
+      versionRegistry.register(newVersion);
     }
 
     String oldVersion = rsVersions.get(rsIndex);
@@ -644,8 +658,10 @@ public class ProcessBasedMiniHBaseCluster extends HBaseCluster {
       throw new IOException("Invalid master index: " + masterIndex);
     }
 
+    // Auto-register the new version if not already registered
     if (!versionRegistry.isRegistered(newVersion)) {
-      throw new IOException("HBase version not registered: " + newVersion);
+      LOG.info("Auto-registering HBase distribution: {}", newVersion);
+      versionRegistry.register(newVersion);
     }
 
     String oldVersion = masterVersions.get(masterIndex);

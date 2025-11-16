@@ -295,49 +295,49 @@ public class TestProcessBasedMiniHBaseClusterUpgrade {
   private void createTableAndWriteData(TableName tableName, int numRows) throws Exception {
     LOG.info("Creating table {} and writing {} rows", tableName, numRows);
 
-    try (Connection conn = cluster.getConnection()) {
-      Admin admin = conn.getAdmin();
+    // Don't close the connection - it's shared by the cluster
+    Connection conn = cluster.getConnection();
+    Admin admin = conn.getAdmin();
 
-      // Create table
-      TableDescriptor td = TableDescriptorBuilder
-          .newBuilder(tableName)
-          .setColumnFamily(ColumnFamilyDescriptorBuilder.of("cf"))
-          .build();
+    // Create table
+    TableDescriptor td = TableDescriptorBuilder
+        .newBuilder(tableName)
+        .setColumnFamily(ColumnFamilyDescriptorBuilder.of("cf"))
+        .build();
 
-      admin.createTable(td);
-      LOG.info("Table created: {}", tableName);
+    admin.createTable(td);
+    LOG.info("Table created: {}", tableName);
 
-      // Write data
-      try (Table table = conn.getTable(tableName)) {
-        for (int i = 0; i < numRows; i++) {
-          Put put = new Put(Bytes.toBytes("row" + i));
-          put.addColumn(Bytes.toBytes("cf"), Bytes.toBytes("qual"),
-              Bytes.toBytes("value" + i));
-          table.put(put);
-        }
+    // Write data
+    try (Table table = conn.getTable(tableName)) {
+      for (int i = 0; i < numRows; i++) {
+        Put put = new Put(Bytes.toBytes("row" + i));
+        put.addColumn(Bytes.toBytes("cf"), Bytes.toBytes("qual"),
+            Bytes.toBytes("value" + i));
+        table.put(put);
       }
-
-      LOG.info("Wrote {} rows to {}", numRows, tableName);
     }
+
+    LOG.info("Wrote {} rows to {}", numRows, tableName);
   }
 
   private void verifyData(TableName tableName, int numRows) throws Exception {
     LOG.info("Verifying {} rows in {}", numRows, tableName);
 
-    try (Connection conn = cluster.getConnection()) {
-      try (Table table = conn.getTable(tableName)) {
-        for (int i = 0; i < numRows; i++) {
-          Get get = new Get(Bytes.toBytes("row" + i));
-          Result result = table.get(get);
+    // Don't close the connection - it's shared by the cluster
+    Connection conn = cluster.getConnection();
+    try (Table table = conn.getTable(tableName)) {
+      for (int i = 0; i < numRows; i++) {
+        Get get = new Get(Bytes.toBytes("row" + i));
+        Result result = table.get(get);
 
-          assertNotNull("Result should not be null for row" + i, result);
-          assertFalse("Result should not be empty for row" + i, result.isEmpty());
+        assertNotNull("Result should not be null for row" + i, result);
+        assertFalse("Result should not be empty for row" + i, result.isEmpty());
 
-          byte[] value = result.getValue(Bytes.toBytes("cf"), Bytes.toBytes("qual"));
-          assertNotNull("Value should not be null for row" + i, value);
-          assertEquals("Value should match for row" + i,
-              "value" + i, Bytes.toString(value));
-        }
+        byte[] value = result.getValue(Bytes.toBytes("cf"), Bytes.toBytes("qual"));
+        assertNotNull("Value should not be null for row" + i, value);
+        assertEquals("Value should match for row" + i,
+            "value" + i, Bytes.toString(value));
       }
     }
 
