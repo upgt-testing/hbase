@@ -9,7 +9,7 @@
 6. [Step-by-Step Transformation Process](#step-by-step-transformation-process)
 7. [Common Transformation Patterns](#common-transformation-patterns)
 8. [Inserting Cluster Upgrade Method Calls](#inserting-cluster-upgrade-method-calls)
-9. [Parameterized Upgrade Checkpoints](#parameterized-upgrade-checkpoints)
+9. [Upgrade Checkpoint Test Methods](#upgrade-checkpoint-test-methods)
 10. [When to Comment Out Logic](#when-to-comment-out-logic)
 11. [Testing Checklist](#testing-checklist)
 12. [Best Practices](#best-practices)
@@ -28,6 +28,17 @@ Transform existing `{MINI_CLUSTER_CLASS}` tests to `{PROCESS_BASED_CLUSTER_CLASS
 
 ### Key Principle
 **Most server-side operations have client-side RPC equivalents.** The goal is to maximize test logic preservation by finding client-side APIs that provide equivalent functionality.
+
+### Critical Transformation Mindset
+
+**EVERY REDUCED VERSION IS MEANINGFUL!**
+
+If you cannot transform 100% of a test, transform what you CAN. A test with 30% preserved logic is infinitely better than 0%. Never skip a test just because:
+- It uses a custom class (analyze what the class actually does)
+- It has some internal access (transform the accessible parts)
+- It seems "too complex" (reduce to essential behavior)
+
+**Transform as much as possible, comment out as little as necessary.**
 
 ### Transformation Hierarchy
 When encountering server-side operations, try these approaches in order:
@@ -849,18 +860,19 @@ for (int i = 0; i < cluster.getNum{NODE_TYPE_2_NAME}s(); i++) {
 
 ---
 
-## Parameterized Upgrade Checkpoints
+## Upgrade Checkpoint Test Methods
 
 ### Overview
 
-**Recommended Approach**: Instead of hardcoding a single upgrade point in each test, use JUnit parameterization to run each test multiple times with upgrades at different checkpoints. This provides comprehensive upgrade coverage with reproducible results.
+**Recommended Approach**: Instead of hardcoding a single upgrade point in each test, generate multiple test methods with checkpoint suffixes. Each test method tests the same logic but with upgrade at a different checkpoint. This provides comprehensive upgrade coverage with Maven Surefire compatibility.
 
 **Key Benefits**:
-- Single test → multiple upgrade scenarios automatically
+- Single test logic → multiple test methods with different checkpoints
 - 100% reproducible (deterministic checkpoint execution)
-- Comprehensive coverage (10+ checkpoints per test)
+- Comprehensive coverage (standard + test-specific checkpoints)
 - Guaranteed cleanup between executions
-- Easy to identify which checkpoint caused failure
+- Easy Maven execution: can run specific checkpoint with `-Dtest=Test#method_CHECKPOINT`
+- Compatible with Maven Surefire single-method execution
 
 ### Base Class: ProcessBasedUpgradeTestBase
 
@@ -875,40 +887,118 @@ All ProcessBased tests should extend `ProcessBasedUpgradeTestBase`, which provid
 
 ### Transformation Steps
 
-#### Step 1: Add Parameterization Framework
+#### Step 1: Identify Checkpoints for Each Test Method
+
+For each original test method, identify:
+1. **Standard checkpoints** (always include):
+   - `NO_UPGRADE` - Baseline test without upgrade
+   - `AFTER_CLUSTER_START` - Upgrade immediately after cluster starts
+
+2. **Test-specific checkpoints** (from actual checkpoint() calls):
+   - Look for all `checkpoint("NAME")` calls in the test method
+   - Each unique checkpoint name becomes a test method variant
+
+**Example:**
+```java
+// Original test method
+@Test
+public void testOperation() {
+  cluster = ...;
+  checkpoint("AFTER_CLUSTER_START");
+
+  createResource();
+  checkpoint("AFTER_CREATE");
+
+  writeData();
+  checkpoint("AFTER_WRITE");
+
+  verify();
+}
+```
+
+**Identified checkpoints:**
+- `NO_UPGRADE` (standard)
+- `AFTER_CLUSTER_START` (standard + in test)
+- `AFTER_CREATE` (test-specific)
+- `AFTER_WRITE` (test-specific)
+
+#### Step 2: Generate Test Methods
+
+Create one test method per checkpoint with naming pattern `testMethodName_CHECKPOINT_NAME()`:
 
 ```java
 // Add imports
 import {PACKAGE_PATH}.ProcessBasedUpgradeTestBase;
 import {PACKAGE_PATH}.UpgradeCheckpoints;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
-import java.util.Arrays;
-import java.util.Collection;
 
-// Add annotation and extend base class
-@RunWith(Parameterized.class)
+// Extend base class (NO parameterization annotations)
 public class Test{Feature}_ProcessBased extends ProcessBasedUpgradeTestBase {
 
-  @Parameter
-  public String upgradeCheckpoint;
+  @Test
+  public void testOperation_NO_UPGRADE() throws Exception {
+    upgradeCheckpoint = UpgradeCheckpoints.NO_UPGRADE;
 
-  @Parameters(name = "upgrade-at={0}")
-  public static Collection<String> checkpoints() {
-    return Arrays.asList(
-      UpgradeCheckpoints.NO_UPGRADE,           // Always include baseline
-      UpgradeCheckpoints.AFTER_CLUSTER_START,
-      "AFTER_{OPERATION_1}",
-      "AFTER_{OPERATION_2}",
-      // ... 10+ checkpoints per test
-    );
+    // Full test logic
+    cluster = ...;
+    checkpoint("AFTER_CLUSTER_START");
+    createResource();
+    checkpoint("AFTER_CREATE");
+    writeData();
+    checkpoint("AFTER_WRITE");
+    verify();
+  }
+
+  @Test
+  public void testOperation_AFTER_CLUSTER_START() throws Exception {
+    upgradeCheckpoint = UpgradeCheckpoints.AFTER_CLUSTER_START;
+
+    // Same full test logic - upgrade happens at AFTER_CLUSTER_START
+    cluster = ...;
+    checkpoint("AFTER_CLUSTER_START");
+    createResource();
+    checkpoint("AFTER_CREATE");
+    writeData();
+    checkpoint("AFTER_WRITE");
+    verify();
+  }
+
+  @Test
+  public void testOperation_AFTER_CREATE() throws Exception {
+    upgradeCheckpoint = "AFTER_CREATE";
+
+    // Same full test logic - upgrade happens at AFTER_CREATE
+    cluster = ...;
+    checkpoint("AFTER_CLUSTER_START");
+    createResource();
+    checkpoint("AFTER_CREATE");
+    writeData();
+    checkpoint("AFTER_WRITE");
+    verify();
+  }
+
+  @Test
+  public void testOperation_AFTER_WRITE() throws Exception {
+    upgradeCheckpoint = "AFTER_WRITE";
+
+    // Same full test logic - upgrade happens at AFTER_WRITE
+    cluster = ...;
+    checkpoint("AFTER_CLUSTER_START");
+    createResource();
+    checkpoint("AFTER_CREATE");
+    writeData();
+    checkpoint("AFTER_WRITE");
+    verify();
   }
 }
 ```
 
-#### Step 2: Remove try-finally Blocks
+#### Step 3: Code Duplication Note
+
+Note that each test method contains **full duplication** of the test logic. This is intentional:
+- Makes each test method independently runnable
+- Clear what each checkpoint variant does
+- Compatible with Maven Surefire single-method execution
+- No shared state between methods (base class handles cleanup)
 
 **BEFORE** (manual cleanup):
 ```java
@@ -927,10 +1017,12 @@ public void testSomething() throws Exception {
 }
 ```
 
-**AFTER** (automatic cleanup via base class):
+**AFTER** (automatic cleanup via base class, with checkpoint test methods):
 ```java
 @Test
-public void testSomething() throws Exception {
+public void testSomething_NO_UPGRADE() throws Exception {
+  upgradeCheckpoint = UpgradeCheckpoints.NO_UPGRADE;
+
   // Use conf, cluster, {CLIENT_VAR} from base class
   cluster = new {PROCESS_BASED_CLUSTER_CLASS}.Builder(conf).build();
   {CLIENT_VAR} = cluster.{GET_CLIENT_METHOD}();
@@ -941,9 +1033,22 @@ public void testSomething() throws Exception {
 
   // No try-finally needed - @After handles cleanup!
 }
+
+@Test
+public void testSomething_AFTER_CLUSTER_START() throws Exception {
+  upgradeCheckpoint = UpgradeCheckpoints.AFTER_CLUSTER_START;
+
+  // Same test logic
+  cluster = new {PROCESS_BASED_CLUSTER_CLASS}.Builder(conf).build();
+  {CLIENT_VAR} = cluster.{GET_CLIENT_METHOD}();
+  {CLIENT_VAR}.{OPERATION}({ARGS});
+  checkpoint(UpgradeCheckpoints.AFTER_{OPERATION});
+}
 ```
 
-#### Step 3: Replace Hardcoded cluster.upgrade() with checkpoint()
+#### Step 4: Replace Hardcoded cluster.upgrade() with checkpoint()
+
+If the original test had a hardcoded `cluster.upgrade()` call, replace it with `checkpoint()` calls at appropriate points. The checkpoint() method in the base class will perform the upgrade only if the current test method's `upgradeCheckpoint` field matches the checkpoint name.
 
 **BEFORE** (hardcoded upgrade point):
 ```java
@@ -957,10 +1062,11 @@ cluster.upgrade();
 {CLIENT_VAR}.{OPERATION_2}({ARGS});
 ```
 
-**AFTER** (parameterized checkpoints):
+**AFTER** (checkpoint-based, same logic in all test methods):
 ```java
+// This code appears in EVERY test method variant (NO_UPGRADE, AFTER_OPERATION_1, etc.)
 {CLIENT_VAR}.{OPERATION_1}({ARGS});
-checkpoint(UpgradeCheckpoints.AFTER_{OPERATION_1});
+checkpoint("AFTER_{OPERATION_1}");
 
 // Close before potential upgrade
 {CLIENT_VAR}.{CLOSE}();
@@ -968,19 +1074,57 @@ checkpoint("AFTER_CLOSE");
 
 // Reopen (always needed, regardless of upgrade)
 {CLIENT_VAR}.{REOPEN}();
-checkpoint(UpgradeCheckpoints.AFTER_REOPEN);
+checkpoint("AFTER_REOPEN");
 
 {CLIENT_VAR}.{OPERATION_2}({ARGS});
-checkpoint(UpgradeCheckpoints.AFTER_{OPERATION_2});
+checkpoint("AFTER_{OPERATION_2}");
+
+// The upgrade only happens if upgradeCheckpoint matches a checkpoint name
+// - In testMethod_NO_UPGRADE(): no upgrade happens
+// - In testMethod_AFTER_OPERATION_1(): upgrade happens at AFTER_OPERATION_1
+// - In testMethod_AFTER_CLOSE(): upgrade happens at AFTER_CLOSE
 ```
 
-### Checkpoint Naming Guidelines
+### Checkpoint Selection Guidelines
 
-1. **Always include NO_UPGRADE first**: Ensures test passes without upgrade
-2. **Use UpgradeCheckpoints constants**: For common checkpoint names
-3. **Use custom strings**: For test-specific checkpoints
-4. **Be descriptive**: "AFTER_BALANCER_RUN" not "CHECKPOINT_7"
-5. **Fine-grained coverage**: 10-15 checkpoints per test method
+For each original test method, generate test method variants for:
+
+1. **Standard checkpoints** (always include):
+   - `NO_UPGRADE` - Baseline test without upgrade
+   - `AFTER_CLUSTER_START` - Upgrade immediately after cluster starts
+
+2. **Test-specific checkpoints** (from actual checkpoint() calls):
+   - Scan the test method for all `checkpoint("NAME")` calls
+   - Generate a test method variant for each unique checkpoint name
+
+3. **Naming conventions**:
+   - Use UpgradeCheckpoints constants for standard checkpoints
+   - Use descriptive strings for test-specific checkpoints
+   - Be descriptive: "AFTER_BALANCER_RUN" not "CHECKPOINT_7"
+
+**Example checkpoint identification:**
+```java
+// Original test method with checkpoint() calls
+@Test
+public void testFoo() {
+  cluster = ...;
+  checkpoint("AFTER_CLUSTER_START");      // Found #1
+
+  createTable();
+  checkpoint("AFTER_CREATE_TABLE");       // Found #2
+
+  writeData();
+  checkpoint("AFTER_WRITE");              // Found #3
+
+  verify();
+}
+```
+
+**Generated test methods:**
+- `testFoo_NO_UPGRADE()` - standard
+- `testFoo_AFTER_CLUSTER_START()` - standard + found in test
+- `testFoo_AFTER_CREATE_TABLE()` - test-specific
+- `testFoo_AFTER_WRITE()` - test-specific
 
 **Common checkpoint categories**:
 - Cluster lifecycle: `AFTER_CLUSTER_START`
@@ -989,18 +1133,38 @@ checkpoint(UpgradeCheckpoints.AFTER_{OPERATION_2});
 - Verification: `BEFORE_VERIFICATION`, `AFTER_VERIFICATION`
 - Identity verification: `AFTER_IDENTITY_VERIFICATION`, `BEFORE_IDENTITY_CHECK`
 
-### Running Parameterized Tests
+### Running Checkpoint Test Methods
 
-**Run all checkpoints**:
+**Run all test methods (all checkpoints for all tests)**:
 ```bash
 mvn test -Dtest=Test{Feature}_ProcessBased \
   -{PROJECT_ARTIFACT}.start.home=/opt/{PROJECT_ARTIFACT}-{VERSION_1} \
   -{PROJECT_ARTIFACT}.upgrade.home=/opt/{PROJECT_ARTIFACT}-{VERSION_2}
 ```
 
-**Run specific checkpoint**:
+**Run specific checkpoint for specific test**:
 ```bash
-mvn test -Dtest='Test{Feature}_ProcessBased#testMethod[upgrade-at=AFTER_{OPERATION}]' \
+mvn test -Dtest=Test{Feature}_ProcessBased#testMethod_AFTER_{OPERATION} \
+  -{PROJECT_ARTIFACT}.start.home=/opt/{PROJECT_ARTIFACT}-{VERSION_1} \
+  -{PROJECT_ARTIFACT}.upgrade.home=/opt/{PROJECT_ARTIFACT}-{VERSION_2}
+```
+
+**Run all checkpoints for one test method** (using wildcard):
+```bash
+mvn test -Dtest='Test{Feature}_ProcessBased#testMethod_*' \
+  -{PROJECT_ARTIFACT}.start.home=/opt/{PROJECT_ARTIFACT}-{VERSION_1} \
+  -{PROJECT_ARTIFACT}.upgrade.home=/opt/{PROJECT_ARTIFACT}-{VERSION_2}
+```
+
+**Run all baseline (NO_UPGRADE) tests**:
+```bash
+mvn test -Dtest='Test{Feature}_ProcessBased#*_NO_UPGRADE' \
+  -{PROJECT_ARTIFACT}.start.home=/opt/{PROJECT_ARTIFACT}-{VERSION_1}
+```
+
+**Run all tests with specific checkpoint across all methods**:
+```bash
+mvn test -Dtest='Test{Feature}_ProcessBased#*_AFTER_CLUSTER_START' \
   -{PROJECT_ARTIFACT}.start.home=/opt/{PROJECT_ARTIFACT}-{VERSION_1} \
   -{PROJECT_ARTIFACT}.upgrade.home=/opt/{PROJECT_ARTIFACT}-{VERSION_2}
 ```

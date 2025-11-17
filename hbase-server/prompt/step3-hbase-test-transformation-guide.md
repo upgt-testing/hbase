@@ -9,7 +9,7 @@
 6. [Step-by-Step Transformation Process](#step-by-step-transformation-process)
 7. [Common Transformation Patterns](#common-transformation-patterns)
 8. [Inserting Cluster Upgrade Method Calls](#inserting-cluster-upgrade-method-calls)
-9. [Parameterized Upgrade Checkpoints](#parameterized-upgrade-checkpoints)
+9. [Upgrade Checkpoint Test Methods](#upgrade-checkpoint-test-methods)
 10. [When to Comment Out Logic](#when-to-comment-out-logic)
 11. [Testing Checklist](#testing-checklist)
 12. [Best Practices](#best-practices)
@@ -37,6 +37,26 @@ When encountering server-side operations, try these approaches in order:
 3. **Low-level RPC** - Direct RPC protocols (AdminService, ClientService)
 4. **ClusterMetrics** - For metrics and runtime statistics
 5. **Comment Out** - Only if truly no client-side equivalent exists
+
+### Critical Transformation Mindset
+
+**EVERY REDUCED VERSION IS MEANINGFUL!**
+
+If you cannot transform 100% of a test, transform what you CAN. A test with 30% preserved logic is infinitely better than 0%. Never skip a test just because:
+- It uses a custom class (analyze what the class actually does)
+- It has some internal access (transform the accessible parts)
+- It seems "too complex" (reduce to essential behavior)
+
+**Transform as much as possible, comment out as little as necessary.**
+
+#### Key Principles:
+1. **Never skip if ANY logic can be preserved** - Reduced versions are meaningful
+2. **Try process access first, then client API** - Threads → processes, use `cluster.killRegionServer()` instead of `thread.stop()`
+3. **Track ServerName, not object references** - ServerName is serializable and works across process boundaries
+4. **Verify presence, not internal state** - For coprocessors, verify they're loaded, not call counts
+5. **Comment out only JVM-internal features** - TaskMonitor, static counters in coprocessors, internal accounting
+6. **Honor ProcessBased's behavior** - Don't fight port management, verify it works correctly
+7. **Client API covers most operations** - ClusterMetrics provides cluster state, Admin provides operations
 
 ### Why ProcessBasedMiniHBaseCluster?
 
@@ -674,6 +694,127 @@ try (Admin admin = conn.getAdmin()) {
 }
 ```
 
+### Pattern 5: Dead Server Tracking (ServerName-based)
+```java
+// BEFORE: Direct object reference tracking
+HRegionServer DEAD = cluster.getRegionServer(0);
+DEAD.stop("Test dead servers status");
+Assert.assertEquals(DEAD.getServerName(), deadServerName);
+
+// AFTER: ServerName-based tracking (works across processes)
+// Store ServerName before killing (via ClusterMetrics)
+ServerName deadServerName = admin.getClusterMetrics()
+    .getLiveServerMetrics().keySet().iterator().next();
+cluster.killRegionServer(deadServerName);
+
+// Later verify via ClusterMetrics:
+Waiter.waitFor(conf, 30000, () ->
+    admin.getClusterMetrics().getDeadServerNames().contains(deadServerName));
+assertTrue(admin.getClusterMetrics().getDeadServerNames().contains(deadServerName));
+```
+
+**Key Insight**: Track **ServerName identifiers**, not object references. ServerName is serializable and works across process boundaries.
+
+### Pattern 6: Thread Access → Process/Client API
+```java
+// BEFORE: Direct thread access
+List<RegionServerThread> threads = cluster.getLiveRegionServerThreads();
+int numServers = threads.size();
+boolean alive = threads.get(0).isAlive();
+
+// AFTER: Two-tier approach:
+// 1. Try Process Access First:
+int numServers = cluster.getNumLiveRegionServers();
+
+// 2. Fallback to Client API:
+int numServers = admin.getClusterMetrics().getLiveServerMetrics().size();
+
+// For checking if server is alive:
+ServerName rsName = ...;
+boolean alive = admin.getClusterMetrics().getLiveServerMetrics().containsKey(rsName);
+```
+
+### Pattern 7: Coprocessor Verification (Presence, not State)
+```java
+// BEFORE: In-process atomic counters
+public static class MyObserver implements MasterCoprocessor {
+    private static final AtomicInteger PRE_COUNT = new AtomicInteger(0);
+}
+Assert.assertEquals(preCount + 1, MyObserver.PRE_COUNT.get());
+
+// AFTER: Verify presence only (can't track call counts across processes)
+List<String> coprocessors = admin.getClusterMetrics().getMasterCoprocessorNames();
+assertTrue("MyObserver should be loaded", coprocessors.contains("MyObserver"));
+// Cannot verify call counts - static counters only work in same JVM
+// But presence verification confirms coprocessor is loaded and active
+```
+
+**Key Insight**: Verify coprocessor is **registered and active**, not internal call counts.
+
+### Pattern 8: Memstore Testing via RegionMetrics
+```java
+// BEFORE: Internal accounting access
+long globalSize = server.getRegionServerAccounting().getGlobalMemStoreDataSize();
+long regionSize = region.getMemStoreDataSize();
+
+// AFTER: Use RegionMetrics API (reduced but meaningful)
+// Write data to generate memstore usage
+try (Table table = connection.getTable(tableName)) {
+    for (int i = 0; i < 100; i++) {
+        Put put = new Put(Bytes.toBytes("row" + i));
+        put.addColumn(CF, Bytes.toBytes("q"), Bytes.toBytes("value"));
+        table.put(put);
+    }
+}
+
+// Verify via RegionMetrics
+List<RegionMetrics> metrics = admin.getRegionMetrics(serverName, tableName);
+long totalMemstoreSize = 0;
+for (RegionMetrics rm : metrics) {
+    totalMemstoreSize += rm.getMemStoreSize().get(Size.Unit.BYTE);
+}
+assertTrue("Memstore should have data", totalMemstoreSize > 0);
+
+// After flush, verify decrease
+admin.flush(tableName);
+Thread.sleep(2000);
+// Re-fetch metrics and verify decreased
+```
+
+**Note**: Can't verify internal GlobalMemStoreSize vs sum consistency, but CAN verify:
+- Memstore usage is tracked
+- Flush behavior works correctly
+- Client-visible metrics are accurate
+
+### Pattern 9: Port Assignment Verification (Reduced Version)
+```java
+// BEFORE: Forces custom ports then verifies
+int masterPort = HBaseTestingUtility.randomFreePort();
+conf.setInt(HConstants.MASTER_PORT, masterPort);
+cluster = new MiniHBaseCluster(conf, 1);
+assertEquals(masterPort, cluster.getMaster().getRpcServer().getListenerAddress().getPort());
+
+// AFTER: Verify ProcessBased's port management works correctly
+cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).build();
+cluster.waitClusterUp();
+
+ServerName masterName = admin.getClusterMetrics().getMasterName();
+assertNotNull("Master should have valid ServerName", masterName);
+assertTrue("Master port should be valid", masterName.getPort() > 0);
+
+// Verify RS ports are unique
+for (ServerName rsName : admin.getClusterMetrics().getLiveServerMetrics().keySet()) {
+    assertTrue("RS port should be valid", rsName.getPort() > 0);
+    assertNotEquals("RS port should differ from master", masterName.getPort(), rsName.getPort());
+}
+
+// Key: ports are consistent across calls (identity preservation)
+ServerName masterName2 = admin.getClusterMetrics().getMasterName();
+assertEquals("Master port should be stable", masterName.getPort(), masterName2.getPort());
+```
+
+**Key Insight**: Don't fight ProcessBased's port management - verify it works correctly!
+
 ---
 
 ## Inserting Cluster Upgrade Method Calls
@@ -976,18 +1117,19 @@ verifyServerNamesPreserved(admin, preUpgradeServerNames);
 
 ---
 
-## Parameterized Upgrade Checkpoints
+## Upgrade Checkpoint Test Methods
 
 ### Overview
 
-**Recommended Approach**: Instead of hardcoding a single upgrade point in each test, use JUnit parameterization to run each test multiple times with upgrades at different checkpoints. This provides comprehensive upgrade coverage with reproducible results.
+**Recommended Approach**: Instead of hardcoding a single upgrade point in each test, generate multiple test methods with checkpoint suffixes. Each test method tests the same logic but with upgrade at a different checkpoint. This provides comprehensive upgrade coverage with Maven Surefire compatibility.
 
 **Key Benefits**:
-- Single test → multiple upgrade scenarios automatically
+- Single test logic → multiple test methods with different checkpoints
 - 100% reproducible (deterministic checkpoint execution)
-- Comprehensive coverage (10+ checkpoints per test)
+- Comprehensive coverage (standard + test-specific checkpoints)
 - Guaranteed cleanup between executions
-- Easy to identify which checkpoint caused failure
+- Easy Maven execution: can run specific checkpoint with `-Dtest=Test#method_CHECKPOINT`
+- Compatible with Maven Surefire single-method execution
 
 ### Base Class: ProcessBasedUpgradeTestBase
 
@@ -1002,42 +1144,130 @@ All ProcessBased tests should extend `ProcessBasedUpgradeTestBase`, which provid
 
 ### Transformation Steps
 
-#### Step 1: Add Parameterization Framework
+#### Step 1: Identify Checkpoints for Each Test Method
+
+For each original test method, identify:
+1. **Standard checkpoints** (always include):
+   - `NO_UPGRADE` - Baseline test without upgrade
+   - `AFTER_CLUSTER_START` - Upgrade immediately after cluster starts
+
+2. **Test-specific checkpoints** (from actual checkpoint() calls):
+   - Look for all `checkpoint("NAME")` calls in the test method
+   - Each unique checkpoint name becomes a test method variant
+
+**Example:**
+```java
+// Original test method
+@Test
+public void testCompaction() {
+  cluster = ...;
+  checkpoint(HBaseUpgradeCheckpoints.AFTER_CLUSTER_START);
+
+  admin.createTable(...);
+  checkpoint("AFTER_CREATE_TABLE");
+
+  writeData();
+  checkpoint("AFTER_WRITE_DATA");
+
+  admin.compact(...);
+  checkpoint("AFTER_COMPACT");
+
+  verify();
+}
+```
+
+**Identified checkpoints:**
+- `NO_UPGRADE` (standard)
+- `AFTER_CLUSTER_START` (standard + in test)
+- `AFTER_CREATE_TABLE` (test-specific)
+- `AFTER_WRITE_DATA` (test-specific)
+- `AFTER_COMPACT` (test-specific)
+
+#### Step 2: Generate Test Methods
+
+Create one test method per checkpoint with naming pattern `testMethodName_CHECKPOINT_NAME()`:
 
 ```java
 // Add imports
 import org.apache.hadoop.hbase.upgrade.ProcessBasedUpgradeTestBase;
 import org.apache.hadoop.hbase.upgrade.HBaseUpgradeCheckpoints;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
-import java.util.Arrays;
-import java.util.Collection;
 
-// Add annotation and extend base class
-@RunWith(Parameterized.class)
+// Extend base class (NO parameterization annotations)
 public class TestCompaction_ProcessBased extends ProcessBasedUpgradeTestBase {
 
-  @Parameter
-  public String upgradeCheckpoint;
+  @Test
+  public void testCompaction_NO_UPGRADE() throws Exception {
+    upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-  @Parameters(name = "upgrade-at={0}")
-  public static Collection<String> checkpoints() {
-    return Arrays.asList(
-      HBaseUpgradeCheckpoints.NO_UPGRADE,           // Always include baseline
-      HBaseUpgradeCheckpoints.AFTER_CLUSTER_START,
-      "AFTER_CREATE_TABLE",
-      "AFTER_WRITE_DATA",
-      "AFTER_FLUSH",
-      "AFTER_COMPACT",
-      "AFTER_READ_DATA"
-    );
+    // Full test logic
+    cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).build();
+    connection = cluster.getConnection();
+    admin = connection.getAdmin();
+    checkpoint(HBaseUpgradeCheckpoints.AFTER_CLUSTER_START);
+
+    admin.createTable(...);
+    checkpoint("AFTER_CREATE_TABLE");
+
+    writeData();
+    checkpoint("AFTER_WRITE_DATA");
+
+    admin.compact(...);
+    checkpoint("AFTER_COMPACT");
+
+    verify();
+  }
+
+  @Test
+  public void testCompaction_AFTER_CLUSTER_START() throws Exception {
+    upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
+
+    // Same full test logic - upgrade happens at AFTER_CLUSTER_START
+    cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).build();
+    connection = cluster.getConnection();
+    admin = connection.getAdmin();
+    checkpoint(HBaseUpgradeCheckpoints.AFTER_CLUSTER_START);
+    admin.createTable(...);
+    checkpoint("AFTER_CREATE_TABLE");
+    writeData();
+    checkpoint("AFTER_WRITE_DATA");
+    admin.compact(...);
+    checkpoint("AFTER_COMPACT");
+    verify();
+  }
+
+  @Test
+  public void testCompaction_AFTER_CREATE_TABLE() throws Exception {
+    upgradeCheckpoint = "AFTER_CREATE_TABLE";
+
+    // Same full test logic - upgrade happens at AFTER_CREATE_TABLE
+    // ... (full duplication)
+  }
+
+  @Test
+  public void testCompaction_AFTER_WRITE_DATA() throws Exception {
+    upgradeCheckpoint = "AFTER_WRITE_DATA";
+
+    // Same full test logic - upgrade happens at AFTER_WRITE_DATA
+    // ... (full duplication)
+  }
+
+  @Test
+  public void testCompaction_AFTER_COMPACT() throws Exception {
+    upgradeCheckpoint = "AFTER_COMPACT";
+
+    // Same full test logic - upgrade happens at AFTER_COMPACT
+    // ... (full duplication)
   }
 }
 ```
 
-#### Step 2: Remove try-finally Blocks
+#### Step 3: Code Duplication Note
+
+Note that each test method contains **full duplication** of the test logic. This is intentional:
+- Makes each test method independently runnable
+- Clear what each checkpoint variant does
+- Compatible with Maven Surefire single-method execution
+- No shared state between methods (base class handles cleanup)
 
 **BEFORE** (manual cleanup):
 ```java
@@ -1056,10 +1286,12 @@ public void testCompaction() throws Exception {
 }
 ```
 
-**AFTER** (automatic cleanup via base class):
+**AFTER** (automatic cleanup via base class, with checkpoint test methods):
 ```java
 @Test
-public void testCompaction() throws Exception {
+public void testCompaction_NO_UPGRADE() throws Exception {
+  upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
+
   // Use conf, cluster, connection from base class
   cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).build();
   connection = cluster.getConnection();
@@ -1074,9 +1306,26 @@ public void testCompaction() throws Exception {
 
   // No try-finally needed - @After handles cleanup!
 }
+
+@Test
+public void testCompaction_AFTER_CLUSTER_START() throws Exception {
+  upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
+
+  // Same test logic
+  cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).build();
+  connection = cluster.getConnection();
+  admin = connection.getAdmin();
+  TableName tableName = TableName.valueOf("test");
+  admin.createTable(TableDescriptorBuilder.newBuilder(tableName)
+      .setColumnFamily(ColumnFamilyDescriptorBuilder.of("cf"))
+      .build());
+  checkpoint("AFTER_CREATE_TABLE");
+}
 ```
 
-#### Step 3: Replace Hardcoded cluster.upgrade() with checkpoint()
+#### Step 4: Replace Hardcoded cluster.upgrade() with checkpoint()
+
+If the original test had a hardcoded `cluster.upgrade()` call, replace it with `checkpoint()` calls at appropriate points. The checkpoint() method in the base class will perform the upgrade only if the current test method's `upgradeCheckpoint` field matches the checkpoint name.
 
 **BEFORE** (hardcoded upgrade point):
 ```java
@@ -1092,8 +1341,9 @@ try (Table table = connection.getTable(tableName)) {
 }
 ```
 
-**AFTER** (parameterized checkpoints):
+**AFTER** (checkpoint-based, same logic in all test methods):
 ```java
+// This code appears in EVERY test method variant (NO_UPGRADE, AFTER_WRITE_DATA, etc.)
 try (Table table = connection.getTable(tableName)) {
     table.put(put1);
 }
@@ -1107,15 +1357,57 @@ try (Table table = connection.getTable(tableName)) {
     table.put(put2);
 }
 checkpoint("AFTER_SECOND_WRITE");
+
+// The upgrade only happens if upgradeCheckpoint matches a checkpoint name
+// - In testMethod_NO_UPGRADE(): no upgrade happens
+// - In testMethod_AFTER_WRITE_DATA(): upgrade happens at AFTER_WRITE_DATA
+// - In testMethod_AFTER_REOPEN(): upgrade happens at AFTER_REOPEN
 ```
 
-### Checkpoint Naming Guidelines
+### Checkpoint Selection Guidelines
 
-1. **Always include NO_UPGRADE first**: Ensures test passes without upgrade
-2. **Use HBaseUpgradeCheckpoints constants**: For common checkpoint names
-3. **Use custom strings**: For test-specific checkpoints
-4. **Be descriptive**: "AFTER_FLUSH" not "CHECKPOINT_7"
-5. **Fine-grained coverage**: 10-15 checkpoints per test method
+For each original test method, generate test method variants for:
+
+1. **Standard checkpoints** (always include):
+   - `NO_UPGRADE` - Baseline test without upgrade
+   - `AFTER_CLUSTER_START` - Upgrade immediately after cluster starts
+
+2. **Test-specific checkpoints** (from actual checkpoint() calls):
+   - Scan the test method for all `checkpoint("NAME")` calls
+   - Generate a test method variant for each unique checkpoint name
+
+3. **Naming conventions**:
+   - Use HBaseUpgradeCheckpoints constants for standard checkpoints
+   - Use descriptive strings for test-specific checkpoints
+   - Be descriptive: "AFTER_FLUSH" not "CHECKPOINT_7"
+
+**Example checkpoint identification:**
+```java
+// Original test method with checkpoint() calls
+@Test
+public void testTableOperations() {
+  cluster = ...;
+  checkpoint(HBaseUpgradeCheckpoints.AFTER_CLUSTER_START);  // Found #1
+
+  admin.createTable(...);
+  checkpoint("AFTER_CREATE_TABLE");                         // Found #2
+
+  writeData();
+  checkpoint("AFTER_WRITE");                                // Found #3
+
+  admin.flush(...);
+  checkpoint("AFTER_FLUSH");                                // Found #4
+
+  verify();
+}
+```
+
+**Generated test methods:**
+- `testTableOperations_NO_UPGRADE()` - standard
+- `testTableOperations_AFTER_CLUSTER_START()` - standard + found in test
+- `testTableOperations_AFTER_CREATE_TABLE()` - test-specific
+- `testTableOperations_AFTER_WRITE()` - test-specific
+- `testTableOperations_AFTER_FLUSH()` - test-specific
 
 **Common checkpoint categories**:
 - Cluster lifecycle: `AFTER_CLUSTER_START`
@@ -1125,18 +1417,38 @@ checkpoint("AFTER_SECOND_WRITE");
 - Resource lifecycle: `AFTER_CLOSE`, `AFTER_REOPEN`
 - Verification: `BEFORE_VERIFICATION`, `AFTER_VERIFICATION`
 
-### Running Parameterized Tests
+### Running Checkpoint Test Methods
 
-**Run all checkpoints**:
+**Run all test methods (all checkpoints for all tests)**:
 ```bash
 mvn test -Dtest=TestCompaction_ProcessBased \
   -Dhbase.start.home=/opt/hbase-2.6.0 \
   -Dhbase.upgrade.home=/opt/hbase-3.0.0
 ```
 
-**Run specific checkpoint**:
+**Run specific checkpoint for specific test**:
 ```bash
-mvn test -Dtest='TestCompaction_ProcessBased#testCompaction[upgrade-at=AFTER_FLUSH]' \
+mvn test -Dtest=TestCompaction_ProcessBased#testCompaction_AFTER_FLUSH \
+  -Dhbase.start.home=/opt/hbase-2.6.0 \
+  -Dhbase.upgrade.home=/opt/hbase-3.0.0
+```
+
+**Run all checkpoints for one test method** (using wildcard):
+```bash
+mvn test -Dtest='TestCompaction_ProcessBased#testCompaction_*' \
+  -Dhbase.start.home=/opt/hbase-2.6.0 \
+  -Dhbase.upgrade.home=/opt/hbase-3.0.0
+```
+
+**Run all baseline (NO_UPGRADE) tests**:
+```bash
+mvn test -Dtest='TestCompaction_ProcessBased#*_NO_UPGRADE' \
+  -Dhbase.start.home=/opt/hbase-2.6.0
+```
+
+**Run all tests with specific checkpoint across all methods**:
+```bash
+mvn test -Dtest='TestCompaction_ProcessBased#*_AFTER_CLUSTER_START' \
   -Dhbase.start.home=/opt/hbase-2.6.0 \
   -Dhbase.upgrade.home=/opt/hbase-3.0.0
 ```
@@ -1221,6 +1533,50 @@ try (Admin admin = connection.getAdmin()) {
     boolean balanced = admin.balance();
 }
 ```
+
+### Custom Class Analysis: Don't Skip Automatically!
+
+When a test uses a custom class (e.g., `MyRegionServer extends MiniHBaseClusterRegionServer`), **don't automatically skip the test**. Instead:
+
+1. **Analyze what the custom class actually does**
+2. **Determine if the behavior is achievable via client API**
+3. **Transform the accessible parts**
+
+**Example: Custom RegionServer Class**
+```java
+// BEFORE: Custom RS that forces reporting
+public static class MyRegionServer extends MiniHBaseCluster.MiniHBaseClusterRegionServer {
+    @Override
+    public void tryRegionServerReport(long start, long end) {
+        super.tryRegionServerReport(start, end);
+    }
+}
+```
+
+**Analysis**:
+- What it does: Forces RS to report metrics to master
+- In ProcessBased: RS naturally reports on schedule
+- **Solution**: Wait for natural reporting OR verify via ClusterMetrics that metrics are updating
+
+```java
+// AFTER: Verify metrics are being reported (don't need custom class)
+ServerMetrics initialMetrics = admin.getClusterMetrics()
+    .getLiveServerMetrics().values().iterator().next();
+long initialRequests = initialMetrics.getRequestCount();
+
+// Do some operations
+table.put(somePut);
+table.get(someGet);
+
+// Wait for metrics to update (natural reporting cycle)
+Waiter.waitFor(conf, 30000, () -> {
+    ServerMetrics updatedMetrics = admin.getClusterMetrics()
+        .getLiveServerMetrics().values().iterator().next();
+    return updatedMetrics.getRequestCount() > initialRequests;
+});
+```
+
+**Key Insight**: Custom classes often just provide convenience for internal testing. The underlying behavior is usually achievable through standard APIs or waiting for natural processes.
 
 ---
 

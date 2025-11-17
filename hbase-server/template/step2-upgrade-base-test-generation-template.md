@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This template helps you generate a base test class for parameterized upgrade testing of your distributed cluster system. The generated class provides automatic lifecycle management, checkpoint-based upgrade testing, and complete test isolation.
+This template helps you generate a base test class for checkpoint-based upgrade testing of your distributed cluster system. The generated class provides automatic lifecycle management, checkpoint-based upgrade testing, and complete test isolation.
 
 ## How to Use This Template
 
@@ -18,7 +18,7 @@ This template helps you generate a base test class for parameterized upgrade tes
 **Copy the section below and fill in the placeholders, then provide to an AI agent:**
 
 ```
-Generate a JUnit base test class for parameterized upgrade testing with the following requirements:
+Generate a JUnit base test class for checkpoint-based upgrade testing with the following requirements:
 
 ### SYSTEM INFORMATION
 
@@ -261,26 +261,26 @@ Please generate a base test class with the following structure:
    - Package declaration: {PACKAGE_NAME}
    - Comprehensive JavaDoc explaining:
      - Purpose of the base class
-     - Usage pattern with @RunWith(Parameterized.class)
+     - Usage pattern with named checkpoint test methods
      - Example test implementation
      - Test isolation guarantees
      - Cleanup guarantees
 
 2. **Protected Fields**:
-   - upgradeCheckpoint (String) - Parameter from subclass
+   - upgradeCheckpoint (String) - Set directly by test methods
    - cluster ({PROCESS_BASED_CLUSTER_CLASS}) - Cluster instance
    - {CLIENT_VAR} ({CLIENT_CLASS}) - Client instance
    - conf ({CONFIG_CLASS}) - Configuration instance
    - {Additional resources from ADDITIONAL_RESOURCES}
 
 3. **@Before setupTest() Method**:
-   - Sync @Parameter field from subclass to base class (use reflection)
-   - Log setup start with checkpoint name
+   - Log setup start with checkpoint name (if upgradeCheckpoint is set)
    - Clean up orphaned processes from previous failed runs
    - Clean up old cluster directories (older than 1 hour)
    - Initialize fresh configuration
    - Set cluster = null, {CLIENT_VAR} = null (defensive)
    - Log setup completion
+   - NOTE: upgradeCheckpoint field is set directly by each test method, no reflection needed
 
 4. **@After tearDownTest() Method**:
    - Log teardown start with checkpoint name
@@ -312,11 +312,11 @@ Please generate a base test class with the following structure:
    - Return false otherwise
 
 7. **Private Helper Methods**:
-   - syncUpgradeCheckpointFromSubclass(): Use Java reflection to find @Parameter field named "upgradeCheckpoint" in subclass, copy value to base class field
    - cleanupOrphanedProcesses(): Execute process cleanup command {PROCESS_CLEANUP_COMMAND}, handle platform differences
    - cleanupOldClusterDirectories(): Use {DIRECTORY_CLEANUP_LOGIC} to find and delete old directories
    - deleteDirectory(File): Recursive directory deletion utility
    - verifyCleanup(): Execute jps and verify no processes match {PROCESS_PATTERN}
+   - NOTE: No reflection-based parameter syncing needed - test methods set upgradeCheckpoint directly
 
 8. **verifyNodeIdentitiesPreserved() Method**:
    - Store node addresses before upgrade (in setupTest or checkpoint)
@@ -347,7 +347,7 @@ Generate:
 5. Proper exception handling and logging
 6. Example usage in class-level JavaDoc showing:
    - How to extend this base class
-   - How to define @Parameters method
+   - How to create named checkpoint test methods
    - How to use checkpoint() in tests
 
 The generated class should be production-ready and follow Java best practices.
@@ -428,7 +428,7 @@ The AI agent will generate a class like this:
 
 ```java
 /**
- * Base test class for parameterized upgrade testing of {PROCESS_BASED_CLUSTER_CLASS}.
+ * Base test class for checkpoint-based upgrade testing of {PROCESS_BASED_CLUSTER_CLASS}.
  *
  * <p>This class provides automatic lifecycle management, checkpoint-based upgrade testing,
  * and complete test isolation. Each test execution is fully isolated with guaranteed
@@ -436,34 +436,58 @@ The AI agent will generate a class like this:
  *
  * <h3>Usage Example:</h3>
  * <pre>{@code
- * @RunWith(Parameterized.class)
  * public class TestMyFeature extends ProcessBasedUpgradeTestBase {
  *
- *   @Parameter
- *   public String upgradeCheckpoint;
+ *   @Test
+ *   public void testFeature_NO_UPGRADE() throws Exception {
+ *     upgradeCheckpoint = UpgradeCheckpoints.NO_UPGRADE;
  *
- *   @Parameters(name = "upgrade-at={0}")
- *   public static Collection<String> checkpoints() {
- *     return Arrays.asList(
- *       UpgradeCheckpoints.NO_UPGRADE,
- *       UpgradeCheckpoints.AFTER_CLUSTER_START,
- *       "AFTER_CREATE_TABLE",
- *       "AFTER_WRITE_DATA"
- *     );
+ *     cluster = new {PROCESS_BASED_CLUSTER_CLASS}.Builder(conf).build();
+ *     {CLIENT_VAR} = cluster.{GET_CLIENT_METHOD}();
+ *     checkpoint(UpgradeCheckpoints.AFTER_CLUSTER_START);
+ *
+ *     // Create resource
+ *     {CLIENT_VAR}.{CREATE_RESOURCE}({ARGS});
+ *     checkpoint("AFTER_CREATE");
+ *
+ *     // Test logic...
+ *     // No try-finally needed - @After handles cleanup!
  *   }
  *
  *   @Test
- *   public void testFeature() throws Exception {
+ *   public void testFeature_AFTER_CLUSTER_START() throws Exception {
+ *     upgradeCheckpoint = UpgradeCheckpoints.AFTER_CLUSTER_START;
+ *
+ *     // Same full test logic as above - upgrade happens at AFTER_CLUSTER_START
  *     cluster = new {PROCESS_BASED_CLUSTER_CLASS}.Builder(conf).build();
  *     {CLIENT_VAR} = cluster.{GET_CLIENT_METHOD}();
- *
  *     checkpoint(UpgradeCheckpoints.AFTER_CLUSTER_START);
+ *     {CLIENT_VAR}.{CREATE_RESOURCE}({ARGS});
+ *     checkpoint("AFTER_CREATE");
+ *     // ...
+ *   }
  *
- *     // Test logic with checkpoints...
- *     // No try-finally needed - @After handles cleanup!
+ *   @Test
+ *   public void testFeature_AFTER_CREATE() throws Exception {
+ *     upgradeCheckpoint = "AFTER_CREATE";
+ *
+ *     // Same full test logic - upgrade happens at AFTER_CREATE
+ *     // ...
  *   }
  * }
  * }</pre>
+ *
+ * <p><strong>Test Execution:</strong></p>
+ * <pre>
+ * # Run specific checkpoint
+ * mvn test -Dtest=TestMyFeature#testFeature_AFTER_CLUSTER_START
+ *
+ * # Run all checkpoints for one test method
+ * mvn test -Dtest='TestMyFeature#testFeature_*'
+ *
+ * # Run all baseline (NO_UPGRADE) tests
+ * mvn test -Dtest='TestMyFeature#*_NO_UPGRADE'
+ * </pre>
  *
  * <h3>Guarantees:</h3>
  * <ul>
@@ -497,8 +521,8 @@ public abstract class ProcessBasedUpgradeTestBase {
 
 After generation, verify the base class has:
 
-- [ ] Complete JavaDoc with usage example
-- [ ] @Before method that syncs @Parameter fields using reflection
+- [ ] Complete JavaDoc with usage example showing named checkpoint test methods
+- [ ] @Before method that performs cleanup and initialization
 - [ ] @After method with independent try-catch blocks for each cleanup step
 - [ ] checkpoint(String) method with health checks before and after upgrade
 - [ ] shouldUpgrade(String) method with proper logic
@@ -516,12 +540,14 @@ After generation, verify the base class has:
 
 ## Notes
 
-- This template is designed for JUnit 4 with Parameterized runner
-- For JUnit 5, adapt @Before/@After to @BeforeEach/@AfterEach and use @ParameterizedTest
-- For TestNG, adapt to @BeforeMethod/@AfterMethod with @DataProvider
-- The reflection-based @Parameter syncing may need adjustment based on your test framework
+- This template is designed for JUnit 4 with standard @Test methods (no parameterization)
+- For JUnit 5, adapt @Before/@After to @BeforeEach/@AfterEach
+- For TestNG, adapt to @BeforeMethod/@AfterMethod
+- Test methods set `upgradeCheckpoint` field directly at the start of each test
+- Each test method should contain full test logic (not shared/helper methods) for clarity
 - Consider adding timeout annotations for long-running tests (@Test(timeout = 300000))
 - Add @Rule or @ClassRule if your framework supports them for additional cleanup
+- Test method naming: `testMethodName_CHECKPOINT_NAME()` format
 
 ---
 
@@ -575,4 +601,4 @@ After generation, verify the base class has:
 
 **End of Template**
 
-Use this template to generate a comprehensive base test class for your parameterized upgrade testing framework.
+Use this template to generate a comprehensive base test class for your checkpoint-based upgrade testing framework.

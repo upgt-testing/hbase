@@ -2,7 +2,7 @@
 
 ## AI Agent Prompt
 
-Generate a JUnit base test class for parameterized upgrade testing with the following requirements:
+Generate a JUnit base test class for checkpoint-based upgrade testing with the following requirements:
 
 ### SYSTEM INFORMATION
 
@@ -272,14 +272,14 @@ Please generate a base test class with the following structure:
    - Package declaration: org.apache.hadoop.hbase.upgrade
    - Comprehensive JavaDoc explaining:
      - Purpose of the base class
-     - Usage pattern with @RunWith(Parameterized.class)
+     - Usage pattern with named checkpoint test methods
      - Example test implementation
      - Test isolation guarantees
      - Cleanup guarantees
      - Node identity preservation verification
 
 2. **Protected Fields**:
-   - upgradeCheckpoint (String) - Parameter from subclass
+   - upgradeCheckpoint (String) - Set directly by test methods
    - cluster (ProcessBasedMiniHBaseCluster) - Cluster instance
    - connection (Connection) - Client instance
    - conf (Configuration) - Configuration instance
@@ -287,14 +287,14 @@ Please generate a base test class with the following structure:
    - preUpgradeServerNames (Map<Integer, ServerName>) - For identity verification
 
 3. **@Before setupTest() Method**:
-   - Sync @Parameter field from subclass to base class (use reflection)
-   - Log setup start with checkpoint name
+   - Log setup start with checkpoint name (if upgradeCheckpoint is set)
    - Clean up orphaned processes from previous failed runs (jps | grep | kill)
    - Clean up old cluster directories (older than 1 hour)
    - Initialize fresh configuration (HBaseConfiguration.create())
    - Set cluster = null, connection = null, admin = null (defensive)
    - Clear preUpgradeServerNames map
    - Log setup completion
+   - NOTE: upgradeCheckpoint field is set directly by each test method, no reflection needed
 
 4. **@After tearDownTest() Method**:
    - Log teardown start with checkpoint name
@@ -327,11 +327,11 @@ Please generate a base test class with the following structure:
    - Return false otherwise
 
 7. **Private Helper Methods**:
-   - syncUpgradeCheckpointFromSubclass(): Use Java reflection to find @Parameter field named "upgradeCheckpoint" in subclass, copy value to base class field
    - cleanupOrphanedProcesses(): Execute `jps | grep -E 'HMaster|HRegionServer' | awk '{print $1}' | xargs -r kill -9`
    - cleanupOldClusterDirectories(): Find and delete process-minihbase-* directories older than 1 hour
    - deleteDirectory(File): Recursive directory deletion utility using FileUtils.deleteDirectory()
    - verifyCleanup(): Execute jps and verify no processes match HMaster|HRegionServer pattern
+   - NOTE: No reflection-based parameter syncing needed - test methods set upgradeCheckpoint directly
 
 8. **captureNodeIdentities() Method**:
    - Clear preUpgradeServerNames map
@@ -375,22 +375,21 @@ Generate:
    import org.apache.commons.io.FileUtils;
    import org.junit.After;
    import org.junit.Before;
-   import org.junit.runners.Parameterized.Parameter;
+   import org.junit.Test;
    import org.slf4j.Logger;
    import org.slf4j.LoggerFactory;
    import java.io.File;
    import java.io.IOException;
-   import java.lang.reflect.Field;
    import java.util.HashMap;
    import java.util.Map;
    import java.util.concurrent.TimeUnit;
    ```
 3. All methods with comprehensive JavaDoc comments
-4. Inline comments for complex logic (especially reflection, process cleanup)
+4. Inline comments for complex logic (especially process cleanup, node identity verification)
 5. Proper exception handling and logging
 6. Example usage in class-level JavaDoc showing:
    - How to extend this base class
-   - How to define @Parameters method
+   - How to create named checkpoint test methods
    - How to use checkpoint() in tests
    - How node identity preservation works
 
@@ -398,7 +397,7 @@ Generate:
 
 ```java
 /**
- * Base test class for parameterized upgrade testing of ProcessBasedMiniHBaseCluster.
+ * Base test class for checkpoint-based upgrade testing of ProcessBasedMiniHBaseCluster.
  *
  * <p>This class provides automatic lifecycle management, checkpoint-based upgrade testing,
  * and complete test isolation. Each test execution is fully isolated with guaranteed
@@ -406,31 +405,17 @@ Generate:
  *
  * <h3>Usage Example:</h3>
  * <pre>{@code
- * @RunWith(Parameterized.class)
  * public class TestMyFeature extends ProcessBasedUpgradeTestBase {
  *
- *   @Parameter
- *   public String upgradeCheckpoint;
- *
- *   @Parameters(name = "upgrade-at={0}")
- *   public static Collection<String> checkpoints() {
- *     return Arrays.asList(
- *       HBaseUpgradeCheckpoints.NO_UPGRADE,
- *       HBaseUpgradeCheckpoints.AFTER_CLUSTER_START,
- *       "AFTER_CREATE_TABLE",
- *       "AFTER_WRITE_DATA",
- *       "AFTER_FLUSH"
- *     );
- *   }
- *
  *   @Test
- *   public void testFeature() throws Exception {
+ *   public void testFeature_NO_UPGRADE() throws Exception {
+ *     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
+ *
  *     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
  *         .numRegionServers(3)
  *         .build();
  *     connection = cluster.getConnection();
  *     admin = connection.getAdmin();
- *
  *     checkpoint(HBaseUpgradeCheckpoints.AFTER_CLUSTER_START);
  *
  *     // Create table
@@ -448,14 +433,64 @@ Generate:
  *     }
  *     checkpoint("AFTER_WRITE_DATA");
  *
- *     // Flush (must close table before checkpoint!)
+ *     // Flush
  *     admin.flush(TableName.valueOf("test"));
  *     checkpoint("AFTER_FLUSH");
  *
  *     // No try-finally needed - @After handles cleanup!
  *   }
+ *
+ *   @Test
+ *   public void testFeature_AFTER_CLUSTER_START() throws Exception {
+ *     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
+ *
+ *     // Same full test logic as above - upgrade happens at AFTER_CLUSTER_START
+ *     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
+ *         .numRegionServers(3)
+ *         .build();
+ *     connection = cluster.getConnection();
+ *     admin = connection.getAdmin();
+ *     checkpoint(HBaseUpgradeCheckpoints.AFTER_CLUSTER_START);
+ *     // ... rest of logic
+ *   }
+ *
+ *   @Test
+ *   public void testFeature_AFTER_CREATE_TABLE() throws Exception {
+ *     upgradeCheckpoint = "AFTER_CREATE_TABLE";
+ *
+ *     // Same full test logic - upgrade happens at AFTER_CREATE_TABLE
+ *     // ...
+ *   }
+ *
+ *   @Test
+ *   public void testFeature_AFTER_WRITE_DATA() throws Exception {
+ *     upgradeCheckpoint = "AFTER_WRITE_DATA";
+ *
+ *     // Same full test logic - upgrade happens at AFTER_WRITE_DATA
+ *     // ...
+ *   }
+ *
+ *   @Test
+ *   public void testFeature_AFTER_FLUSH() throws Exception {
+ *     upgradeCheckpoint = "AFTER_FLUSH";
+ *
+ *     // Same full test logic - upgrade happens at AFTER_FLUSH
+ *     // ...
+ *   }
  * }
  * }</pre>
+ *
+ * <p><strong>Test Execution:</strong></p>
+ * <pre>
+ * # Run specific checkpoint
+ * mvn test -Dtest=TestMyFeature#testFeature_AFTER_CLUSTER_START
+ *
+ * # Run all checkpoints for one test method
+ * mvn test -Dtest='TestMyFeature#testFeature_*'
+ *
+ * # Run all baseline (NO_UPGRADE) tests
+ * mvn test -Dtest='TestMyFeature#*_NO_UPGRADE'
+ * </pre>
  *
  * <h3>Node Identity Preservation:</h3>
  * <p>During upgrades, this base class automatically verifies that each RegionServer

@@ -1204,7 +1204,7 @@ class UpgradeTestHelper {
 ### Build Dependencies
 
 - Maven 3.3+
-- JUnit 5 for parameterized tests
+- JUnit 4/5 for tests
 - Mockito for unit tests
 
 ---
