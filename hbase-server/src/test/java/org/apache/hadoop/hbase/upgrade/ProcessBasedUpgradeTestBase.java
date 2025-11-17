@@ -30,6 +30,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.ClusterMetrics;
 import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.apache.hadoop.hbase.HBaseTestingUtility;
 import org.apache.hadoop.hbase.ServerName;
 import org.apache.hadoop.hbase.process.ProcessBasedMiniHBaseCluster;
 import org.apache.hadoop.hbase.client.Admin;
@@ -168,6 +169,9 @@ public abstract class ProcessBasedUpgradeTestBase {
   /** Map to store pre-upgrade ServerNames for identity verification */
   protected Map<Integer, ServerName> preUpgradeServerNames;
 
+  /** HBaseTestingUtility for starting ZooKeeper cluster. */
+  protected HBaseTestingUtility testUtil;
+
   /**
    * Sets up the test environment before each test execution.
    * <p>
@@ -196,9 +200,27 @@ public abstract class ProcessBasedUpgradeTestBase {
     LOG.info("Cleaning up old cluster directories");
     cleanupOldClusterDirectories();
 
-    // Initialize fresh configuration
-    conf = HBaseConfiguration.create();
-    LOG.info("Created fresh HBase configuration");
+    // Initialize HBaseTestingUtility and start ZooKeeper
+    testUtil = new HBaseTestingUtility();
+    LOG.info("Starting MiniZooKeeperCluster");
+    testUtil.startMiniZKCluster();
+    LOG.info("MiniZooKeeperCluster started at port: {}",
+      testUtil.getZkCluster().getClientPort());
+
+    // Start MiniDFSCluster for distributed filesystem support
+    LOG.info("Starting MiniDFSCluster");
+    testUtil.startMiniDFSCluster(3);
+    LOG.info("MiniDFSCluster started with namenode at: {}",
+      testUtil.getDFSCluster().getFileSystem().getUri());
+
+    // Set hbase.rootdir to use HDFS instead of local filesystem
+    String hdfsRootDir = testUtil.getDefaultRootDirPath().toString();
+    testUtil.getConfiguration().set("hbase.rootdir", hdfsRootDir);
+    LOG.info("Set hbase.rootdir to HDFS: {}", hdfsRootDir);
+
+    // Initialize configuration from test utility (includes ZK and DFS config)
+    conf = HBaseConfiguration.create(testUtil.getConfiguration());
+    LOG.info("Created HBase configuration with ZooKeeper quorum and DFS");
 
     // Reset all managed resources (defensive)
     cluster = null;
@@ -291,6 +313,30 @@ public abstract class ProcessBasedUpgradeTestBase {
       }
     } else {
       LOG.info("Cleanup verification passed - no orphaned processes found");
+    }
+
+    // Shutdown DFS cluster (must be before ZooKeeper)
+    if (testUtil != null && testUtil.getDFSCluster() != null) {
+      try {
+        LOG.info("Shutting down MiniDFSCluster");
+        testUtil.shutdownMiniDFSCluster();
+        LOG.info("MiniDFSCluster shutdown successfully");
+      } catch (Exception e) {
+        LOG.warn("Failed to shutdown MiniDFSCluster", e);
+      }
+    }
+
+    // Shutdown ZooKeeper cluster
+    if (testUtil != null) {
+      try {
+        LOG.info("Shutting down MiniZooKeeperCluster");
+        testUtil.shutdownMiniZKCluster();
+        LOG.info("MiniZooKeeperCluster shutdown successfully");
+      } catch (Exception e) {
+        LOG.warn("Failed to shutdown MiniZooKeeperCluster", e);
+      } finally {
+        testUtil = null;
+      }
     }
 
     LOG.info("=== Test teardown completed for checkpoint: {} ===", upgradeCheckpoint);
@@ -557,9 +603,10 @@ public abstract class ProcessBasedUpgradeTestBase {
   private void cleanupOrphanedProcesses() {
     try {
       // Use jps to find HBase processes and kill them
+      // Note: Using conditional check instead of xargs -r for macOS compatibility
       String[] command = { "/bin/bash", "-c",
-        "jps | grep -E '" + PROCESS_PATTERN + "' | awk '{print $1}' | xargs -r kill -9 2>/dev/null"
-          + " || true" };
+        "pids=$(jps | grep -E '" + PROCESS_PATTERN + "' | awk '{print $1}'); "
+          + "if [ -n \"$pids\" ]; then kill -9 $pids 2>/dev/null || true; fi" };
       Process process = Runtime.getRuntime().exec(command);
       int exitCode = process.waitFor();
       LOG.debug("Orphaned process cleanup completed with exit code: {}", exitCode);

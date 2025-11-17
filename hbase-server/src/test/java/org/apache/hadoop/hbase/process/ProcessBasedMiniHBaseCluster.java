@@ -1043,6 +1043,13 @@ public class ProcessBasedMiniHBaseCluster extends HBaseCluster {
     }
 
     public ProcessBasedMiniHBaseCluster build() throws IOException {
+      // Auto-read hbase.start.home system property if no default is set
+      if (defaultHBaseHome == null) {
+        String hbaseHome = System.getProperty("hbase.start.home");
+        if (hbaseHome != null && !hbaseHome.isEmpty()) {
+          this.defaultHBaseHome = hbaseHome;
+        }
+      }
       return new ProcessBasedMiniHBaseCluster(conf, this);
     }
   }
