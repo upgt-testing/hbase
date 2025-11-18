@@ -1735,6 +1735,232 @@ Found server-side operation?
 
 ---
 
+## Common Pitfalls and Solutions
+
+This section documents common errors encountered during test transformation and their solutions. Always check this section when encountering test failures.
+
+### Pitfall 1: TableNotDisabledException - Missing Table Disable Before Delete
+
+**Error Message:**
+```
+org.apache.hadoop.hbase.TableNotDisabledException: Not DISABLED; tableName=test_table, state=ENABLED
+```
+
+**Root Cause:**
+HBase requires tables to be **disabled before deletion**. This is true for both MiniHBaseCluster and ProcessBasedMiniHBaseCluster, but it's easy to overlook during transformation.
+
+**Why It Happens:**
+- Original tests may have relied on test utilities that automatically disable tables
+- Test cleanup code might not explicitly disable before delete
+- The disable-before-delete pattern is not always obvious in original test code
+
+**Solution:**
+Always call `admin.disableTable(tableName)` before `admin.deleteTable(tableName)`:
+
+```java
+// ❌ WRONG - Will throw TableNotDisabledException
+admin.deleteTable(tableName);
+
+// ✅ CORRECT - Disable first, then delete
+admin.disableTable(tableName);
+admin.deleteTable(tableName);
+```
+
+**Complete Example:**
+```java
+@Test
+public void testSomething_NO_UPGRADE() throws Exception {
+    upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
+
+    cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
+        .numRegionServers(3)
+        .build();
+    connection = cluster.getConnection();
+    admin = connection.getAdmin();
+
+    // Create table
+    TableName tableName = TableName.valueOf("test_table");
+    admin.createTable(TableDescriptorBuilder.newBuilder(tableName)
+        .setColumnFamily(ColumnFamilyDescriptorBuilder.of("cf"))
+        .build());
+
+    // ... test logic ...
+
+    // Cleanup: MUST disable before delete
+    admin.disableTable(tableName);
+    admin.deleteTable(tableName);
+}
+```
+
+**When to Check:**
+- Any test that creates and deletes tables
+- Test cleanup code in test methods
+- @After or tearDown() methods that clean up tables
+
+### Pitfall 2: Parallel Test Execution Resource Exhaustion
+
+**Error Message:**
+```
+Master failed to start within 60000ms
+Could not bind to port
+Too many open files
+```
+
+**Root Cause:**
+ProcessBased tests run **full HBase clusters in separate JVMs**. Running multiple tests in parallel causes:
+- Simultaneous cluster startups competing for CPU, memory, and ports
+- Resource exhaustion preventing cluster startup
+- Port conflicts between parallel clusters
+
+**Why It Happens:**
+- Maven Surefire runs tests in parallel by default
+- Each ProcessBased test starts a complete multi-node cluster
+- Multiple clusters (7+ tests) starting simultaneously overwhelm system resources
+
+**Solution:**
+Configure Maven Surefire to run ProcessBased tests **sequentially**:
+
+**Option 1: Per-module configuration** (pom.xml):
+```xml
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-surefire-plugin</artifactId>
+      <configuration>
+        <!-- Run ProcessBased tests sequentially -->
+        <forkCount>1</forkCount>
+        <reuseForks>false</reuseForks>
+        <threadCount>1</threadCount>
+        <parallel>none</parallel>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+```
+
+**Option 2: Command-line override**:
+```bash
+# Run ProcessBased tests sequentially
+mvn test -Dtest='*_ProcessBased' \
+  -DforkCount=1 \
+  -DreuseForks=false \
+  -DparallelMaven=none \
+  -Dhbase.start.home=/opt/hbase-2.6.0
+```
+
+**Verification:**
+Run failed tests individually to confirm they pass when not competing for resources:
+```bash
+# Test individually (should pass)
+mvn test -Dtest=TestMyFeature_ProcessBased#testMethod_NO_UPGRADE \
+  -Dhbase.start.home=/opt/hbase-2.6.0
+```
+
+If the test passes individually but fails in a batch run, it's a resource contention issue.
+
+**Best Practice:**
+- Configure CI/CD pipelines to run ProcessBased tests sequentially
+- Document resource requirements in test class Javadoc
+- Consider splitting large test suites into smaller batches
+
+### Pitfall 3: Missing Table/Resource Cleanup Pattern
+
+**Error Message:**
+```
+Table already exists
+Region already assigned
+Connection refused (after test)
+```
+
+**Root Cause:**
+- Resources (Connection, Admin, Table) not properly closed
+- Tables not cleaned up between test methods
+- ProcessBasedUpgradeTestBase @After not invoked
+
+**Why It Happens:**
+- Original MiniHBaseCluster tests may use TEST_UTIL for automatic cleanup
+- Forgetting to call super tearDown() when overriding @After
+- Not using try-with-resources for client connections
+
+**Solution:**
+
+**Option 1: Use ProcessBasedUpgradeTestBase (Recommended)**
+Extend ProcessBasedUpgradeTestBase for automatic cleanup:
+
+```java
+public class TestMyFeature_ProcessBased extends ProcessBasedUpgradeTestBase {
+
+  @Test
+  public void testSomething_NO_UPGRADE() throws Exception {
+    upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
+
+    // Use base class fields (cluster, connection, admin)
+    cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).build();
+    connection = cluster.getConnection();
+    admin = connection.getAdmin();
+
+    // Test logic here
+    TableName tableName = TableName.valueOf("test");
+    admin.createTable(TableDescriptorBuilder.newBuilder(tableName)
+        .setColumnFamily(ColumnFamilyDescriptorBuilder.of("cf"))
+        .build());
+
+    // ... test operations ...
+
+    // Cleanup table before base class @After
+    admin.disableTable(tableName);
+    admin.deleteTable(tableName);
+
+    // Base class @After automatically:
+    // - Closes connection
+    // - Shuts down cluster
+    // - Kills orphaned processes
+  }
+}
+```
+
+**Option 2: Manual cleanup with try-with-resources**
+If not using base class:
+
+```java
+@Test
+public void testSomething() throws Exception {
+    ProcessBasedMiniHBaseCluster cluster = null;
+    try {
+        cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).build();
+
+        try (Connection connection = cluster.getConnection();
+             Admin admin = connection.getAdmin()) {
+
+            TableName tableName = TableName.valueOf("test");
+            admin.createTable(TableDescriptorBuilder.newBuilder(tableName)
+                .setColumnFamily(ColumnFamilyDescriptorBuilder.of("cf"))
+                .build());
+
+            // Test logic
+
+            // Cleanup
+            admin.disableTable(tableName);
+            admin.deleteTable(tableName);
+        }
+    } finally {
+        if (cluster != null) {
+            cluster.shutdown();
+        }
+    }
+}
+```
+
+**Checklist:**
+- [ ] Extend ProcessBasedUpgradeTestBase for automatic cleanup
+- [ ] Disable tables before deleting them
+- [ ] Close all Table instances with try-with-resources
+- [ ] Don't override @After without calling super.tearDown()
+- [ ] Verify `jps` shows no orphaned HMaster/HRegionServer processes after test
+
+---
+
 ## Summary
 
 ### Transformation Success Criteria

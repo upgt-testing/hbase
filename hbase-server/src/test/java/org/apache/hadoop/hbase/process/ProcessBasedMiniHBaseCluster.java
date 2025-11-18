@@ -61,9 +61,8 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.MasterProtos.MasterServ
  * ProcessBasedMiniHBaseCluster cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
  *     .numRegionServers(3)
  *     .allNodesHBaseDistribution("/opt/hbase-2.6.0")
- *     .build();
+ *     .build();  // startup() is called automatically by build()
  *
- * cluster.startup();
  * Connection conn = cluster.getConnection();
  * // Use conn for testing...
  * cluster.shutdown();
@@ -1050,7 +1049,9 @@ public class ProcessBasedMiniHBaseCluster extends HBaseCluster {
           this.defaultHBaseHome = hbaseHome;
         }
       }
-      return new ProcessBasedMiniHBaseCluster(conf, this);
+      ProcessBasedMiniHBaseCluster cluster = new ProcessBasedMiniHBaseCluster(conf, this);
+      cluster.startup();
+      return cluster;
     }
   }
 }
