@@ -362,6 +362,13 @@ public class ProcessBasedMiniHBaseCluster extends HBaseCluster {
     return connection;
   }
 
+  /**
+   * Get the configuration for this cluster.
+   */
+  public Configuration getConfiguration() {
+    return conf;
+  }
+
   @Override
   public ClusterMetrics getClusterMetrics() throws IOException {
     Connection conn = getConnection();

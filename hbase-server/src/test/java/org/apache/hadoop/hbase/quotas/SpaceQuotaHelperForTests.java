@@ -38,6 +38,7 @@ import org.apache.hadoop.hbase.HConstants;
 import org.apache.hadoop.hbase.MiniHBaseCluster;
 import org.apache.hadoop.hbase.NamespaceDescriptor;
 import org.apache.hadoop.hbase.TableName;
+import org.apache.hadoop.hbase.process.ProcessBasedMiniHBaseCluster;
 import org.apache.hadoop.hbase.TableNotEnabledException;
 import org.apache.hadoop.hbase.Waiter.Predicate;
 import org.apache.hadoop.hbase.client.Admin;
@@ -84,6 +85,7 @@ public class SpaceQuotaHelperForTests {
   public static final long ONE_GIGABYTE = ONE_MEGABYTE * ONE_KILOBYTE;
 
   private final HBaseTestingUtility testUtil;
+  private final ProcessBasedMiniHBaseCluster processBasedCluster;
   private final TestName testName;
   private final AtomicLong counter;
   private static final int NUM_RETRIES = 10;
@@ -91,8 +93,63 @@ public class SpaceQuotaHelperForTests {
   public SpaceQuotaHelperForTests(HBaseTestingUtility testUtil, TestName testName,
     AtomicLong counter) {
     this.testUtil = Objects.requireNonNull(testUtil);
+    this.processBasedCluster = null;
     this.testName = Objects.requireNonNull(testName);
     this.counter = Objects.requireNonNull(counter);
+  }
+
+  /**
+   * Constructor for ProcessBasedMiniHBaseCluster tests.
+   */
+  public SpaceQuotaHelperForTests(ProcessBasedMiniHBaseCluster cluster, TestName testName,
+    AtomicLong counter) {
+    this.testUtil = null;
+    this.processBasedCluster = Objects.requireNonNull(cluster);
+    this.testName = Objects.requireNonNull(testName);
+    this.counter = Objects.requireNonNull(counter);
+  }
+
+  // Helper methods that work for both HBaseTestingUtility and ProcessBasedMiniHBaseCluster
+
+  private Connection getConnection() throws IOException {
+    if (testUtil != null) {
+      return testUtil.getConnection();
+    } else {
+      return processBasedCluster.getConnection();
+    }
+  }
+
+  private Admin getAdmin() throws IOException {
+    if (testUtil != null) {
+      return testUtil.getAdmin();
+    } else {
+      return getConnection().getAdmin();
+    }
+  }
+
+  private Configuration getConfiguration() {
+    if (testUtil != null) {
+      return testUtil.getConfiguration();
+    } else {
+      return processBasedCluster.getConfiguration();
+    }
+  }
+
+  private FileSystem getTestFileSystem() throws IOException {
+    if (testUtil != null) {
+      return testUtil.getTestFileSystem();
+    } else {
+      return FileSystem.get(getConfiguration());
+    }
+  }
+
+  private <E extends Exception> void waitFor(long timeout, long interval, Predicate<E> predicate)
+      throws E {
+    if (testUtil != null) {
+      testUtil.waitFor(timeout, interval, predicate);
+    } else {
+      org.apache.hadoop.hbase.Waiter.waitFor(getConfiguration(), timeout, interval, predicate);
+    }
   }
 
   //
@@ -187,7 +244,7 @@ public class SpaceQuotaHelperForTests {
     boolean sawError = false;
     String msg = "";
     for (int i = 0; i < NUM_RETRIES && !sawError; i++) {
-      try (Table table = testUtil.getConnection().getTable(tn)) {
+      try (Table table = getConnection().getTable(tn)) {
         if (m instanceof Put) {
           table.put((Put) m);
         } else if (m instanceof Delete) {
@@ -218,7 +275,7 @@ public class SpaceQuotaHelperForTests {
       }
     }
     if (!sawError) {
-      try (Table quotaTable = testUtil.getConnection().getTable(QuotaUtil.QUOTA_TABLE_NAME)) {
+      try (Table quotaTable = getConnection().getTable(QuotaUtil.QUOTA_TABLE_NAME)) {
         ResultScanner scanner = quotaTable.getScanner(new Scan());
         Result result = null;
         LOG.info("Dumping contents of hbase:quota table");
@@ -247,7 +304,7 @@ public class SpaceQuotaHelperForTests {
     // But let's try a few times to write data before failing
     boolean sawSuccess = false;
     for (int i = 0; i < NUM_RETRIES && !sawSuccess; i++) {
-      try (Table table = testUtil.getConnection().getTable(tn)) {
+      try (Table table = getConnection().getTable(tn)) {
         if (m instanceof Put) {
           table.put((Put) m);
         } else if (m instanceof Delete) {
@@ -267,7 +324,7 @@ public class SpaceQuotaHelperForTests {
       }
     }
     if (!sawSuccess) {
-      try (Table quotaTable = testUtil.getConnection().getTable(QuotaUtil.QUOTA_TABLE_NAME)) {
+      try (Table quotaTable = getConnection().getTable(QuotaUtil.QUOTA_TABLE_NAME)) {
         ResultScanner scanner = quotaTable.getScanner(new Scan());
         Result result = null;
         LOG.info("Dumping contents of hbase:quota table");
@@ -285,7 +342,7 @@ public class SpaceQuotaHelperForTests {
    */
   void verifyTableUsageSnapshotForSpaceQuotaExist(TableName tn) throws Exception {
     boolean sawUsageSnapshot = false;
-    try (Table quotaTable = testUtil.getConnection().getTable(QuotaTableUtil.QUOTA_TABLE_NAME)) {
+    try (Table quotaTable = getConnection().getTable(QuotaTableUtil.QUOTA_TABLE_NAME)) {
       Scan s = QuotaTableUtil.makeQuotaSnapshotScanForTable(tn);
       ResultScanner rs = quotaTable.getScanner(s);
       sawUsageSnapshot = (rs.next() != null);
@@ -301,7 +358,7 @@ public class SpaceQuotaHelperForTests {
     throws Exception {
     final long sizeLimit = sizeInMBs * SpaceQuotaHelperForTests.ONE_MEGABYTE;
     QuotaSettings settings = QuotaSettingsFactory.limitTableSpace(tn, sizeLimit, policy);
-    testUtil.getAdmin().setQuota(settings);
+    getAdmin().setQuota(settings);
     LOG.debug("Quota limit set for table = {}, limit = {}", tn, sizeLimit);
   }
 
@@ -311,7 +368,7 @@ public class SpaceQuotaHelperForTests {
   void setQuotaLimit(String ns, SpaceViolationPolicy policy, long sizeInMBs) throws Exception {
     final long sizeLimit = sizeInMBs * SpaceQuotaHelperForTests.ONE_MEGABYTE;
     QuotaSettings settings = QuotaSettingsFactory.limitNamespaceSpace(ns, sizeLimit, policy);
-    testUtil.getAdmin().setQuota(settings);
+    getAdmin().setQuota(settings);
     LOG.debug("Quota limit set for namespace = {}, limit = {}", ns, sizeLimit);
   }
 
@@ -320,7 +377,7 @@ public class SpaceQuotaHelperForTests {
    */
   void removeQuotaFromtable(final TableName tn) throws Exception {
     QuotaSettings removeQuota = QuotaSettingsFactory.removeTableSpaceLimit(tn);
-    testUtil.getAdmin().setQuota(removeQuota);
+    getAdmin().setQuota(removeQuota);
     LOG.debug("Space quota settings removed from the table ", tn);
   }
 
@@ -333,9 +390,9 @@ public class SpaceQuotaHelperForTests {
    */
   ClientServiceCallable<Void> generateFileToLoad(TableName tn, int numFiles, int numRowsPerFile)
     throws Exception {
-    Connection conn = testUtil.getConnection();
-    FileSystem fs = testUtil.getTestFileSystem();
-    Configuration conf = testUtil.getConfiguration();
+    Connection conn = getConnection();
+    FileSystem fs = getTestFileSystem();
+    Configuration conf = getConfiguration();
     Path baseDir = new Path(fs.getHomeDirectory(), testName.getMethodName() + "_files");
     fs.mkdirs(baseDir);
     final List<Pair<byte[], String>> famPaths = new ArrayList<Pair<byte[], String>>();
@@ -408,7 +465,7 @@ public class SpaceQuotaHelperForTests {
    */
   void removeQuotaFromNamespace(String ns) throws Exception {
     QuotaSettings removeQuota = QuotaSettingsFactory.removeNamespaceSpaceLimit(ns);
-    Admin admin = testUtil.getAdmin();
+    Admin admin = getAdmin();
     admin.setQuota(removeQuota);
     LOG.debug("Space quota settings removed from the namespace ", ns);
   }
@@ -417,7 +474,7 @@ public class SpaceQuotaHelperForTests {
    * Removes all quotas defined in the HBase quota table.
    */
   void removeAllQuotas() throws Exception {
-    final Connection conn = testUtil.getConnection();
+    final Connection conn = getConnection();
     removeAllQuotas(conn);
     assertEquals(0, listNumDefinedQuotas(conn));
   }
@@ -474,7 +531,7 @@ public class SpaceQuotaHelperForTests {
    * Waits {@code timeout} milliseconds for the HBase quota table to exist.
    */
   public void waitForQuotaTable(Connection conn, long timeout) throws IOException {
-    testUtil.waitFor(timeout, 1000, new Predicate<IOException>() {
+    waitFor(timeout, 1000, new Predicate<IOException>() {
       @Override
       public boolean evaluate() throws IOException {
         return conn.getAdmin().tableExists(QuotaUtil.QUOTA_TABLE_NAME);
@@ -483,7 +540,7 @@ public class SpaceQuotaHelperForTests {
   }
 
   void writeData(TableName tn, long sizeInBytes) throws IOException {
-    writeData(testUtil.getConnection(), tn, sizeInBytes);
+    writeData(getConnection(), tn, sizeInBytes);
   }
 
   void writeData(Connection conn, TableName tn, long sizeInBytes) throws IOException {
@@ -495,7 +552,7 @@ public class SpaceQuotaHelperForTests {
   }
 
   void writeData(TableName tn, long sizeInBytes, byte[] qual) throws IOException {
-    final Connection conn = testUtil.getConnection();
+    final Connection conn = getConnection();
     final Table table = conn.getTable(tn);
     try {
       List<Put> updates = new ArrayList<>();
@@ -530,7 +587,7 @@ public class SpaceQuotaHelperForTests {
 
       LOG.debug("Data was written to HBase");
       // Push the data to disk.
-      testUtil.getAdmin().flush(tn);
+      getAdmin().flush(tn);
       LOG.debug("Data flushed to disk");
     } finally {
       table.close();
