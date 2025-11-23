@@ -193,12 +193,17 @@ public class TestChangingEncoding_ProcessBased extends ProcessBasedUpgradeTestBa
   public void testChangingEncoding_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    conf = HBaseConfiguration.create();
     conf.setInt(HConstants.HREGION_MEMSTORE_FLUSH_SIZE, 1024 * 1024);
     conf.set(HConstants.HBASE_REGION_SPLIT_POLICY_KEY,
       "org.apache.hadoop.hbase.regionserver.DisabledRegionSplitPolicy");
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).build();
+    cluster.waitClusterUp();
+
+    // Wait for Master to be fully initialized before creating tables
+    // This prevents PleaseHoldException: Master is initializing
+    cluster.waitForActiveAndReadyMaster(60000);
+
     connection = cluster.getConnection();
     admin = connection.getAdmin();
     checkpoint(HBaseUpgradeCheckpoints.AFTER_CLUSTER_START);
@@ -220,12 +225,17 @@ public class TestChangingEncoding_ProcessBased extends ProcessBasedUpgradeTestBa
   public void testChangingEncoding_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    conf = HBaseConfiguration.create();
     conf.setInt(HConstants.HREGION_MEMSTORE_FLUSH_SIZE, 1024 * 1024);
     conf.set(HConstants.HBASE_REGION_SPLIT_POLICY_KEY,
       "org.apache.hadoop.hbase.regionserver.DisabledRegionSplitPolicy");
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).build();
+    cluster.waitClusterUp();
+
+    // Wait for Master to be fully initialized before creating tables
+    // This prevents PleaseHoldException: Master is initializing
+    cluster.waitForActiveAndReadyMaster(60000);
+
     connection = cluster.getConnection();
     admin = connection.getAdmin();
     checkpoint(HBaseUpgradeCheckpoints.AFTER_CLUSTER_START);
@@ -247,12 +257,17 @@ public class TestChangingEncoding_ProcessBased extends ProcessBasedUpgradeTestBa
   public void testChangingEncodingWithCompaction_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    conf = HBaseConfiguration.create();
     conf.setInt(HConstants.HREGION_MEMSTORE_FLUSH_SIZE, 1024 * 1024);
     conf.set(HConstants.HBASE_REGION_SPLIT_POLICY_KEY,
       "org.apache.hadoop.hbase.regionserver.DisabledRegionSplitPolicy");
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).build();
+    cluster.waitClusterUp();
+
+    // Wait for Master to be fully initialized before creating tables
+    // This prevents PleaseHoldException: Master is initializing
+    cluster.waitForActiveAndReadyMaster(60000);
+
     connection = cluster.getConnection();
     admin = connection.getAdmin();
     checkpoint(HBaseUpgradeCheckpoints.AFTER_CLUSTER_START);
@@ -276,12 +291,17 @@ public class TestChangingEncoding_ProcessBased extends ProcessBasedUpgradeTestBa
   public void testChangingEncodingWithCompaction_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    conf = HBaseConfiguration.create();
     conf.setInt(HConstants.HREGION_MEMSTORE_FLUSH_SIZE, 1024 * 1024);
     conf.set(HConstants.HBASE_REGION_SPLIT_POLICY_KEY,
       "org.apache.hadoop.hbase.regionserver.DisabledRegionSplitPolicy");
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).build();
+    cluster.waitClusterUp();
+
+    // Wait for Master to be fully initialized before creating tables
+    // This prevents PleaseHoldException: Master is initializing
+    cluster.waitForActiveAndReadyMaster(60000);
+
     connection = cluster.getConnection();
     admin = connection.getAdmin();
     checkpoint(HBaseUpgradeCheckpoints.AFTER_CLUSTER_START);
@@ -305,12 +325,17 @@ public class TestChangingEncoding_ProcessBased extends ProcessBasedUpgradeTestBa
   public void testCrazyRandomChanges_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    conf = HBaseConfiguration.create();
     conf.setInt(HConstants.HREGION_MEMSTORE_FLUSH_SIZE, 1024 * 1024);
     conf.set(HConstants.HBASE_REGION_SPLIT_POLICY_KEY,
       "org.apache.hadoop.hbase.regionserver.DisabledRegionSplitPolicy");
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).build();
+    cluster.waitClusterUp();
+
+    // Wait for Master to be fully initialized before creating tables
+    // This prevents PleaseHoldException: Master is initializing
+    cluster.waitForActiveAndReadyMaster(60000);
+
     connection = cluster.getConnection();
     admin = connection.getAdmin();
     checkpoint(HBaseUpgradeCheckpoints.AFTER_CLUSTER_START);
@@ -333,12 +358,17 @@ public class TestChangingEncoding_ProcessBased extends ProcessBasedUpgradeTestBa
   public void testCrazyRandomChanges_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    conf = HBaseConfiguration.create();
     conf.setInt(HConstants.HREGION_MEMSTORE_FLUSH_SIZE, 1024 * 1024);
     conf.set(HConstants.HBASE_REGION_SPLIT_POLICY_KEY,
       "org.apache.hadoop.hbase.regionserver.DisabledRegionSplitPolicy");
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).build();
+    cluster.waitClusterUp();
+
+    // Wait for Master to be fully initialized before creating tables
+    // This prevents PleaseHoldException: Master is initializing
+    cluster.waitForActiveAndReadyMaster(60000);
+
     connection = cluster.getConnection();
     admin = connection.getAdmin();
     checkpoint(HBaseUpgradeCheckpoints.AFTER_CLUSTER_START);

@@ -21,6 +21,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.hbase.HBaseClassTestRule;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HConstants;
 import org.apache.hadoop.hbase.TableName;
@@ -33,12 +34,15 @@ import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.client.TableDescriptor;
 import org.apache.hadoop.hbase.client.TableDescriptorBuilder;
 import org.apache.hadoop.hbase.process.ProcessBasedMiniHBaseCluster;
+import org.apache.hadoop.hbase.testclassification.LargeTests;
 import org.apache.hadoop.hbase.upgrade.HBaseUpgradeCheckpoints;
 import org.apache.hadoop.hbase.upgrade.ProcessBasedUpgradeTestBase;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.hadoop.hbase.util.ServerRegionReplicaUtil;
 import org.apache.hadoop.hbase.Waiter;
+import org.junit.ClassRule;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -80,7 +84,12 @@ import org.slf4j.LoggerFactory;
  *
  * @see TestRegionReplicaFailover Original test using MiniHBaseCluster
  */
+@Category(LargeTests.class)
 public class TestRegionReplicaFailover_ProcessBased extends ProcessBasedUpgradeTestBase {
+
+  @ClassRule
+  public static final HBaseClassTestRule CLASS_RULE =
+    HBaseClassTestRule.forClass(TestRegionReplicaFailover_ProcessBased.class);
 
   private static final Logger LOG =
     LoggerFactory.getLogger(TestRegionReplicaFailover_ProcessBased.class);
@@ -120,7 +129,8 @@ public class TestRegionReplicaFailover_ProcessBased extends ProcessBasedUpgradeT
   private void runTestSecondaryRegionWithEmptyRegion() throws Exception {
     tableName = TableName.valueOf("testSecondaryRegionWithEmptyRegion");
 
-    Configuration testConf = HBaseConfiguration.create();
+    // Use conf from base class - it has correct dynamic ZK port configuration
+    Configuration testConf = conf;
     testConf.setInt(HConstants.REGION_SERVER_HIGH_PRIORITY_HANDLER_COUNT, 10);
     testConf.setBoolean(ServerRegionReplicaUtil.REGION_REPLICA_REPLICATION_CONF_KEY, true);
     testConf.setBoolean(ServerRegionReplicaUtil.REGION_REPLICA_WAIT_FOR_PRIMARY_FLUSH_CONF_KEY, true);
@@ -198,7 +208,8 @@ public class TestRegionReplicaFailover_ProcessBased extends ProcessBasedUpgradeT
   private void runTestSecondaryRegionWithNonEmptyRegion() throws Exception {
     tableName = TableName.valueOf("testSecondaryRegionWithNonEmptyRegion");
 
-    Configuration testConf = HBaseConfiguration.create();
+    // Use conf from base class - it has correct dynamic ZK port configuration
+    Configuration testConf = conf;
     testConf.setInt(HConstants.REGION_SERVER_HIGH_PRIORITY_HANDLER_COUNT, 10);
     testConf.setBoolean(ServerRegionReplicaUtil.REGION_REPLICA_REPLICATION_CONF_KEY, true);
     testConf.setBoolean(ServerRegionReplicaUtil.REGION_REPLICA_WAIT_FOR_PRIMARY_FLUSH_CONF_KEY, true);
@@ -275,7 +286,8 @@ public class TestRegionReplicaFailover_ProcessBased extends ProcessBasedUpgradeT
     int numRegions = NB_SERVERS * 20;
     int regionReplication = 10;
 
-    Configuration testConf = HBaseConfiguration.create();
+    // Use conf from base class - it has correct dynamic ZK port configuration
+    Configuration testConf = conf;
     testConf.setInt(HConstants.REGION_SERVER_HIGH_PRIORITY_HANDLER_COUNT, 10);
     testConf.setBoolean(ServerRegionReplicaUtil.REGION_REPLICA_REPLICATION_CONF_KEY, true);
     testConf.setBoolean(ServerRegionReplicaUtil.REGION_REPLICA_WAIT_FOR_PRIMARY_FLUSH_CONF_KEY, true);

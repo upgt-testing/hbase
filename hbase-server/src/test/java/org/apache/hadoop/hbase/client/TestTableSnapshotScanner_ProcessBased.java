@@ -161,7 +161,6 @@ public class TestTableSnapshotScanner_ProcessBased extends ProcessBasedUpgradeTe
   public void testNoDuplicateResultsWhenSplitting_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    conf = HBaseConfiguration.create();
     setupConf(conf);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
@@ -249,7 +248,6 @@ public class TestTableSnapshotScanner_ProcessBased extends ProcessBasedUpgradeTe
   public void testScanLimit_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    conf = HBaseConfiguration.create();
     setupConf(conf);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
@@ -333,7 +331,6 @@ public class TestTableSnapshotScanner_ProcessBased extends ProcessBasedUpgradeTe
 
   private void testScanner(String snapshotName, int numRegions, boolean shutdownCluster)
     throws Exception {
-    conf = HBaseConfiguration.create();
     setupConf(conf);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)

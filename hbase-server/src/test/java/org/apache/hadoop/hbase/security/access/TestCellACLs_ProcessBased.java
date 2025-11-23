@@ -227,7 +227,6 @@ public class TestCellACLs_ProcessBased extends ProcessBasedUpgradeTestBase {
   }
 
   private void testCellPermissionsImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setInt(HConstants.REGION_SERVER_HIGH_PRIORITY_HANDLER_COUNT, 10);
     SecureTestUtil.enableSecurity(conf);
     SecureTestUtil.verifyConfiguration(conf);
@@ -472,7 +471,6 @@ public class TestCellACLs_ProcessBased extends ProcessBasedUpgradeTestBase {
   }
 
   private void testCoveringCheckImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setInt(HConstants.REGION_SERVER_HIGH_PRIORITY_HANDLER_COUNT, 10);
     SecureTestUtil.enableSecurity(conf);
     SecureTestUtil.verifyConfiguration(conf);

@@ -105,7 +105,6 @@ public class TestScannersFromClientSide_ProcessBased extends ProcessBasedUpgrade
   }
 
   private void testScanImmutableImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setLong(HConstants.HBASE_CLIENT_SCANNER_MAX_RESULT_SIZE_KEY, 10 * 1024 * 1024);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
@@ -147,7 +146,6 @@ public class TestScannersFromClientSide_ProcessBased extends ProcessBasedUpgrade
   }
 
   private void testScanBatchImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setLong(HConstants.HBASE_CLIENT_SCANNER_MAX_RESULT_SIZE_KEY, 10 * 1024 * 1024);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
@@ -239,7 +237,6 @@ public class TestScannersFromClientSide_ProcessBased extends ProcessBasedUpgrade
   }
 
   private void testMaxResultSizeIsSetToDefaultImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setLong(HConstants.HBASE_CLIENT_SCANNER_MAX_RESULT_SIZE_KEY, 10 * 1024 * 1024);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
@@ -311,7 +308,6 @@ public class TestScannersFromClientSide_ProcessBased extends ProcessBasedUpgrade
   }
 
   private void testScannerForNotExistingTableImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setLong(HConstants.HBASE_CLIENT_SCANNER_MAX_RESULT_SIZE_KEY, 10 * 1024 * 1024);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
@@ -349,7 +345,6 @@ public class TestScannersFromClientSide_ProcessBased extends ProcessBasedUpgrade
   }
 
   private void testSmallScanImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setLong(HConstants.HBASE_CLIENT_SCANNER_MAX_RESULT_SIZE_KEY, 10 * 1024 * 1024);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
@@ -404,7 +399,6 @@ public class TestScannersFromClientSide_ProcessBased extends ProcessBasedUpgrade
   }
 
   private void testGetMaxResultsImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setLong(HConstants.HBASE_CLIENT_SCANNER_MAX_RESULT_SIZE_KEY, 10 * 1024 * 1024);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
@@ -540,7 +534,6 @@ public class TestScannersFromClientSide_ProcessBased extends ProcessBasedUpgrade
   }
 
   private void testScanMaxResultsImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setLong(HConstants.HBASE_CLIENT_SCANNER_MAX_RESULT_SIZE_KEY, 10 * 1024 * 1024);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
@@ -607,7 +600,6 @@ public class TestScannersFromClientSide_ProcessBased extends ProcessBasedUpgrade
   }
 
   private void testGetRowOffsetImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setLong(HConstants.HBASE_CLIENT_SCANNER_MAX_RESULT_SIZE_KEY, 10 * 1024 * 1024);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
@@ -719,7 +711,6 @@ public class TestScannersFromClientSide_ProcessBased extends ProcessBasedUpgrade
   }
 
   private void testScanRawDeleteFamilyVersionImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setLong(HConstants.HBASE_CLIENT_SCANNER_MAX_RESULT_SIZE_KEY, 10 * 1024 * 1024);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
@@ -816,7 +807,6 @@ public class TestScannersFromClientSide_ProcessBased extends ProcessBasedUpgrade
     assert qualifierNumber > 0;
 
     if (cluster == null) {
-      conf = HBaseConfiguration.create();
       conf.setLong(HConstants.HBASE_CLIENT_SCANNER_MAX_RESULT_SIZE_KEY, 10 * 1024 * 1024);
       cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
       connection = cluster.getConnection();
@@ -904,7 +894,6 @@ public class TestScannersFromClientSide_ProcessBased extends ProcessBasedUpgrade
   }
 
   private void testReadExpiredDataForRawScanImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setLong(HConstants.HBASE_CLIENT_SCANNER_MAX_RESULT_SIZE_KEY, 10 * 1024 * 1024);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
@@ -946,7 +935,6 @@ public class TestScannersFromClientSide_ProcessBased extends ProcessBasedUpgrade
   }
 
   private void testScanWithColumnsAndFilterAndVersionImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setLong(HConstants.HBASE_CLIENT_SCANNER_MAX_RESULT_SIZE_KEY, 10 * 1024 * 1024);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
@@ -992,7 +980,6 @@ public class TestScannersFromClientSide_ProcessBased extends ProcessBasedUpgrade
   }
 
   private void testScanWithSameStartRowStopRowImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setLong(HConstants.HBASE_CLIENT_SCANNER_MAX_RESULT_SIZE_KEY, 10 * 1024 * 1024);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
@@ -1052,7 +1039,6 @@ public class TestScannersFromClientSide_ProcessBased extends ProcessBasedUpgrade
   }
 
   private void testReverseScanWithFlushImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setLong(HConstants.HBASE_CLIENT_SCANNER_MAX_RESULT_SIZE_KEY, 10 * 1024 * 1024);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
@@ -1116,7 +1102,6 @@ public class TestScannersFromClientSide_ProcessBased extends ProcessBasedUpgrade
   }
 
   private void testScannerWithPartialResultsImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setLong(HConstants.HBASE_CLIENT_SCANNER_MAX_RESULT_SIZE_KEY, 10 * 1024 * 1024);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();

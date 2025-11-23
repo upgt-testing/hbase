@@ -101,7 +101,6 @@ public class TestRegionMoveAndAbandon_ProcessBased extends ProcessBasedUpgradeTe
   }
 
   private void runTest() throws Exception {
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
         .numRegionServers(2)
         .build();

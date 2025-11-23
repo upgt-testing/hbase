@@ -180,7 +180,6 @@ public class TestRestoreFlushSnapshotFromClient_ProcessBased extends ProcessBase
   }
 
   private void testTakeFlushSnapshotImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setInt("hbase.regionserver.msginterval", 100);
     conf.setInt("hbase.client.pause", 250);
     conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 6);
@@ -219,7 +218,6 @@ public class TestRestoreFlushSnapshotFromClient_ProcessBased extends ProcessBase
   }
 
   private void testRestoreSnapshotImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setInt("hbase.regionserver.msginterval", 100);
     conf.setInt("hbase.client.pause", 250);
     conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 6);
@@ -266,7 +264,6 @@ public class TestRestoreFlushSnapshotFromClient_ProcessBased extends ProcessBase
   public void testCloneNonExistentSnapshot_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    conf = HBaseConfiguration.create();
     conf.setBoolean(SnapshotManager.HBASE_SNAPSHOT_ENABLED, true);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
@@ -296,7 +293,6 @@ public class TestRestoreFlushSnapshotFromClient_ProcessBased extends ProcessBase
   }
 
   private void testCloneSnapshotImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setBoolean(SnapshotManager.HBASE_SNAPSHOT_ENABLED, true);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
@@ -344,7 +340,6 @@ public class TestRestoreFlushSnapshotFromClient_ProcessBased extends ProcessBase
   }
 
   private void testRestoreSnapshotOfClonedImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setBoolean(SnapshotManager.HBASE_SNAPSHOT_ENABLED, true);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();

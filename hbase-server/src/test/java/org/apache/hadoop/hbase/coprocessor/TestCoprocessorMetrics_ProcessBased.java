@@ -273,7 +273,6 @@ public class TestCoprocessorMetrics_ProcessBased extends ProcessBasedUpgradeTest
   }
 
   private void setupCluster() throws Exception {
-    conf = HBaseConfiguration.create();
     // inject master, regionserver and WAL coprocessors
     conf.set(CoprocessorHost.MASTER_COPROCESSOR_CONF_KEY, CustomMasterObserver.class.getName());
     conf.set(CoprocessorHost.REGIONSERVER_COPROCESSOR_CONF_KEY,

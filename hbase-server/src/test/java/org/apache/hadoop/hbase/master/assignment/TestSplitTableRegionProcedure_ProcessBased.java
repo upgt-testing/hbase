@@ -138,7 +138,6 @@ public class TestSplitTableRegionProcedure_ProcessBased extends ProcessBasedUpgr
   public void testSplitTableRegion_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    Configuration conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
     connection = cluster.getConnection();
     admin = connection.getAdmin();
@@ -212,7 +211,6 @@ public class TestSplitTableRegionProcedure_ProcessBased extends ProcessBasedUpgr
   public void testSplitTableRegion_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    Configuration conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
     connection = cluster.getConnection();
     admin = connection.getAdmin();
@@ -272,7 +270,6 @@ public class TestSplitTableRegionProcedure_ProcessBased extends ProcessBasedUpgr
   public void testSplitTableRegion_AFTER_CREATE_TABLE() throws Exception {
     upgradeCheckpoint = "AFTER_CREATE_TABLE";
 
-    Configuration conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
     connection = cluster.getConnection();
     admin = connection.getAdmin();
@@ -332,7 +329,6 @@ public class TestSplitTableRegionProcedure_ProcessBased extends ProcessBasedUpgr
   public void testSplitTableRegionNoStoreFile_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    Configuration conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
     connection = cluster.getConnection();
     admin = connection.getAdmin();
@@ -383,7 +379,6 @@ public class TestSplitTableRegionProcedure_ProcessBased extends ProcessBasedUpgr
   public void testSplitTableRegionNoStoreFile_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    Configuration conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(3).build();
     connection = cluster.getConnection();
     admin = connection.getAdmin();

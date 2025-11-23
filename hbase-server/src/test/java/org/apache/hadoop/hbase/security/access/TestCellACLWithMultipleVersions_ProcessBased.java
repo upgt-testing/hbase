@@ -231,7 +231,6 @@ public class TestCellACLWithMultipleVersions_ProcessBased extends ProcessBasedUp
   }
 
   private void testCellPermissionwithVersionsImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     SecureTestUtil.enableSecurity(conf);
     SecureTestUtil.verifyConfiguration(conf);
     conf.setBoolean(AccessControlConstants.CF_ATTRIBUTE_EARLY_OUT, false);
@@ -347,7 +346,6 @@ public class TestCellACLWithMultipleVersions_ProcessBased extends ProcessBasedUp
   }
 
   private void testCellPermissionsWithDeleteMutipleVersionsImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     SecureTestUtil.enableSecurity(conf);
     SecureTestUtil.verifyConfiguration(conf);
     conf.setBoolean(AccessControlConstants.CF_ATTRIBUTE_EARLY_OUT, false);
@@ -486,7 +484,6 @@ public class TestCellACLWithMultipleVersions_ProcessBased extends ProcessBasedUp
   }
 
   private void testDeleteWithFutureTimestampImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     SecureTestUtil.enableSecurity(conf);
     SecureTestUtil.verifyConfiguration(conf);
     conf.setBoolean(AccessControlConstants.CF_ATTRIBUTE_EARLY_OUT, false);

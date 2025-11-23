@@ -107,7 +107,6 @@ public class TestCoprocessorStop_ProcessBased extends ProcessBasedUpgradeTestBas
   public void testStopped_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    conf = HBaseConfiguration.create();
     conf.set(CoprocessorHost.MASTER_COPROCESSOR_CONF_KEY, FooCoprocessor.class.getName());
     conf.set(CoprocessorHost.REGIONSERVER_COPROCESSOR_CONF_KEY, FooCoprocessor.class.getName());
 

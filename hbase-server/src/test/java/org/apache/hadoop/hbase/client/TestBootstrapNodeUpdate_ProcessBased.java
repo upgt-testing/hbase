@@ -68,7 +68,6 @@ public class TestBootstrapNodeUpdate_ProcessBased extends ProcessBasedUpgradeTes
   private void setupTest(String testMethodName) throws Exception {
     testCounter++;
 
-    conf = HBaseConfiguration.create();
     conf.setLong(BootstrapNodeManager.REQUEST_MASTER_INTERVAL_SECS, 5);
     conf.setLong(BootstrapNodeManager.REQUEST_MASTER_MIN_INTERVAL_SECS, 1);
     conf.setLong(BootstrapNodeManager.REQUEST_REGIONSERVER_INTERVAL_SECS, 1);

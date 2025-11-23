@@ -144,8 +144,7 @@ public class TestEndToEndSplitTransaction_ProcessBased extends ProcessBasedUpgra
     final TableName tableName = TableName.valueOf(name.getMethodName());
     final byte[] FAMILY = Bytes.toBytes("family");
 
-    conf = HBaseConfiguration.create();
-    conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 5);
+    conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 10); // Increased for process-based cluster startup
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
@@ -154,6 +153,11 @@ public class TestEndToEndSplitTransaction_ProcessBased extends ProcessBasedUpgra
     admin = connection.getAdmin();
 
     cluster.waitClusterUp();
+
+    // Wait for Master to be fully initialized before creating tables
+    // This prevents PleaseHoldException: Master is initializing
+    cluster.waitForActiveAndReadyMaster(60000);
+
     checkpoint(HBaseUpgradeCheckpoints.AFTER_CLUSTER_START);
 
     // Create table

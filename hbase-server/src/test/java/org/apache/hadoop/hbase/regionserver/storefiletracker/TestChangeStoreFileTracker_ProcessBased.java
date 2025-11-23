@@ -385,7 +385,6 @@ public class TestChangeStoreFileTracker_ProcessBased extends ProcessBasedUpgrade
 
   private void setupCluster() throws Exception {
     if (cluster == null) {
-      Configuration conf = HBaseConfiguration.create();
       cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(1).build();
       connection = cluster.getConnection();
       admin = connection.getAdmin();

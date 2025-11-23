@@ -101,7 +101,6 @@ public class TestAsyncTableGetMultiThreaded_ProcessBased extends ProcessBasedUpg
   private void setupTest(String testMethodName) throws Exception {
     testCounter++;
 
-    conf = HBaseConfiguration.create();
     conf.set(TABLES_ON_MASTER, "none");
     conf.setLong(HBASE_CLIENT_META_OPERATION_TIMEOUT, 60000L);
     conf.setInt(MAX_BUFFER_COUNT_KEY, 100);

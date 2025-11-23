@@ -96,7 +96,8 @@ public class TestMasterRestartAfterDisablingTable_ProcessBased extends ProcessBa
 
     // Start the cluster
     log("Starting cluster");
-    cluster = new ProcessBasedMiniHBaseCluster.Builder(HBaseConfiguration.create())
+    // Use conf from base class - it has correct dynamic ZK port configuration
+    cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numMasters(NUM_MASTERS)
       .numRegionServers(1)
       .build();

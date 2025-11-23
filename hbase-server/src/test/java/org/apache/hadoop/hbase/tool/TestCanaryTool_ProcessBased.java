@@ -108,7 +108,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
   public void testBasicZookeeperCanaryWorks_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -127,7 +126,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
   public void testBasicZookeeperCanaryWorks_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -146,7 +144,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
   public void testZookeeperCanaryPermittedFailuresArgumentWorks_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -166,7 +163,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
   public void testZookeeperCanaryPermittedFailuresArgumentWorks_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -186,7 +182,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
   public void testBasicCanaryWorks_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -230,7 +225,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
   public void testBasicCanaryWorks_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -273,7 +267,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
   public void testBasicCanaryWorks_AFTER_CREATE_TABLE() throws Exception {
     upgradeCheckpoint = "AFTER_CREATE_TABLE";
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -316,7 +309,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
   public void testBasicCanaryWorks_AFTER_WRITE_DATA() throws Exception {
     upgradeCheckpoint = "AFTER_WRITE_DATA";
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -366,7 +358,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
   public void testCanaryRegionTaskReadAllCF_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -430,7 +421,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
   public void testCanaryRegionTaskReadAllCF_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -494,7 +484,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
   public void testCanaryRegionTaskResult_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -568,7 +557,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
   public void testCanaryRegionTaskResult_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -644,7 +632,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
 
     setUpMockAppender();
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -677,7 +664,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
 
     setUpMockAppender();
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -710,7 +696,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
 
     setUpMockAppender();
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -738,7 +723,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
 
     setUpMockAppender();
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -766,7 +750,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
 
     setUpMockAppender();
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -802,7 +785,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
 
     setUpMockAppender();
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -836,7 +818,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
   public void testRawScanConfig_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -879,7 +860,6 @@ public class TestCanaryTool_ProcessBased extends ProcessBasedUpgradeTestBase {
   public void testRawScanConfig_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();

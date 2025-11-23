@@ -85,7 +85,6 @@ public class TestClusterRestart_ProcessBased extends ProcessBasedUpgradeTestBase
   }
 
   private void testImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(3)
       .build();

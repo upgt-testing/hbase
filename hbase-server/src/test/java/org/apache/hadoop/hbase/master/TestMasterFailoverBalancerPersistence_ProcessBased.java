@@ -92,7 +92,8 @@ public class TestMasterFailoverBalancerPersistence_ProcessBased extends ProcessB
 
   private void runTestMasterFailoverBalancerPersistence() throws Exception {
     // Start the cluster with 3 masters
-    cluster = new ProcessBasedMiniHBaseCluster.Builder(HBaseConfiguration.create())
+    // Use conf from base class - it has correct dynamic ZK port configuration
+    cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numMasters(3)
       .numRegionServers(1)
       .build();

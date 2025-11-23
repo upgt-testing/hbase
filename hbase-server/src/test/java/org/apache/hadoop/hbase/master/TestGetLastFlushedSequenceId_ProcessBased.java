@@ -94,7 +94,6 @@ public class TestGetLastFlushedSequenceId_ProcessBased extends ProcessBasedUpgra
   }
 
   private void runTest() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setInt("hbase.regionserver.msginterval", 1000);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)

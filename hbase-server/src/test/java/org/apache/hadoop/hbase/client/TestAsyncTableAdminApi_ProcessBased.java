@@ -87,10 +87,11 @@ public class TestAsyncTableAdminApi_ProcessBased extends ProcessBasedUpgradeTest
     testCounter++;
     tableName = TableName.valueOf(testMethodName + "_" + testCounter);
 
-    conf = HBaseConfiguration.create();
+    // Use the base class conf which already has ZooKeeper and HDFS settings
+    // Just add test-specific configuration on top
     conf.setInt(HConstants.HBASE_RPC_TIMEOUT_KEY, 60000);
     conf.setInt(HConstants.HBASE_CLIENT_OPERATION_TIMEOUT, 120000);
-    conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 2);
+    conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 10); // Increased for process-based cluster startup
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(2)

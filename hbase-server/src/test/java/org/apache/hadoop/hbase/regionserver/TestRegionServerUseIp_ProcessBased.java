@@ -67,7 +67,6 @@ public class TestRegionServerUseIp_ProcessBased extends ProcessBasedUpgradeTestB
   }
 
   private void runTestRegionServerUseIp() throws Exception {
-    Configuration conf = HBaseConfiguration.create();
     conf.setBoolean(HConstants.HBASE_SERVER_USEIP_ENABLED_KEY, true);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)

@@ -104,10 +104,9 @@ public class TestAsyncTableBatch_ProcessBased extends ProcessBasedUpgradeTestBas
   private void setupTest(String testMethodName) throws Exception {
     testCounter++;
 
-    conf = HBaseConfiguration.create();
     conf.setInt(HConstants.HBASE_RPC_TIMEOUT_KEY, 60000);
     conf.setInt(HConstants.HBASE_CLIENT_OPERATION_TIMEOUT, 120000);
-    conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 2);
+    conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 10); // Increased for process-based cluster startup
     conf.setInt(HConstants.HBASE_CLIENT_PAUSE, 100);
 
     SPLIT_KEYS = new byte[][] { Bytes.toBytes("100"), Bytes.toBytes("200"), Bytes.toBytes("300"),
@@ -118,6 +117,10 @@ public class TestAsyncTableBatch_ProcessBased extends ProcessBasedUpgradeTestBas
       .numRegionServers(3)
       .build();
     cluster.waitClusterUp();
+
+    // Wait for Master to be fully initialized before creating tables
+    // This prevents PleaseHoldException: Master is initializing
+    cluster.waitForActiveAndReadyMaster(60000);
 
     connection = cluster.getConnection();
     admin = connection.getAdmin();

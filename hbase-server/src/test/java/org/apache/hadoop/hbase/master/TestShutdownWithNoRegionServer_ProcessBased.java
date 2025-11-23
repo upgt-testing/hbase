@@ -55,7 +55,6 @@ public class TestShutdownWithNoRegionServer_ProcessBased extends ProcessBasedUpg
   public void test_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    Configuration conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
         .numRegionServers(1)
         .build();
@@ -88,7 +87,6 @@ public class TestShutdownWithNoRegionServer_ProcessBased extends ProcessBasedUpg
   public void test_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    Configuration conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
         .numRegionServers(1)
         .build();
@@ -121,7 +119,6 @@ public class TestShutdownWithNoRegionServer_ProcessBased extends ProcessBasedUpg
   public void test_AFTER_STOP_RS() throws Exception {
     upgradeCheckpoint = "AFTER_STOP_RS";
 
-    Configuration conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
         .numRegionServers(1)
         .build();

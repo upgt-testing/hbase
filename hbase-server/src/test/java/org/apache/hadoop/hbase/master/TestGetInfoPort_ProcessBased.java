@@ -63,7 +63,6 @@ public class TestGetInfoPort_ProcessBased extends ProcessBasedUpgradeTestBase {
   }
 
   private void runTest() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setInt(HConstants.MASTER_INFO_PORT, 0);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)

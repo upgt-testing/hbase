@@ -602,12 +602,12 @@ public class SpaceQuotaHelperForTests {
     if (namespace == null || namespace.trim().isEmpty())
       namespace = "ns" + counter.getAndIncrement();
     NamespaceDescriptor nd = NamespaceDescriptor.create(namespace).build();
-    testUtil.getAdmin().createNamespace(nd);
+    getAdmin().createNamespace(nd);
     return nd;
   }
 
   Multimap<TableName, QuotaSettings> createTablesWithSpaceQuotas() throws Exception {
-    final Admin admin = testUtil.getAdmin();
+    final Admin admin = getAdmin();
     final Multimap<TableName, QuotaSettings> tablesWithQuotas = HashMultimap.create();
 
     final TableName tn1 = createTable();
@@ -672,7 +672,7 @@ public class SpaceQuotaHelperForTests {
   }
 
   TableName createTableWithRegions(String namespace, int numRegions) throws Exception {
-    return createTableWithRegions(testUtil.getAdmin(), namespace, numRegions, 0);
+    return createTableWithRegions(getAdmin(), namespace, numRegions, 0);
   }
 
   TableName createTableWithRegions(Admin admin, String namespace, int numRegions,
@@ -703,7 +703,7 @@ public class SpaceQuotaHelperForTests {
   }
 
   TableName createTableInNamespace(NamespaceDescriptor nd) throws Exception {
-    final Admin admin = testUtil.getAdmin();
+    final Admin admin = getAdmin();
     final TableName tn =
       TableName.valueOf(nd.getName(), testName.getMethodName() + counter.getAndIncrement());
 

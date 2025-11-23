@@ -157,7 +157,6 @@ public class TestLoadAndSwitchEncodeOnDisk_ProcessBased extends ProcessBasedUpgr
   public void loadTest_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    conf = HBaseConfiguration.create();
     conf.setInt(HConstants.HREGION_MEMSTORE_FLUSH_SIZE, 1024 * 1024);
     conf.setFloat(HConstants.LOAD_BALANCER_SLOP_KEY, 10.0f);
     conf.setBoolean(CacheConfig.CACHE_BLOCKS_ON_WRITE_KEY, true);
@@ -204,7 +203,6 @@ public class TestLoadAndSwitchEncodeOnDisk_ProcessBased extends ProcessBasedUpgr
   public void loadTest_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    conf = HBaseConfiguration.create();
     conf.setInt(HConstants.HREGION_MEMSTORE_FLUSH_SIZE, 1024 * 1024);
     conf.setFloat(HConstants.LOAD_BALANCER_SLOP_KEY, 10.0f);
     conf.setBoolean(CacheConfig.CACHE_BLOCKS_ON_WRITE_KEY, true);

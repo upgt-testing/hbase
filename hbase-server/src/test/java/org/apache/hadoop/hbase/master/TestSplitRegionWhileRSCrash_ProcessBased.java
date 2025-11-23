@@ -107,7 +107,6 @@ public class TestSplitRegionWhileRSCrash_ProcessBased extends ProcessBasedUpgrad
   }
 
   private void runTest() throws Exception {
-    Configuration conf = HBaseConfiguration.create();
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(2).build();
     connection = cluster.getConnection();

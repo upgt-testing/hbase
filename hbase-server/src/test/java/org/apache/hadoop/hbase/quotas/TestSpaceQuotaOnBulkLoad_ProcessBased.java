@@ -73,7 +73,6 @@ public class TestSpaceQuotaOnBulkLoad_ProcessBased extends ProcessBasedUpgradeTe
   public void testNoBulkLoadsWithNoWrites_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    Configuration conf = HBaseConfiguration.create();
     SpaceQuotaHelperForTests.updateConfigForQuotas(conf);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
@@ -94,7 +93,6 @@ public class TestSpaceQuotaOnBulkLoad_ProcessBased extends ProcessBasedUpgradeTe
   public void testNoBulkLoadsWithNoWrites_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    Configuration conf = HBaseConfiguration.create();
     SpaceQuotaHelperForTests.updateConfigForQuotas(conf);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)

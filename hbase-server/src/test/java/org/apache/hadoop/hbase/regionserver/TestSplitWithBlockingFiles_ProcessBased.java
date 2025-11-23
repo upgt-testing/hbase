@@ -104,7 +104,6 @@ public class TestSplitWithBlockingFiles_ProcessBased extends ProcessBasedUpgrade
   }
 
   private void runTestSplitIgnoreBlockingFiles() throws Exception {
-    Configuration conf = HBaseConfiguration.create();
     conf.setLong(HConstants.HREGION_MAX_FILESIZE, 8 * 2 * 10240L);
     conf.setInt(HStore.BLOCKING_STOREFILES_KEY, 1);
     conf.set(HConstants.HBASE_REGION_SPLIT_POLICY_KEY,

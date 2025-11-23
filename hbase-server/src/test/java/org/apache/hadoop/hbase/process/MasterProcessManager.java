@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory;
 public class MasterProcessManager extends ProcessNodeManager {
   private static final Logger LOG = LoggerFactory.getLogger(MasterProcessManager.class);
 
-  private static final long DEFAULT_STARTUP_TIMEOUT_MS = 60000; // 60 seconds
+  private static final long DEFAULT_STARTUP_TIMEOUT_MS = 300000; // 300 seconds (5 minutes) - increased for slower systems
 
   /**
    * Constructor for MasterProcessManager.

@@ -69,7 +69,6 @@ public class TestMasterDryRunBalancer_ProcessBased extends ProcessBasedUpgradeTe
   public void testDryRunBalancer_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
         .numRegionServers(2)
         .build();
@@ -86,7 +85,6 @@ public class TestMasterDryRunBalancer_ProcessBased extends ProcessBasedUpgradeTe
   public void testDryRunBalancer_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
         .numRegionServers(2)
         .build();
@@ -103,7 +101,6 @@ public class TestMasterDryRunBalancer_ProcessBased extends ProcessBasedUpgradeTe
   public void testDryRunBalancer_AFTER_CREATE_TABLE() throws Exception {
     upgradeCheckpoint = "AFTER_CREATE_TABLE";
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
         .numRegionServers(2)
         .build();
@@ -120,7 +117,6 @@ public class TestMasterDryRunBalancer_ProcessBased extends ProcessBasedUpgradeTe
   public void testDryRunBalancer_AFTER_UNBALANCE() throws Exception {
     upgradeCheckpoint = "AFTER_UNBALANCE";
 
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
         .numRegionServers(2)
         .build();

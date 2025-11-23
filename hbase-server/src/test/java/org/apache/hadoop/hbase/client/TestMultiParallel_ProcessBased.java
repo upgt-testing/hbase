@@ -157,7 +157,6 @@ public class TestMultiParallel_ProcessBased extends ProcessBasedUpgradeTestBase 
   }
 
   private void testBatchWithGet() throws Exception {
-    conf = HBaseConfiguration.create();
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(5)
@@ -240,7 +239,6 @@ public class TestMultiParallel_ProcessBased extends ProcessBasedUpgradeTestBase 
   }
 
   private void testBadFam() throws Exception {
-    conf = HBaseConfiguration.create();
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(3)

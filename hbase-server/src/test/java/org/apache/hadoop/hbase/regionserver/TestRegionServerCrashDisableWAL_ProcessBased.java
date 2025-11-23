@@ -98,7 +98,6 @@ public class TestRegionServerCrashDisableWAL_ProcessBased extends ProcessBasedUp
   }
 
   private void runTest() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setInt(ServerManager.WAIT_ON_REGIONSERVERS_MINTOSTART, 1);
     conf.setBoolean(WALFactory.WAL_ENABLED, false);
 

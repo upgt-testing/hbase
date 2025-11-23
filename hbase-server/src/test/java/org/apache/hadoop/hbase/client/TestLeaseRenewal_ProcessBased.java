@@ -86,7 +86,6 @@ public class TestLeaseRenewal_ProcessBased extends ProcessBasedUpgradeTestBase {
   }
 
   private void testLeaseRenewal() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setInt(HConstants.HBASE_CLIENT_SCANNER_TIMEOUT_PERIOD, leaseTimeout);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)

@@ -86,7 +86,6 @@ public class TestMetaAssignmentWithStopMaster_ProcessBased extends ProcessBasedU
   }
 
   private void runTestStopActiveMaster() throws Exception {
-    conf = HBaseConfiguration.create();
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
         .numMasters(2)

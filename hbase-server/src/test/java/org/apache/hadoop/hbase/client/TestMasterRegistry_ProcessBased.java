@@ -77,7 +77,6 @@ public class TestMasterRegistry_ProcessBased extends ProcessBasedUpgradeTestBase
    */
   @Test
   public void testMasterAddressParsing() throws Exception {
-    Configuration conf = HBaseConfiguration.create();
     int numMasters = 10;
     conf.set(HConstants.MASTER_ADDRS_KEY, generateDummyMastersList(numMasters));
     List<ServerName> parsedMasters = new ArrayList<>(MasterRegistry.parseMasterAddrs(conf));
@@ -102,7 +101,6 @@ public class TestMasterRegistry_ProcessBased extends ProcessBasedUpgradeTestBase
    */
   @Test
   public void testMasterPortDefaults() throws Exception {
-    Configuration conf = HBaseConfiguration.create();
     conf.set(HConstants.MASTER_ADDRS_KEY, "localhost");
     List<ServerName> parsedMasters = new ArrayList<>(MasterRegistry.parseMasterAddrs(conf));
     ServerName sn = parsedMasters.get(0);
@@ -127,7 +125,6 @@ public class TestMasterRegistry_ProcessBased extends ProcessBasedUpgradeTestBase
   }
 
   private void testRegistryRPCs() throws Exception {
-    conf = HBaseConfiguration.create();
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numMasters(3)
@@ -195,7 +192,6 @@ public class TestMasterRegistry_ProcessBased extends ProcessBasedUpgradeTestBase
    * due to internal access requirements.
    */
   private void testDynamicMasterConfigurationRefresh() throws Exception {
-    conf = HBaseConfiguration.create();
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numMasters(3)

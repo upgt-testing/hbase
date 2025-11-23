@@ -105,7 +105,6 @@ public class TestQuotaAdmin_ProcessBased extends ProcessBasedUpgradeTestBase {
   @Test
   public void testThrottleType_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
-    conf = HBaseConfiguration.create();
     conf.setBoolean(QuotaUtil.QUOTA_CONF_KEY, true);
     conf.setInt(QuotaCache.REFRESH_CONF_KEY, 2000);
     conf.setInt("hbase.hstore.compactionThreshold", 10);
@@ -183,7 +182,6 @@ public class TestQuotaAdmin_ProcessBased extends ProcessBasedUpgradeTestBase {
   @Test
   public void testThrottleType_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
-    conf = HBaseConfiguration.create();
     conf.setBoolean(QuotaUtil.QUOTA_CONF_KEY, true);
     conf.setInt(QuotaCache.REFRESH_CONF_KEY, 2000);
     conf.setInt("hbase.hstore.compactionThreshold", 10);
@@ -259,7 +257,6 @@ public class TestQuotaAdmin_ProcessBased extends ProcessBasedUpgradeTestBase {
   @Test
   public void testSimpleScan_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
-    conf = HBaseConfiguration.create();
     conf.setBoolean(QuotaUtil.QUOTA_CONF_KEY, true);
     conf.setInt(QuotaCache.REFRESH_CONF_KEY, 2000);
 
@@ -323,7 +320,6 @@ public class TestQuotaAdmin_ProcessBased extends ProcessBasedUpgradeTestBase {
   @Test
   public void testSimpleScan_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
-    conf = HBaseConfiguration.create();
     conf.setBoolean(QuotaUtil.QUOTA_CONF_KEY, true);
     conf.setInt(QuotaCache.REFRESH_CONF_KEY, 2000);
 
@@ -391,7 +387,6 @@ public class TestQuotaAdmin_ProcessBased extends ProcessBasedUpgradeTestBase {
     byte[] QUALIFIER = Bytes.toBytes("testQualifier");
     byte[] VALUE = Bytes.toBytes("testValue");
 
-    conf = HBaseConfiguration.create();
     conf.setBoolean(QuotaUtil.QUOTA_CONF_KEY, true);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
@@ -458,7 +453,6 @@ public class TestQuotaAdmin_ProcessBased extends ProcessBasedUpgradeTestBase {
     byte[] QUALIFIER = Bytes.toBytes("testQualifier");
     byte[] VALUE = Bytes.toBytes("testValue");
 
-    conf = HBaseConfiguration.create();
     conf.setBoolean(QuotaUtil.QUOTA_CONF_KEY, true);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)

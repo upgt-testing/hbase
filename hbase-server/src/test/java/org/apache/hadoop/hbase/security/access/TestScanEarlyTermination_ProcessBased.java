@@ -192,7 +192,6 @@ public class TestScanEarlyTermination_ProcessBased extends ProcessBasedUpgradeTe
   }
 
   private void testEarlyScanTerminationImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     conf.setInt(HConstants.REGION_SERVER_HIGH_PRIORITY_HANDLER_COUNT, 10);
     SecureTestUtil.enableSecurity(conf);
     SecureTestUtil.verifyConfiguration(conf);

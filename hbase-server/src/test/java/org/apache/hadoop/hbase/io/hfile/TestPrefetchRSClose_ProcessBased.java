@@ -89,17 +89,18 @@ public class TestPrefetchRSClose_ProcessBased extends ProcessBasedUpgradeTestBas
   }
 
   private void testPrefetchPersistenceImpl() throws Exception {
-    conf = HBaseConfiguration.create();
 
     // Setup bucket cache with persistence
-    testDir = new Path(conf.get("hadoop.tmp.dir"), "test-" + System.currentTimeMillis());
-    FileSystem fs = FileSystem.get(conf);
-    fs.mkdirs(testDir);
+    // Use local filesystem path for file-based bucket cache, not HDFS Path
+    String localTmpDir = System.getProperty("java.io.tmpdir");
+    File localTestDir = new File(localTmpDir, "test-prefetch-" + System.currentTimeMillis());
+    localTestDir.mkdirs();
+    testDir = new Path(localTestDir.getAbsolutePath());
 
     conf.setBoolean(CacheConfig.PREFETCH_BLOCKS_ON_OPEN_KEY, true);
-    conf.set(BUCKET_CACHE_IOENGINE_KEY, "file:" + testDir + "/bucket.cache");
+    conf.set(BUCKET_CACHE_IOENGINE_KEY, "file:" + localTestDir.getAbsolutePath() + "/bucket.cache");
     conf.setInt("hbase.bucketcache.size", 400);
-    conf.set("hbase.bucketcache.persistent.path", testDir + "/bucket.persistence");
+    conf.set("hbase.bucketcache.persistent.path", localTestDir.getAbsolutePath() + "/bucket.persistence");
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
@@ -156,14 +157,32 @@ public class TestPrefetchRSClose_ProcessBased extends ProcessBasedUpgradeTestBas
     LOG.info("Stopped Region Server: {}", rsName);
     Thread.sleep(1000);
 
-    // Verify persistence file exists (HDFS check)
-    File persistenceFile = new File(testDir + "/bucket.persistence");
+    // Verify persistence file exists (local filesystem check)
+    File localTestDirFile = new File(testDir.toString());
+    File persistenceFile = new File(localTestDirFile, "bucket.persistence");
     assertTrue("Bucket cache persistence file should exist after RS stop",
       persistenceFile.exists());
 
     // Cleanup
     admin.disableTable(tableName);
     admin.deleteTable(tableName);
-    fs.delete(testDir, true);
+    // Delete local temp directory
+    deleteDirectory(localTestDirFile);
+  }
+
+  private void deleteDirectory(File directory) {
+    if (directory.exists()) {
+      File[] files = directory.listFiles();
+      if (files != null) {
+        for (File file : files) {
+          if (file.isDirectory()) {
+            deleteDirectory(file);
+          } else {
+            file.delete();
+          }
+        }
+      }
+      directory.delete();
+    }
   }
 }

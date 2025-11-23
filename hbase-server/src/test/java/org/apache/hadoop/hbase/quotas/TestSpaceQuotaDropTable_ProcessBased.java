@@ -66,7 +66,6 @@ public class TestSpaceQuotaDropTable_ProcessBased extends ProcessBasedUpgradeTes
   public void testSetQuotaAndThenDropTableWithNoInserts_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    Configuration conf = HBaseConfiguration.create();
     SpaceQuotaHelperForTests.updateConfigForQuotas(conf);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
@@ -87,7 +86,6 @@ public class TestSpaceQuotaDropTable_ProcessBased extends ProcessBasedUpgradeTes
   public void testSetQuotaAndThenDropTableWithNoInserts_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    Configuration conf = HBaseConfiguration.create();
     SpaceQuotaHelperForTests.updateConfigForQuotas(conf);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
@@ -108,7 +106,6 @@ public class TestSpaceQuotaDropTable_ProcessBased extends ProcessBasedUpgradeTes
   public void testSetQuotaAndThenDropTableWithNoWrite_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    Configuration conf = HBaseConfiguration.create();
     SpaceQuotaHelperForTests.updateConfigForQuotas(conf);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
@@ -129,7 +126,6 @@ public class TestSpaceQuotaDropTable_ProcessBased extends ProcessBasedUpgradeTes
   public void testSetQuotaAndThenDropTableWithNoWrite_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    Configuration conf = HBaseConfiguration.create();
     SpaceQuotaHelperForTests.updateConfigForQuotas(conf);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
@@ -150,7 +146,6 @@ public class TestSpaceQuotaDropTable_ProcessBased extends ProcessBasedUpgradeTes
   public void testSetQuotaAndThenDropTableWithNoWritesCompactions_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    Configuration conf = HBaseConfiguration.create();
     SpaceQuotaHelperForTests.updateConfigForQuotas(conf);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
@@ -171,7 +166,6 @@ public class TestSpaceQuotaDropTable_ProcessBased extends ProcessBasedUpgradeTes
   public void testSetQuotaAndThenDropTableWithNoWritesCompactions_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    Configuration conf = HBaseConfiguration.create();
     SpaceQuotaHelperForTests.updateConfigForQuotas(conf);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
@@ -192,7 +186,6 @@ public class TestSpaceQuotaDropTable_ProcessBased extends ProcessBasedUpgradeTes
   public void testSetQuotaAndThenDropTableWithDisable_NO_UPGRADE() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
-    Configuration conf = HBaseConfiguration.create();
     SpaceQuotaHelperForTests.updateConfigForQuotas(conf);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
@@ -213,7 +206,6 @@ public class TestSpaceQuotaDropTable_ProcessBased extends ProcessBasedUpgradeTes
   public void testSetQuotaAndThenDropTableWithDisable_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    Configuration conf = HBaseConfiguration.create();
     SpaceQuotaHelperForTests.updateConfigForQuotas(conf);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)

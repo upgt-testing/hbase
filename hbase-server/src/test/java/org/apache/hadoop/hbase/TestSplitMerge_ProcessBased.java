@@ -59,7 +59,7 @@ public class TestSplitMerge_ProcessBased extends ProcessBasedUpgradeTestBase {
 
   private void setupCluster() throws Exception {
     conf.setInt(HConstants.HBASE_CLIENT_META_OPERATION_TIMEOUT, 1000);
-    conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 2);
+    conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 10); // Increased for process-based cluster startup
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
@@ -67,6 +67,10 @@ public class TestSplitMerge_ProcessBased extends ProcessBasedUpgradeTestBase {
     connection = cluster.getConnection();
     admin = connection.getAdmin();
     cluster.waitClusterUp();
+
+    // Wait for Master to be fully initialized before creating tables
+    // This prevents PleaseHoldException: Master is initializing
+    cluster.waitForActiveAndReadyMaster(60000);
   }
 
   @Test

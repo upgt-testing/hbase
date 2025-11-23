@@ -80,7 +80,6 @@ public class TestSplitOrMergeStatus_ProcessBased extends ProcessBasedUpgradeTest
   }
 
   private void testSplitSwitchImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(2).build();
     connection = cluster.getConnection();
     admin = connection.getAdmin();
@@ -132,7 +131,6 @@ public class TestSplitOrMergeStatus_ProcessBased extends ProcessBasedUpgradeTest
   }
 
   private void testMergeSwitchImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(2).build();
     connection = cluster.getConnection();
     admin = connection.getAdmin();
@@ -198,7 +196,6 @@ public class TestSplitOrMergeStatus_ProcessBased extends ProcessBasedUpgradeTest
   }
 
   private void testMultiSwitchesImpl() throws Exception {
-    conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf).numRegionServers(2).build();
     connection = cluster.getConnection();
     admin = connection.getAdmin();

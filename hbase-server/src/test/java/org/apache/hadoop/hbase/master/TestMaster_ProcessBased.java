@@ -80,7 +80,6 @@ public class TestMaster_ProcessBased extends ProcessBasedUpgradeTestBase {
   }
 
   private void runTestMoveThrowsUnknownRegionException() throws Exception {
-    conf = HBaseConfiguration.create();
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
         .numRegionServers(2)

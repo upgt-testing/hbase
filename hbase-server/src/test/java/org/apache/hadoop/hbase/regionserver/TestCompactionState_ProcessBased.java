@@ -125,7 +125,6 @@ public class TestCompactionState_ProcessBased extends ProcessBasedUpgradeTestBas
   }
 
   private void testInvalidColumnFamilyInternal() throws Exception {
-    Configuration conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
@@ -178,7 +177,6 @@ public class TestCompactionState_ProcessBased extends ProcessBasedUpgradeTestBas
   private void compaction(final String tableName, final int flushes,
     final CompactionState expectedState, boolean singleFamily)
     throws Exception {
-    Configuration conf = HBaseConfiguration.create();
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();

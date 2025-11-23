@@ -76,7 +76,6 @@ public class TestClearRegionBlockCache_ProcessBased extends ProcessBasedUpgradeT
   private static final int NUM_RS = 2;
 
   private void setupClusterAndTable(String cacheType) throws Exception {
-    Configuration conf = HBaseConfiguration.create();
     if (cacheType.equals("bucket")) {
       conf.set(HConstants.BUCKET_CACHE_IOENGINE_KEY, "offheap");
       conf.setInt(HConstants.BUCKET_CACHE_SIZE_KEY, 30);

@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.Cell;
 import org.apache.hadoop.hbase.CellUtil;
 import org.apache.hadoop.hbase.HBaseClassTestRule;
@@ -90,14 +91,30 @@ public class TestMalformedCellFromClient_ProcessBased extends ProcessBasedUpgrad
    * Otherwise, the row operation which is not in the exception should have a true result.
    */
   private void testRegionException() throws Exception {
-    conf = HBaseConfiguration.create();
-    conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 0);
-
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
+    cluster.waitClusterUp();
+
+    // Wait for Master to be fully initialized before creating tables
+    // This prevents PleaseHoldException: Master is initializing
+    cluster.waitForActiveAndReadyMaster(60000);
+
     connection = cluster.getConnection();
     admin = connection.getAdmin();
+
+    // Wait for Master initialization by retrying listTables with higher retry count
+    // This test intentionally sets retries to 0 later for testing purposes,
+    // but we need to wait for Master initialization first
+    Configuration tempConf = new Configuration(conf);
+    tempConf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 10);
+    try (Connection tempConn = ConnectionFactory.createConnection(tempConf);
+         Admin tempAdmin = tempConn.getAdmin()) {
+      tempAdmin.listTableDescriptors(); // Will retry until Master is initialized
+    }
+
+    // Now set retries to 0 for the actual test
+    conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 0);
 
     checkpoint(HBaseUpgradeCheckpoints.AFTER_CLUSTER_START);
 
@@ -176,14 +193,30 @@ public class TestMalformedCellFromClient_ProcessBased extends ProcessBasedUpgrad
    * a true result. The no-cluster test is in TestAsyncProcessWithRegionException.
    */
   private void testRegionExceptionByAsync() throws Exception {
-    conf = HBaseConfiguration.create();
-    conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 0);
-
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
+    cluster.waitClusterUp();
+
+    // Wait for Master to be fully initialized before creating tables
+    // This prevents PleaseHoldException: Master is initializing
+    cluster.waitForActiveAndReadyMaster(60000);
+
     connection = cluster.getConnection();
     admin = connection.getAdmin();
+
+    // Wait for Master initialization by retrying listTables with higher retry count
+    // This test intentionally sets retries to 0 later for testing purposes,
+    // but we need to wait for Master initialization first
+    Configuration tempConf = new Configuration(conf);
+    tempConf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 10);
+    try (Connection tempConn = ConnectionFactory.createConnection(tempConf);
+         Admin tempAdmin = tempConn.getAdmin()) {
+      tempAdmin.listTableDescriptors(); // Will retry until Master is initialized
+    }
+
+    // Now set retries to 0 for the actual test
+    conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 0);
 
     checkpoint(HBaseUpgradeCheckpoints.AFTER_CLUSTER_START);
 
@@ -262,14 +295,30 @@ public class TestMalformedCellFromClient_ProcessBased extends ProcessBasedUpgrad
    * RSRpcServices#doNonAtomicRegionMutation
    */
   private void testNonAtomicOperations() throws Exception {
-    conf = HBaseConfiguration.create();
-    conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 0);
-
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
+    cluster.waitClusterUp();
+
+    // Wait for Master to be fully initialized before creating tables
+    // This prevents PleaseHoldException: Master is initializing
+    cluster.waitForActiveAndReadyMaster(60000);
+
     connection = cluster.getConnection();
     admin = connection.getAdmin();
+
+    // Wait for Master initialization by retrying listTables with higher retry count
+    // This test intentionally sets retries to 0 later for testing purposes,
+    // but we need to wait for Master initialization first
+    Configuration tempConf = new Configuration(conf);
+    tempConf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 10);
+    try (Connection tempConn = ConnectionFactory.createConnection(tempConf);
+         Admin tempAdmin = tempConn.getAdmin()) {
+      tempAdmin.listTableDescriptors(); // Will retry until Master is initialized
+    }
+
+    // Now set retries to 0 for the actual test
+    conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 0);
 
     checkpoint(HBaseUpgradeCheckpoints.AFTER_CLUSTER_START);
 
@@ -332,14 +381,30 @@ public class TestMalformedCellFromClient_ProcessBased extends ProcessBasedUpgrad
   }
 
   private void testRowMutations() throws Exception {
-    conf = HBaseConfiguration.create();
-    conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 0);
-
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
+    cluster.waitClusterUp();
+
+    // Wait for Master to be fully initialized before creating tables
+    // This prevents PleaseHoldException: Master is initializing
+    cluster.waitForActiveAndReadyMaster(60000);
+
     connection = cluster.getConnection();
     admin = connection.getAdmin();
+
+    // Wait for Master initialization by retrying listTables with higher retry count
+    // This test intentionally sets retries to 0 later for testing purposes,
+    // but we need to wait for Master initialization first
+    Configuration tempConf = new Configuration(conf);
+    tempConf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 10);
+    try (Connection tempConn = ConnectionFactory.createConnection(tempConf);
+         Admin tempAdmin = tempConn.getAdmin()) {
+      tempAdmin.listTableDescriptors(); // Will retry until Master is initialized
+    }
+
+    // Now set retries to 0 for the actual test
+    conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 0);
 
     checkpoint(HBaseUpgradeCheckpoints.AFTER_CLUSTER_START);
 

@@ -36,6 +36,8 @@ import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.process.ProcessBasedMiniHBaseCluster;
 import org.apache.hadoop.hbase.TableNameTestRule;
 import org.apache.hadoop.hbase.TableNotFoundException;
+import org.apache.hadoop.hbase.coprocessor.CoprocessorHost;
+import org.apache.hadoop.hbase.io.hfile.HFile;
 import org.apache.hadoop.hbase.client.Admin;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.ConnectionFactory;
@@ -229,8 +231,39 @@ public class TestAccessController2_ProcessBased extends ProcessBasedUpgradeTestB
 
   @Before
   public void setUp() throws Exception {
-    // Test-specific configuration
-    conf = HBaseConfiguration.create(staticConf);
+    // CRITICAL FIX: Update staticConf's ZK configuration to match the dynamic port from base conf
+    // staticConf has hardcoded ZK port (21818) from test resources, but conf has correct dynamic port
+    String zkQuorum = conf.get(HConstants.ZOOKEEPER_QUORUM);
+    String zkPort = conf.get(HConstants.ZOOKEEPER_CLIENT_PORT);
+    if (zkQuorum != null) {
+      staticConf.set(HConstants.ZOOKEEPER_QUORUM, zkQuorum);
+    }
+    if (zkPort != null) {
+      staticConf.set(HConstants.ZOOKEEPER_CLIENT_PORT, zkPort);
+    }
+
+    // Copy security settings from staticConf to the base conf
+    // DO NOT replace conf - it already has correct ZK port from base class
+    // Copy security coprocessor settings from staticConf
+    String masterCoprocs = staticConf.get(CoprocessorHost.MASTER_COPROCESSOR_CONF_KEY);
+    if (masterCoprocs != null) {
+      conf.set(CoprocessorHost.MASTER_COPROCESSOR_CONF_KEY, masterCoprocs);
+    }
+    String regionCoprocs = staticConf.get(CoprocessorHost.REGION_COPROCESSOR_CONF_KEY);
+    if (regionCoprocs != null) {
+      conf.set(CoprocessorHost.REGION_COPROCESSOR_CONF_KEY, regionCoprocs);
+    }
+    String rsCoprocs = staticConf.get(CoprocessorHost.REGIONSERVER_COPROCESSOR_CONF_KEY);
+    if (rsCoprocs != null) {
+      conf.set(CoprocessorHost.REGIONSERVER_COPROCESSOR_CONF_KEY, rsCoprocs);
+    }
+    // Copy other security settings
+    conf.setInt(HConstants.REGION_SERVER_HIGH_PRIORITY_HANDLER_COUNT, 10);
+    conf.setInt(HFile.FORMAT_VERSION_KEY, 3);
+    conf.set(User.HBASE_SECURITY_AUTHORIZATION_CONF_KEY, "true");
+    conf.set("hadoop.security.authorization", "false");
+    conf.set("hadoop.security.authentication", "simple");
+    SecureTestUtil.configureSuperuser(conf);
   }
 
   @AfterClass

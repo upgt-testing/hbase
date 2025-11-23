@@ -91,7 +91,8 @@ public class TestHRegionOnCluster_ProcessBased extends ProcessBasedUpgradeTestBa
 
   private void testDataCorrectnessReplayingRecoveredEditsInternal() throws Exception {
     final int NUM_RS = 3;
-    Configuration configuration = HBaseConfiguration.create();
+    // Use conf from base class - it has correct dynamic ZK port configuration
+    Configuration configuration = conf;
     cluster = new ProcessBasedMiniHBaseCluster.Builder(configuration)
       .numRegionServers(NUM_RS)
       .build();

@@ -88,8 +88,8 @@ public class TestMutateRowsRecovery_ProcessBased extends ProcessBasedUpgradeTest
 
   private void testMutateRowsAndCheckPostKillInternal() throws Exception {
     final int NB_SERVERS = 3;
-    Configuration configuration = HBaseConfiguration.create();
-    cluster = new ProcessBasedMiniHBaseCluster.Builder(configuration)
+    // Use conf from base class - it has correct dynamic ZK port configuration
+    cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(NB_SERVERS)
       .build();
     connection = cluster.getConnection();

@@ -195,7 +195,6 @@ public class TestMobCompactionWithDefaults_ProcessBased extends ProcessBasedUpgr
     LOG.info("MOB compaction started for checkpoint: {}", upgradeCheckpoint);
 
     // Setup configuration
-    Configuration conf = HBaseConfiguration.create();
     conf.setInt("hfile.format.version", 3);
     conf.setLong(MobConstants.MOB_COMPACTION_CHORE_PERIOD, 0);
     conf.setLong(MobConstants.MOB_CLEANER_PERIOD, 0);
@@ -286,7 +285,6 @@ public class TestMobCompactionWithDefaults_ProcessBased extends ProcessBasedUpgr
   private void testMobFileCompactionAfterSnapshotClone() throws Exception {
     LOG.info("MOB compaction of cloned snapshot started for checkpoint: {}", upgradeCheckpoint);
 
-    Configuration conf = HBaseConfiguration.create();
     conf.setInt("hfile.format.version", 3);
     conf.setLong(MobConstants.MOB_COMPACTION_CHORE_PERIOD, 0);
     conf.setLong(MobConstants.MOB_CLEANER_PERIOD, 0);

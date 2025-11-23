@@ -71,7 +71,6 @@ public class TestCompactSplitThread_ProcessBased extends ProcessBasedUpgradeTest
     upgradeCheckpoint = HBaseUpgradeCheckpoints.NO_UPGRADE;
 
     // Configure cluster
-    conf = HBaseConfiguration.create();
     conf.setInt("hbase.regionserver.info.port", -1);
     conf.setInt("hbase.hstore.compaction.min", 2);
     conf.setInt("hbase.hstore.compactionThreshold", 5);
@@ -142,7 +141,6 @@ public class TestCompactSplitThread_ProcessBased extends ProcessBasedUpgradeTest
   public void testFlushWithTableCompactionDisabled_AFTER_CLUSTER_START() throws Exception {
     upgradeCheckpoint = HBaseUpgradeCheckpoints.AFTER_CLUSTER_START;
 
-    conf = HBaseConfiguration.create();
     conf.setInt("hbase.regionserver.info.port", -1);
     conf.setInt("hbase.hstore.compaction.min", 2);
     conf.setInt("hbase.hstore.compactionThreshold", 5);
@@ -196,7 +194,6 @@ public class TestCompactSplitThread_ProcessBased extends ProcessBasedUpgradeTest
   public void testFlushWithTableCompactionDisabled_AFTER_CREATE_TABLE() throws Exception {
     upgradeCheckpoint = "AFTER_CREATE_TABLE";
 
-    conf = HBaseConfiguration.create();
     conf.setInt("hbase.regionserver.info.port", -1);
     conf.setInt("hbase.hstore.compaction.min", 2);
     conf.setInt("hbase.hstore.compactionThreshold", 5);

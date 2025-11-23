@@ -70,7 +70,6 @@ public class TestAsyncTableLocateRegionForDeletedTable_ProcessBased
   private void setupTest(String testMethodName) throws Exception {
     testCounter++;
 
-    conf = HBaseConfiguration.create();
     conf.setInt(HConstants.HBASE_RPC_TIMEOUT_KEY, 60000);
     conf.setInt(HConstants.HBASE_CLIENT_OPERATION_TIMEOUT, 120000);
 

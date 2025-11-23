@@ -22,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.Set;
+import org.apache.hadoop.hbase.HBaseClassTestRule;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
@@ -31,12 +32,15 @@ import org.apache.hadoop.hbase.process.ProcessBasedMiniHBaseCluster;
 import org.apache.hadoop.hbase.client.Admin;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.TableDescriptor;
+import org.apache.hadoop.hbase.testclassification.LargeTests;
 import org.apache.hadoop.hbase.upgrade.ProcessBasedUpgradeTestBase;
 import org.apache.hadoop.hbase.upgrade.HBaseUpgradeCheckpoints;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.junit.Assert;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.rules.TestName;
 
 /**
@@ -50,7 +54,12 @@ import org.junit.rules.TestName;
  *
  * @see TestTableDescriptorModificationFromClient Original test using MiniHBaseCluster
  */
+@Category(LargeTests.class)
 public class TestTableDescriptorModificationFromClient_ProcessBased extends ProcessBasedUpgradeTestBase {
+
+  @ClassRule
+  public static final HBaseClassTestRule CLASS_RULE =
+    HBaseClassTestRule.forClass(TestTableDescriptorModificationFromClient_ProcessBased.class);
 
   @Rule
   public TestName name = new TestName();
@@ -85,7 +94,7 @@ public class TestTableDescriptorModificationFromClient_ProcessBased extends Proc
   private void testModifyTableImpl() throws Exception {
     TableName tableName = TableName.valueOf(name.getMethodName());
 
-    cluster = new ProcessBasedMiniHBaseCluster.Builder(HBaseConfiguration.create())
+    cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
     connection = cluster.getConnection();
@@ -146,7 +155,7 @@ public class TestTableDescriptorModificationFromClient_ProcessBased extends Proc
   private void testAddColumnImpl() throws Exception {
     TableName tableName = TableName.valueOf(name.getMethodName());
 
-    cluster = new ProcessBasedMiniHBaseCluster.Builder(HBaseConfiguration.create())
+    cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
     connection = cluster.getConnection();
@@ -198,7 +207,7 @@ public class TestTableDescriptorModificationFromClient_ProcessBased extends Proc
   private void testAddSameColumnFamilyTwiceImpl() throws Exception {
     TableName tableName = TableName.valueOf(name.getMethodName());
 
-    cluster = new ProcessBasedMiniHBaseCluster.Builder(HBaseConfiguration.create())
+    cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
     connection = cluster.getConnection();
@@ -256,7 +265,7 @@ public class TestTableDescriptorModificationFromClient_ProcessBased extends Proc
   private void testModifyColumnFamilyImpl() throws Exception {
     TableName tableName = TableName.valueOf(name.getMethodName());
 
-    cluster = new ProcessBasedMiniHBaseCluster.Builder(HBaseConfiguration.create())
+    cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
     connection = cluster.getConnection();
@@ -308,7 +317,7 @@ public class TestTableDescriptorModificationFromClient_ProcessBased extends Proc
   private void testModifyNonExistingColumnFamilyImpl() throws Exception {
     TableName tableName = TableName.valueOf(name.getMethodName());
 
-    cluster = new ProcessBasedMiniHBaseCluster.Builder(HBaseConfiguration.create())
+    cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
     connection = cluster.getConnection();
@@ -365,7 +374,7 @@ public class TestTableDescriptorModificationFromClient_ProcessBased extends Proc
   private void testDeleteColumnImpl() throws Exception {
     TableName tableName = TableName.valueOf(name.getMethodName());
 
-    cluster = new ProcessBasedMiniHBaseCluster.Builder(HBaseConfiguration.create())
+    cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
     connection = cluster.getConnection();
@@ -416,7 +425,7 @@ public class TestTableDescriptorModificationFromClient_ProcessBased extends Proc
   private void testDeleteSameColumnFamilyTwiceImpl() throws Exception {
     TableName tableName = TableName.valueOf(name.getMethodName());
 
-    cluster = new ProcessBasedMiniHBaseCluster.Builder(HBaseConfiguration.create())
+    cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(1)
       .build();
     connection = cluster.getConnection();

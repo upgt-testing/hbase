@@ -86,7 +86,6 @@ public class TestSpaceQuotas_ProcessBased extends ProcessBasedUpgradeTestBase {
   private SpaceQuotaHelperForTests helper;
 
   private void setupCluster() throws Exception {
-    Configuration conf = HBaseConfiguration.create();
     SpaceQuotaHelperForTests.updateConfigForQuotas(conf);
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)

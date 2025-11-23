@@ -79,16 +79,19 @@ public class TestAsyncTableAdminApi2_ProcessBased extends ProcessBasedUpgradeTes
     testCounter++;
     tableName = TableName.valueOf(testMethodName + "_" + testCounter);
 
-    conf = HBaseConfiguration.create();
     conf.setInt(HConstants.HBASE_RPC_TIMEOUT_KEY, 60000);
     conf.setInt(HConstants.HBASE_CLIENT_OPERATION_TIMEOUT, 120000);
-    conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 2);
+    conf.setInt(HConstants.HBASE_CLIENT_RETRIES_NUMBER, 10); // Increased for process-based cluster startup
 
     cluster = new ProcessBasedMiniHBaseCluster.Builder(conf)
       .numRegionServers(2)
       .numMasters(2)
       .build();
     cluster.waitClusterUp();
+
+    // Wait for Master to be fully initialized before creating tables
+    // This prevents PleaseHoldException: Master is initializing
+    cluster.waitForActiveAndReadyMaster(60000);
 
     connection = cluster.getConnection();
     admin = connection.getAdmin();
