@@ -36,8 +36,24 @@
     <license.bundles.jquery>true</license.bundles.jquery>
     <license.bundles.vega>true</license.bundles.vega>
     <hbase.webapps.dir>hbase-webapps</hbase.webapps.dir>
+    <restart.config>${project.basedir}/restarts-config/restart-config.json</restart.config>
   </properties>
   <dependencies>
+    <!-- Restart Testing Framework - Core -->
+    <dependency>
+        <groupId>org.restarttest</groupId>
+        <artifactId>restart-core</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <scope>test</scope>
+    </dependency>
+    <!-- Restart Testing Framework - HBase Adapter -->
+    <dependency>
+        <groupId>org.restarttest</groupId>
+        <artifactId>restart-hbase-adapter</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <scope>test</scope>
+    </dependency>
+
     <dependency>
       <groupId>org.apache.hbase.thirdparty</groupId>
       <artifactId>hbase-shaded-protobuf</artifactId>
@@ -384,6 +400,14 @@
       </testResource>
     </testResources>
     <plugins>
+      <plugin>
+        <groupId>org.restarttest</groupId>
+        <artifactId>restart-maven-plugin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <configuration>
+          <configFile>${restart.config}</configFile>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>

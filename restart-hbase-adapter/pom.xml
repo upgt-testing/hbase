@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.apache.hbase</groupId>
+        <artifactId>hbase-build-configuration</artifactId>
+        <version>${revision}</version>
+        <relativePath>../hbase-build-configuration</relativePath>
+    </parent>
+
+    <artifactId>restart-hbase-adapter</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Restart Testing Framework - HBase Adapter</name>
+    <description>HBase adapter for restart testing with MiniHBaseCluster</description>
+
+    <properties>
+        <!--
+            Override Hadoop version to use 3.3.6 instead of parent's defaults.
+            HBase 2.6.3 is binary compatible with Hadoop 3.3.x but not 3.4.x
+            (HdfsFileStatus changed from class to interface in 3.4.0)
+        -->
+        <hadoop.profile>3.0</hadoop.profile>
+    </properties>
+
+    <dependencies>
+        <!-- Restart Testing Framework Core -->
+        <dependency>
+            <groupId>org.restarttest</groupId>
+            <artifactId>restart-core</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- HBase dependencies (versions inherited from parent's dependencyManagement) -->
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-server</artifactId>
+            <type>test-jar</type>
+            <!-- Override scope from parent: we need MiniHBaseCluster in main code -->
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-zookeeper</artifactId>
+        </dependency>
+
+        <!-- Logging (version inherited from parent's dependencyManagement) -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+    </dependencies>
+</project>
