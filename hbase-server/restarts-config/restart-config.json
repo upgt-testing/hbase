@@ -9784,9 +9784,7 @@
           ]
         }
       ]
-    }
-  ]
-    ,
+    },
     {
       "testClass": "org.apache.hadoop.hbase.coprocessor.TestMasterObserver_RestartInjected",
       "testMethod": "testStarted",
@@ -10034,9 +10032,7 @@
           "modes": ["GRACEFUL", "CRASH"]
         }
       ]
-    }
-  ]
-    ,
+    },
     {
       "testClass": "org.apache.hadoop.hbase.coprocessor.TestCoprocessorStop_RestartInjected",
       "testMethod": "testStopped",
@@ -10052,9 +10048,7 @@
           "modes": ["GRACEFUL", "CRASH"]
         }
       ]
-    }
-  ]
-    ,
+    },
     {
       "testClass": "org.apache.hadoop.hbase.coprocessor.TestMasterCoprocessorExceptionWithRemove_RestartInjected",
       "testMethod": "testExceptionFromCoprocessorWhenCreatingTable",

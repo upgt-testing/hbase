@@ -400,9 +400,7 @@
         {"position": "after_put_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]},
         {"position": "after_shutdown_hook_check", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH"]}
       ]
-    }
-  ]
-    ,
+    },
     {
       "testClass": "org.apache.hadoop.hbase.regionserver.TestRegionReplicaFailover_RestartInjected",
       "testMethod": "testSecondaryRegionWithEmptyRegion",
@@ -457,9 +455,7 @@
         {"position": "after_table_create", "targets": ["master", "regionserver"], "modes": ["GRACEFUL", "CRASH"]},
         {"position": "after_get_operations", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH"]}
       ]
-    }
-  ]
-    ,
+    },
     {
       "testClass": "org.apache.hadoop.hbase.regionserver.TestScannerBlockSizeLimits_RestartInjected",
       "testMethod": "testSingleBlock",

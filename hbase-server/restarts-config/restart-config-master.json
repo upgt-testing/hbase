@@ -2489,8 +2489,7 @@
         {"position": "after_split_submit", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
         {"position": "after_wait_split_complete", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH"]}
       ]
-    }
-  },
+    },
   {
     "testClass": "org.apache.hadoop.hbase.master.assignment.TestWakeUpUnexpectedProcedure_RestartInjected",
     "testMethod": "test",
@@ -2653,3 +2652,4 @@
     ]
   }
 ]
+}
