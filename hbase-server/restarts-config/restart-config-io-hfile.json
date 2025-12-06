@@ -1,0 +1,92 @@
+{
+  "tests": [
+    {
+      "testClass": "org.apache.hadoop.hbase.io.hfile.TestPrefetchRSClose_RestartInjected",
+      "testMethod": "testPrefetchPersistence",
+      "restartPoints": [
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_put",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_cache_verification",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.io.hfile.TestBlockEvictionOnRegionMovement_RestartInjected",
+      "testMethod": "testBlockEvictionOnRegionMove",
+      "restartPoints": [
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_put",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_cache_verification",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_region_move",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.io.hfile.TestBlockEvictionOnRegionMovement_RestartInjected",
+      "testMethod": "testBlockEvictionOnGracefulStop",
+      "restartPoints": [
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_put",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_cache_check",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_regionserver_restart",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    }
+  ]
+}

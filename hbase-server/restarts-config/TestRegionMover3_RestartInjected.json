@@ -1,0 +1,40 @@
+{
+  "tests": [
+    {
+      "testClass": "org.apache.hadoop.hbase.util.TestRegionMover3_RestartInjected",
+      "testMethod": "testRegionUnloadWithRack",
+      "restartPoints": [
+        {
+          "position": "after_put",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_compact",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_region_move",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_unload_from_rack",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_unload_with_custom_rack",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    }
+  ]
+}

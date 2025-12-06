@@ -1,0 +1,46 @@
+{
+  "tests": [
+    {
+      "testClass": "org.apache.hadoop.hbase.procedure.TestFailedProcCleanup_RestartInjected",
+      "testMethod": "testFailCreateTable",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_failed_table_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_eviction_delay",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.procedure.TestFailedProcCleanup_RestartInjected",
+      "testMethod": "testFailCreateTableAction",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_failed_table_create_action",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_eviction_delay",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    }
+  ]
+}

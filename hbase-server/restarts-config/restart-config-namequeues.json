@@ -1,0 +1,62 @@
+{
+  "tests": [
+    {
+      "testClass": "org.apache.hadoop.hbase.namequeues.TestWALEventTracker_RestartInjected",
+      "testMethod": "testWALRolling",
+      "restartPoints": [
+        {
+          "position": "after_wal_tracker_table_ready",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_wal_roll",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_wal_events_retrieved",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.namequeues.TestSlowLogAccessor_RestartInjected",
+      "testMethod": "testSlowLogRecords",
+      "restartPoints": [
+        {
+          "position": "after_slowlog_table_ready",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_first_batch_records",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_all_records_added",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.namequeues.TestSlowLogAccessor_RestartInjected",
+      "testMethod": "testHigherSlowLogs",
+      "restartPoints": [
+        {
+          "position": "after_slowlog_table_ready",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_async_records_submit",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        }
+      ]
+    }
+  ]
+}

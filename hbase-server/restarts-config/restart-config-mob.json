@@ -1,0 +1,424 @@
+{
+  "tests": [
+    {
+      "testClass": "org.apache.hadoop.hbase.mob.TestMobCompactionWithDefaults_RestartInjected",
+      "testMethod": "baseTestMobFileCompaction",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_load_three_times",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_enable_compactions",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_compact_impl",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_compaction_complete",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_compact",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_wait_archive",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_cleaner",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_cleanup",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.mob.TestMobCompactionWithDefaults_RestartInjected",
+      "testMethod": "testMobFileCompactionAfterSnapshotClone",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_load_three_times_clone",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_snapshot",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_clone_snapshot",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_hlinks_check",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_enable_compactions",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_compact_impl",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_compaction_complete",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_compact_clone",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_file_check_clone",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_wait_archive",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_cleaner",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_cleanup_clone",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.mob.TestMobCompactionWithDefaults_RestartInjected",
+      "testMethod": "testMobFileCompactionAfterSnapshotCloneAndFlush",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_first_load_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_snapshot_flush_test",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_clone_snapshot_flush_test",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_hlinks_check_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_second_load_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_enable_compactions",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_compact_impl",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_compaction_complete",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_compact_flush_test",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_file_check_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_wait_archive",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_cleaner",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_cleanup_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.mob.TestRSMobFileCleanerChore_RestartInjected",
+      "testMethod": "testMobFileCleanerChore",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_first_load",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_second_load",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_file_check",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_major_compact",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_compaction_complete",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_file_check_compact",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_wait_archive",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_get_server_regions",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_cleaner",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_file_check_cleaner",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_scan",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_generate_mob_file",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_file_check_generate",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_extra_file_check",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_wait_archive_second",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_cleaner_second",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_file_check_final",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_final_extra_file_check",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_final_scan",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.mob.TestRSMobFileCleanerChore_RestartInjected",
+      "testMethod": "testCleaningAndStoreFileReaderCreatedByOtherThreads",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_create_test_table",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_exists",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_load_data",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_get_regions",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_get_store_files",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mob_file_num_check",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_get_server_name",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_get_cleaner_chore",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_sleep",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_cleaner_chore",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_future_join",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    }
+  ]
+}

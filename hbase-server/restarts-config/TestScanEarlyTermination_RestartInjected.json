@@ -1,0 +1,54 @@
+{
+  "testClass": "org.apache.hadoop.hbase.security.access.TestScanEarlyTermination_RestartInjected",
+  "description": "Restart injection configuration for TestScanEarlyTermination with early scan termination ACL testing",
+  "restartPoints": [
+    {
+      "location": "setupBeforeClass",
+      "name": "after_cluster_start",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After cluster starts"
+    },
+    {
+      "location": "setupBeforeClass",
+      "name": "after_acl_table_ready",
+      "nodeType": "regionserver",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After ACL table is available"
+    },
+    {
+      "location": "setUp",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation in each test"
+    },
+    {
+      "location": "testEarlyScanTermination",
+      "name": "after_first_grant",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After granting USER_OTHER access to TEST_FAMILY1"
+    },
+    {
+      "location": "testEarlyScanTermination",
+      "name": "after_put_data",
+      "nodeType": "regionserver",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After putting test data with cell ACLs"
+    },
+    {
+      "location": "testEarlyScanTermination",
+      "name": "after_second_grant",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After granting USER_OTHER access to TEST_FAMILY2:TEST_Q2"
+    }
+  ]
+}

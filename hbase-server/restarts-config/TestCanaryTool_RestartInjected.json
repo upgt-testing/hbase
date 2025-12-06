@@ -1,0 +1,54 @@
+{
+  "testClass": "org.apache.hadoop.hbase.tool.TestCanaryTool_RestartInjected",
+  "description": "Restart injection configuration for TestCanaryTool with canary tool testing",
+  "restartPoints": [
+    {
+      "location": "setUp",
+      "name": "after_cluster_start",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After cluster starts in each test"
+    },
+    {
+      "location": "testBasicCanaryWorks",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testBasicCanaryWorks",
+      "name": "after_data_load",
+      "nodeType": "regionserver",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After loading 1000 rows of data"
+    },
+    {
+      "location": "testCanaryStopsScanningAfterTimeout",
+      "name": "after_multi_region_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After creating multi-region table"
+    },
+    {
+      "location": "testCanaryRegionTaskReadAllCF",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation with two column families"
+    },
+    {
+      "location": "testCanaryRegionTaskReadAllCF",
+      "name": "after_data_load",
+      "nodeType": "regionserver",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After loading 1000 rows with two column families"
+    }
+  ]
+}

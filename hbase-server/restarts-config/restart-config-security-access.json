@@ -1,0 +1,186 @@
+{
+  "tests": [
+    {
+      "testClass": "org.apache.hadoop.hbase.security.access.TestAccessController2_RestartInjected",
+      "testMethod": "testCreateWithCorrectOwner",
+      "restartPoints": [
+        {
+          "position": "after_grant_global_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_user_table_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.security.access.TestAccessController2_RestartInjected",
+      "testMethod": "testCreateTableWithGroupPermissions",
+      "restartPoints": [
+        {
+          "position": "after_grant_group_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_group_table_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.security.access.TestAccessController2_RestartInjected",
+      "testMethod": "testACLTableAccess",
+      "restartPoints": [
+        {
+          "position": "after_grant_global_permissions",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_grant_namespace_permissions",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_grant_table_permissions",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_grant_group_write",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_acl_write_test",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_grant_group_read",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_acl_read_test",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.security.access.TestAccessController2_RestartInjected",
+      "testMethod": "testPostGrantAndRevokeScanAction",
+      "restartPoints": [
+        {
+          "position": "after_grant_table_read",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_revoke_table_read",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_grant_family_read",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_revoke_family_read",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_grant_qualifier_read",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_revoke_qualifier_read",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.security.access.TestAccessController2_RestartInjected",
+      "testMethod": "testCoprocessorLoading",
+      "restartPoints": [
+        {
+          "position": "after_load_coprocessor",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_create_master_cp_env",
+          "targets": ["master"],
+          "modes": ["GRACEFUL"]
+        },
+        {
+          "position": "after_create_rs_cp_env",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.security.access.TestAccessController2_RestartInjected",
+      "testMethod": "testACLZNodeDeletion",
+      "restartPoints": [
+        {
+          "position": "after_namespace_create_znode",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create_znode",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_grant_namespace_admin",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_zk_node_verification",
+          "targets": ["master"],
+          "modes": ["GRACEFUL"]
+        },
+        {
+          "position": "after_cleanup_operations",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.security.access.TestAccessController_RestartInjected",
+      "testMethod": "*",
+      "restartPoints": [
+        {
+          "position": "after_acl_table_ready",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_test_table_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_user_permissions_setup",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,296 @@
+{
+  "tests": [
+    {
+      "testClass": "org.apache.hadoop.hbase.regionserver.wal.AbstractTestLogRolling_RestartInjected",
+      "testMethod": "testLogRolling",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_write_data",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_log_roll",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_flush_all_regions",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.regionserver.wal.AbstractTestLogRolling_RestartInjected",
+      "testMethod": "testCompactionRecordDoesntBlockRolling",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_initial_flushes",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_compaction",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_final_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.regionserver.wal.TestLogRollAbort_RestartInjected",
+      "testMethod": "testRSAbortWithUnflushedEdits",
+      "restartPoints": [
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_first_put",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_wal_sync",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_second_put",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_datanode_restart",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.regionserver.wal.TestLogRollAbort_RestartInjected",
+      "testMethod": "testLogRollAfterSplitStart",
+      "restartPoints": [
+        {
+          "position": "after_wal_create",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_wal_append",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_wal_sync_split",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_writer_replace",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_dir_rename",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_wal_split",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.regionserver.wal.TestWALSyncTimeoutException_RestartInjected",
+      "testMethod": "testWALSyncWriteException",
+      "restartPoints": [
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "before_timeout_test",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay_RestartInjected",
+      "testMethod": "testReplayEditsAfterRegionMovedWithMultiCF",
+      "restartPoints": [
+        {
+          "position": "after_table_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_put",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_region_move",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_compact",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay_RestartInjected",
+      "testMethod": "test2727",
+      "restartPoints": [
+        {
+          "position": "after_first_wal_split",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_second_wal_split",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay_RestartInjected",
+      "testMethod": "testRegionMadeOfBulkLoadedFilesOnly",
+      "restartPoints": [
+        {
+          "position": "after_bulk_load",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay_RestartInjected",
+      "testMethod": "testCompactedBulkLoadedFiles",
+      "restartPoints": [
+        {
+          "position": "after_major_compact",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay_RestartInjected",
+      "testMethod": "testReplayEditsWrittenViaHRegion",
+      "restartPoints": [
+        {
+          "position": "after_wal_split_replay",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay_RestartInjected",
+      "testMethod": "testReplayEditsAfterPartialFlush",
+      "restartPoints": [
+        {
+          "position": "after_partial_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay_RestartInjected",
+      "testMethod": "testReplayEditsAfterAbortingFlush",
+      "restartPoints": [
+        {
+          "position": "after_puts_before_abort",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay_RestartInjected",
+      "testMethod": "testReplayEditsWrittenIntoWAL",
+      "restartPoints": [
+        {
+          "position": "after_wal_edits",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay_RestartInjected",
+      "testMethod": "testSequentialEditLogSeqNum",
+      "restartPoints": [
+        {
+          "position": "after_flush_seqnum",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay_RestartInjected",
+      "testMethod": "testDatalossWhenInputError",
+      "restartPoints": [
+        {
+          "position": "after_wal_split_error",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay_RestartInjected",
+      "testMethod": "testNameConflictWhenSplit0",
+      "restartPoints": [
+        {
+          "position": "after_name_conflict_split",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.regionserver.wal.AbstractTestWALReplay_RestartInjected",
+      "testMethod": "testNameConflictWhenSplit1",
+      "restartPoints": [
+        {
+          "position": "after_name_conflict_split",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    }
+  ]
+}

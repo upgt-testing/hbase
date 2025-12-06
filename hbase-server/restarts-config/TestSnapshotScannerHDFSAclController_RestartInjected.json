@@ -1,0 +1,694 @@
+{
+  "testClass": "org.apache.hadoop.hbase.security.access.TestSnapshotScannerHDFSAclController_RestartInjected",
+  "description": "Restart injection configuration for TestSnapshotScannerHDFSAclController with HDFS ACL snapshot scanning tests",
+  "restartPoints": [
+    {
+      "location": "setupBeforeClass",
+      "name": "after_cluster_start",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After cluster starts"
+    },
+    {
+      "location": "setupBeforeClass",
+      "name": "after_acl_table_ready",
+      "nodeType": "regionserver",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After ACL table is available"
+    },
+    {
+      "location": "testGrantGlobal1",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testGrantGlobal1",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testGrantGlobal1",
+      "name": "after_grant_global",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After global permission grant"
+    },
+    {
+      "location": "testGrantGlobal2",
+      "name": "after_namespace_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After namespace creation"
+    },
+    {
+      "location": "testGrantGlobal2",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testGrantGlobal2",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testGrantGlobal2",
+      "name": "after_grant_global",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After global permission grant"
+    },
+    {
+      "location": "testGrantGlobal3",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testGrantGlobal3",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testGrantGlobal3",
+      "name": "after_grant_global",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After global permission grant"
+    },
+    {
+      "location": "testGrantNamespace1",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testGrantNamespace1",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testGrantNamespace1",
+      "name": "after_grant_namespace",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After namespace permission grant"
+    },
+    {
+      "location": "testGrantNamespace2",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testGrantNamespace2",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testGrantNamespace2",
+      "name": "after_grants",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After permission grants"
+    },
+    {
+      "location": "testGrantNamespace3",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testGrantNamespace3",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testGrantNamespace3",
+      "name": "after_grants",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After permission grants"
+    },
+    {
+      "location": "testGrantTable",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testGrantTable",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testGrantTable",
+      "name": "after_grant_table",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table permission grant"
+    },
+    {
+      "location": "testGrantMobTable",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After MOB table creation"
+    },
+    {
+      "location": "testGrantMobTable",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testGrantMobTable",
+      "name": "after_grant_table",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table permission grant"
+    },
+    {
+      "location": "testRevokeGlobal1",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testRevokeGlobal1",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testRevokeGlobal1",
+      "name": "after_grant_global",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After global permission grant"
+    },
+    {
+      "location": "testRevokeGlobal2",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testRevokeGlobal2",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testRevokeGlobal2",
+      "name": "after_grant_namespace",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After namespace permission grant"
+    },
+    {
+      "location": "testRevokeGlobal3",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testRevokeGlobal3",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testRevokeGlobal3",
+      "name": "after_grant_global",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After global permission grant"
+    },
+    {
+      "location": "testRevokeNamespace1",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testRevokeNamespace1",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testRevokeNamespace1",
+      "name": "after_grants",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After permission grants"
+    },
+    {
+      "location": "testRevokeNamespace2",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testRevokeNamespace2",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testRevokeNamespace2",
+      "name": "after_grant_global",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After global permission grant"
+    },
+    {
+      "location": "testRevokeTable1",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testRevokeTable1",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testRevokeTable2",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testRevokeTable2",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testRevokeTable2",
+      "name": "after_grants",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After permission grants"
+    },
+    {
+      "location": "testRevokeTable3",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testRevokeTable3",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testRevokeTable3",
+      "name": "after_grants",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After permission grants"
+    },
+    {
+      "location": "testTruncateTable",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testTruncateTable",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After first snapshot creation"
+    },
+    {
+      "location": "testTruncateTable",
+      "name": "after_grants",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After permission grants"
+    },
+    {
+      "location": "testTruncateTable",
+      "name": "after_truncate",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table truncate"
+    },
+    {
+      "location": "testTruncateTable",
+      "name": "after_snapshot2",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After second snapshot creation"
+    },
+    {
+      "location": "testDeleteTable",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testDeleteTable",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testDeleteTable",
+      "name": "after_grants",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After permission grants"
+    },
+    {
+      "location": "testDeleteTable",
+      "name": "after_delete_table",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table deletion"
+    },
+    {
+      "location": "testDeleteTable2",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testDeleteTable2",
+      "name": "after_grants",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After permission grants"
+    },
+    {
+      "location": "testDeleteTable2",
+      "name": "after_delete_table",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table deletion"
+    },
+    {
+      "location": "testDeleteNamespace",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testDeleteNamespace",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testDeleteNamespace",
+      "name": "after_grant_namespace",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After namespace permission grant"
+    },
+    {
+      "location": "testDeleteNamespace",
+      "name": "after_delete_table",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table deletion"
+    },
+    {
+      "location": "testDeleteNamespace",
+      "name": "after_delete_namespace",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After namespace deletion"
+    },
+    {
+      "location": "testCleanArchiveTableDir",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testCleanArchiveTableDir",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testCleanArchiveTableDir",
+      "name": "after_grant_table",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table permission grant"
+    },
+    {
+      "location": "testModifyTable1",
+      "name": "after_namespace_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After namespace creation"
+    },
+    {
+      "location": "testModifyTable1",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testModifyTable1",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testModifyTable1",
+      "name": "after_grants",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After permission grants"
+    },
+    {
+      "location": "testModifyTable1",
+      "name": "after_modify_table",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table modification"
+    },
+    {
+      "location": "testModifyTable2",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After first table creation"
+    },
+    {
+      "location": "testModifyTable2",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    },
+    {
+      "location": "testModifyTable2",
+      "name": "after_grants",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After permission grants"
+    },
+    {
+      "location": "testModifyTable2",
+      "name": "after_table2_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After second table creation"
+    },
+    {
+      "location": "testModifyTable2",
+      "name": "after_table2_grant",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After second table permission grant"
+    },
+    {
+      "location": "testModifyTable2",
+      "name": "after_modify_table",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table modification"
+    },
+    {
+      "location": "testRestartMaster",
+      "name": "after_namespace_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After namespace creation"
+    },
+    {
+      "location": "testRestartMaster",
+      "name": "after_table2_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table2 creation"
+    },
+    {
+      "location": "testRestartMaster",
+      "name": "after_grant_namespace",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After namespace permission grant"
+    },
+    {
+      "location": "testRestartMaster",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation"
+    },
+    {
+      "location": "testRestartMaster",
+      "name": "after_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After snapshot creation"
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "tests": [
+    {
+      "testClass": "org.apache.hadoop.hbase.util.TestHBaseFsckCleanReplicationBarriers_RestartInjected",
+      "testMethod": "testCleanReplicationBarrierWithDeletedTable",
+      "restartPoints": [
+        {
+          "position": "after_barriers_written",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_barrier_scan",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_clean_barriers",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.util.TestHBaseFsckCleanReplicationBarriers_RestartInjected",
+      "testMethod": "testCleanReplicationBarrierWithExistTable",
+      "restartPoints": [
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_barriers_added",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_clean_barriers",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.util.TestRegionMover1_RestartInjected",
+      "testMethod": "testWithAck",
+      "restartPoints": [
+        {
+          "position": "after_unload",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_load",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.util.TestRegionMover1_RestartInjected",
+      "testMethod": "testWithoutAck",
+      "restartPoints": [
+        {
+          "position": "after_unload",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_load",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.util.TestRegionMover1_RestartInjected",
+      "testMethod": "testExclude",
+      "restartPoints": [
+        {
+          "position": "after_unload_with_exclude",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.util.TestRegionMover1_RestartInjected",
+      "testMethod": "testDesignatedFile",
+      "restartPoints": [
+        {
+          "position": "after_unload_with_designated",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.util.TestRegionMover1_RestartInjected",
+      "testMethod": "testLoadMetaRegion",
+      "restartPoints": [
+        {
+          "position": "after_meta_unload",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_meta_load",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.util.TestRegionMover1_RestartInjected",
+      "testMethod": "testDecomServerExclusionWithAck",
+      "restartPoints": [
+        {
+          "position": "after_server_decom",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_unload_decom_excluded",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    }
+  ]
+}

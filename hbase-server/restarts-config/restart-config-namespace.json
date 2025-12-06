@@ -1,0 +1,250 @@
+{
+  "tests": [
+    {
+      "testClass": "org.apache.hadoop.hbase.namespace.TestNamespaceAuditor_RestartInjected",
+      "testMethod": "testTableOperations",
+      "restartPoints": [
+        {
+          "position": "after_namespace_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_first_table_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_second_table_create",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.namespace.TestNamespaceAuditor_RestartInjected",
+      "testMethod": "testValidQuotas",
+      "restartPoints": [
+        {
+          "position": "after_get_filesystem",
+          "targets": ["master"],
+          "modes": ["GRACEFUL"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.namespace.TestNamespaceAuditor_RestartInjected",
+      "testMethod": "testDeleteTable",
+      "restartPoints": [
+        {
+          "position": "after_namespace_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_tables_create",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_first_table_delete",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.namespace.TestNamespaceAuditor_RestartInjected",
+      "testMethod": "testRegionMerge",
+      "restartPoints": [
+        {
+          "position": "after_namespace_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_region_merge",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_region_split",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.namespace.TestNamespaceAuditor_RestartInjected",
+      "testMethod": "testRecreateTableWithSameNameAfterFirstTimeFailure",
+      "restartPoints": [
+        {
+          "position": "after_namespace_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_failed_table_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL"]
+        },
+        {
+          "position": "after_successful_table_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.namespace.TestNamespaceAuditor_RestartInjected",
+      "testMethod": "testStatePreserve",
+      "restartPoints": [
+        {
+          "position": "after_namespace_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_tables_create",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_delete",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.namespace.TestNamespaceAuditor_RestartInjected",
+      "testMethod": "testExceedTableQuotaInNamespace",
+      "restartPoints": [
+        {
+          "position": "after_namespace_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_first_table_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.namespace.TestNamespaceAuditor_RestartInjected",
+      "testMethod": "testCloneSnapshotQuotaExceed",
+      "restartPoints": [
+        {
+          "position": "after_namespace_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_snapshot",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.namespace.TestNamespaceAuditor_RestartInjected",
+      "testMethod": "testCloneSnapshot",
+      "restartPoints": [
+        {
+          "position": "after_namespace_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_snapshot",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_clone_snapshot",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.namespace.TestNamespaceAuditor_RestartInjected",
+      "testMethod": "testRestoreSnapshot",
+      "restartPoints": [
+        {
+          "position": "after_namespace_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_snapshot",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_region_split",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_restore_snapshot",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.namespace.TestNamespaceAuditor_RestartInjected",
+      "testMethod": "testRestoreSnapshotQuotaExceed",
+      "restartPoints": [
+        {
+          "position": "after_namespace_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_snapshot",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_namespace_modify",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    }
+  ]
+}

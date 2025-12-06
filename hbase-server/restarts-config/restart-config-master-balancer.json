@@ -1,0 +1,324 @@
+{
+  "tests": [
+    {
+      "testClass": "org.apache.hadoop.hbase.master.balancer.TestRegionLocationFinder_RestartInjected",
+      "testMethod": "testInternalGetTopBlockLocation",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_load_table",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_finder_setup",
+          "targets": ["master"],
+          "modes": ["GRACEFUL"]
+        },
+        {
+          "position": "before_block_location_check",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.master.balancer.TestRegionLocationFinder_RestartInjected",
+      "testMethod": "testMapHostNameToServerName",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_load_table",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_finder_setup",
+          "targets": ["master"],
+          "modes": ["GRACEFUL"]
+        },
+        {
+          "position": "after_collect_hosts",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.master.balancer.TestRegionLocationFinder_RestartInjected",
+      "testMethod": "testGetTopBlockLocations",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_load_table",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_finder_setup",
+          "targets": ["master"],
+          "modes": ["GRACEFUL"]
+        },
+        {
+          "position": "before_get_block_locations",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.master.balancer.TestRegionLocationFinder_RestartInjected",
+      "testMethod": "testRefreshAndWait",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_load_table",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_finder_setup",
+          "targets": ["master"],
+          "modes": ["GRACEFUL"]
+        },
+        {
+          "position": "after_cache_invalidate",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_refresh_wait",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.master.balancer.TestRegionLocationFinder_RestartInjected",
+      "testMethod": "testRefreshRegionsWithChangedLocality",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_load_table",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_finder_setup",
+          "targets": ["master"],
+          "modes": ["GRACEFUL"]
+        },
+        {
+          "position": "before_locality_test",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.master.balancer.TestFavoredNodeTableImport_RestartInjected",
+      "testMethod": "testTableCreation",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start_stochastic",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_balancer_switch_off",
+          "targets": ["master"],
+          "modes": ["GRACEFUL"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_available",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_cluster_restart_favored",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_available_restart",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_no_rit",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_get_regions",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.master.balancer.TestBalancerStatusTagInJMXMetrics_RestartInjected",
+      "testMethod": "testJmxMetrics",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_initial_status_check",
+          "targets": ["master"],
+          "modes": ["GRACEFUL"]
+        },
+        {
+          "position": "after_balancer_update",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.master.balancer.TestFavoredStochasticLoadBalancer_RestartInjected",
+      "testMethod": "all",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.master.balancer.TestRegionsOnMasterOptions_RestartInjected",
+      "testMethod": "all",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_master_failover",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.master.balancer.TestFavoredStochasticBalancerPickers_RestartInjected",
+      "testMethod": "testPickers",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_region_moves",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_new_rs_start",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_balancer_setup",
+          "targets": ["master"],
+          "modes": ["GRACEFUL"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "tests": [
+    {
+      "testClass": "org.apache.hadoop.hbase.master.http.TestHbckMetricsResource_RestartInjected",
+      "testMethod": "all",
+      "restartPoints": [
+        {
+          "position": "after_table_create",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_mock_setup",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "testClass": "org.apache.hadoop.hbase.security.access.TestAccessController3_RestartInjected",
+  "description": "Restart injection configuration for TestAccessController3 with reference counting and AuthManager testing",
+  "restartPoints": [
+    {
+      "location": "setupBeforeClass",
+      "name": "after_cluster_start",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After cluster starts"
+    },
+    {
+      "location": "setupBeforeClass",
+      "name": "after_acl_table_ready",
+      "nodeType": "regionserver",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After ACL table is available"
+    },
+    {
+      "location": "setUpTableAndUserPermissions",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After test table creation"
+    },
+    {
+      "location": "setUpTableAndUserPermissions",
+      "name": "after_grants",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After setting up all user and group permissions"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "testClass": "org.apache.hadoop.hbase.snapshot.TestRestoreFlushSnapshotFromClient_RestartInjected",
+  "description": "Restart injection configuration for TestRestoreFlushSnapshotFromClient with FLUSH snapshot restore and clone testing",
+  "restartPoints": [
+    {
+      "location": "setupCluster",
+      "name": "after_cluster_start",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After cluster starts"
+    },
+    {
+      "location": "setup",
+      "name": "after_table_create",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After table creation in each test"
+    },
+    {
+      "location": "setup",
+      "name": "after_first_data_load",
+      "nodeType": "regionserver",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After loading first 500 rows of data"
+    },
+    {
+      "location": "setup",
+      "name": "after_first_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After taking first FLUSH snapshot (snapshotName0)"
+    },
+    {
+      "location": "setup",
+      "name": "after_second_data_load",
+      "nodeType": "regionserver",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After loading second 500 rows of data (total 1000 rows)"
+    },
+    {
+      "location": "setup",
+      "name": "after_second_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After taking second FLUSH snapshot (snapshotName1)"
+    },
+    {
+      "location": "testRestoreSnapshot",
+      "name": "after_restore_snapshot0",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After restoring from snapshot-0"
+    },
+    {
+      "location": "testRestoreSnapshot",
+      "name": "after_restore_snapshot1",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After restoring from snapshot-1"
+    },
+    {
+      "location": "testCloneSnapshot",
+      "name": "after_clone_snapshot",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After cloning snapshot to new table"
+    },
+    {
+      "location": "testRestoreSnapshotOfCloned",
+      "name": "after_first_clone",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After cloning snapshot0 to cloned table"
+    },
+    {
+      "location": "testRestoreSnapshotOfCloned",
+      "name": "after_snapshot_of_clone",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After taking snapshot of cloned table"
+    },
+    {
+      "location": "testRestoreSnapshotOfCloned",
+      "name": "after_second_clone",
+      "nodeType": "master",
+      "nodeIndex": 0,
+      "mode": "GRACEFUL",
+      "description": "After cloning snapshot2 to recreate cloned table"
+    }
+  ]
+}

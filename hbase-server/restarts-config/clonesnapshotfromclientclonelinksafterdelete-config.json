@@ -1,0 +1,33 @@
+[
+  {
+    "testClass": "org.apache.hadoop.hbase.client.CloneSnapshotFromClientCloneLinksAfterDeleteTestBase_RestartInjected",
+    "testMethod": "testCloneLinksAfterDelete",
+    "restartPoints": [
+      {
+        "position": "after_first_clone",
+        "targets": ["master", "regionserver"],
+        "modes": ["GRACEFUL", "CRASH"]
+      },
+      {
+        "position": "after_snapshot",
+        "targets": ["master"],
+        "modes": ["GRACEFUL", "CRASH"]
+      },
+      {
+        "position": "after_second_clone",
+        "targets": ["regionserver"],
+        "modes": ["GRACEFUL", "CRASH"]
+      },
+      {
+        "position": "after_delete_original",
+        "targets": ["master"],
+        "modes": ["GRACEFUL", "CRASH"]
+      },
+      {
+        "position": "after_third_clone",
+        "targets": ["regionserver"],
+        "modes": ["GRACEFUL", "CRASH"]
+      }
+    ]
+  }
+]

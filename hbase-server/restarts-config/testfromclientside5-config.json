@@ -1,0 +1,839 @@
+[
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testGetClosestRowBefore",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      },
+      {
+        "position": "after_flush",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testMultiRowMutation",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_batch_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testMultiRowMutationWithSingleConditionWhenConditionMatches",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testMultiRowMutationWithSingleConditionWhenConditionNotMatch",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testMultiRowMutationWithMultipleConditionsWhenConditionsMatch",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testMultiRowMutationWithMultipleConditionsWhenConditionsNotMatch",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testMultiRowMutationWithFilterConditionWhenConditionMatches",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testMultiRowMutationWithFilterConditionWhenConditionNotMatch",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testRowMutations",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_row_mutations",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testBatchAppendWithReturnResultFalse",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_batch_append",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testAppend",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_append",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      },
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_append_and_puts",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testClientPoolRoundRobin",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testCheckAndPut",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_check_and_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testCheckAndMutateWithTimeRange",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_check_and_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testCheckAndPutWithCompareOp",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_check_and_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testCheckAndDelete",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testCheckAndDeleteWithCompareOp",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testScanMetrics",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_batch_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testCacheOnWriteEvictOnClose",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      },
+      {
+        "position": "after_flush",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testNonCachedGetRegionLocation",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_region_move",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_region_move",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testGetRegionsInRange",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testJira6912",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_batch_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testScan_NullQualifier",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testRawScanRespectsVersions",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testEmptyFilterList",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testSmallScan",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testSuperSimpleWithReverseScan",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testFiltersWithReverseScan",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testKeyOnlyFilterWithReverseScan",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  },
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestFromClientSide5_RestartInjected",
+    "testMethod": "testSimpleMissingWithReverseScan",
+    "restartPoints": [
+      {
+        "position": "after_table_create",
+        "targets": [
+          "master"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH"
+        ]
+      },
+      {
+        "position": "after_put",
+        "targets": [
+          "regionserver"
+        ],
+        "modes": [
+          "GRACEFUL",
+          "CRASH",
+          "DELAYED_CRASH"
+        ]
+      }
+    ]
+  }
+]

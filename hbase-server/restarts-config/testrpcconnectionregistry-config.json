@@ -1,0 +1,23 @@
+[
+  {
+    "testClass": "org.apache.hadoop.hbase.client.TestRpcConnectionRegistry_RestartInjected",
+    "testMethod": "testRegistryRPCs",
+    "restartPoints": [
+      {
+        "position": "after_endpoints_refresh",
+        "targets": ["regionserver"],
+        "modes": ["GRACEFUL", "CRASH"]
+      },
+      {
+        "position": "after_meta_replicas_ready",
+        "targets": ["master", "regionserver"],
+        "modes": ["GRACEFUL", "CRASH"]
+      },
+      {
+        "position": "after_metadata_verify",
+        "targets": ["master"],
+        "modes": ["GRACEFUL", "CRASH"]
+      }
+    ]
+  }
+]

@@ -1,0 +1,612 @@
+{
+  "tests": [
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestQuotaObserverChoreWithMiniCluster_RestartInjected",
+      "testMethod": "testTableViolatesQuota",
+      "restartPoints": [
+        {
+          "position": "after_table_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_quota_set",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_data_write",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestQuotaObserverChoreWithMiniCluster_RestartInjected",
+      "testMethod": "testNamespaceViolatesQuota",
+      "restartPoints": [
+        {
+          "position": "after_namespace_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_tables_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_quota_set",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestQuotaObserverChoreWithMiniCluster_RestartInjected",
+      "testMethod": "testTableQuotaOverridesNamespaceQuota",
+      "restartPoints": [
+        {
+          "position": "after_namespace_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_tables_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_namespace_quota_set",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSnapshotQuotaObserverChore_RestartInjected",
+      "testMethod": "testSnapshotsFromTables",
+      "restartPoints": [
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_quota_set",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_snapshot_batch1",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_snapshot_batch2",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSnapshotQuotaObserverChore_RestartInjected",
+      "testMethod": "testSnapshotsFromNamespaces",
+      "restartPoints": [
+        {
+          "position": "after_namespace_create",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_quota_set",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_snapshot_batch1",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_snapshot_batch2",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSnapshotQuotaObserverChore_RestartInjected",
+      "testMethod": "testSnapshotSize",
+      "restartPoints": [
+        {
+          "position": "after_table_create_quota",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_write_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_snapshot",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_write_flush_compact",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSnapshotQuotaObserverChore_RestartInjected",
+      "testMethod": "testPersistingSnapshotsForNamespaces",
+      "restartPoints": [
+        {
+          "position": "after_setup",
+          "targets": ["master"],
+          "modes": ["GRACEFUL"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSnapshotQuotaObserverChore_RestartInjected",
+      "testMethod": "testRemovedSnapshots",
+      "restartPoints": [
+        {
+          "position": "after_table_create_quota",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_write",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_snapshot",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_compact",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_snapshot_delete",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSnapshotQuotaObserverChore_RestartInjected",
+      "testMethod": "testBucketingFilesToSnapshots",
+      "restartPoints": [
+        {
+          "position": "after_table_create_quota",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_write_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_snapshot1_compact",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_snapshot2_compact",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestQuotaObserverChoreRegionReports_RestartInjected",
+      "testMethod": "testReportExpiration",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_quota_set",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_report_received",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestQuotaObserverChoreRegionReports_RestartInjected",
+      "testMethod": "testMissingReportsRemovesQuota",
+      "restartPoints": [
+        {
+          "position": "after_cluster_start",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_table_create",
+          "targets": ["master", "regionserver"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_quota_set",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_write_flush",
+          "targets": ["regionserver"],
+          "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]
+        },
+        {
+          "position": "after_violation",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        },
+        {
+          "position": "after_region_unassign",
+          "targets": ["master"],
+          "modes": ["GRACEFUL", "CRASH"]
+        }
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotas_RestartInjected",
+      "testMethod": "testNoInsertsWithPut",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master", "regionserver"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotas_RestartInjected",
+      "testMethod": "testNoInsertsWithAppend",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master", "regionserver"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotas_RestartInjected",
+      "testMethod": "testNoInsertsWithIncrement",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master", "regionserver"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotas_RestartInjected",
+      "testMethod": "testDeletesAfterNoInserts",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master", "regionserver"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotas_RestartInjected",
+      "testMethod": "testNoWritesWithPut",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master", "regionserver"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotas_RestartInjected",
+      "testMethod": "testNoWritesWithAppend",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master", "regionserver"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotas_RestartInjected",
+      "testMethod": "testNoWritesWithIncrement",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master", "regionserver"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotas_RestartInjected",
+      "testMethod": "testNoWritesWithDelete",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master", "regionserver"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotas_RestartInjected",
+      "testMethod": "testNoCompactions",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master", "regionserver"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotas_RestartInjected",
+      "testMethod": "testNoEnableAfterDisablePolicy",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master", "regionserver"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotas_RestartInjected",
+      "testMethod": "testNoBulkLoadsWithNoWrites",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master", "regionserver"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotas_RestartInjected",
+      "testMethod": "testAtomicBulkLoadUnderQuota",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master", "regionserver"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotas_RestartInjected",
+      "testMethod": "testTableQuotaOverridesNamespaceQuota",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master", "regionserver"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotaDropTable_RestartInjected",
+      "testMethod": "testSetQuotaAndThenDropTableWithNoInserts",
+      "restartPoints": [
+        {"position": "after_quota_violation", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_table_drop", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_table_recreate", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotaDropTable_RestartInjected",
+      "testMethod": "testSetQuotaAndThenDropTableWithNoWrite",
+      "restartPoints": [
+        {"position": "after_quota_violation", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_table_drop", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_table_recreate", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotaDropTable_RestartInjected",
+      "testMethod": "testSetQuotaAndThenDropTableWithNoWritesCompactions",
+      "restartPoints": [
+        {"position": "after_quota_violation", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_table_drop", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_table_recreate", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotaDropTable_RestartInjected",
+      "testMethod": "testSetQuotaAndThenDropTableWithDisable",
+      "restartPoints": [
+        {"position": "after_quota_violation", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_table_drop", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_table_recreate", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotaDropTable_RestartInjected",
+      "testMethod": "testSetQuotaAndThenDropTableWithRegionReport",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_data_write", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_region_report", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_table_drop", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestClusterScopeQuotaThrottle_RestartInjected",
+      "testMethod": "testNamespaceClusterScopeQuota",
+      "restartPoints": [
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_operations", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestClusterScopeQuotaThrottle_RestartInjected",
+      "testMethod": "testTableClusterScopeQuota",
+      "restartPoints": [
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_operations", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestClusterScopeQuotaThrottle_RestartInjected",
+      "testMethod": "testUserClusterScopeQuota",
+      "restartPoints": [
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_operations", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestClusterScopeQuotaThrottle_RestartInjected",
+      "testMethod": "testUserNamespaceClusterScopeQuota",
+      "restartPoints": [
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_operations", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestClusterScopeQuotaThrottle_RestartInjected",
+      "testMethod": "testUserTableClusterScopeQuota",
+      "restartPoints": [
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_operations", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestQuotaStatusRPCs_RestartInjected",
+      "testMethod": "testRegionSizesFromMaster",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]},
+        {"position": "after_region_sizes_collected", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestQuotaStatusRPCs_RestartInjected",
+      "testMethod": "testQuotaSnapshotsFromRS",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]},
+        {"position": "after_snapshot_verification", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestQuotaStatusRPCs_RestartInjected",
+      "testMethod": "testQuotaEnforcementsFromRS",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]},
+        {"position": "after_enforcement_verification", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestQuotaStatusRPCs_RestartInjected",
+      "testMethod": "testQuotaStatusFromMaster",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_first_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]},
+        {"position": "after_first_snapshot_verification", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_second_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]},
+        {"position": "after_violation_verification", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestQuotaAdmin_RestartInjected",
+      "testMethod": "testMultiQuotaThrottling",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_batch_operations", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestQuotaAdmin_RestartInjected",
+      "testMethod": "testRpcThrottleWhenStartup",
+      "restartPoints": [
+        {"position": "after_throttle_switch_off", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_cluster_restart", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_throttle_switch_on", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestQuotaAdmin_RestartInjected",
+      "testMethod": "testSetGetRemoveSpaceQuota",
+      "restartPoints": [
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_remove", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotaBasicFunctioning_RestartInjected",
+      "testMethod": "testNoInsertsWithPut",
+      "restartPoints": [
+        {"position": "before_test", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_violation_verification", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotaBasicFunctioning_RestartInjected",
+      "testMethod": "testNoWritesWithPut",
+      "restartPoints": [
+        {"position": "before_test", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_violation_verification", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotaBasicFunctioning_RestartInjected",
+      "testMethod": "testNoCompactions",
+      "restartPoints": [
+        {"position": "before_test", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_violation_verification", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]},
+        {"position": "after_compaction_rejection_verification", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotaBasicFunctioning_RestartInjected",
+      "testMethod": "testTableQuotaOverridesNamespaceQuota",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]},
+        {"position": "after_violation_verification", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestRegionSizeUse_RestartInjected",
+      "testMethod": "testBasicRegionSizeReports",
+      "restartPoints": [
+        {"position": "after_write_data", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]},
+        {"position": "after_flush", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_region_size_verification", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotaOnBulkLoad_RestartInjected",
+      "testMethod": "testNoBulkLoadsWithNoWrites",
+      "restartPoints": [
+        {"position": "after_violation_verification", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH", "DELAYED_CRASH"]},
+        {"position": "after_bulk_load_rejection", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    },
+    {
+      "testClass": "org.apache.hadoop.hbase.quotas.TestSpaceQuotaOnBulkLoad_RestartInjected",
+      "testMethod": "testAtomicBulkLoadUnderQuota",
+      "restartPoints": [
+        {"position": "after_table_create", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_quota_set", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_snapshot_verification", "targets": ["regionserver"], "modes": ["GRACEFUL", "CRASH"]},
+        {"position": "after_bulk_load_and_table_verification", "targets": ["master"], "modes": ["GRACEFUL", "CRASH"]}
+      ]
+    }
+  ]
+}
