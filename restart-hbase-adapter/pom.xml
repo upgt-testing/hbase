@@ -12,7 +12,9 @@
         <relativePath>../hbase-build-configuration</relativePath>
     </parent>
 
+    <groupId>org.restarttest</groupId>
     <artifactId>restart-hbase-adapter</artifactId>
+    <version>2.6.3</version>
     <packaging>jar</packaging>
 
     <name>Restart Testing Framework - HBase Adapter</name>
@@ -39,25 +41,29 @@
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-server</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-server</artifactId>
             <type>test-jar</type>
             <!-- Override scope from parent: we need MiniHBaseCluster in main code -->
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-common</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-client</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-zookeeper</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Logging (version inherited from parent's dependencyManagement) -->

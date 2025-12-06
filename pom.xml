@@ -502,7 +502,6 @@
     <module>hbase-compression</module>
     <module>hbase-backup</module>
     <module>hbase-extensions</module>
-    <module>restart-hbase-adapter</module>
   </modules>
   <scm>
     <connection>scm:git:git://gitbox.apache.org/repos/asf/hbase.git</connection>
