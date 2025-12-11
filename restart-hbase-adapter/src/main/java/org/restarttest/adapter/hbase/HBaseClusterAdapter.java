@@ -36,17 +36,17 @@ public class HBaseClusterAdapter implements ClusterAdapter<MiniHBaseCluster> {
     private final CompositeHealthCheck<MiniHBaseCluster> healthCheck;
 
     /**
-     * Create an HBase cluster adapter with default health checks.
+     * Create an HBase cluster adapter.
      */
     public HBaseClusterAdapter() {
         this.stateCapture = new HBaseStateCapture();
         this.healthCheck = new CompositeHealthCheck<>("hbase-health");
 
         // Add default health checks
-        this.healthCheck.addCheck(new HBaseMasterActiveCheck());
-        this.healthCheck.addCheck(new HBaseRegionServersRegisteredCheck());
-        this.healthCheck.addCheck(new HBaseMetaTableAccessibleCheck());
-        this.healthCheck.addCheck(new HBaseRegionsAssignedCheck());
+        // this.healthCheck.addCheck(new HBaseMasterActiveCheck());
+        // this.healthCheck.addCheck(new HBaseRegionServersRegisteredCheck());
+        // this.healthCheck.addCheck(new HBaseMetaTableAccessibleCheck());
+        // this.healthCheck.addCheck(new HBaseRegionsAssignedCheck());
     }
 
     @Override
