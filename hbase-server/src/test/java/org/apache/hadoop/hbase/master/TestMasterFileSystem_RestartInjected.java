@@ -82,6 +82,8 @@ public class TestMasterFileSystem_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    fs = master.getMasterFileSystem();
 
     Path masterRoot = CommonFSUtils.getRootDir(fs.getConfiguration());
     Path rootDir = CommonFSUtils.getRootDir(fs.getFileSystem().getConf());
@@ -94,7 +96,7 @@ public class TestMasterFileSystem_RestartInjected {
 
   @Test
   public void testCheckNoTempDir() throws Exception {
-    final MasterFileSystem masterFileSystem =
+    MasterFileSystem masterFileSystem =
       UTIL.getMiniHBaseCluster().getMaster().getMasterFileSystem();
 
     final TableName tableName = TableName.valueOf(name.getMethodName());
@@ -110,6 +112,7 @@ public class TestMasterFileSystem_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    masterFileSystem = UTIL.getMiniHBaseCluster().getMaster().getMasterFileSystem();
 
     // get the current store files for the regions
     List<HRegion> regions = UTIL.getHBaseCluster().getRegions(tableName);
@@ -144,6 +147,7 @@ public class TestMasterFileSystem_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    masterFileSystem = UTIL.getMiniHBaseCluster().getMaster().getMasterFileSystem();
 
     final Path tempDir = masterFileSystem.getTempDir();
     final Path tempNsDir = CommonFSUtils.getNamespaceDir(tempDir, tableName.getNamespaceAsString());

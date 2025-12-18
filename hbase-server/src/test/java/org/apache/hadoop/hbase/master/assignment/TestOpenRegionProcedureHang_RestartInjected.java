@@ -196,6 +196,7 @@ public class TestOpenRegionProcedureHang_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     am.moveAsync(new RegionPlan(region, rs1.getServerName(), rs2.getServerName()));
 
@@ -205,6 +206,7 @@ public class TestOpenRegionProcedureHang_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     ARRIVE.await();
     ARRIVE = null;
@@ -215,6 +217,7 @@ public class TestOpenRegionProcedureHang_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     HMaster master = UTIL.getMiniHBaseCluster().getMaster();
     master.getZooKeeper().close();
@@ -225,10 +228,12 @@ public class TestOpenRegionProcedureHang_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
+    final HMaster finalMaster = master;
     UTIL.waitFor(30000, () -> {
       for (MasterThread mt : UTIL.getMiniHBaseCluster().getMasterThreads()) {
-        if (mt.getMaster() != master && mt.getMaster().isActiveMaster()) {
+        if (mt.getMaster() != finalMaster && mt.getMaster().isActiveMaster()) {
           return mt.getMaster().isInitialized();
         }
       }
@@ -241,11 +246,13 @@ public class TestOpenRegionProcedureHang_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     ProcedureExecutor<MasterProcedureEnv> procExec =
       UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
+    final ProcedureExecutor<MasterProcedureEnv> finalProcExec = procExec;
     UTIL.waitFor(30000,
-      () -> procExec.getProcedures().stream().filter(p -> p instanceof OpenRegionProcedure)
+      () -> finalProcExec.getProcedures().stream().filter(p -> p instanceof OpenRegionProcedure)
         .map(p -> (OpenRegionProcedure) p).anyMatch(p -> p.region.getTable().equals(NAME)));
 
     RestartFramework.at("after_wait_open_procedure")
@@ -254,6 +261,8 @@ public class TestOpenRegionProcedureHang_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     OpenRegionProcedure proc = procExec.getProcedures().stream()
       .filter(p -> p instanceof OpenRegionProcedure).map(p -> (OpenRegionProcedure) p)
@@ -265,6 +274,8 @@ public class TestOpenRegionProcedureHang_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     // wait a bit to let the OpenRegionProcedure send out the request
     Thread.sleep(2000);
@@ -276,6 +287,8 @@ public class TestOpenRegionProcedureHang_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     if (!FINISH.await(15, TimeUnit.SECONDS)) {
       LOG.info("Wait reportRegionStateTransition to finish timed out, this is possible if"
@@ -301,8 +314,11 @@ public class TestOpenRegionProcedureHang_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
-    UTIL.waitFor(30000, () -> procExec.isFinished(proc.getProcId()));
+    final ProcedureExecutor<MasterProcedureEnv> finalProcExec2 = procExec;
+    UTIL.waitFor(30000, () -> finalProcExec2.isFinished(proc.getProcId()));
 
     RestartFramework.at("after_wait_proc_finish")
         .on(UTIL.getMiniHBaseCluster())
@@ -310,8 +326,11 @@ public class TestOpenRegionProcedureHang_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
-    UTIL.waitFor(30000, () -> procExec.isFinished(proc.getParentProcId()));
+    final ProcedureExecutor<MasterProcedureEnv> finalProcExec3 = procExec;
+    UTIL.waitFor(30000, () -> finalProcExec3.isFinished(proc.getParentProcId()));
 
     RestartFramework.at("after_wait_parent_proc_finish")
         .on(UTIL.getMiniHBaseCluster())
@@ -319,5 +338,7 @@ public class TestOpenRegionProcedureHang_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
   }
 }

@@ -123,6 +123,7 @@ public class TestTransitRegionStateProcedure_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    env = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor().getEnvironment(); // Refresh after master restart
 
     HRegion region = UTIL.getMiniHBaseCluster().getRegions(tableName).get(0);
     long openSeqNum = region.getOpenSeqNum();
@@ -170,6 +171,7 @@ public class TestTransitRegionStateProcedure_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    env = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor().getEnvironment(); // Refresh after master restart
 
     HRegionServer rs = UTIL.getRSForFirstRegionInTable(tableName);
     HRegion region = rs.getRegions(tableName).get(0);
@@ -225,6 +227,8 @@ public class TestTransitRegionStateProcedure_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    env = master.getMasterProcedureExecutor().getEnvironment(); // Refresh after master restart
 
     HRegion region = UTIL.getMiniHBaseCluster().getRegions(tableName).get(0);
     RegionInfo regionInfo = region.getRegionInfo();
@@ -255,6 +259,7 @@ public class TestTransitRegionStateProcedure_RestartInjected {
       .withMode(RestartMode.GRACEFUL)
       .execute();
 
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh master reference
     AssignmentManager am = master.getAssignmentManager();
     assertTrue(am.getRegionStates().getRegionState(regionInfo).isClosed());
 
@@ -264,6 +269,8 @@ public class TestTransitRegionStateProcedure_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    env = master.getMasterProcedureExecutor().getEnvironment(); // Refresh after master restart
 
     TransitRegionStateProcedure assign = TransitRegionStateProcedure.assign(env, regionInfo, null);
 

@@ -79,6 +79,9 @@ public class TestReopenTableRegionsProcedureInfiniteLoop_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
+    exec = master.getMasterProcedureExecutor(); // Refresh after master restart
 
     RegionInfo regionInfo = UTIL.getAdmin().getRegions(TABLE_NAME).get(0);
 
@@ -88,6 +91,9 @@ public class TestReopenTableRegionsProcedureInfiniteLoop_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
+    exec = master.getMasterProcedureExecutor(); // Refresh after master restart
 
     RegionStateNode regionNode = am.getRegionStates().getRegionStateNode(regionInfo);
 
@@ -97,6 +103,10 @@ public class TestReopenTableRegionsProcedureInfiniteLoop_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
+    exec = master.getMasterProcedureExecutor(); // Refresh after master restart
+    regionNode = am.getRegionStates().getRegionStateNode(regionInfo); // Refresh after master restart
 
     long procId;
     ReopenTableRegionsProcedure proc = new ReopenTableRegionsProcedure(TABLE_NAME);
@@ -107,6 +117,10 @@ public class TestReopenTableRegionsProcedureInfiniteLoop_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
+    exec = master.getMasterProcedureExecutor(); // Refresh after master restart
+    regionNode = am.getRegionStates().getRegionStateNode(regionInfo); // Refresh after master restart
 
     regionNode.lock();
 
@@ -116,6 +130,10 @@ public class TestReopenTableRegionsProcedureInfiniteLoop_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
+    exec = master.getMasterProcedureExecutor(); // Refresh after master restart
+    regionNode = am.getRegionStates().getRegionStateNode(regionInfo); // Refresh after master restart
 
     try {
       procId = exec.submitProcedure(proc);
@@ -126,6 +144,10 @@ public class TestReopenTableRegionsProcedureInfiniteLoop_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+      am = master.getAssignmentManager(); // Refresh after master restart
+      exec = master.getMasterProcedureExecutor(); // Refresh after master restart
+      regionNode = am.getRegionStates().getRegionStateNode(regionInfo); // Refresh after master restart
 
       UTIL.waitFor(30000, () -> proc.hasLock());
 
@@ -135,6 +157,10 @@ public class TestReopenTableRegionsProcedureInfiniteLoop_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+      am = master.getAssignmentManager(); // Refresh after master restart
+      exec = master.getMasterProcedureExecutor(); // Refresh after master restart
+      regionNode = am.getRegionStates().getRegionStateNode(regionInfo); // Refresh after master restart
 
       TransitRegionStateProcedure trsp =
         TransitRegionStateProcedure.reopen(exec.getEnvironment(), regionInfo);
@@ -145,6 +171,10 @@ public class TestReopenTableRegionsProcedureInfiniteLoop_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+      am = master.getAssignmentManager(); // Refresh after master restart
+      exec = master.getMasterProcedureExecutor(); // Refresh after master restart
+      regionNode = am.getRegionStates().getRegionStateNode(regionInfo); // Refresh after master restart
 
       regionNode.setProcedure(trsp);
 
@@ -154,6 +184,10 @@ public class TestReopenTableRegionsProcedureInfiniteLoop_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+      am = master.getAssignmentManager(); // Refresh after master restart
+      exec = master.getMasterProcedureExecutor(); // Refresh after master restart
+      regionNode = am.getRegionStates().getRegionStateNode(regionInfo); // Refresh after master restart
 
       exec.submitProcedure(trsp);
 
@@ -163,6 +197,10 @@ public class TestReopenTableRegionsProcedureInfiniteLoop_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+      am = master.getAssignmentManager(); // Refresh after master restart
+      exec = master.getMasterProcedureExecutor(); // Refresh after master restart
+      regionNode = am.getRegionStates().getRegionStateNode(regionInfo); // Refresh after master restart
     } finally {
       regionNode.unlock();
     }
@@ -173,7 +211,11 @@ public class TestReopenTableRegionsProcedureInfiniteLoop_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
+    exec = master.getMasterProcedureExecutor(); // Refresh after master restart
+    final ProcedureExecutor<MasterProcedureEnv> finalExec = exec;
 
-    UTIL.waitFor(60000, () -> exec.isFinished(procId));
+    UTIL.waitFor(60000, () -> finalExec.isFinished(procId));
   }
 }

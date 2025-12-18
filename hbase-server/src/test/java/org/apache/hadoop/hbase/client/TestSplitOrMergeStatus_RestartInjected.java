@@ -258,7 +258,7 @@ public class TestSplitOrMergeStatus_RestartInjected {
     int startRowNum = 11;
     int rowCount = 60;
     final TableName tableName = TableName.valueOf(name.getMethodName());
-    final ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+    ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
     TEST_UTIL.getAdmin().createTable(TableDescriptorBuilder.newBuilder(tableName)
       .setColumnFamily(ColumnFamilyDescriptorBuilder.of(FAMILY)).setRegionReplication(2).build());
     TEST_UTIL.waitUntilAllRegionsAssigned(tableName);
@@ -269,6 +269,7 @@ public class TestSplitOrMergeStatus_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     ServerName serverName =
       RegionReplicaTestHelper.getRSCarryingReplica(TEST_UTIL, tableName, 1).get();
@@ -309,6 +310,7 @@ public class TestSplitOrMergeStatus_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     // Delete Table
     long procId2 =

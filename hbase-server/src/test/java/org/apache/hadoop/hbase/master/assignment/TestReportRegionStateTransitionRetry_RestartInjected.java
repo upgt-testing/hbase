@@ -137,6 +137,8 @@ public class TestReportRegionStateTransitionRetry_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     RegionStateNode rsn = am.getRegionStates().getRegionStateNode(region);
 
@@ -149,6 +151,8 @@ public class TestReportRegionStateTransitionRetry_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     Future<byte[]> future =
       am.moveAsync(new RegionPlan(region, rsn.getRegionLocation(), rsn.getRegionLocation()));
@@ -159,9 +163,12 @@ public class TestReportRegionStateTransitionRetry_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
+    final ProcedureExecutor<MasterProcedureEnv> finalProcExec = procExec;
     TransitRegionStateProcedure proc =
-      procExec.getProcedures().stream().filter(p -> p instanceof TransitRegionStateProcedure)
+      finalProcExec.getProcedures().stream().filter(p -> p instanceof TransitRegionStateProcedure)
         .filter(p -> !p.isFinished()).map(p -> (TransitRegionStateProcedure) p).findAny().get();
 
     RestartFramework.at("after_get_procedure")
@@ -170,6 +177,8 @@ public class TestReportRegionStateTransitionRetry_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     // wait until we schedule the OpenRegionProcedure
     UTIL.waitFor(10000,
@@ -181,6 +190,8 @@ public class TestReportRegionStateTransitionRetry_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     // Fail the reportRegionStateTransition for closing
     latch.countDown();
@@ -191,6 +202,8 @@ public class TestReportRegionStateTransitionRetry_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     future.get();
 

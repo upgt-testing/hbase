@@ -94,6 +94,7 @@ public class TestMasterDryRunBalancer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = Mockito.spy(TEST_UTIL.getHBaseCluster().getMaster()); // Refresh after master restart
 
     HRegionServer biasedServer = unbalance(master, tableName);
 
@@ -118,6 +119,7 @@ public class TestMasterDryRunBalancer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = Mockito.spy(TEST_UTIL.getHBaseCluster().getMaster()); // Refresh after master restart
 
     // sanity check that we truly don't try to execute any plans
     Mockito.verify(master, Mockito.never()).executeRegionPlansWithThrottling(Mockito.anyList());

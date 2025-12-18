@@ -160,6 +160,7 @@ public class TestMasterCoprocessorExceptionWithRemove_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = cluster.getMaster(); // Refresh after master restart
 
     // Set a watch on the zookeeper /hbase/master node. If the master dies,
     // the node will be deleted.
@@ -200,6 +201,7 @@ public class TestMasterCoprocessorExceptionWithRemove_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = cluster.getMaster(); // Refresh after master restart
 
     // Test (part of the) output that should have be printed by master when it aborts:
     // (namely the part that shows the set of loaded coprocessors).
@@ -241,6 +243,7 @@ public class TestMasterCoprocessorExceptionWithRemove_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = cluster.getMaster(); // Refresh after master restart
 
     // Verify that BuggyMasterObserver has been removed due to its misbehavior
     // by creating another table: should not have a problem this time.
@@ -259,6 +262,7 @@ public class TestMasterCoprocessorExceptionWithRemove_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = cluster.getMaster(); // Refresh after master restart
   }
 
 }

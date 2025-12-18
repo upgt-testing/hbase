@@ -88,6 +88,7 @@ public class TestAlwaysStandByHMaster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    newActive = testUtil.getMiniHBaseCluster().getMaster(); // Refresh after master restart
     assertTrue(testUtil.getMiniHBaseCluster().waitForActiveAndReadyMaster(5000));
     // Newly added master should be the active.
     assertEquals(newActive.getServerName(),

@@ -70,6 +70,8 @@ public class TestMasterFileSystemWithWALDir_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = cluster.getMaster(); // Refresh after master restart
+    fs = master.getMasterFileSystem();
 
     Path masterRoot = CommonFSUtils.getRootDir(fs.getConfiguration());
     Path rootDir = CommonFSUtils.getRootDir(fs.getFileSystem().getConf());
@@ -82,6 +84,8 @@ public class TestMasterFileSystemWithWALDir_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = cluster.getMaster(); // Refresh after master restart
+    fs = master.getMasterFileSystem();
 
   }
 }

@@ -133,6 +133,8 @@ public class TestMasterProcedureEvents_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    procExec = master.getMasterProcedureExecutor(); // Refresh after master restart
 
     master.setInitialized(false); // fake it, set back later
 
@@ -142,6 +144,8 @@ public class TestMasterProcedureEvents_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    procExec = master.getMasterProcedureExecutor(); // Refresh after master restart
 
     // check event wait/wake
     testProcedureEventWaitWake(master, master.getInitializedEvent(),

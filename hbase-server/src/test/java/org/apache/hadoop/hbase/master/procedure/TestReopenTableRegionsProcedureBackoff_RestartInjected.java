@@ -89,6 +89,8 @@ public class TestReopenTableRegionsProcedureBackoff_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
 
     RegionInfo regionInfo = UTIL.getAdmin().getRegions(TABLE_NAME).get(0);
 
@@ -98,6 +100,8 @@ public class TestReopenTableRegionsProcedureBackoff_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
 
     RegionStateNode regionNode = am.getRegionStates().getRegionStateNode(regionInfo);
 
@@ -107,6 +111,8 @@ public class TestReopenTableRegionsProcedureBackoff_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
     // just a dummy one
     TransitRegionStateProcedure trsp =
       TransitRegionStateProcedure.unassign(procExec.getEnvironment(), regionInfo);
@@ -117,6 +123,8 @@ public class TestReopenTableRegionsProcedureBackoff_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
 
     long openSeqNum;
     regionNode.lock();
@@ -136,6 +144,8 @@ public class TestReopenTableRegionsProcedureBackoff_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
 
     ReopenTableRegionsProcedure proc = new ReopenTableRegionsProcedure(TABLE_NAME);
     procExec.submitProcedure(proc);
@@ -146,6 +156,8 @@ public class TestReopenTableRegionsProcedureBackoff_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
 
     UTIL.waitFor(10000, () -> proc.getState() == ProcedureState.WAITING_TIMEOUT);
 
@@ -155,6 +167,8 @@ public class TestReopenTableRegionsProcedureBackoff_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
     long oldTimeout = 0;
     int timeoutIncrements = 0;
     for (;;) {
@@ -178,6 +192,8 @@ public class TestReopenTableRegionsProcedureBackoff_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
 
     regionNode.lock();
     try {
@@ -195,6 +211,8 @@ public class TestReopenTableRegionsProcedureBackoff_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
 
     ProcedureSyncWait.waitForProcedureToComplete(procExec, proc, 60000);
 
@@ -204,6 +222,8 @@ public class TestReopenTableRegionsProcedureBackoff_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
 
     assertTrue(regionNode.getOpenSeqNum() > openSeqNum);
 
@@ -213,5 +233,7 @@ public class TestReopenTableRegionsProcedureBackoff_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
   }
 }

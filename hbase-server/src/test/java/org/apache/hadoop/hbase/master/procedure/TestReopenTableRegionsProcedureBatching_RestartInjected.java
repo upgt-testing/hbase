@@ -99,9 +99,13 @@ public class TestReopenTableRegionsProcedureBatching_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
 
+    final AssignmentManager finalAm = am;
+    final ProcedureExecutor<MasterProcedureEnv> finalProcExec = procExec;
     Set<StuckRegion> stuckRegions =
-      regions.stream().map(r -> stickRegion(am, procExec, r)).collect(Collectors.toSet());
+      regions.stream().map(r -> stickRegion(finalAm, finalProcExec, r)).collect(Collectors.toSet());
 
     RestartFramework.at("after_stick_regions")
         .on(UTIL.getMiniHBaseCluster())
@@ -120,6 +124,8 @@ public class TestReopenTableRegionsProcedureBatching_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
 
     UTIL.waitFor(10000, () -> proc.getState() == ProcedureState.WAITING_TIMEOUT);
 
@@ -155,9 +161,13 @@ public class TestReopenTableRegionsProcedureBatching_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
 
+    final AssignmentManager finalAm = am;
+    final ProcedureExecutor<MasterProcedureEnv> finalProcExec = procExec;
     Set<StuckRegion> stuckRegions =
-      regions.stream().map(r -> stickRegion(am, procExec, r)).collect(Collectors.toSet());
+      regions.stream().map(r -> stickRegion(finalAm, finalProcExec, r)).collect(Collectors.toSet());
 
     RestartFramework.at("after_stick_regions_default")
         .on(UTIL.getMiniHBaseCluster())
@@ -175,6 +185,8 @@ public class TestReopenTableRegionsProcedureBatching_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
 
     UTIL.waitFor(10000, () -> proc.getState() == ProcedureState.WAITING_TIMEOUT);
 
@@ -207,9 +219,13 @@ public class TestReopenTableRegionsProcedureBatching_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
 
+    final AssignmentManager finalAm = am;
+    final ProcedureExecutor<MasterProcedureEnv> finalProcExec = procExec;
     Set<StuckRegion> stuckRegions =
-      regions.stream().map(r -> stickRegion(am, procExec, r)).collect(Collectors.toSet());
+      regions.stream().map(r -> stickRegion(finalAm, finalProcExec, r)).collect(Collectors.toSet());
 
     RestartFramework.at("after_stick_regions_negative")
         .on(UTIL.getMiniHBaseCluster())
@@ -228,6 +244,8 @@ public class TestReopenTableRegionsProcedureBatching_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
 
     UTIL.waitFor(10000, () -> proc.getState() == ProcedureState.WAITING_TIMEOUT);
 

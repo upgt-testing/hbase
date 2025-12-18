@@ -106,6 +106,8 @@ public class TestServerCrashProcedureStuck_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    executor = master.getMasterProcedureExecutor(); // Refresh after master restart
 
     try (AsyncConnection conn =
       ConnectionFactory.createAsyncConnection(UTIL.getConfiguration()).get()) {
@@ -119,9 +121,12 @@ public class TestServerCrashProcedureStuck_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+      executor = master.getMasterProcedureExecutor(); // Refresh after master restart
+      final ProcedureExecutor<MasterProcedureEnv> execForLambda1 = executor;
 
       UTIL.waitFor(30000,
-        () -> executor.getProcedures().stream()
+        () -> execForLambda1.getProcedures().stream()
           .filter(p -> p instanceof TransitRegionStateProcedure)
           .map(p -> (TransitRegionStateProcedure) p)
           .anyMatch(p -> Bytes.equals(hri.getRegionName(), p.getRegion().getRegionName())));
@@ -132,6 +137,8 @@ public class TestServerCrashProcedureStuck_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+      executor = master.getMasterProcedureExecutor(); // Refresh after master restart
 
       proc.resume();
 
@@ -141,8 +148,11 @@ public class TestServerCrashProcedureStuck_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+      executor = master.getMasterProcedureExecutor(); // Refresh after master restart
+      final ProcedureExecutor<MasterProcedureEnv> execForLambda2 = executor;
 
-      UTIL.waitFor(30000, () -> executor.isFinished(procId));
+      UTIL.waitFor(30000, () -> execForLambda2.isFinished(procId));
       // see whether the move region procedure can finish properly
       future.get(30, TimeUnit.SECONDS);
     }

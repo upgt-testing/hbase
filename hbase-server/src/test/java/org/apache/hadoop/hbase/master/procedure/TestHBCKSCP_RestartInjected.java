@@ -151,6 +151,7 @@ public class TestHBCKSCP_RestartInjected extends TestSCPBase {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = cluster.getMaster(); // Refresh after master restart
     final RegionInfo rsRI =
       regions.stream().peek(info -> LOG.debug("{}", info)).filter(regionSelector::regionFilter)
         .findAny().orElseThrow(regionSelector::regionFilterFailure);
@@ -182,6 +183,7 @@ public class TestHBCKSCP_RestartInjected extends TestSCPBase {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = cluster.getMaster(); // Refresh after master restart
 
     master.getServerManager().moveFromOnlineToDeadServers(rsServerName);
     master.getServerManager().getDeadServers().finish(rsServerName);
@@ -194,6 +196,7 @@ public class TestHBCKSCP_RestartInjected extends TestSCPBase {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = cluster.getMaster(); // Refresh after master restart
 
     // Kill the server. Nothing should happen since an 'Unknown Server' as far
     // as the Master is concerned; i.e. no SCP.
@@ -229,6 +232,7 @@ public class TestHBCKSCP_RestartInjected extends TestSCPBase {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = cluster.getMaster(); // Refresh after master restart
 
     ProcedureTestingUtility.waitProcedure(master.getMasterProcedureExecutor(), pid);
 
@@ -238,6 +242,7 @@ public class TestHBCKSCP_RestartInjected extends TestSCPBase {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = cluster.getMaster(); // Refresh after master restart
 
     // After SCP, assert region is OPEN on new server.
     r = MetaTableAccessor.getRegionResult(master.getConnection(), rsRI);

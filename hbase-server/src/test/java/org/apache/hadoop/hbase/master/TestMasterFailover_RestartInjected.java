@@ -113,6 +113,7 @@ public class TestMasterFailover_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      active = cluster.getMaster(); // Refresh after master restart
 
       // Check that ClusterStatus reports the correct active and backup masters
       assertNotNull(active);
@@ -175,6 +176,7 @@ public class TestMasterFailover_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      active = cluster.getMaster(); // Refresh after master restart
 
       // Check that ClusterStatus reports the correct active and backup masters
       assertNotNull(active);
@@ -310,6 +312,7 @@ public class TestMasterFailover_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      activeMaster = cluster.getMaster(); // Refresh after master restart
 
       // ensure meta is still deployed on RS
       metaState = MetaTableLocator.getMetaRegionState(activeMaster.getZooKeeper());

@@ -189,6 +189,7 @@ public class TestClaimReplicationQueue_RestartInjected extends TestReplicationBa
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    final HMaster masterAfterRestart = UTIL1.getMiniHBaseCluster().getMaster(); // Refresh after master restart
 
     hbaseAdmin.enableReplicationPeer(PEER_ID2);
     hbaseAdmin.enableReplicationPeer(PEER_ID3);
@@ -202,7 +203,7 @@ public class TestClaimReplicationQueue_RestartInjected extends TestReplicationBa
 
     EMPTY = false;
     // wait until the SCP finished, ClaimReplicationQueuesProcedure is a sub procedure of SCP
-    UTIL1.waitFor(30000, () -> master.getProcedures().stream()
+    UTIL1.waitFor(30000, () -> masterAfterRestart.getProcedures().stream()
       .filter(p -> p instanceof ServerCrashProcedure).allMatch(Procedure::isSuccess));
 
     RestartFramework.at("after_scp_completion")

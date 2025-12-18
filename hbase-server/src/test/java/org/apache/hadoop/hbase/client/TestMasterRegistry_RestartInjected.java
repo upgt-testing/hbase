@@ -149,6 +149,7 @@ public class TestMasterRegistry_RestartInjected {
             .withIndex(0)
             .withMode(RestartMode.GRACEFUL)
             .execute();
+        activeMaster = TEST_UTIL.getHBaseCluster().getMaster(); // Refresh after master restart
         // Add wait on all replicas being assigned before proceeding w/ test. Failed on occasion
         // because not all replicas had made it up before test started.
         RegionReplicaTestHelper.waitUntilAllMetaReplicasAreReady(TEST_UTIL, registry);
@@ -205,6 +206,7 @@ public class TestMasterRegistry_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      activeMaster = TEST_UTIL.getHBaseCluster().getMaster(); // Refresh after master restart
       // Wait for new set of masters to be populated.
       TEST_UTIL.waitFor(5000,
         (Waiter.Predicate<Exception>) () -> !registry.getParsedServers().equals(masters));

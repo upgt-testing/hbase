@@ -103,6 +103,8 @@ public class TestModifyTableWhileMerging_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    executor = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
+    env = executor.getEnvironment(); // Refresh after master restart
 
     List<RegionInfo> regionInfos = admin.getRegions(TABLE_NAME);
 
@@ -123,6 +125,8 @@ public class TestModifyTableWhileMerging_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    executor = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
+    env = executor.getEnvironment(); // Refresh after master restart
 
     ModifyTableProcedure modifyTableProcedure = new ModifyTableProcedure(env, tableDescriptor);
 
@@ -141,9 +145,12 @@ public class TestModifyTableWhileMerging_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    executor = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
+    env = executor.getEnvironment(); // Refresh after master restart
 
+    final ProcedureExecutor<MasterProcedureEnv> finalExecutor = executor;
     UTIL.waitFor(30000,
-      () -> executor.getProcedures().stream().filter(p -> p instanceof ModifyTableProcedure)
+      () -> finalExecutor.getProcedures().stream().filter(p -> p instanceof ModifyTableProcedure)
         .map(p -> (ModifyTableProcedure) p).anyMatch(p -> TABLE_NAME.equals(p.getTableName())));
 
     RestartFramework.at("after_modify_procedure_appear")
@@ -161,6 +168,8 @@ public class TestModifyTableWhileMerging_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    executor = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
+    env = executor.getEnvironment(); // Refresh after master restart
 
     UTIL.waitFor(3000000, () -> UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor()
       .isFinished(procModify));

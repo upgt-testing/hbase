@@ -95,6 +95,8 @@ public class TestMetaShutdownHandler_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = cluster.getMaster(); // Refresh after master restart
+    regionStates = master.getAssignmentManager().getRegionStates(); // Refresh after master restart
 
     if (
       master.getServerName().equals(metaServerName) || metaServerName == null
@@ -126,6 +128,8 @@ public class TestMetaShutdownHandler_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = cluster.getMaster(); // Refresh after master restart
+    regionStates = master.getAssignmentManager().getRegionStates(); // Refresh after master restart
 
     // Delete the ephemeral node of the meta-carrying region server.
     // This is trigger the expire of this region server on the master.
@@ -142,7 +146,7 @@ public class TestMetaShutdownHandler_RestartInjected {
         .execute();
 
     // Wait for SSH to finish
-    final ServerManager serverManager = master.getServerManager();
+    ServerManager serverManager = master.getServerManager();
     final ServerName priorMetaServerName = metaServerName;
     TEST_UTIL.waitFor(60000, 100, () -> metaRegionServer.isStopped());
 
@@ -152,12 +156,15 @@ public class TestMetaShutdownHandler_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = cluster.getMaster(); // Refresh after master restart
+    serverManager = master.getServerManager(); // Refresh after master restart
+    final ServerManager finalServerManager = serverManager;
 
     TEST_UTIL.waitFor(120000, 200, new Waiter.Predicate<Exception>() {
       @Override
       public boolean evaluate() throws Exception {
-        return !serverManager.isServerOnline(priorMetaServerName)
-          && !serverManager.areDeadServersInProgress();
+        return !finalServerManager.isServerOnline(priorMetaServerName)
+          && !finalServerManager.areDeadServersInProgress();
       }
     });
 

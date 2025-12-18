@@ -110,6 +110,9 @@ public class TestAssignmentManagerUtil_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    HMaster master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    ENV = master.getMasterProcedureExecutor().getEnvironment(); // Refresh after master restart
+    AM = master.getAssignmentManager(); // Refresh after master restart
 
     AM.getRegionStates().getRegionStateNode(region)
       .setProcedure(TransitRegionStateProcedure.unassign(ENV, region));
@@ -120,6 +123,9 @@ public class TestAssignmentManagerUtil_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    ENV = master.getMasterProcedureExecutor().getEnvironment(); // Refresh after master restart
+    AM = master.getAssignmentManager(); // Refresh after master restart
 
     try {
       AssignmentManagerUtil.createUnassignProceduresForSplitOrMerge(ENV, Stream.of(region),
@@ -140,6 +146,9 @@ public class TestAssignmentManagerUtil_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    HMaster master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    ENV = master.getMasterProcedureExecutor().getEnvironment(); // Refresh after master restart
+    AM = master.getAssignmentManager(); // Refresh after master restart
 
     RegionInfo regionA = regions.get(0);
     RegionInfo regionB = regions.get(1);
@@ -152,6 +161,9 @@ public class TestAssignmentManagerUtil_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    ENV = master.getMasterProcedureExecutor().getEnvironment(); // Refresh after master restart
+    AM = master.getAssignmentManager(); // Refresh after master restart
 
     try {
       AssignmentManagerUtil.createUnassignProceduresForSplitOrMerge(ENV,
@@ -160,9 +172,10 @@ public class TestAssignmentManagerUtil_RestartInjected {
     } catch (HBaseIOException e) {
       // expected
     }
+    final AssignmentManager finalAM = AM; // Create final copy for lambda
     IntStream.range(0, REGION_REPLICATION)
       .mapToObj(i -> RegionReplicaUtil.getRegionInfoForReplica(regionA, i))
-      .map(AM.getRegionStates()::getRegionStateNode).forEachOrdered(
+      .map(finalAM.getRegionStates()::getRegionStateNode).forEachOrdered(
         rn -> assertFalse("Should have unset the proc for " + rn, rn.isInTransition()));
 
     RestartFramework.at("after_verify_region_states")
@@ -171,5 +184,8 @@ public class TestAssignmentManagerUtil_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    ENV = master.getMasterProcedureExecutor().getEnvironment(); // Refresh after master restart
+    AM = master.getAssignmentManager(); // Refresh after master restart
   }
 }

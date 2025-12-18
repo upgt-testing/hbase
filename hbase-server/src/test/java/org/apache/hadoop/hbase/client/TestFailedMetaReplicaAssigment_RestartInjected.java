@@ -79,7 +79,8 @@ public class TestFailedMetaReplicaAssigment_RestartInjected {
   public void testFailedReplicaAssignment() throws InterruptedException {
     HMaster master = TEST_UTIL.getMiniHBaseCluster().getMaster();
     // waiting for master to come up
-    TEST_UTIL.waitFor(30000, () -> master.isInitialized());
+    final HMaster finalMaster = master;
+    TEST_UTIL.waitFor(30000, () -> finalMaster.isInitialized());
 
     RestartFramework.at("after_master_init")
         .on(TEST_UTIL.getMiniHBaseCluster())
@@ -87,15 +88,17 @@ public class TestFailedMetaReplicaAssigment_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = TEST_UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
 
     AssignmentManager am = master.getAssignmentManager();
     // showing one of the replicas got assigned
     RegionInfo metaReplicaHri =
       RegionReplicaUtil.getRegionInfoForReplica(RegionInfoBuilder.FIRST_META_REGIONINFO, 1);
     // we use assignAsync so we need to wait a bit
+    final AssignmentManager finalAm = am;
     TEST_UTIL.waitFor(30000, () -> {
       RegionStateNode metaReplicaRegionNode =
-        am.getRegionStates().getOrCreateRegionStateNode(metaReplicaHri);
+        finalAm.getRegionStates().getOrCreateRegionStateNode(metaReplicaHri);
       return metaReplicaRegionNode.getRegionLocation() != null;
     });
 
@@ -105,6 +108,8 @@ public class TestFailedMetaReplicaAssigment_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = TEST_UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
 
     // showing one of the replicas failed to be assigned
     RegionInfo metaReplicaHri2 =
@@ -123,6 +128,7 @@ public class TestFailedMetaReplicaAssigment_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = TEST_UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
 
     // showing master is active and running
     assertFalse(master.isStopping());

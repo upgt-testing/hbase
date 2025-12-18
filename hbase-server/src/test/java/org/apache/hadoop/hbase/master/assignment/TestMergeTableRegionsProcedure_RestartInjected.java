@@ -212,7 +212,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
 
     // collect AM metrics before test
     collectAssignmentManagerMetrics();
-    final ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+    ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
     MergeTableRegionsProcedure proc =
       new MergeTableRegionsProcedure(procExec.getEnvironment(), regionsToMerge, true);
     RestartFramework.at("after_create_merge_proc")
@@ -221,6 +221,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
     long procId = procExec.submitProcedure(proc);
     RestartFramework.at("after_submit_merge_proc")
         .on(UTIL.getMiniHBaseCluster())
@@ -228,6 +229,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
     ProcedureTestingUtility.waitProcedure(procExec, procId);
     RestartFramework.at("after_wait_merge_proc")
         .on(UTIL.getMiniHBaseCluster())
@@ -235,6 +237,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
     ProcedureTestingUtility.assertProcNotFailed(procExec, procId);
     MetaTableAccessor.fullScanMetaAndPrint(UTIL.getConnection());
     assertEquals(originalRegionCount - mergeCount + 1,
@@ -311,7 +314,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
   @Test
   public void testMergeTenRegions() throws Exception {
     final TableName tableName = TableName.valueOf(this.name.getMethodName());
-    final ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+    // Note: procExec is not used in this method after the restart
     UTIL.createMultiRegionTable(tableName, HConstants.CATALOG_FAMILY);
     RestartFramework.at("after_create_table_merge_ten")
         .on(UTIL.getMiniHBaseCluster())
@@ -334,7 +337,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
   @Test
   public void testMergeRegionsConcurrently() throws Exception {
     final TableName tableName = TableName.valueOf("testMergeRegionsConcurrently");
-    final ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+    ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
 
     List<RegionInfo> tableRegions = createTable(tableName);
     RestartFramework.at("after_create_table_concurrent")
@@ -343,6 +346,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     RegionInfo[] regionsToMerge1 = new RegionInfo[2];
     RegionInfo[] regionsToMerge2 = new RegionInfo[2];
@@ -370,6 +374,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
     ProcedureTestingUtility.waitProcedure(procExec, procId1);
     ProcedureTestingUtility.waitProcedure(procExec, procId2);
     RestartFramework.at("after_wait_concurrent_procs")
@@ -378,6 +383,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
     ProcedureTestingUtility.assertProcNotFailed(procExec, procId1);
     ProcedureTestingUtility.assertProcNotFailed(procExec, procId2);
     assertRegionCount(tableName, initialRegionCount - 2);
@@ -399,7 +405,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
   @Test
   public void testRecoveryAndDoubleExecution() throws Exception {
     final TableName tableName = TableName.valueOf("testRecoveryAndDoubleExecution");
-    final ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+    ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
 
     List<RegionInfo> tableRegions = createTable(tableName);
     RestartFramework.at("after_create_table_recovery")
@@ -408,6 +414,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     ProcedureTestingUtility.waitNoProcedureRunning(procExec);
     ProcedureTestingUtility.setKillIfHasParent(procExec, false);
@@ -418,6 +425,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     RegionInfo[] regionsToMerge = new RegionInfo[2];
     regionsToMerge[0] = tableRegions.get(0);
@@ -431,6 +439,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     // Restart the executor and execute the step twice
     MasterProcedureTestingUtility.testRecoveryAndDoubleExecution(procExec, procId);
@@ -440,6 +449,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
     ProcedureTestingUtility.assertProcNotFailed(procExec, procId);
 
     assertRegionCount(tableName, initialRegionCount - 1);
@@ -454,7 +464,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
   @Test
   public void testRollbackAndDoubleExecution() throws Exception {
     final TableName tableName = TableName.valueOf("testRollbackAndDoubleExecution");
-    final ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+    ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
 
     List<RegionInfo> tableRegions = createTable(tableName);
     RestartFramework.at("after_create_table_rollback")
@@ -463,6 +473,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     ProcedureTestingUtility.waitNoProcedureRunning(procExec);
     ProcedureTestingUtility.setKillAndToggleBeforeStoreUpdate(procExec, true);
@@ -472,6 +483,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     RegionInfo[] regionsToMerge = new RegionInfo[2];
     regionsToMerge[0] = tableRegions.get(0);
@@ -485,6 +497,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     // Failing before MERGE_TABLE_REGIONS_UPDATE_META we should trigger the rollback
     // NOTE: the 8 (number of MERGE_TABLE_REGIONS_UPDATE_META step) is
@@ -518,7 +531,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
   @Test
   public void testMergeWithoutPONR() throws Exception {
     final TableName tableName = TableName.valueOf("testMergeWithoutPONR");
-    final ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+    ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
 
     List<RegionInfo> tableRegions = createTable(tableName);
     RestartFramework.at("after_create_table_without_ponr")
@@ -527,6 +540,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     ProcedureTestingUtility.waitNoProcedureRunning(procExec);
     ProcedureTestingUtility.setKillAndToggleBeforeStoreUpdate(procExec, true);
@@ -536,6 +550,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     RegionInfo[] regionsToMerge = new RegionInfo[2];
     regionsToMerge[0] = tableRegions.get(0);
@@ -549,6 +564,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     // Execute until step 9 of split procedure
     // NOTE: step 9 is after step MERGE_TABLE_REGIONS_UPDATE_META
@@ -559,6 +575,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     // Unset Toggle Kill and make ProcExec work correctly
     ProcedureTestingUtility.setKillAndToggleBeforeStoreUpdate(procExec, false);
@@ -570,6 +587,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     assertRegionCount(tableName, initialRegionCount - 1);
     RestartFramework.at("after_verify_without_ponr")
@@ -583,7 +601,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
   @Test
   public void testMergingRegionWhileTakingSnapshot() throws Exception {
     final TableName tableName = TableName.valueOf("testMergingRegionWhileTakingSnapshot");
-    final ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+    ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
 
     List<RegionInfo> tableRegions = createTable(tableName);
     RestartFramework.at("after_create_table_with_snapshot")
@@ -592,6 +610,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     ProcedureTestingUtility.waitNoProcedureRunning(procExec);
 
@@ -611,6 +630,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     RegionInfo[] regionsToMerge = new RegionInfo[2];
     regionsToMerge[0] = tableRegions.get(0);
@@ -624,6 +644,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     ProcedureTestingUtility
       .waitProcedure(UTIL.getHBaseCluster().getMaster().getMasterProcedureExecutor(), mergeProcId);
@@ -635,6 +656,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     assertProcFailed(procExec, mergeProcId);
     assertEquals(initialRegionCount, UTIL.getAdmin().getRegions(tableName).size());
@@ -649,7 +671,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
   @Test
   public void testMergeDetectsModifyTableProcedure() throws Exception {
     final TableName tableName = TableName.valueOf(name.getMethodName());
-    final ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+    ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
 
     List<RegionInfo> regions = createTable(tableName);
     RestartFramework.at("after_create_table_modify")
@@ -658,6 +680,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     RegionServerHostingReplicaSlowOpenCoprocessor.slowDownReplicaOpen = true;
     TableDescriptor td = TableDescriptorBuilder.newBuilder(admin.getDescriptor(tableName))
@@ -670,6 +693,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     // Merge regions of the table, the MergeTableRegionsProcedure will fail because there is a
     // ModifyTableProcedure in progress
@@ -682,6 +706,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
     ProcedureTestingUtility.waitProcedure(procExec, mergeProcId);
     RestartFramework.at("after_wait_merge_with_modify")
         .on(UTIL.getMiniHBaseCluster())
@@ -689,6 +714,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
     ProcedureTestingUtility.assertProcFailed(procExec, mergeProcId);
 
     RegionServerHostingReplicaSlowOpenCoprocessor.slowDownReplicaOpen = false;
@@ -699,6 +725,7 @@ public class TestMergeTableRegionsProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
     ProcedureTestingUtility.assertProcNotFailed(procExec, modifyProcId);
     RestartFramework.at("after_verify_modify_conflict")
         .on(UTIL.getMiniHBaseCluster())

@@ -136,6 +136,8 @@ public class TestTableStateManager_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = TEST_UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+
     assertTrue(MetaTableAccessor.getTableState(TEST_UTIL.getConnection(), tableName).getState()
       .equals(TableState.State.DISABLED));
     RestartFramework.at("after_verify_migration")

@@ -138,6 +138,7 @@ public class TestMasterRegionMutation2_RestartInjected extends TestMasterRegionM
         .execute();
 
     HMaster master = TEST_UTIL.getHBaseCluster().getMaster();
+    final HMaster masterForLambda = master;
 
     TEST_UTIL.waitFor(5000, 1000, () -> {
       LOG.info("numRegions0: {} , numRegions1: {} , numRegions2: {}", numRegions0, numRegions1,
@@ -147,19 +148,19 @@ public class TestMasterRegionMutation2_RestartInjected extends TestMasterRegionM
         cluster.getRegionServer(1).getNumberOfOnlineRegions(),
         cluster.getRegionServer(2).getNumberOfOnlineRegions());
       LOG.info("Num of successfully completed procedures: {} , num of all procedures: {}",
-        master.getMasterProcedureExecutor().getProcedures().stream()
+        masterForLambda.getMasterProcedureExecutor().getProcedures().stream()
           .filter(masterProcedureEnvProcedure -> masterProcedureEnvProcedure.getState()
               == ProcedureProtos.ProcedureState.SUCCESS)
           .count(),
-        master.getMasterProcedureExecutor().getProcedures().size());
+        masterForLambda.getMasterProcedureExecutor().getProcedures().size());
       return (numRegions0 + numRegions1 + numRegions2)
           == (cluster.getRegionServer(0).getNumberOfOnlineRegions()
             + cluster.getRegionServer(1).getNumberOfOnlineRegions()
             + cluster.getRegionServer(2).getNumberOfOnlineRegions())
-        && master.getMasterProcedureExecutor().getProcedures().stream()
+        && masterForLambda.getMasterProcedureExecutor().getProcedures().stream()
           .filter(masterProcedureEnvProcedure -> masterProcedureEnvProcedure.getState()
               == ProcedureProtos.ProcedureState.SUCCESS)
-          .count() == master.getMasterProcedureExecutor().getProcedures().size();
+          .count() == masterForLambda.getMasterProcedureExecutor().getProcedures().size();
     });
 
     RestartFramework.at("after_procedure_completion")
@@ -168,6 +169,7 @@ public class TestMasterRegionMutation2_RestartInjected extends TestMasterRegionM
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = TEST_UTIL.getHBaseCluster().getMaster(); // Refresh after master restart
 
     TEST_UTIL.waitFor(5000, 1000, () -> {
       HbckChore hbck = new HbckChore(TEST_UTIL.getHBaseCluster().getMaster());

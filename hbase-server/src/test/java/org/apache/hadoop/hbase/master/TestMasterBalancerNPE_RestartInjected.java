@@ -101,7 +101,7 @@ public class TestMasterBalancerNPE_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
-    final HMaster master = TEST_UTIL.getHBaseCluster().getMaster();
+    HMaster master = TEST_UTIL.getHBaseCluster().getMaster();
     List<RegionInfo> regionInfos = TEST_UTIL.getAdmin().getRegions(tableName);
     assertTrue(regionInfos.size() == 1);
     final ServerName serverName1 =
@@ -187,6 +187,8 @@ public class TestMasterBalancerNPE_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = TEST_UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    assignmentManager = master.getAssignmentManager(); // Refresh after master restart
 
     try {
       final AtomicReference<Throwable> exceptionRef = new AtomicReference<Throwable>(null);
@@ -224,6 +226,8 @@ public class TestMasterBalancerNPE_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      master = TEST_UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+      assignmentManager = master.getAssignmentManager(); // Refresh after master restart
       /**
        * Before HBASE-26712,here invokes {@link AssignmentManager#balance(RegionPlan)} which may
        * throw NPE.

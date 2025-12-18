@@ -484,6 +484,7 @@ public class TestAdmin2_RestartInjected extends TestAdminBase {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = cluster.getMaster(); // Refresh after master restart
     List<RegionInfo> tableRegions = localAdmin.getRegions(tableName);
     RegionInfo hri = tableRegions.get(0);
     AssignmentManager am = master.getAssignmentManager();

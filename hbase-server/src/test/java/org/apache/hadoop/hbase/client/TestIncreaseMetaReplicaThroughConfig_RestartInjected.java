@@ -64,8 +64,11 @@ public class TestIncreaseMetaReplicaThroughConfig_RestartInjected extends MetaWi
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
-    oldMaster.stop("Restarting");
-    TEST_UTIL.waitFor(30000, () -> oldMaster.isStopped());
+    oldMaster = TEST_UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    oldTds = oldMaster.getTableDescriptors();
+    final HMaster masterToStop = oldMaster;
+    masterToStop.stop("Restarting");
+    TEST_UTIL.waitFor(30000, () -> masterToStop.isStopped());
     RestartFramework.at("after_master_stop")
         .on(TEST_UTIL.getMiniHBaseCluster())
         .restart("regionserver")

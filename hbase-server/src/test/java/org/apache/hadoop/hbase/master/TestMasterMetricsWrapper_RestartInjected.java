@@ -72,6 +72,7 @@ public class TestMasterMetricsWrapper_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = TEST_UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
 
     assertEquals(master.getRegionNormalizerManager().getSplitPlanCount(), info.getSplitPlanCount(),
       0);
@@ -110,6 +111,7 @@ public class TestMasterMetricsWrapper_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = TEST_UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
     // We stopped the regionserver but could take a while for the master to notice it so hang here
     // until it does... then move forward to see if metrics wrapper notices.
     while (
@@ -141,6 +143,7 @@ public class TestMasterMetricsWrapper_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = TEST_UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
 
     assertEquals(1, info.getNumDrainingRegionServers());
     assertEquals(master.getServerManager().getOnlineServersList().get(0).toString(),

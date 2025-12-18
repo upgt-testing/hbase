@@ -95,6 +95,8 @@ public class TestServerCrashProcedureCarryingMetaStuck_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    executor = master.getMasterProcedureExecutor(); // Refresh after master restart
     proc.waitUntilArrive();
     RestartFramework.at("after_procedure_arrive")
         .on(UTIL.getMiniHBaseCluster())
@@ -102,6 +104,8 @@ public class TestServerCrashProcedureCarryingMetaStuck_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    executor = master.getMasterProcedureExecutor(); // Refresh after master restart
     try (AsyncConnection conn =
       ConnectionFactory.createAsyncConnection(UTIL.getConfiguration()).get()) {
       AsyncAdmin admin = conn.getAdmin();
@@ -113,9 +117,12 @@ public class TestServerCrashProcedureCarryingMetaStuck_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+      executor = master.getMasterProcedureExecutor(); // Refresh after master restart
+      final ProcedureExecutor<MasterProcedureEnv> execForLambda1 = executor;
 
       UTIL.waitFor(30000,
-        () -> executor.getProcedures().stream()
+        () -> execForLambda1.getProcedures().stream()
           .filter(p -> p instanceof TransitRegionStateProcedure)
           .map(p -> (TransitRegionStateProcedure) p)
           .anyMatch(p -> Bytes.equals(hri.getRegionName(), p.getRegion().getRegionName())));
@@ -125,6 +132,8 @@ public class TestServerCrashProcedureCarryingMetaStuck_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+      executor = master.getMasterProcedureExecutor(); // Refresh after master restart
       proc.resume();
       RestartFramework.at("after_procedure_resume")
           .on(UTIL.getMiniHBaseCluster())
@@ -132,7 +141,10 @@ public class TestServerCrashProcedureCarryingMetaStuck_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
-      UTIL.waitFor(30000, () -> executor.isFinished(procId));
+      master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+      executor = master.getMasterProcedureExecutor(); // Refresh after master restart
+      final ProcedureExecutor<MasterProcedureEnv> execForLambda2 = executor;
+      UTIL.waitFor(30000, () -> execForLambda2.isFinished(procId));
       RestartFramework.at("after_procedure_finish")
           .on(UTIL.getMiniHBaseCluster())
           .restart("master")

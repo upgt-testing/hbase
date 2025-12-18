@@ -173,6 +173,7 @@ public class TestMasterRegionMutation1_RestartInjected {
     // Ensure:
     // 1. num of regions before and after master abort remain same
     // 2. all procedures are successfully completed
+    final HMaster finalMaster = master;
     TEST_UTIL.waitFor(5000, 1000, () -> {
       LOG.info("numRegions0: {} , numRegions1: {} , numRegions2: {}", numRegions0, numRegions1,
         numRegions2);
@@ -181,19 +182,19 @@ public class TestMasterRegionMutation1_RestartInjected {
         cluster.getRegionServer(1).getNumberOfOnlineRegions(),
         cluster.getRegionServer(2).getNumberOfOnlineRegions());
       LOG.info("Num of successfully completed procedures: {} , num of all procedures: {}",
-        master.getMasterProcedureExecutor().getProcedures().stream()
+        finalMaster.getMasterProcedureExecutor().getProcedures().stream()
           .filter(masterProcedureEnvProcedure -> masterProcedureEnvProcedure.getState()
               == ProcedureProtos.ProcedureState.SUCCESS)
           .count(),
-        master.getMasterProcedureExecutor().getProcedures().size());
+        finalMaster.getMasterProcedureExecutor().getProcedures().size());
       return (numRegions0 + numRegions1 + numRegions2)
           == (cluster.getRegionServer(0).getNumberOfOnlineRegions()
             + cluster.getRegionServer(1).getNumberOfOnlineRegions()
             + cluster.getRegionServer(2).getNumberOfOnlineRegions())
-        && master.getMasterProcedureExecutor().getProcedures().stream()
+        && finalMaster.getMasterProcedureExecutor().getProcedures().stream()
           .filter(masterProcedureEnvProcedure -> masterProcedureEnvProcedure.getState()
               == ProcedureProtos.ProcedureState.SUCCESS)
-          .count() == master.getMasterProcedureExecutor().getProcedures().size();
+          .count() == finalMaster.getMasterProcedureExecutor().getProcedures().size();
     });
 
     RestartFramework.at("after_procedures_complete")
@@ -202,6 +203,7 @@ public class TestMasterRegionMutation1_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = TEST_UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
 
     // Ensure we have no inconsistent regions
     TEST_UTIL.waitFor(5000, 1000, () -> {

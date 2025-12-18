@@ -143,6 +143,7 @@ public class TestFavoredNodeTableImport_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
 
     UTIL.waitTableAvailable(desc.getTableName());
 

@@ -180,6 +180,8 @@ public class TestRegionAssignedToMultipleRegionServers_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    rsn = am.getRegionStates().getRegionStateNode(region); // Refresh after master restart
 
     ServerName sn = rsn.getRegionLocation();
     ARRIVE = new CountDownLatch(1);
@@ -201,6 +203,8 @@ public class TestRegionAssignedToMultipleRegionServers_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    rsn = am.getRegionStates().getRegionStateNode(region); // Refresh after master restart
 
     // let's restart the master
     EXCLUDE_SERVERS.add(rsn.getRegionLocation());
@@ -224,6 +228,7 @@ public class TestRegionAssignedToMultipleRegionServers_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     // sleep a while to reproduce the problem, as after the fix in HBASE-21472 the execution logic
     // is changed so the old code to reproduce the problem can not compile...
@@ -245,6 +250,7 @@ public class TestRegionAssignedToMultipleRegionServers_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     HRegionServer rs = UTIL.getMiniHBaseCluster().getRegionServer(sn);
     assertNotNull(rs.getRegion(region.getEncodedName()));

@@ -170,6 +170,7 @@ public class TestRaceBetweenSCPAndTRSP_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     Future<byte[]> moveFuture = am.moveAsync(new RegionPlan(region, sn, sn));
     RestartFramework.at("after_move_async")
@@ -185,6 +186,7 @@ public class TestRaceBetweenSCPAndTRSP_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     // Kill the region server and trigger a SCP
     UTIL.getMiniHBaseCluster().killRegionServer(sn);
@@ -194,6 +196,7 @@ public class TestRaceBetweenSCPAndTRSP_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
     // Wait until the SCP reaches the getRegionsOnServer call
     arriveGetRegionsOnServer.await();
     RestartFramework.at("after_getregions_arrive")
@@ -219,6 +222,7 @@ public class TestRaceBetweenSCPAndTRSP_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     // Resume the TRSP, it should be able to finish
     RESUME_REGION_OPENING.countDown();
@@ -235,6 +239,7 @@ public class TestRaceBetweenSCPAndTRSP_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     ProcedureExecutor<?> procExec =
       UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
@@ -255,7 +260,9 @@ public class TestRaceBetweenSCPAndTRSP_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
-    UTIL.waitFor(60000, () -> procExec.isFinished(scpProcId));
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
+    final ProcedureExecutor<?> finalProcExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
+    UTIL.waitFor(60000, () -> finalProcExec.isFinished(scpProcId));
     RestartFramework.at("after_scp_finished")
         .on(UTIL.getMiniHBaseCluster())
         .restart("regionserver")

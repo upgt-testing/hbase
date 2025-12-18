@@ -119,6 +119,8 @@ public class TestBalancer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = TEST_UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    assignmentManager = master.getAssignmentManager(); // Refresh after master restart
 
     TableStateManager tableStateManager = master.getTableStateManager();
     ServerManager serverManager = master.getServerManager();

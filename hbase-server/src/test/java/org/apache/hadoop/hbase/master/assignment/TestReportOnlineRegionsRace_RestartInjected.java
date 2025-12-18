@@ -150,9 +150,10 @@ public class TestReportOnlineRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    HMaster master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
     ProcedureExecutor<MasterProcedureEnv> procExec =
-      UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
-    AssignmentManager am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager();
+      master.getMasterProcedureExecutor();
+    AssignmentManager am = master.getAssignmentManager();
     RestartFramework.at("after_get_assignment_manager")
         .on(UTIL.getMiniHBaseCluster())
         .restart("regionserver")
@@ -166,6 +167,9 @@ public class TestReportOnlineRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
+    procExec = master.getMasterProcedureExecutor(); // Refresh after master restart
 
     // halt a regionServerReport
     RESUME_RS_REPORT = new CountDownLatch(1);
@@ -177,6 +181,9 @@ public class TestReportOnlineRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
+    procExec = master.getMasterProcedureExecutor(); // Refresh after master restart
 
     ARRIVE_RS_REPORT.await();
     RestartFramework.at("after_arrive_rs_report")
@@ -196,6 +203,9 @@ public class TestReportOnlineRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
+    procExec = master.getMasterProcedureExecutor(); // Refresh after master restart
     TransitRegionStateProcedure proc =
       procExec.getProcedures().stream().filter(p -> p instanceof TransitRegionStateProcedure)
         .filter(p -> !p.isFinished()).map(p -> (TransitRegionStateProcedure) p).findAny().get();
@@ -214,6 +224,9 @@ public class TestReportOnlineRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
+    procExec = master.getMasterProcedureExecutor(); // Refresh after master restart
     // resume the reportRegionStateTransition to finish the CloseRegionProcedure
     RESUME_REPORT_STATE.countDown();
     RestartFramework.at("after_resume_report_state")
@@ -222,6 +235,9 @@ public class TestReportOnlineRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
+    procExec = master.getMasterProcedureExecutor(); // Refresh after master restart
     // wait until we schedule the OpenRegionProcedure
     UTIL.waitFor(10000,
       () -> proc.getCurrentStateId() == REGION_STATE_TRANSITION_CONFIRM_OPENED_VALUE);
@@ -239,6 +255,9 @@ public class TestReportOnlineRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
+    procExec = master.getMasterProcedureExecutor(); // Refresh after master restart
     // resume the region server report
     RESUME_RS_REPORT.countDown();
     RestartFramework.at("after_resume_rs_report")
@@ -247,6 +266,9 @@ public class TestReportOnlineRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
+    procExec = master.getMasterProcedureExecutor(); // Refresh after master restart
     // wait until it finishes, it will find that the region is opened on the rs
     FINISH_RS_REPORT.await();
     RestartFramework.at("after_finish_rs_report")
@@ -263,6 +285,9 @@ public class TestReportOnlineRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
+    procExec = master.getMasterProcedureExecutor(); // Refresh after master restart
     // wait until the TRSP is done
     future.get();
     RestartFramework.at("after_trsp_done")
@@ -271,6 +296,9 @@ public class TestReportOnlineRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
+    procExec = master.getMasterProcedureExecutor(); // Refresh after master restart
 
     // confirm that the region can still be write, i.e, the regionServerReport method should not
     // change the region state to OPEN
@@ -285,5 +313,8 @@ public class TestReportOnlineRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
+    procExec = master.getMasterProcedureExecutor(); // Refresh after master restart
   }
 }

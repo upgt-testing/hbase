@@ -93,6 +93,7 @@ public class TestHRegionOnCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      master = cluster.getMaster(); // Refresh after master restart
 
       assertTrue(hbaseAdmin.isTableAvailable(tableName));
 
@@ -135,6 +136,7 @@ public class TestHRegionOnCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      master = cluster.getMaster(); // Refresh after master restart
 
       // Put data: r2->v2
       LOG.info("Loading r2 to v2 into " + tableName);
@@ -161,6 +163,7 @@ public class TestHRegionOnCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      master = cluster.getMaster(); // Refresh after master restart
 
       // Put data: r3->v3
       LOG.info("Loading r3 to v3 into " + tableName);

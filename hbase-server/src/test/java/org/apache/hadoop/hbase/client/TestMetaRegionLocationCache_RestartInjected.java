@@ -140,6 +140,10 @@ public class TestMetaRegionLocationCache_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    // Re-fetch standBy master after restart - it may have become active or changed
+    standBy = TEST_UTIL.getMiniHBaseCluster().getMaster(1) != null
+      ? TEST_UTIL.getMiniHBaseCluster().getMaster(1)
+      : TEST_UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
     verifyCachedMetaLocations(standBy);
     RestartFramework.at("after_standby_cache_verification")
         .on(TEST_UTIL.getMiniHBaseCluster())

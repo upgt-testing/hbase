@@ -197,6 +197,7 @@ public class TestReportRegionStateTransitionFromDeadServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     RESUME_REPORT = new CountDownLatch(1);
     ARRIVE_REPORT = new CountDownLatch(1);
@@ -214,6 +215,7 @@ public class TestReportRegionStateTransitionFromDeadServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
     ARRIVE_REPORT.await();
     RestartFramework.at("after_report_arrive")
         .on(UTIL.getMiniHBaseCluster())
@@ -230,6 +232,7 @@ public class TestReportRegionStateTransitionFromDeadServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
     rs0.abort("For testing!");
     RestartFramework.at("after_rs0_abort")
         .on(UTIL.getMiniHBaseCluster())
@@ -237,6 +240,7 @@ public class TestReportRegionStateTransitionFromDeadServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     ARRIVE_GET_REGIONS.await();
     RestartFramework.at("after_getregions_arrive")
@@ -252,6 +256,7 @@ public class TestReportRegionStateTransitionFromDeadServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     try {
       future.get(15, TimeUnit.SECONDS);
@@ -274,6 +279,7 @@ public class TestReportRegionStateTransitionFromDeadServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
     // wait until there are no running procedures, no SCP and no TRSP
     UTIL.waitFor(30000, () -> UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor()
       .getActiveProcIds().isEmpty());

@@ -204,6 +204,8 @@ public class TestSCPGetRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
 
     ARRIVE_REPORT = new CountDownLatch(1);
     RESUME_REPORT = new CountDownLatch(1);
@@ -226,6 +228,8 @@ public class TestSCPGetRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
 
     // let's get procedure lock to stop the TRSP
     IdLock procExecutionLock = master.getMasterProcedureExecutor().getProcExecutionLock();
@@ -252,6 +256,8 @@ public class TestSCPGetRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
 
     // wait until we try to get the region list of the region server
     ARRIVE_GET.await();
@@ -274,6 +280,8 @@ public class TestSCPGetRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
 
     // resume the SCP
     EXCLUDE_SERVERS.add(dest);
@@ -287,7 +295,8 @@ public class TestSCPGetRegionsRace_RestartInjected {
         .execute();
 
     // wait until there are no SCPs and TRSPs
-    UTIL.waitFor(60000, () -> master.getProcedures().stream().allMatch(p -> p.isFinished()
+    final HMaster finalMaster = master; // Create final copy for lambda
+    UTIL.waitFor(60000, () -> finalMaster.getProcedures().stream().allMatch(p -> p.isFinished()
       || (!(p instanceof ServerCrashProcedure) && !(p instanceof TransitRegionStateProcedure))));
 
     RestartFramework.at("after_wait_for_procedures")
@@ -296,6 +305,8 @@ public class TestSCPGetRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
 
     // assert the region is only on the dest server.
     HRegionServer rs = UTIL.getMiniHBaseCluster().getRegionServer(dest);

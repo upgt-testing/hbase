@@ -86,6 +86,7 @@ public class TestAssignmentManagerLoadMetaRegionState_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     HMaster newMaster = UTIL.getMiniHBaseCluster().startMaster().getMaster();
 
@@ -126,5 +127,6 @@ public class TestAssignmentManagerLoadMetaRegionState_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
   }
 }

@@ -207,6 +207,7 @@ public class TestFavoredStochasticBalancerPickers_RestartInjected extends Balanc
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = cluster.getMaster(); // Refresh after master restart
 
     Map<ServerName, List<RegionInfo>> serverAssignments = Maps.newHashMap();
     ClusterMetrics status = admin.getClusterMetrics(EnumSet.of(Option.LIVE_SERVERS));
@@ -230,6 +231,7 @@ public class TestFavoredStochasticBalancerPickers_RestartInjected extends Balanc
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = this.cluster.getMaster(); // Refresh after master restart
 
     cluster.sortServersByRegionCount();
     Integer[] servers = cluster.serverIndicesSortedByRegionCount;

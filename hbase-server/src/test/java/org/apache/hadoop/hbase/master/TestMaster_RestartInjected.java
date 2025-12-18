@@ -250,6 +250,7 @@ public class TestMaster_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    master = TEST_UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
     try {
       List<RegionInfo> tableRegions = admin.getRegions(tableName);
       RestartFramework.at("after_get_regions")

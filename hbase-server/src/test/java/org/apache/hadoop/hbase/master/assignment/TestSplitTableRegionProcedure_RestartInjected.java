@@ -156,7 +156,7 @@ public class TestSplitTableRegionProcedure_RestartInjected {
   @Test
   public void testRollbackForSplitTableRegionWithReplica() throws Exception {
     final TableName tableName = TableName.valueOf(name.getMethodName());
-    final ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+    ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
 
     RegionServerHostingReplicaSlowOpenCoprocessor.slowDownReplicaOpen = true;
     RegionInfo[] regions =
@@ -168,6 +168,7 @@ public class TestSplitTableRegionProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     TableDescriptor td = TableDescriptorBuilder.newBuilder(UTIL.getAdmin().getDescriptor(tableName))
       .setRegionReplication(2).build();
@@ -179,6 +180,7 @@ public class TestSplitTableRegionProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     // wait until the primary region is online.
     HBaseTestingUtility.await(2000, () -> {
@@ -215,6 +217,7 @@ public class TestSplitTableRegionProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     // Let replica parent region open.
     RegionServerHostingReplicaSlowOpenCoprocessor.slowDownReplicaOpen = false;
@@ -251,7 +254,7 @@ public class TestSplitTableRegionProcedure_RestartInjected {
   @Test
   public void testSplitTableRegion() throws Exception {
     final TableName tableName = TableName.valueOf(name.getMethodName());
-    final ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+    ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
 
     RegionInfo[] regions = MasterProcedureTestingUtility.createTable(procExec, tableName, null,
       columnFamilyName1, columnFamilyName2);
@@ -262,6 +265,7 @@ public class TestSplitTableRegionProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     insertData(UTIL, tableName, rowCount, startRowNum, columnFamilyName1, columnFamilyName2);
 
@@ -291,6 +295,7 @@ public class TestSplitTableRegionProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     // Wait the completion
     ProcedureTestingUtility.waitProcedure(procExec, procId);
@@ -316,7 +321,7 @@ public class TestSplitTableRegionProcedure_RestartInjected {
   @Test
   public void testSplitTableRegionNoStoreFile() throws Exception {
     final TableName tableName = TableName.valueOf(name.getMethodName());
-    final ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+    ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
 
     RegionInfo[] regions = MasterProcedureTestingUtility.createTable(procExec, tableName, null,
       columnFamilyName1, columnFamilyName2);
@@ -327,6 +332,7 @@ public class TestSplitTableRegionProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     int splitRowNum = startRowNum + rowCount / 2;
     byte[] splitKey = Bytes.toBytes("" + splitRowNum);
@@ -369,7 +375,7 @@ public class TestSplitTableRegionProcedure_RestartInjected {
   @Test
   public void testSplitTableRegionUnevenDaughter() throws Exception {
     final TableName tableName = TableName.valueOf(name.getMethodName());
-    final ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+    ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
 
     RegionInfo[] regions = MasterProcedureTestingUtility.createTable(procExec, tableName, null,
       columnFamilyName1, columnFamilyName2);
@@ -380,6 +386,7 @@ public class TestSplitTableRegionProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     insertData(UTIL, tableName, rowCount, startRowNum, columnFamilyName1, columnFamilyName2);
 
@@ -410,6 +417,7 @@ public class TestSplitTableRegionProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = getMasterProcedureExecutor(); // Refresh after master restart
 
     // Wait the completion
     ProcedureTestingUtility.waitProcedure(procExec, procId);

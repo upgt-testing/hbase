@@ -218,15 +218,18 @@ public class TestRollbackSCP_RestartInjected {
         .withMode(RestartMode.GRACEFUL)
         .execute();
     // make sure that finally we could successfully rollback the procedure
-    while (scp.getState() != ProcedureState.FAILED || !procExec.isRunning()) {
-      MasterProcedureTestingUtility.restartMasterProcedureExecutor(procExec);
+    // Use fresh procExec reference inside loop since master may be restarted
+    ProcedureExecutor<MasterProcedureEnv> currentProcExec = procExec;
+    while (scp.getState() != ProcedureState.FAILED || !currentProcExec.isRunning()) {
+      MasterProcedureTestingUtility.restartMasterProcedureExecutor(currentProcExec);
       RestartFramework.at("after_procedure_restart")
           .on(UTIL.getMiniHBaseCluster())
           .restart("master")
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
-      ProcedureTestingUtility.waitProcedure(procExec, scp);
+      currentProcExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
+      ProcedureTestingUtility.waitProcedure(currentProcExec, scp);
     }
     RestartFramework.at("after_scp_failed")
         .on(UTIL.getMiniHBaseCluster())
@@ -242,8 +245,9 @@ public class TestRollbackSCP_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    currentProcExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor(); // Refresh after master restart
     // make sure all sub procedures are cleaned up
-    assertThat(procExec.getProcedures(), everyItem(not(subProcOf(scp))));
+    assertThat(currentProcExec.getProcedures(), everyItem(not(subProcOf(scp))));
     RestartFramework.at("after_verify_subprocs_cleaned")
         .on(UTIL.getMiniHBaseCluster())
         .restart("regionserver")

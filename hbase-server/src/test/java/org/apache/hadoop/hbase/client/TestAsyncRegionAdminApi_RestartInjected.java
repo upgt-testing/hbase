@@ -119,6 +119,9 @@ public class TestAsyncRegionAdminApi_RestartInjected extends TestAsyncAdminBase 
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = TEST_UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    am = master.getAssignmentManager(); // Refresh after master restart
+    regionStates = am.getRegionStates(); // Refresh after master restart
     assertFalse(am.getRegionStates().getRegionStateNode(hri).isInTransition());
     assertTrue(regionStates.getRegionState(hri).isClosed());
   }

@@ -179,6 +179,8 @@ public class TestMasterObserverPostCalls_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    observer = master.getMasterCoprocessorHost().findCoprocessor(MasterObserverForTest.class); // Refresh after master restart
 
     try {
       admin.deleteNamespace(ns);
@@ -242,6 +244,8 @@ public class TestMasterObserverPostCalls_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    observer = master.getMasterCoprocessorHost().findCoprocessor(MasterObserverForTest.class); // Refresh after master restart
 
     try {
       admin.modifyNamespace(NamespaceDescriptor.create("nonexistent").build());
@@ -284,6 +288,8 @@ public class TestMasterObserverPostCalls_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    observer = master.getMasterCoprocessorHost().findCoprocessor(MasterObserverForTest.class); // Refresh after master restart
 
     // Validate that the post hook is called
     int preCount = observer.postHookCalls.get();
@@ -331,6 +337,8 @@ public class TestMasterObserverPostCalls_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    observer = master.getMasterCoprocessorHost().findCoprocessor(MasterObserverForTest.class); // Refresh after master restart
 
     // Validate that the post hook is called
     int preCount = observer.postHookCalls.get();
@@ -380,6 +388,8 @@ public class TestMasterObserverPostCalls_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    observer = master.getMasterCoprocessorHost().findCoprocessor(MasterObserverForTest.class); // Refresh after master restart
 
     // Validate that the post hook is called
     int preCount = observer.postHookCalls.get();
@@ -391,6 +401,8 @@ public class TestMasterObserverPostCalls_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    observer = master.getMasterCoprocessorHost().findCoprocessor(MasterObserverForTest.class); // Refresh after master restart
 
     int postCount = observer.postHookCalls.get();
     assertEquals("Expected 1 invocation of postModifyTable", preCount + 1, postCount);
@@ -430,6 +442,8 @@ public class TestMasterObserverPostCalls_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    observer = master.getMasterCoprocessorHost().findCoprocessor(MasterObserverForTest.class); // Refresh after master restart
 
     // Validate that the post hook is called
     int preCount = observer.postHookCalls.get();
@@ -441,6 +455,8 @@ public class TestMasterObserverPostCalls_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    observer = master.getMasterCoprocessorHost().findCoprocessor(MasterObserverForTest.class); // Refresh after master restart
 
     int postCount = observer.postHookCalls.get();
     assertEquals("Expected 1 invocation of postDisableTable", preCount + 1, postCount);
@@ -479,6 +495,8 @@ public class TestMasterObserverPostCalls_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    observer = master.getMasterCoprocessorHost().findCoprocessor(MasterObserverForTest.class); // Refresh after master restart
 
     admin.disableTable(td.getTableName());
 
@@ -488,6 +506,8 @@ public class TestMasterObserverPostCalls_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    observer = master.getMasterCoprocessorHost().findCoprocessor(MasterObserverForTest.class); // Refresh after master restart
 
     // Validate that the post hook is called
     int preCount = observer.postHookCalls.get();
@@ -499,6 +519,8 @@ public class TestMasterObserverPostCalls_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
+    observer = master.getMasterCoprocessorHost().findCoprocessor(MasterObserverForTest.class); // Refresh after master restart
 
     int postCount = observer.postHookCalls.get();
     assertEquals("Expected 1 invocation of postDeleteTable", preCount + 1, postCount);
