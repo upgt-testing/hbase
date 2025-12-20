@@ -1,6 +1,8 @@
 package org.restarttest.adapter.hbase;
 
 import org.apache.hadoop.hbase.MiniHBaseCluster;
+import org.apache.hadoop.hbase.regionserver.HRegion;
+import org.apache.hadoop.hbase.regionserver.HRegionServer;
 import org.restarttest.adapter.hbase.health.HBaseMasterActiveCheck;
 import org.restarttest.adapter.hbase.health.HBaseMetaTableAccessibleCheck;
 import org.restarttest.adapter.hbase.health.HBaseRegionServersRegisteredCheck;
@@ -163,9 +165,15 @@ public class HBaseClusterAdapter implements ClusterAdapter<MiniHBaseCluster> {
 
         switch (mode) {
             case GRACEFUL:
-                // Stop master gracefully, then start new one
+                // Graceful restart: stop master cleanly, allowing proper state transitions
+                // Masters handle procedures/metadata so no region flush is needed
+                LOG.info("Initiating graceful shutdown of Master {}", masterIndex);
                 cluster.stopMaster(masterIndex);
                 cluster.waitOnMaster(masterIndex);
+
+                // Small delay to allow ZK state and cluster state to propagate
+                Thread.sleep(100);
+
                 cluster.startMaster();
                 break;
 
@@ -205,9 +213,17 @@ public class HBaseClusterAdapter implements ClusterAdapter<MiniHBaseCluster> {
 
         switch (mode) {
             case GRACEFUL:
+                // Graceful restart: flush all regions before stopping to ensure data durability
+                // This ensures all memstore data is persisted to HFiles before shutdown
+                flushRegionServerRegions(cluster, rsIndex);
+
                 // Stop regionserver gracefully, then start new one
                 cluster.stopRegionServer(rsIndex);
                 cluster.waitOnRegionServer(rsIndex);
+
+                // Small delay to allow region reassignment state to propagate
+                Thread.sleep(100);
+
                 cluster.startRegionServerAndWait(60000);
                 break;
 
@@ -231,5 +247,57 @@ public class HBaseClusterAdapter implements ClusterAdapter<MiniHBaseCluster> {
         }
 
         LOG.info("RegionServer {} restarted successfully", rsIndex);
+    }
+
+    /**
+     * Flush all regions on a specific RegionServer before graceful shutdown.
+     * <p>
+     * This ensures all memstore data is persisted to HFiles before the server stops,
+     * providing maximum data durability and faster restart (no WAL replay needed for
+     * flushed data).
+     *
+     * @param cluster the MiniHBaseCluster
+     * @param rsIndex the index of the RegionServer to flush
+     */
+    private void flushRegionServerRegions(MiniHBaseCluster cluster, int rsIndex) {
+        try {
+            HRegionServer server = cluster.getRegionServer(rsIndex);
+            if (server == null) {
+                LOG.warn("RegionServer {} not found, skipping pre-flush", rsIndex);
+                return;
+            }
+
+            int regionCount = 0;
+            int flushSuccessCount = 0;
+            int flushFailCount = 0;
+
+            for (HRegion region : server.getOnlineRegionsLocalContext()) {
+                regionCount++;
+                try {
+                    // Force flush the region's memstore to HFiles
+                    HRegion.FlushResult result = region.flush(true);
+                    if (result.isFlushSucceeded()) {
+                        flushSuccessCount++;
+                        LOG.debug("Flushed region {} before graceful restart",
+                                region.getRegionInfo().getEncodedName());
+                    } else {
+                        // Flush was not needed (no data in memstore) or already flushing
+                        flushSuccessCount++;
+                        LOG.debug("Region {} flush result: {} before graceful restart",
+                                region.getRegionInfo().getEncodedName(), result.getResult());
+                    }
+                } catch (Exception e) {
+                    flushFailCount++;
+                    LOG.warn("Failed to flush region {} before graceful restart: {}",
+                            region.getRegionInfo().getEncodedName(), e.getMessage());
+                }
+            }
+
+            LOG.info("Pre-flush completed for RegionServer {}: {} regions total, {} succeeded, {} failed",
+                    rsIndex, regionCount, flushSuccessCount, flushFailCount);
+        } catch (Exception e) {
+            LOG.warn("Error during pre-flush for RegionServer {}: {}", rsIndex, e.getMessage());
+            // Continue with restart even if pre-flush fails - the stop() will still attempt flush
+        }
     }
 }
