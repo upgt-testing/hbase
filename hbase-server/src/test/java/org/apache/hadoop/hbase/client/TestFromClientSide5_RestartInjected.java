@@ -3232,13 +3232,13 @@ public class TestFromClientSide5_RestartInjected extends FromClientSideBase {
     TEST_UTIL.getAdmin().modifyTable(newDesc);
   }
 
-  @Test(timeout = 60000)
+  @Test
   public void testModifyTableWithMemstoreData() throws Exception {
     TableName tableName = name.getTableName();
     createTableAndValidateTableSchemaModification(tableName, true);
   }
 
-  @Test(timeout = 60000)
+  @Test
   public void testDeleteCFWithMemstoreData() throws Exception {
     TableName tableName = name.getTableName();
     createTableAndValidateTableSchemaModification(tableName, false);

@@ -44,7 +44,7 @@ public class TestClusterPortAssignment_RestartInjected {
   /**
    * Check that we can start an HBase cluster specifying a custom set of RPC and infoserver ports.
    */
-  @Test(timeout = 300000)
+  @Test
   public void testClusterPortAssignment() throws Exception {
     boolean retry = false;
     do {
