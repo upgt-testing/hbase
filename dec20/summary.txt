@@ -1,0 +1,132 @@
+======================================================================
+Test Result Analysis Summary
+======================================================================
+Generated: 2026-01-04 21:07:04
+
+Step 1: Execution Parsing
+----------------------------------------------------------------------
+Total baseline executions: 903
+Total restart executions: 7318
+
+Step 2: Failure Analysis
+----------------------------------------------------------------------
+Baseline failures: 18
+Restart failures (baseline passed): 738
+Ignored restart executions (baseline failed): 212
+
+Step 3: Failure Grouping
+----------------------------------------------------------------------
+Unique failure groups: 79
+Total restart failures analyzed: 0
+
+Group Distribution:
+----------------------------------------------------------------------
+Group   1:  100 executions (  0.0%) - Example: org.apache.hadoop.hbase.client.TestReplicasClient_RestartInjected.testFlushTable @ after_initial_flush/regionserver
+Group   2:   71 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.TestRegionReplicaFailover_RestartInjected.testSecondaryRegionKillWhilePrimaryIsAcceptingWrites @ after_final_verify/master
+Group   3:   24 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.assignment.TestExceptionInUnassignedRegion_RestartInjected.testExceptionInUnassignRegion @ after_get_procedure_executor/master
+Group   4:   18 executions (  0.0%) - Example: org.apache.hadoop.hbase.mob.TestRSMobFileCleanerChore_RestartInjected.testCleaningAndStoreFileReaderCreatedByOtherThreads @ after_flush/regionserver
+Group   5:   15 executions (  0.0%) - Example: org.apache.hadoop.hbase.client.TestMalformedCellFromClient_RestartInjected.testAtomicOperations @ after_atomic_operation/regionserver
+Group   6:   14 executions (  0.0%) - Example: org.apache.hadoop.hbase.quotas.TestQuotaObserverChoreWithMiniCluster_RestartInjected.testTableQuotaOverridesNamespaceQuota @ after_namespace_create/master
+Group   7:   13 executions (  0.0%) - Example: org.apache.hadoop.hbase.mob.TestRSMobFileCleanerChore_RestartInjected.testMobFileCleanerChore @ after_second_load/regionserver
+Group   8:   10 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.assignment.TestWakeUpUnexpectedProcedure_RestartInjected.test @ after_arrive_exec_proc/regionserver
+Group   9:    9 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.assignment.TestReportOnlineRegionsRace_RestartInjected.testRace @ after_verify_opening_state/master
+Group  10:    8 executions (  0.0%) - Example: org.apache.hadoop.hbase.replication.regionserver.TestSerialReplicationChecker_RestartInjected.testLastRegionAndOpeningCanNotPush @ after_add_state_barrier_first/regionserver
+Group  11:    7 executions (  0.0%) - Example: org.apache.hadoop.hbase.namespace.TestNamespaceAuditor_RestartInjected.testRegionMerge @ after_flush/regionserver
+Group  12:    6 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.storefiletracker.TestChangeStoreFileTracker_RestartInjected.testModify @ after_put/regionserver
+Group  13:    6 executions (  0.0%) - Example: org.apache.hadoop.hbase.TestSplitWithCache_RestartInjected.testDoesntEvictOnSplit @ before_region_split/regionserver
+Group  14:    5 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.TestRegionMergeTransactionOnCluster_RestartInjected.testCleanMergeReference @ after_merge/master
+Group  15:    4 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.TestRegionMergeTransactionOnCluster_RestartInjected.testMerge @ after_table_create_and_load/regionserver
+Group  16:    4 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.TestSplitRegionWhileRSCrash_RestartInjected.test @ after_kill_region_server/master
+Group  17:    4 executions (  0.0%) - Example: org.apache.hadoop.hbase.io.hfile.TestBlockEvictionOnRegionMovement_RestartInjected.testBlockEvictionOnRegionMove @ after_cache_verification/regionserver
+Group  18:    4 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.assignment.TestModifyTableWhileMerging_RestartInjected.test @ after_modify_procedure_finish/regionserver
+Group  19:    4 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.throttle.TestFlushWithThroughputController_RestartInjected.testFlushControl @ after_put_iteration_2/regionserver
+Group  20:    3 executions (  0.0%) - Example: org.apache.hadoop.hbase.client.TestSplitOrMergeStatus_RestartInjected.testSplitRegionReplicaRitRecovery @ after_data_insert/regionserver
+Group  21:    3 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.TestMasterFailover_RestartInjected.testMetaInTransitionWhenMasterFailover @ after_get_meta_location/regionserver
+Group  22:    2 executions (  0.0%) - Example: org.apache.hadoop.hbase.coprocessor.TestMasterObserver_RestartInjected.testRegionTransitionOperations @ after_multi_region_table_create/master
+Group  23:    2 executions (  0.0%) - Example: org.apache.hadoop.hbase.mob.TestRSMobFileCleanerChore_RestartInjected.testMobFileCleanerChore @ after_wait_archive/regionserver
+Group  24:    2 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.TestRegionServerNoMaster_RestartInjected.testCloseByRegionServer @ after_put_data/regionserver
+Group  25:    2 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.TestRegionServerScan_RestartInjected.testScannWhenRpcCallContextNull @ after_first_scan_result/regionserver
+Group  26:    2 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.assignment.TestReportRegionStateTransitionFromDeadServer_RestartInjected.test @ after_move_async/master
+Group  27:    2 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.TestScannerLeaseCount_RestartInjected.itDoesNotIncreaseScannerLeaseCount @ before_throttled_scanner_create/regionserver
+Group  28:    2 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.TestMergesSplitsAddToTracker_RestartInjected.testCommitMergedRegion @ after_merge_files_created/regionserver
+Group  29:    2 executions (  0.0%) - Example: org.apache.hadoop.hbase.TestIOFencing_RestartInjected.testFencingAroundCompaction @ after_first_data_load/regionserver
+Group  30:    2 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.TestGetReplicationLoad_RestartInjected.testGetReplicationMetrics @ after_get_server_name/master
+Group  31:    2 executions (  0.0%) - Example: org.apache.hadoop.hbase.replication.TestReplicationStatusBothNormalAndRecoveryLagging_RestartInjected.testReplicationStatusBothNormalAndRecoveryLagging @ after_get_server_name/regionserver
+Group  32:    2 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.TestCompactSplitThread_RestartInjected.testThreadPoolSizeTuning @ after_config_update_bigger/regionserver
+Group  33:    2 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.assignment.TestReduceExcessRegionReplicasBlockedByRIT_RestartInjected.testRIT @ after_wait_close_procedure/master
+Group  34:    2 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.TestTableStateManager_RestartInjected.testMigration @ after_delete_table_state/master
+Group  35:    2 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.assignment.TestSCPGetRegionsRace_RestartInjected.test @ after_arrive_get/regionserver
+Group  36:    2 executions (  0.0%) - Example: org.apache.hadoop.hbase.TestMetaTableAccessor_RestartInjected.testGetMergeRegions @ after_first_region_merge/master
+Group  37:    2 executions (  0.0%) - Example: org.apache.hadoop.hbase.fs.TestBlockReorderMultiBlocks_RestartInjected.testHBaseCluster @ after_wal_roll/regionserver
+Group  38:    2 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.procedure.TestReopenTableRegionsProcedureBatchBackoff_RestartInjected.testRegionBatchBackoff @ after_submit_backoff/master
+Group  39:    2 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.TestRoundRobinAssignmentOnRestart_RestartInjected.test @ after_rs_restart/regionserver
+Group  40:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.client.TestTableSnapshotScanner_RestartInjected.testNoDuplicateResultsWhenSplitting @ after_data_load/regionserver
+Group  41:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.client.TestTableSnapshotScanner_RestartInjected.testNoDuplicateResultsWhenSplitting @ after_region_split/master
+Group  42:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.util.TestRegionMover2_RestartInjected.testIsolateMetaOnTheDifferentServer @ before_meta_isolate/regionserver
+Group  43:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.mob.TestRSMobFileCleanerChore_RestartInjected.testCleaningAndStoreFileReaderCreatedByOtherThreads @ after_get_server_name/regionserver
+Group  44:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.TestRegionServerCrashDisableWAL_RestartInjected.test @ after_region_placement/regionserver
+Group  45:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.replication.TestReplicationStatus_RestartInjected.testReplicationStatus @ after_rs_stop/regionserver
+Group  46:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.namequeues.TestWALEventTracker_RestartInjected.testWALRolling @ after_wal_tracker_table_ready/regionserver
+Group  47:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.namequeues.TestWALEventTracker_RestartInjected.testWALRolling @ after_wal_roll/regionserver
+Group  48:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.TestSplitTransactionOnCluster_RestartInjected.testSplitFailedCompactionAndSplit @ after_compaction_request/regionserver
+Group  49:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.TestHRegionOnCluster_RestartInjected.testDataCorrectnessReplayingRecoveredEdits @ after_table_create/master
+Group  50:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.TestHRegionOnCluster_RestartInjected.testDataCorrectnessReplayingRecoveredEdits @ after_first_region_move/master
+Group  51:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.client.TestSeparateClientZKCluster_RestartInjected.testMetaMoveDuringClientZkClusterRestart @ after_meta_server_stop/regionserver
+Group  52:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.coprocessor.TestRegionServerCoprocessorExceptionWithAbort_RestartInjected.testExceptionFromCoprocessorDuringPut @ after_regions_assigned/regionserver
+Group  53:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.replication.TestReplicationStatusSourceStartedTargetStoppedWithRecovery_RestartInjected.testReplicationStatusSourceStartedTargetStoppedWithRecovery @ after_get_server_name/regionserver
+Group  54:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.TestRegionMergeTransactionOnCluster_RestartInjected.testWholesomeMerge @ after_assign_attempt/master
+Group  55:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.throttle.TestCompactionWithThroughputController_RestartInjected.testGetCompactionPressureForStripedStore @ after_table_create/regionserver
+Group  56:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.replication.regionserver.TestReplicationMarker_RestartInjected.testReplicationMarkerRow @ after_wait_for_tracker_rows/regionserver
+Group  57:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.throttle.TestCompactionWithThroughputController_RestartInjected.testCompaction @ after_flush_9/regionserver
+Group  58:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.TestGetReplicationLoad_RestartInjected.testGetReplicationMetrics @ after_add_second_peer/master
+Group  59:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.TestRegionPlacement2_RestartInjected.testFavoredNodesPresentForRoundRobinAssignment @ after_balancer_init/master
+Group  60:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.wal.TestWALSyncTimeoutException_RestartInjected.testWALSyncWriteException @ before_timeout_test/regionserver
+Group  61:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.TestRegionPlacement2_RestartInjected.testFavoredNodesPresentForRandomAssignment @ after_balancer_init/master
+Group  62:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.TestWarmupRegion_RestartInjected.testWarmupAndClose @ after_get_region_info/regionserver
+Group  63:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.procedure.TestCreateTableNoRegionServer_RestartInjected.testCreate @ after_submit_create_table_async/master
+Group  64:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.quotas.TestSnapshotQuotaObserverChore_RestartInjected.testSnapshotSize @ after_snapshot/master
+Group  65:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.assignment.TestReduceExcessRegionReplicasBlockedByRIT_RestartInjected.testRIT @ after_wait_proc_finished/master
+Group  66:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.replication.TestReplicationStatusSourceStartedTargetStoppedNoOps_RestartInjected.testReplicationStatusSourceStartedTargetStoppedNoOps @ after_sleep_interval/regionserver
+Group  67:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.TestSplitWithBlockingFiles_RestartInjected.testSplitIgnoreBlockingFiles @ after_split_policy_check/regionserver
+Group  68:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.TestRegionServerNoMaster_RestartInjected.testOpenCloseRegionRPCIntendedForPreviousServer @ after_put_data/regionserver
+Group  69:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.compactions.TestFIFOCompactionPolicy_RestartInjected.testFIFOCompactionPolicyExpiredEmptyHFiles @ after_second_put_flush/regionserver
+Group  70:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.TestRecreateCluster_RestartInjected.testRecreateCluster_UserTableEnabled_CleanupWALAndZNodes @ after_flush/regionserver
+Group  71:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.assignment.TestRollbackSCP_RestartInjected.testFailAndRollback @ after_balance/regionserver
+Group  72:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.procedure.TestReopenTableRegionsProcedureInfiniteLoop_RestartInjected.testInfiniteLoop @ after_lock_region_node/master
+Group  73:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.procedure.TestSafemodeBringsDownMaster_RestartInjected.testSafemodeBringsDownMaster @ after_master_shutdown/regionserver
+Group  74:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.replication.TestMasterReplication_RestartInjected.testBasePeerConfigsForReplicationPeer @ after_update_peer_configs/master
+Group  75:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.procedure.TestReopenTableRegionsProcedureBackoff_RestartInjected.testRetryBackoff @ after_submit_reopen_procedure/master
+Group  76:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.regionserver.TestFSErrorsExposed_RestartInjected.testFullSystemBubblesFSErrors @ after_load_and_flush/regionserver
+Group  77:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.replication.regionserver.TestRefreshPeerWhileRegionServerRestarts_RestartInjected.testRestart @ after_start_region_server/regionserver
+Group  78:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.master.TestMergeTableRegionsWhileRSCrash_RestartInjected.test @ after_get_regions/master
+Group  79:    1 executions (  0.0%) - Example: org.apache.hadoop.hbase.coprocessor.TestMasterObserver_RestartInjected.testQueueLockAndLockHeartbeatOperations @ after_lock_heartbeat/master
+
+Baseline Failures Details:
+----------------------------------------------------------------------
+  1. org.apache.hadoop.hbase.master.TestMasterShutdown_RestartInjected.testMasterShutdownBeforeStartingAnyRegionServer (ignored 6 restart executions)
+  2. org.apache.hadoop.hbase.client.CloneSnapshotFromClientCloneLinksAfterDeleteTestBase_RestartInjected.testCloneLinksAfterDelete (ignored 12 restart executions)
+  3. org.apache.hadoop.hbase.master.TestMigrateAndMirrorMetaLocations_RestartInjected.test (ignored 34 restart executions)
+  4. org.apache.hadoop.hbase.master.TestLoadProcedureError_RestartInjected.testLoadError (ignored 10 restart executions)
+  5. org.apache.hadoop.hbase.master.assignment.TestAssignmentManager_RestartInjected.testUnassignAndCrashBeforeResponse (ignored 8 restart executions)
+  6. org.apache.hadoop.hbase.client.RestoreSnapshotFromClientCloneTestBase_RestartInjected.testCloneSnapshotOfCloned (ignored 12 restart executions)
+  7. org.apache.hadoop.hbase.master.assignment.TestAssignmentManager_RestartInjected.testAssignSocketTimeout (ignored 8 restart executions)
+  8. org.apache.hadoop.hbase.master.assignment.TestAssignmentManager_RestartInjected.testAssignQueueFullOnce (ignored 8 restart executions)
+  9. org.apache.hadoop.hbase.master.TestAlwaysStandByHMaster_RestartInjected.testAlwaysStandBy (ignored 8 restart executions)
+ 10. org.apache.hadoop.hbase.client.RestoreSnapshotFromClientCloneTestBase_RestartInjected.testCloneAndRestoreSnapshot (ignored 8 restart executions)
+ 11. org.apache.hadoop.hbase.replication.TestReplicationEndpoint_RestartInjected.testInterClusterReplication (ignored 5 restart executions)
+ 12. org.apache.hadoop.hbase.TestClientClusterMetrics_RestartInjected.testServerTasks (ignored 1 restart executions)
+ 13. org.apache.hadoop.hbase.master.assignment.TestRegionMoveAndAbandon_RestartInjected.test (ignored 26 restart executions)
+ 14. org.apache.hadoop.hbase.master.assignment.TestAssignmentManager_RestartInjected.testAssignWithGoodExec (ignored 6 restart executions)
+ 15. org.apache.hadoop.hbase.master.assignment.TestAssignmentManager_RestartInjected.testAssignAndCrashBeforeResponse (ignored 6 restart executions)
+ 16. org.apache.hadoop.hbase.master.assignment.TestAssignmentManagerLoadMetaRegionState_RestartInjected.testRestart (ignored 14 restart executions)
+ 17. org.apache.hadoop.hbase.client.RestoreSnapshotFromClientSchemaChangeTestBase_RestartInjected.testRestoreSchemaChange (ignored 20 restart executions)
+ 18. org.apache.hadoop.hbase.master.assignment.TestRegionAssignedToMultipleRegionServers_RestartInjected.test (ignored 20 restart executions)
+
+Output Files:
+----------------------------------------------------------------------
+Step 1 results: results-dec20/hbase/dec20/step1_execution_summary.json
+Step 2 results: results-dec20/hbase/dec20/step2_failures.json
+Step 3 results: results-dec20/hbase/dec20/step3_grouped_failures.json
+This summary:   results-dec20/hbase/dec20/summary.txt
+
+======================================================================
