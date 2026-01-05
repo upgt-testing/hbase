@@ -1,0 +1,28 @@
+diff --git a/hbase-server/src/main/java/org/apache/hadoop/hbase/master/WorkerAssigner.java b/hbase-server/src/main/java/org/apache/hadoop/hbase/master/WorkerAssigner.java
+index abcdef1..1234567 100644
+--- a/hbase-server/src/main/java/org/apache/hadoop/hbase/master/WorkerAssigner.java
++++ b/hbase-server/src/main/java/org/apache/hadoop/hbase/master/WorkerAssigner.java
+@@ -24,6 +24,8 @@ import java.util.Map;
+ import java.util.Optional;
+ import org.apache.hadoop.hbase.ServerName;
+ import org.apache.hadoop.hbase.master.procedure.MasterProcedureScheduler;
++import org.apache.hadoop.hbase.master.procedure.MasterProcedureEnv;
++import org.apache.hadoop.hbase.procedure2.ProcedureExecutor;
+ import org.apache.hadoop.hbase.procedure2.Procedure;
+ import org.apache.hadoop.hbase.procedure2.ProcedureEvent;
+ import org.apache.yetus.audience.InterfaceAudience;
+@@ -79,7 +81,13 @@ public class WorkerAssigner implements ServerListener {
+
+   @Override
+   public void serverAdded(ServerName worker) {
+-    this.wake(master.getMasterProcedureExecutor().getEnvironment().getProcedureScheduler());
++    // Defensive null check: MasterProcedureExecutor may be null during master shutdown
++    // as it is explicitly set to null in HMaster.stopProcedureExecutor()
++    ProcedureExecutor<MasterProcedureEnv> executor = master.getMasterProcedureExecutor();
++    if (executor != null && executor.getEnvironment() != null) {
++      MasterProcedureScheduler scheduler = executor.getEnvironment().getProcedureScheduler();
++      this.wake(scheduler);
++    }
+   }
+
+   public synchronized void addUsedWorker(ServerName worker) {

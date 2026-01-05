@@ -16,7 +16,7 @@ These are most likely actual bugs in HBase code.
 
 ### Group 58
 
-- [ ] **Status:** Not started
+- [x] **Status:** BUG - WorkerAssigner.serverAdded() lacks null check for MasterProcedureExecutor which is set to null during shutdown. See bugs/HBASE-BUG-GROUP-58.md
 - **Priority Reason:** NullPointerException from production code
 - **Test Executions:** 1
 
@@ -73,7 +73,7 @@ java.lang.NullPointerException
 
 ### Group 67
 
-- [ ] **Status:** Not started
+- [x] **Status:** BUG - SplitTableRegionProcedure.checkSplittable() lacks null check for node.getRegionLocation() which can be null after RegionServer restart. See bugs/HBASE-BUG-GROUP-67.md
 - **Priority Reason:** NullPointerException from production code
 - **Test Executions:** 1
 
@@ -135,7 +135,7 @@ java.lang.NullPointerException
 
 ### Group 71
 
-- [ ] **Status:** Not started
+- [x] **Status:** BUG - RegionRemoteProcedureBase.afterReplay() lacks null check for parent TransitRegionStateProcedure which may have already completed/rolled back. See bugs/HBASE-BUG-GROUP-71.md
 - **Priority Reason:** NullPointerException from production code
 - **Test Executions:** 1
 

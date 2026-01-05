@@ -1,0 +1,34 @@
+diff --git a/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/SplitTableRegionProcedure.java b/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/SplitTableRegionProcedure.java
+index abcdef123..456789abc 100644
+--- a/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/SplitTableRegionProcedure.java
++++ b/hbase-server/src/main/java/org/apache/hadoop/hbase/master/assignment/SplitTableRegionProcedure.java
+@@ -205,17 +205,24 @@ public class SplitTableRegionProcedure
+     IOException splittableCheckIOE = null;
+     boolean splittable = false;
+     if (node != null) {
++      // Check if region has a valid location before attempting to contact the RegionServer.
++      // After a RegionServer restart, the region may be in OPEN state but not yet assigned
++      // to a server, resulting in null location.
++      ServerName regionLocation = node.getRegionLocation();
++      if (regionLocation == null) {
++        throw new DoNotRetryIOException("Region " + regionToSplit.getShortNameToLog()
++          + " is not assigned to any server. Cannot check splittability.");
++      }
+       try {
+         GetRegionInfoResponse response;
+         if (!hasBestSplitRow()) {
+           LOG.info(
+             "{} splitKey isn't explicitly specified, will try to find a best split key from RS {}",
+-            node.getRegionInfo().getRegionNameAsString(), node.getRegionLocation());
+-          response = AssignmentManagerUtil.getRegionInfoResponse(env, node.getRegionLocation(),
++            node.getRegionInfo().getRegionNameAsString(), regionLocation);
++          response = AssignmentManagerUtil.getRegionInfoResponse(env, regionLocation,
+             node.getRegionInfo(), true);
+           bestSplitRow =
+             response.hasBestSplitRow() ? response.getBestSplitRow().toByteArray() : null;
+         } else {
+-          response = AssignmentManagerUtil.getRegionInfoResponse(env, node.getRegionLocation(),
++          response = AssignmentManagerUtil.getRegionInfoResponse(env, regionLocation,
+             node.getRegionInfo(), false);
+         }
+         splittable = response.hasSplittable() && response.getSplittable();
