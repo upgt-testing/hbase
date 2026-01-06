@@ -122,6 +122,7 @@ public class TestReopenTableRegionsProcedureBatchBackoff_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     int noBackoffMillis = 0;
     ReopenTableRegionsProcedure proc =
@@ -134,6 +135,7 @@ public class TestReopenTableRegionsProcedureBatchBackoff_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     ProcedureSyncWait.waitForProcedureToComplete(procExec, proc,
       (long) regions.size() * BACKOFF_MILLIS_PER_RS);

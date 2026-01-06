@@ -176,6 +176,7 @@ public class TestZooKeeper_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = TEST_UTIL.getAdmin();
 
     Table table = TEST_UTIL.getConnection().getTable(desc.getTableName());
     Put put = new Put(Bytes.toBytes("testrow"));
@@ -305,6 +306,7 @@ public class TestZooKeeper_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     TEST_UTIL.waitUntilNoRegionsInTransition(60000);
     HMaster m = cluster.getMaster();
@@ -323,6 +325,7 @@ public class TestZooKeeper_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
 
       m.abort("Test recovery from zk session expired",
         new KeeperException.SessionExpiredException());

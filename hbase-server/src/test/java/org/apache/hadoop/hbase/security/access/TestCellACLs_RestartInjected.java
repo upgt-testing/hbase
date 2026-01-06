@@ -119,6 +119,7 @@ public class TestCellACLs_RestartInjected extends SecureTestUtil {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
     MasterCoprocessorHost cpHost =
       TEST_UTIL.getMiniHBaseCluster().getMaster().getMasterCoprocessorHost();
     cpHost.load(AccessController.class, Coprocessor.PRIORITY_HIGHEST, conf);
@@ -133,6 +134,7 @@ public class TestCellACLs_RestartInjected extends SecureTestUtil {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
 
     // Wait for the ACL table to become available
     TEST_UTIL.waitTableEnabled(PermissionStorage.ACL_TABLE_NAME);
@@ -142,6 +144,8 @@ public class TestCellACLs_RestartInjected extends SecureTestUtil {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
+    cpHost = TEST_UTIL.getMiniHBaseCluster().getMaster().getMasterCoprocessorHost();
 
     // create a set of test users
     USER_OWNER = User.createUserForTesting(conf, "owner", new String[0]);
@@ -155,6 +159,8 @@ public class TestCellACLs_RestartInjected extends SecureTestUtil {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
+    cpHost = TEST_UTIL.getMiniHBaseCluster().getMaster().getMasterCoprocessorHost();
   }
 
   @AfterClass
@@ -178,6 +184,7 @@ public class TestCellACLs_RestartInjected extends SecureTestUtil {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = TEST_UTIL.getAdmin();
     TEST_UTIL.waitTableEnabled(testTable.getTableName());
     RestartFramework.at("after_table_enabled")
         .on(cluster)
@@ -185,6 +192,7 @@ public class TestCellACLs_RestartInjected extends SecureTestUtil {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = TEST_UTIL.getAdmin();
     LOG.info("Sleeping a second because of HBASE-12581");
     Threads.sleep(1000);
   }

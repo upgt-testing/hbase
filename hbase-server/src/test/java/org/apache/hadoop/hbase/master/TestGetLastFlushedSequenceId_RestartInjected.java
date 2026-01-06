@@ -125,6 +125,7 @@ public class TestGetLastFlushedSequenceId_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = testUtil.getMiniHBaseCluster();
 
     Thread.sleep(2000);
     RegionStoreSequenceIds ids = testUtil.getHBaseCluster().getMaster()
@@ -140,6 +141,7 @@ public class TestGetLastFlushedSequenceId_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = testUtil.getMiniHBaseCluster();
 
     testUtil.getAdmin().flush(tableName);
 
@@ -149,6 +151,7 @@ public class TestGetLastFlushedSequenceId_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = testUtil.getMiniHBaseCluster();
 
     Thread.sleep(2000);
     ids = testUtil.getHBaseCluster().getMaster()

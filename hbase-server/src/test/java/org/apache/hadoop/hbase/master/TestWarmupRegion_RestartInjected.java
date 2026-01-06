@@ -205,6 +205,7 @@ public class TestWarmupRegion_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    rs = TEST_UTIL.getMiniHBaseCluster().getRegionServer(0);
 
     TableDescriptor htd = table.getDescriptor();
     HRegion warmedUpRegion =
@@ -216,6 +217,7 @@ public class TestWarmupRegion_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    rs = TEST_UTIL.getMiniHBaseCluster().getRegionServer(0);
 
     assertTrue(warmedUpRegion.isClosed());
   }

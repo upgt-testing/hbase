@@ -141,6 +141,7 @@ public class TestReplicationSink_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
     RegionServerCoprocessorHost rsCpHost =
       TEST_UTIL.getMiniHBaseCluster().getRegionServer(0).getRegionServerCoprocessorHost();
     SINK = new ReplicationSink(new Configuration(TEST_UTIL.getConfiguration()), rsCpHost);
@@ -150,6 +151,7 @@ public class TestReplicationSink_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
     table1 = TEST_UTIL.createTable(TABLE_NAME1, FAM_NAME1);
     RestartFramework.at("after_table1_create")
         .on(cluster)
@@ -157,6 +159,7 @@ public class TestReplicationSink_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
     table2 = TEST_UTIL.createTable(TABLE_NAME2, FAM_NAME2);
     RestartFramework.at("after_table2_create")
         .on(cluster)
@@ -164,6 +167,7 @@ public class TestReplicationSink_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
     Path rootDir = CommonFSUtils.getRootDir(TEST_UTIL.getConfiguration());
     baseNamespaceDir = new Path(rootDir, new Path(HConstants.BASE_NAMESPACE_DIR)).toString();
     hfileArchiveDir = new Path(rootDir, new Path(HConstants.HFILE_ARCHIVE_DIRECTORY)).toString();

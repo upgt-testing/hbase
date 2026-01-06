@@ -184,6 +184,7 @@ public class TestSpaceQuotaOnBulkLoad_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    rs = TEST_UTIL.getMiniHBaseCluster().getRegionServer(0);
 
     // Should generate two files, each of which is over 25KB each
     ClientServiceCallable<Void> callable = helper.generateFileToLoad(tn, 2, 500);

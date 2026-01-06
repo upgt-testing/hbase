@@ -70,6 +70,7 @@ public class TestMasterFileSystemWithWALDir_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getMiniHBaseCluster();
     master = cluster.getMaster(); // Refresh after master restart
     fs = master.getMasterFileSystem();
 
@@ -84,6 +85,7 @@ public class TestMasterFileSystemWithWALDir_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getMiniHBaseCluster();
     master = cluster.getMaster(); // Refresh after master restart
     fs = master.getMasterFileSystem();
 

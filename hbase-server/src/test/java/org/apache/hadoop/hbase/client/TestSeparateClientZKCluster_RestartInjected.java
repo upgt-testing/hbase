@@ -288,6 +288,7 @@ public class TestSeparateClientZKCluster_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      conn = TEST_UTIL.getConnection();
 
       // put some data
       Put put = new Put(row);
@@ -300,6 +301,7 @@ public class TestSeparateClientZKCluster_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      conn = TEST_UTIL.getConnection();
 
       // invalid connection cache
       conn.clearRegionLocationCache();
@@ -321,6 +323,8 @@ public class TestSeparateClientZKCluster_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      conn = TEST_UTIL.getConnection();
+      cluster = TEST_UTIL.getHBaseCluster();
 
       // wait for meta region online
       AssignmentTestingUtil.waitForAssignment(cluster.getMaster().getAssignmentManager(),
@@ -389,6 +393,7 @@ public class TestSeparateClientZKCluster_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      admin = TEST_UTIL.getAdmin();
 
       HBaseTestingUtility.setReplicas(admin, TableName.META_TABLE_NAME, 2);
       TEST_UTIL.waitFor(30000, () -> locator.getAllRegionLocations().size() == 2);
@@ -399,6 +404,7 @@ public class TestSeparateClientZKCluster_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      admin = TEST_UTIL.getAdmin();
 
       HBaseTestingUtility.setReplicas(admin, TableName.META_TABLE_NAME, 1);
       TEST_UTIL.waitFor(30000, () -> locator.getAllRegionLocations().size() == 1);

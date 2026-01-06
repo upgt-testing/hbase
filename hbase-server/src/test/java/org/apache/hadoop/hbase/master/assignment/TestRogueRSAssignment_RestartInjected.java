@@ -120,6 +120,7 @@ public class TestRogueRSAssignment_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getHBaseCluster();
 
     admin = UTIL.getAdmin();
     assertNotNull(admin);
@@ -130,6 +131,8 @@ public class TestRogueRSAssignment_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getHBaseCluster();
+    admin = UTIL.getAdmin();
 
     master = cluster.getMaster();
     assertNotNull(master);
@@ -140,6 +143,7 @@ public class TestRogueRSAssignment_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getHBaseCluster();
   }
 
   @AfterClass

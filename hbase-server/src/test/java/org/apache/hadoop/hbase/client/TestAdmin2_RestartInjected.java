@@ -201,6 +201,7 @@ public class TestAdmin2_RestartInjected extends TestAdminBase {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      hbaseadmin = TEST_UTIL.getHBaseAdmin();
     } finally {
       TEST_UTIL.getConfiguration().setInt(HConstants.HBASE_RPC_TIMEOUT_KEY, oldTimeout);
     }
@@ -484,6 +485,7 @@ public class TestAdmin2_RestartInjected extends TestAdminBase {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     master = cluster.getMaster(); // Refresh after master restart
     List<RegionInfo> tableRegions = localAdmin.getRegions(tableName);
     RegionInfo hri = tableRegions.get(0);
@@ -674,6 +676,7 @@ public class TestAdmin2_RestartInjected extends TestAdminBase {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    rawAdmin = TEST_UTIL.getHBaseAdmin();
 
     try (RegionLocator locator = TEST_UTIL.getConnection().getRegionLocator(tableName)) {
       HRegionLocation regionLocation = locator.getRegionLocation(Bytes.toBytes("mmm"));

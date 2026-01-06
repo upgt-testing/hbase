@@ -118,6 +118,7 @@ public class TestFavoredStochasticBalancerPickers_RestartInjected extends Balanc
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
   }
 
   @After

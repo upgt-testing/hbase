@@ -111,6 +111,7 @@ public class TestReplicationMarker_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster2 = utility2.getMiniHBaseCluster();
     waitForReplicationTrackerTableCreation();
     RestartFramework.at("after_tracker_table_creation")
         .on(cluster2)
@@ -118,6 +119,7 @@ public class TestReplicationMarker_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster2 = utility2.getMiniHBaseCluster();
 
     // Start cluster1
     utility1.startMiniCluster(1);
@@ -128,6 +130,8 @@ public class TestReplicationMarker_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster2 = utility2.getMiniHBaseCluster();
+    cluster1 = utility1.getMiniHBaseCluster();
     Admin admin1 = utility1.getAdmin();
     ReplicationPeerConfigBuilder rpcBuilder = ReplicationPeerConfig.newBuilder();
     rpcBuilder.setClusterKey(utility2.getClusterKey());
@@ -138,6 +142,9 @@ public class TestReplicationMarker_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster2 = utility2.getMiniHBaseCluster();
+    cluster1 = utility1.getMiniHBaseCluster();
+    admin1 = utility1.getAdmin();
 
     ReplicationSourceManager manager = utility1.getHBaseCluster().getRegionServer(0)
       .getReplicationSourceService().getReplicationManager();
@@ -149,6 +156,8 @@ public class TestReplicationMarker_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster2 = utility2.getMiniHBaseCluster();
+    cluster1 = utility1.getMiniHBaseCluster();
   }
 
   private static void waitForReplicationTrackerTableCreation() {

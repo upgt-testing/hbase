@@ -86,6 +86,7 @@ public class TestMigrateRepliationPeerStorageOnline_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    admin = UTIL.getAdmin();
 
     // migrate replication peer data
     Configuration conf = new Configuration(UTIL.getConfiguration());
@@ -126,6 +127,7 @@ public class TestMigrateRepliationPeerStorageOnline_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    admin = UTIL.getAdmin();
 
     for (RegionServerThread rt : UTIL.getMiniHBaseCluster().getRegionServerThreads()) {
       Configuration newConf = new Configuration(rt.getRegionServer().getConfiguration());
@@ -149,6 +151,7 @@ public class TestMigrateRepliationPeerStorageOnline_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    admin = UTIL.getAdmin();
 
     admin.removeReplicationPeer("1");
 

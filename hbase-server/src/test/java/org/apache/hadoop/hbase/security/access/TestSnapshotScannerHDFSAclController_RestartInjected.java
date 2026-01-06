@@ -1507,6 +1507,7 @@ public class TestSnapshotScannerHDFSAclController_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = TEST_UTIL.getAdmin();
     aclTable = TEST_UTIL.getConnection().getTable(PermissionStorage.ACL_TABLE_NAME);
     snapshotAndWait(snapshot, table);
     RestartFramework.at("after_snapshot")
@@ -1515,6 +1516,7 @@ public class TestSnapshotScannerHDFSAclController_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = TEST_UTIL.getAdmin();
     TestHDFSAclHelper.canUserScanSnapshot(TEST_UTIL, grantUser, snapshot, 6);
     deleteTable(table);
     deleteTable(table2);

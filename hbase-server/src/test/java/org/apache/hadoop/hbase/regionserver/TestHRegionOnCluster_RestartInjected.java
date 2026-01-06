@@ -93,6 +93,7 @@ public class TestHRegionOnCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
       master = cluster.getMaster(); // Refresh after master restart
 
       assertTrue(hbaseAdmin.isTableAvailable(tableName));
@@ -108,6 +109,7 @@ public class TestHRegionOnCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
 
       TEST_UTIL.waitUntilAllRegionsAssigned(table.getName());
       // Move region to target server
@@ -136,6 +138,7 @@ public class TestHRegionOnCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
       master = cluster.getMaster(); // Refresh after master restart
 
       // Put data: r2->v2
@@ -148,6 +151,7 @@ public class TestHRegionOnCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
 
       TEST_UTIL.waitUntilAllRegionsAssigned(table.getName());
       // Move region to origin server
@@ -163,6 +167,7 @@ public class TestHRegionOnCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
       master = cluster.getMaster(); // Refresh after master restart
 
       // Put data: r3->v3
@@ -175,6 +180,7 @@ public class TestHRegionOnCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
 
       // Kill target server
       LOG.info("Killing target server " + targetServer.getServerName());

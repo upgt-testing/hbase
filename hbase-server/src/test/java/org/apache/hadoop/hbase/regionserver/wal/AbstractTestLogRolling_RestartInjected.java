@@ -158,6 +158,7 @@ public abstract class AbstractTestLogRolling_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     dfsCluster = TEST_UTIL.getDFSCluster();
     fs = TEST_UTIL.getTestFileSystem();
     admin = TEST_UTIL.getAdmin();
@@ -392,6 +393,7 @@ public abstract class AbstractTestLogRolling_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      server = TEST_UTIL.getRSForFirstRegionInTable(table.getName());
       doPut(table, 3); // don't flush yet, or compaction might trigger before we roll WAL
       assertEquals("Should have no WAL after initial writes", 0,
         AbstractFSWALProvider.getNumRolledLogFiles(log));
@@ -415,6 +417,7 @@ public abstract class AbstractTestLogRolling_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      server = TEST_UTIL.getRSForFirstRegionInTable(table.getName());
 
       // Write some value to the table so the WAL cannot be deleted until table is flushed.
       doPut(table, 0); // Now 2nd WAL will have both compaction and put record for table.
@@ -430,6 +433,7 @@ public abstract class AbstractTestLogRolling_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      server = TEST_UTIL.getRSForFirstRegionInTable(table.getName());
       doPut(table, 1);
       log.rollWriter(); // Now 2nd WAL is deleted and 3rd is added.
       assertEquals("Should have 1 WALs at the end", 1,

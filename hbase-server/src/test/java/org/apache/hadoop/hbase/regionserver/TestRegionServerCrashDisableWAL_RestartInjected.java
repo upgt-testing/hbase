@@ -97,6 +97,7 @@ public class TestRegionServerCrashDisableWAL_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    rs = UTIL.getRSForFirstRegionInTable(TABLE_NAME);
   }
 
   @AfterClass

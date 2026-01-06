@@ -115,6 +115,7 @@ public class TestRegionMoverUseIp_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     admin.flush(tableName);
     RestartFramework.at("after_flush")
         .on(cluster)
@@ -122,6 +123,7 @@ public class TestRegionMoverUseIp_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     admin.compact(tableName);
     RestartFramework.at("after_compact")
         .on(cluster)
@@ -129,6 +131,7 @@ public class TestRegionMoverUseIp_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     Thread.sleep(3000);
     HRegionServer hRegionServer0 = cluster.getRegionServer(0);
     HRegionServer hRegionServer1 = cluster.getRegionServer(1);
@@ -155,6 +158,7 @@ public class TestRegionMoverUseIp_RestartInjected {
           .withIndex(1)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
       int newNumRegions0 = hRegionServer0.getNumberOfOnlineRegions();
       int newNumRegions1 = hRegionServer1.getNumberOfOnlineRegions();
       int newNumRegions2 = hRegionServer2.getNumberOfOnlineRegions();

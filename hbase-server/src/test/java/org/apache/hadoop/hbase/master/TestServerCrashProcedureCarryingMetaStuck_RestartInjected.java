@@ -117,6 +117,7 @@ public class TestServerCrashProcedureCarryingMetaStuck_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      admin = conn.getAdmin();
       master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
       executor = master.getMasterProcedureExecutor(); // Refresh after master restart
       final ProcedureExecutor<MasterProcedureEnv> execForLambda1 = executor;
@@ -132,6 +133,7 @@ public class TestServerCrashProcedureCarryingMetaStuck_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      admin = conn.getAdmin();
       master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
       executor = master.getMasterProcedureExecutor(); // Refresh after master restart
       proc.resume();
@@ -141,6 +143,7 @@ public class TestServerCrashProcedureCarryingMetaStuck_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      admin = conn.getAdmin();
       master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
       executor = master.getMasterProcedureExecutor(); // Refresh after master restart
       final ProcedureExecutor<MasterProcedureEnv> execForLambda2 = executor;
@@ -151,6 +154,9 @@ public class TestServerCrashProcedureCarryingMetaStuck_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      admin = conn.getAdmin();
+      master = UTIL.getMiniHBaseCluster().getMaster();
+      executor = master.getMasterProcedureExecutor();
       future.get(30, TimeUnit.SECONDS);
     }
   }

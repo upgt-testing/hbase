@@ -114,6 +114,9 @@ public class TestFavoredStochasticLoadBalancer_RestartInjected extends BalancerT
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
+    master = TEST_UTIL.getMiniHBaseCluster().getMaster();
+    admin = TEST_UTIL.getAdmin();
   }
 
   @After

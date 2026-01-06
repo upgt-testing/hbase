@@ -134,6 +134,7 @@ public class TestFailedProcCleanup_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     try {
       TEST_UTIL.createTable(TABLE, FAMILY);
       fail("Table shouldn't be created");
@@ -145,6 +146,7 @@ public class TestFailedProcCleanup_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
       Thread.sleep(evictionDelay * 3);
       RestartFramework.at("after_eviction_delay")
           .on(cluster)
@@ -152,6 +154,7 @@ public class TestFailedProcCleanup_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
     }
     List<Procedure<MasterProcedureEnv>> procedureInfos =
       TEST_UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor().getProcedures();

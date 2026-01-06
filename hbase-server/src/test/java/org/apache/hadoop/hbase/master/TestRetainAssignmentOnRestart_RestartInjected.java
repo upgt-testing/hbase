@@ -291,6 +291,7 @@ public class TestRetainAssignmentOnRestart_RestartInjected extends AbstractTestR
         .withIndex(2)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getHBaseCluster();
     Map<RegionInfo, ServerName> regionToRegionServerMap = snapshot.getRegionToRegionServerMap();
     for (ServerName serverName : regionToRegionServerMap.values()) {
       boolean found = false; // Test only, no need to optimize

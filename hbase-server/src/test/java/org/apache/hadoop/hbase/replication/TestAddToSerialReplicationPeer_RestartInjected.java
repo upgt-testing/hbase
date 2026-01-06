@@ -297,6 +297,7 @@ public class TestAddToSerialReplicationPeer_RestartInjected extends SerialReplic
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    srcRs = UTIL.getRSForFirstRegionInTable(tableName);
 
     // Make sure that the replication done for the oldWal at source rs.
     waitUntilReplicatedToTheCurrentWALFile(srcRs, walFileNameBeforeRollover);
@@ -307,6 +308,7 @@ public class TestAddToSerialReplicationPeer_RestartInjected extends SerialReplic
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    srcRs = UTIL.getRSForFirstRegionInTable(tableName);
 
     UTIL.getAdmin().disableReplicationPeer(PEER_ID);
     UTIL.getAdmin().updateReplicationPeerConfig(PEER_ID,
@@ -320,6 +322,7 @@ public class TestAddToSerialReplicationPeer_RestartInjected extends SerialReplic
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    srcRs = UTIL.getRSForFirstRegionInTable(tableName);
 
     try (Table table = UTIL.getConnection().getTable(tableName)) {
       for (int i = 0; i < 100; i++) {
@@ -333,6 +336,7 @@ public class TestAddToSerialReplicationPeer_RestartInjected extends SerialReplic
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    srcRs = UTIL.getRSForFirstRegionInTable(tableName);
 
     waitUntilReplicationDone(100);
     checkOrder(100);
@@ -550,6 +554,7 @@ public class TestAddToSerialReplicationPeer_RestartInjected extends SerialReplic
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    tsm = UTIL.getMiniHBaseCluster().getMaster().getTableStateManager();
 
     Thread t = new Thread(() -> {
       try {
@@ -579,6 +584,7 @@ public class TestAddToSerialReplicationPeer_RestartInjected extends SerialReplic
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    tsm = UTIL.getMiniHBaseCluster().getMaster().getTableStateManager();
 
     try (Table table = UTIL.getConnection().getTable(tableName)) {
       for (int i = 0; i < 100; i++) {

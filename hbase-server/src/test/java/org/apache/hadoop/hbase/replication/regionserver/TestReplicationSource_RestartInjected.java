@@ -338,7 +338,7 @@ public class TestReplicationSource_RestartInjected {
       HRegionServer serverB = cluster.getRegionServer(1);
       final ReplicationSourceManager managerB =
         serverB.getReplicationSourceService().getReplicationManager();
-      final Admin admin = TEST_UTIL.getAdmin();
+      Admin admin = TEST_UTIL.getAdmin();
 
       final String peerId = "TestPeer";
       admin.addReplicationPeer(peerId,
@@ -349,6 +349,7 @@ public class TestReplicationSource_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      admin = TEST_UTIL.getAdmin();
       // Wait for replication sources to come up
       Waiter.waitFor(conf, 20000, new Waiter.Predicate<Exception>() {
         @Override

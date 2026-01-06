@@ -130,6 +130,7 @@ public class TestAsyncTableBatch_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
 
     SPLIT_KEYS = new byte[8][];
     for (int i = 111; i < 999; i += 111) {

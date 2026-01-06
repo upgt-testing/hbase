@@ -95,6 +95,7 @@ public class TestMasterRestartAfterDisablingTable_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     log("Disabling table\n");
     TEST_UTIL.getAdmin().disableTable(tableName);
@@ -105,6 +106,7 @@ public class TestMasterRestartAfterDisablingTable_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     NavigableSet<String> regions = HBaseTestingUtility.getAllOnlineRegions(cluster);
     assertEquals("The number of regions for the table tableRestart should be 0 and only"
@@ -116,6 +118,7 @@ public class TestMasterRestartAfterDisablingTable_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     List<MasterThread> masterThreads = cluster.getMasterThreads();
     MasterThread activeMaster = null;
@@ -135,6 +138,7 @@ public class TestMasterRestartAfterDisablingTable_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     assertTrue("The table should not be in enabled state",
       cluster.getMaster().getTableStateManager().isTableState(
@@ -152,6 +156,8 @@ public class TestMasterRestartAfterDisablingTable_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
+    admin = TEST_UTIL.getAdmin();
 
     log("Waiting for no more RIT\n");
     TEST_UTIL.waitUntilNoRegionsInTransition(60000);
@@ -168,6 +174,7 @@ public class TestMasterRestartAfterDisablingTable_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     ht.close();
     TEST_UTIL.shutdownMiniCluster();

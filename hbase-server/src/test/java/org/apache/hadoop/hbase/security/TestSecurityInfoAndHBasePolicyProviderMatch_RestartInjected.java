@@ -65,6 +65,7 @@ public class TestSecurityInfoAndHBasePolicyProviderMatch_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getMiniHBaseCluster();
   }
 
   @AfterClass

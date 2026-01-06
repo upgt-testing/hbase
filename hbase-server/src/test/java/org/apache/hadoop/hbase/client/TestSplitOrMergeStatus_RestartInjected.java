@@ -247,6 +247,7 @@ public class TestSplitOrMergeStatus_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = TEST_UTIL.getAdmin();
 
     assertFalse(admin.isSplitOrMergeEnabled(MasterSwitchType.SPLIT));
     assertFalse(admin.isSplitOrMergeEnabled(MasterSwitchType.MERGE));

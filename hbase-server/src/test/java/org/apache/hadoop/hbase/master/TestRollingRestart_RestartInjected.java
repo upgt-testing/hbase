@@ -106,6 +106,7 @@ public class TestRollingRestart_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     // Create a table with regions
     final TableName tableName =
@@ -127,6 +128,7 @@ public class TestRollingRestart_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     log("Disabling table\n");
     TEST_UTIL.getAdmin().disableTable(tableName);
     log("Waiting for no more RIT\n");
@@ -138,6 +140,7 @@ public class TestRollingRestart_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     NavigableSet<String> regions = HBaseTestingUtility.getAllOnlineRegions(cluster);
     log("Verifying only catalog and namespace regions are assigned\n");
@@ -157,6 +160,7 @@ public class TestRollingRestart_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     log("Verifying there are " + numRegions + " assigned on cluster\n");
     regions = HBaseTestingUtility.getAllOnlineRegions(cluster);
@@ -178,6 +182,7 @@ public class TestRollingRestart_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     log("Verifying there are " + numRegions + " assigned on cluster");
     assertRegionsAssigned(cluster, regions);
@@ -207,6 +212,7 @@ public class TestRollingRestart_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     // Bring down the primary master
     log("Stopping primary master\n\n");
@@ -219,6 +225,7 @@ public class TestRollingRestart_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     // Start primary master
     log("Restarting primary master\n\n");
@@ -231,6 +238,7 @@ public class TestRollingRestart_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     // Start backup master
     log("Restarting backup master\n\n");
@@ -242,6 +250,7 @@ public class TestRollingRestart_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     assertEquals(expectedNumRS, cluster.getRegionServerThreads().size());
 

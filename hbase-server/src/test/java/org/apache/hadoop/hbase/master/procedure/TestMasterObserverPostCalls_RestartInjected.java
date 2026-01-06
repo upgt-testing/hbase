@@ -476,7 +476,7 @@ public class TestMasterObserverPostCalls_RestartInjected {
 
   @Test
   public void testPostDeleteTable() throws IOException {
-    final Admin admin = UTIL.getAdmin();
+    Admin admin = UTIL.getAdmin();
     final TableName tn = TableName.valueOf("postdeletetable");
     final TableDescriptor td = TableDescriptorBuilder.newBuilder(tn)
       .setColumnFamily(ColumnFamilyDescriptorBuilder.newBuilder(Bytes.toBytes("f1")).build())
@@ -495,6 +495,7 @@ public class TestMasterObserverPostCalls_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = UTIL.getAdmin();
     master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
     observer = master.getMasterCoprocessorHost().findCoprocessor(MasterObserverForTest.class); // Refresh after master restart
 
@@ -506,6 +507,7 @@ public class TestMasterObserverPostCalls_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = UTIL.getAdmin();
     master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
     observer = master.getMasterCoprocessorHost().findCoprocessor(MasterObserverForTest.class); // Refresh after master restart
 
@@ -519,6 +521,7 @@ public class TestMasterObserverPostCalls_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = UTIL.getAdmin();
     master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
     observer = master.getMasterCoprocessorHost().findCoprocessor(MasterObserverForTest.class); // Refresh after master restart
 

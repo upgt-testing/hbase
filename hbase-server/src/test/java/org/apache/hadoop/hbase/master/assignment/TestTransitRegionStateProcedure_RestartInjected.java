@@ -185,6 +185,7 @@ public class TestTransitRegionStateProcedure_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    rs = UTIL.getRSForFirstRegionInTable(tableName);
 
     TransitRegionStateProcedure proc =
       TransitRegionStateProcedure.reopen(env, region.getRegionInfo());
@@ -204,6 +205,7 @@ public class TestTransitRegionStateProcedure_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    rs = UTIL.getRSForFirstRegionInTable(tableName);
 
     // should still be on the same RS
     HRegion region2 = rs.getRegions(tableName).get(0);
@@ -269,6 +271,7 @@ public class TestTransitRegionStateProcedure_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    am = master.getAssignmentManager();
     master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
     env = master.getMasterProcedureExecutor().getEnvironment(); // Refresh after master restart
 
@@ -280,6 +283,8 @@ public class TestTransitRegionStateProcedure_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster();
+    am = master.getAssignmentManager();
 
     testRecoveryAndDoubleExcution(assign);
 

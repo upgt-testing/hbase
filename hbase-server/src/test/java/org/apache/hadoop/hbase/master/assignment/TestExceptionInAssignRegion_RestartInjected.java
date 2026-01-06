@@ -85,6 +85,7 @@ public class TestExceptionInAssignRegion_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procedureExecutor = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     JVMClusterUtil.RegionServerThread rsThread = null;
     for (JVMClusterUtil.RegionServerThread t : UTIL.getMiniHBaseCluster()
@@ -123,6 +124,7 @@ public class TestExceptionInAssignRegion_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procedureExecutor = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     RegionStateNode regionNode = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager()
       .getRegionStates().getOrCreateRegionStateNode(hri);
@@ -134,6 +136,7 @@ public class TestExceptionInAssignRegion_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procedureExecutor = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     countDownLatch.countDown();
     long prodId = procedureExecutor.submitProcedure(assignRegionProcedure);
@@ -144,6 +147,7 @@ public class TestExceptionInAssignRegion_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procedureExecutor = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     ProcedureTestingUtility.waitProcedure(procedureExecutor, prodId);
 
@@ -153,6 +157,7 @@ public class TestExceptionInAssignRegion_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procedureExecutor = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     Assert.assertEquals("Should be two RS since other is aborted", 2,
       UTIL.getMiniHBaseCluster().getLiveRegionServerThreads().size());

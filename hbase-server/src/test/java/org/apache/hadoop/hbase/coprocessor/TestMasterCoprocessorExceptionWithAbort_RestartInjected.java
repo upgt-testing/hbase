@@ -175,6 +175,7 @@ public class TestMasterCoprocessorExceptionWithAbort_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    cluster = UTIL.getHBaseCluster();
 
     HMaster master = cluster.getMaster();
     MasterCoprocessorHost host = master.getMasterCoprocessorHost();

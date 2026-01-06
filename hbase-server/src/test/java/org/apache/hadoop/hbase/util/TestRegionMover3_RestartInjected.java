@@ -105,6 +105,7 @@ public class TestRegionMover3_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     admin.flush(tableName);
     RestartFramework.at("after_flush")
         .on(cluster)
@@ -112,6 +113,7 @@ public class TestRegionMover3_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     admin.compact(tableName);
     RestartFramework.at("after_compact")
         .on(cluster)
@@ -119,6 +121,7 @@ public class TestRegionMover3_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     Thread.sleep(3000);
     HRegionServer hRegionServer0 = cluster.getRegionServer(0);
     HRegionServer hRegionServer1 = cluster.getRegionServer(1);
@@ -150,6 +153,7 @@ public class TestRegionMover3_RestartInjected {
         .withIndex(1)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     // regionMover obj on rs0. While unloading regions from rs0
     // with default rackManager, which resolves "/default-rack" for each server, no region
@@ -165,6 +169,7 @@ public class TestRegionMover3_RestartInjected {
           .withIndex(2)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
       int newNumRegions0 = hRegionServer0.getNumberOfOnlineRegions();
       int newNumRegions1 = hRegionServer1.getNumberOfOnlineRegions();
       int newNumRegions2 = hRegionServer2.getNumberOfOnlineRegions();
@@ -185,6 +190,7 @@ public class TestRegionMover3_RestartInjected {
           .withIndex(1)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
       int newNumRegions0 = hRegionServer0.getNumberOfOnlineRegions();
       int newNumRegions1 = hRegionServer1.getNumberOfOnlineRegions();
       int newNumRegions2 = hRegionServer2.getNumberOfOnlineRegions();

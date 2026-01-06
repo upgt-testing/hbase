@@ -111,6 +111,7 @@ public class TestWALSplitWithDeletedTableData_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
     Path tableDir = CommonFSUtils.getWALTableDir(TEST_UTIL.getConfiguration(), t1);
     // Dropping table 't1' removed the table directory from the WAL FS completely
     assertFalse(TEST_UTIL.getDFSCluster().getFileSystem().exists(tableDir));
@@ -127,6 +128,7 @@ public class TestWALSplitWithDeletedTableData_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
     // Table 't1' is dropped. Assert table directory does not exist in WAL FS after WAL split.
     assertFalse(TEST_UTIL.getDFSCluster().getFileSystem().exists(tableDir));
     // Assert the table t2 region's data getting replayed after WAL split and available

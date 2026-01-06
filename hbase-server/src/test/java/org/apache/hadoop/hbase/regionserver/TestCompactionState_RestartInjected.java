@@ -209,6 +209,7 @@ public class TestCompactionState_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      rs = TEST_UTIL.getMiniHBaseCluster().getRegionServer(0);
       long curt = EnvironmentEdgeManager.currentTime();
       long waitTime = 5000;
       long endt = curt + waitTime;
@@ -241,6 +242,7 @@ public class TestCompactionState_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      rs = TEST_UTIL.getMiniHBaseCluster().getRegionServer(0);
       int countAfter = countStoreFilesInFamilies(regions, families);
       int countAfterSingleFamily = countStoreFilesInFamily(regions, family);
       assertTrue(countAfter < countBefore);

@@ -96,6 +96,7 @@ public class TestGlobalMemStoreSize_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     int numRegions = -1;
     try (RegionLocator r = TEST_UTIL.getConnection().getRegionLocator(table)) {
       numRegions = r.getStartKeys().length;
@@ -108,6 +109,7 @@ public class TestGlobalMemStoreSize_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     for (HRegionServer server : getOnlineRegionServers()) {
       long globalMemStoreSize = 0;
@@ -123,6 +125,7 @@ public class TestGlobalMemStoreSize_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     // check the global memstore size after flush
     int i = 0;
     for (HRegionServer server : getOnlineRegionServers()) {
@@ -139,6 +142,7 @@ public class TestGlobalMemStoreSize_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
       LOG.info("Post flush on " + server.getServerName());
       long now = EnvironmentEdgeManager.currentTime();
       long timeout = now + 1000;

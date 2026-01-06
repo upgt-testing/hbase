@@ -190,7 +190,7 @@ public class TestHTableMultiplexerFlushCache_RestartInjected {
         .execute();
 
     final HRegionLocation loc = regionLocator.getRegionLocation(row);
-    final MiniHBaseCluster hbaseCluster = TEST_UTIL.getHBaseCluster();
+    MiniHBaseCluster hbaseCluster = TEST_UTIL.getHBaseCluster();
     // The current server for the region we're writing to
     final ServerName originalServer = loc.getServerName();
     ServerName newServer = null;
@@ -218,6 +218,7 @@ public class TestHTableMultiplexerFlushCache_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    hbaseCluster = TEST_UTIL.getHBaseCluster();
 
     // Send a new Put
     put = new Put(row).addColumn(FAMILY, QUALIFIER2, VALUE2);

@@ -262,6 +262,7 @@ public class TestHbck_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = TEST_UTIL.getAdmin();
   }
 
   @Test
@@ -351,6 +352,7 @@ public class TestHbck_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    testRs = TEST_UTIL.getRSForFirstRegionInTable(TABLE_NAME);
     ServerName serverName = testRs.getServerName();
     Hbck hbck = getHbck();
     List<Long> pids =
@@ -386,6 +388,7 @@ public class TestHbck_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = TEST_UTIL.getMiniHBaseCluster().getMaster();
     HbckReport report = hbckChore.getLastReport();
     assertNotNull(report);
     assertTrue(report.getCheckingEndTimestamp().isAfter(endTimestamp));

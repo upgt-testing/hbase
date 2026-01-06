@@ -167,6 +167,7 @@ public class TestNamespaceCommands_RestartInjected extends SecureTestUtil {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getMiniHBaseCluster();
     // Wait for the ACL table to become available
     UTIL.waitTableAvailable(PermissionStorage.ACL_TABLE_NAME.getName(), 30 * 1000);
     RestartFramework.at("after_acl_table_available")
@@ -175,6 +176,7 @@ public class TestNamespaceCommands_RestartInjected extends SecureTestUtil {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getMiniHBaseCluster();
 
     // Find the Access Controller CP. Could be on master or if master is not serving regions, is
     // on an arbitrary server.
@@ -195,6 +197,7 @@ public class TestNamespaceCommands_RestartInjected extends SecureTestUtil {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getMiniHBaseCluster();
 
     UTIL.getAdmin().createNamespace(NamespaceDescriptor.create(TEST_NAMESPACE).build());
     UTIL.getAdmin().createNamespace(NamespaceDescriptor.create(TEST_NAMESPACE2).build());
@@ -204,6 +207,7 @@ public class TestNamespaceCommands_RestartInjected extends SecureTestUtil {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getMiniHBaseCluster();
 
     // grants on global
     grantGlobal(UTIL, USER_GLOBAL_ADMIN.getShortName(), Permission.Action.ADMIN);
@@ -217,6 +221,7 @@ public class TestNamespaceCommands_RestartInjected extends SecureTestUtil {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getMiniHBaseCluster();
 
     // grants on namespace
     grantOnNamespace(UTIL, USER_NS_ADMIN.getShortName(), TEST_NAMESPACE, Permission.Action.ADMIN);
@@ -233,6 +238,7 @@ public class TestNamespaceCommands_RestartInjected extends SecureTestUtil {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getMiniHBaseCluster();
 
     grantGlobal(UTIL, toGroupEntry(GROUP_ADMIN), Permission.Action.ADMIN);
     grantGlobal(UTIL, toGroupEntry(GROUP_CREATE), Permission.Action.CREATE);
@@ -244,6 +250,7 @@ public class TestNamespaceCommands_RestartInjected extends SecureTestUtil {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getMiniHBaseCluster();
   }
 
   @AfterClass

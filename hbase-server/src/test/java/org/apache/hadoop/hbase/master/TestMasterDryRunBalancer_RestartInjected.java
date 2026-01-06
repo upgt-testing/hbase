@@ -70,6 +70,7 @@ public class TestMasterDryRunBalancer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
 
     int numRegions = 100;
     int regionsPerRs = numRegions / 2;
@@ -81,6 +82,7 @@ public class TestMasterDryRunBalancer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
     HMaster master = Mockito.spy(TEST_UTIL.getHBaseCluster().getMaster());
 
     // dry run should be possible with balancer disabled
@@ -94,6 +96,7 @@ public class TestMasterDryRunBalancer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
     master = Mockito.spy(TEST_UTIL.getHBaseCluster().getMaster()); // Refresh after master restart
 
     HRegionServer biasedServer = unbalance(master, tableName);
@@ -104,6 +107,7 @@ public class TestMasterDryRunBalancer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
 
     BalanceResponse response = master.balance(BalanceRequest.newBuilder().setDryRun(true).build());
     assertTrue(response.isBalancerRan());
@@ -119,6 +123,7 @@ public class TestMasterDryRunBalancer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
     master = Mockito.spy(TEST_UTIL.getHBaseCluster().getMaster()); // Refresh after master restart
 
     // sanity check that we truly don't try to execute any plans
@@ -133,6 +138,7 @@ public class TestMasterDryRunBalancer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
 
     TEST_UTIL.deleteTable(tableName);
   }

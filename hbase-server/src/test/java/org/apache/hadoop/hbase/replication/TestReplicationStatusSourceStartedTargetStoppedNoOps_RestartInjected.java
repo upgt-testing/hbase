@@ -65,6 +65,7 @@ public class TestReplicationStatusSourceStartedTargetStoppedNoOps_RestartInjecte
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    hbaseAdmin = UTIL1.getAdmin();
     ServerName serverName = UTIL1.getHBaseCluster().getRegionServer(0).getServerName();
     Thread.sleep(10000);
     RestartFramework.at("after_sleep_interval")

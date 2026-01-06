@@ -104,6 +104,7 @@ public class TestShutdownBackupMaster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getHBaseCluster();
     assertNotNull(activeMaster);
     assertNotNull(backupMaster);
     RestartFramework.at("after_assert_masters")
@@ -112,6 +113,7 @@ public class TestShutdownBackupMaster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getHBaseCluster();
     ARRIVE = new CountDownLatch(1);
     CONTINUE = new CountDownLatch(1);
     activeMaster.abort("Aborting active master for test");

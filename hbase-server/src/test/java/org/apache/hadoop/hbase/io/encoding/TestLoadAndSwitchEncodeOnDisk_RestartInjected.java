@@ -102,6 +102,7 @@ public class TestLoadAndSwitchEncodeOnDisk_RestartInjected extends TestMiniClust
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = TEST_UTIL.getAdmin();
 
     System.err.println("\nRe-enabling table\n");
     admin.enableTable(TABLE);
@@ -112,6 +113,7 @@ public class TestLoadAndSwitchEncodeOnDisk_RestartInjected extends TestMiniClust
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = TEST_UTIL.getAdmin();
 
     System.err.println("\nNew column descriptor: " + getColumnDesc(admin) + "\n");
 
@@ -134,6 +136,7 @@ public class TestLoadAndSwitchEncodeOnDisk_RestartInjected extends TestMiniClust
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    rs = TEST_UTIL.getMiniHBaseCluster().getRegionServer(0);
 
     System.err.println("\nDone with the test, shutting down the cluster\n");
   }

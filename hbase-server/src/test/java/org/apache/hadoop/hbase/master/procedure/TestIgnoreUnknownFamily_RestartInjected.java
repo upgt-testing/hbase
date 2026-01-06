@@ -157,6 +157,7 @@ public class TestIgnoreUnknownFamily_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = UTIL.getAdmin();
 
     List<RegionInfo> regions = admin.getRegions(tableName);
 
@@ -185,5 +186,6 @@ public class TestIgnoreUnknownFamily_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = UTIL.getAdmin();
   }
 }

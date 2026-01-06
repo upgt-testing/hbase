@@ -224,6 +224,7 @@ public class TestReportOnlineRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExecLock = procExec.getProcExecutionLock();
     master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
     am = master.getAssignmentManager(); // Refresh after master restart
     procExec = master.getMasterProcedureExecutor(); // Refresh after master restart
@@ -235,6 +236,7 @@ public class TestReportOnlineRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExecLock = procExec.getProcExecutionLock();
     master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
     am = master.getAssignmentManager(); // Refresh after master restart
     procExec = master.getMasterProcedureExecutor(); // Refresh after master restart
@@ -255,6 +257,7 @@ public class TestReportOnlineRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExecLock = procExec.getProcExecutionLock();
     master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
     am = master.getAssignmentManager(); // Refresh after master restart
     procExec = master.getMasterProcedureExecutor(); // Refresh after master restart
@@ -266,6 +269,7 @@ public class TestReportOnlineRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExecLock = procExec.getProcExecutionLock();
     master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
     am = master.getAssignmentManager(); // Refresh after master restart
     procExec = master.getMasterProcedureExecutor(); // Refresh after master restart
@@ -285,6 +289,7 @@ public class TestReportOnlineRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExecLock = procExec.getProcExecutionLock();
     master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
     am = master.getAssignmentManager(); // Refresh after master restart
     procExec = master.getMasterProcedureExecutor(); // Refresh after master restart
@@ -296,6 +301,7 @@ public class TestReportOnlineRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExecLock = procExec.getProcExecutionLock();
     master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
     am = master.getAssignmentManager(); // Refresh after master restart
     procExec = master.getMasterProcedureExecutor(); // Refresh after master restart
@@ -313,6 +319,7 @@ public class TestReportOnlineRegionsRace_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExecLock = procExec.getProcExecutionLock();
     master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
     am = master.getAssignmentManager(); // Refresh after master restart
     procExec = master.getMasterProcedureExecutor(); // Refresh after master restart

@@ -151,7 +151,7 @@ public class TestSplitWithBlockingFiles_RestartInjected {
         .execute();
     MasterProcedureEnv env =
       UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor().getEnvironment();
-    final ProcedureExecutor<MasterProcedureEnv> executor =
+    ProcedureExecutor<MasterProcedureEnv> executor =
       UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
     SplitTableRegionProcedure splitProcedure =
       new SplitTableRegionProcedure(env, regions.get(0).getRegionInfo(), Bytes.toBytes("row5"));
@@ -162,6 +162,7 @@ public class TestSplitWithBlockingFiles_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    executor = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
     ProcedureTestingUtility.waitProcedure(executor, splitProcedure.getProcId());
     RestartFramework.at("after_split_complete")
         .on(cluster)

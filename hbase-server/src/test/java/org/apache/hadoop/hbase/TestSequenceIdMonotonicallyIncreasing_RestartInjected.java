@@ -215,6 +215,7 @@ public class TestSequenceIdMonotonicallyIncreasing_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getMiniHBaseCluster();
 
     UTIL.getAdmin().mergeRegionsAsync(regionA.getRegionInfo().getRegionName(),
       regionB.getRegionInfo().getRegionName(), false).get(1, TimeUnit.MINUTES);
@@ -225,6 +226,7 @@ public class TestSequenceIdMonotonicallyIncreasing_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getMiniHBaseCluster();
 
     long maxSeqIdA = getMaxSeqId(rsA, regionA.getRegionInfo());
     long maxSeqIdB = getMaxSeqId(rsB, regionB.getRegionInfo());

@@ -260,6 +260,7 @@ public class TestRaceBetweenSCPAndTRSP_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
     am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
     final ProcedureExecutor<?> finalProcExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
     UTIL.waitFor(60000, () -> finalProcExec.isFinished(scpProcId));

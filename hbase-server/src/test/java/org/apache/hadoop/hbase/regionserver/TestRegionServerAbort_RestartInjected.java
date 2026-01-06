@@ -202,6 +202,7 @@ public class TestRegionServerAbort_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    admin = testUtil.getHBaseAdmin();
     HRegionServer regionserver = cluster.getRegionServer(0);
     admin.stopRegionServer(regionserver.getServerName().getAddress().toString());
     RestartFramework.at("after_stop_regionserver_call")
@@ -210,6 +211,7 @@ public class TestRegionServerAbort_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    admin = testUtil.getHBaseAdmin();
 
     // regionserver should have failed to stop due to coprocessor
     assertFalse(cluster.getRegionServer(0).isAborted());

@@ -121,6 +121,7 @@ public class TestRSMobFileCleanerChore_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = HTU.getAdmin();
   }
 
   private void initConf() {

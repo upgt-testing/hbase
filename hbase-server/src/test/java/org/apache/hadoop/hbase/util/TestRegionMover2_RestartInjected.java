@@ -554,6 +554,7 @@ public class TestRegionMover2_RestartInjected {
           .withIndex(1)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
       Assert.assertEquals(numRegionsToIsolate, destinationRS.getNumberOfOnlineRegions());
       List<HRegion> onlineRegions = destinationRS.getRegions();
       for (int i = 0; i < numRegionsToIsolate; i++) {

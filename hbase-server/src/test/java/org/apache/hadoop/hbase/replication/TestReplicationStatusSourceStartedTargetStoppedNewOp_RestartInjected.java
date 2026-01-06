@@ -73,6 +73,7 @@ public class TestReplicationStatusSourceStartedTargetStoppedNewOp_RestartInjecte
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    hbaseAdmin = UTIL1.getAdmin();
 
     // add some values to source cluster
     for (int i = 0; i < NB_ROWS_IN_BATCH; i++) {

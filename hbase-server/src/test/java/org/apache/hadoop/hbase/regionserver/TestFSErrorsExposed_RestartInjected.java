@@ -210,6 +210,7 @@ public class TestFSErrorsExposed_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      admin = util.getAdmin();
 
       // Make a new Configuration so it makes a new connection that has the
       // above configuration on it; else we use the old one w/ 10 as default.

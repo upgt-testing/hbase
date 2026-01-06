@@ -94,6 +94,7 @@ public class TestMasterAbortWhileMergingTable_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = UTIL.getHBaseAdmin();
   }
 
   @AfterClass

@@ -89,6 +89,7 @@ public class TestAsyncClusterAdminApi2_RestartInjected extends TestAsyncAdminBas
         .withIndex(1)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    rs = TEST_UTIL.getMiniHBaseCluster().getRegionServer(0);
 
     admin.stopRegionServer(rs.getServerName()).join();
     assertTrue(rs.isStopped());
@@ -99,6 +100,7 @@ public class TestAsyncClusterAdminApi2_RestartInjected extends TestAsyncAdminBas
         .withIndex(1)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    rs = TEST_UTIL.getMiniHBaseCluster().getRegionServer(0);
 
     HMaster master = TEST_UTIL.getMiniHBaseCluster().getMaster();
     assertFalse(master.isStopped());

@@ -306,7 +306,7 @@ public class TestHFileArchiving_RestartInjected {
         .withMode(RestartMode.GRACEFUL)
         .execute();
 
-    final Admin admin = UTIL.getAdmin();
+    Admin admin = UTIL.getAdmin();
 
     // get the current store files for the region
     List<HRegion> servingRegions = UTIL.getHBaseCluster().getRegions(tableName);
@@ -333,6 +333,7 @@ public class TestHFileArchiving_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = UTIL.getAdmin();
 
     FileSystem fs = UTIL.getTestFileSystem();
 

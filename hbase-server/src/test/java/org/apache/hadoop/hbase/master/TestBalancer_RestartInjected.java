@@ -119,6 +119,7 @@ public class TestBalancer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    regionStates = assignmentManager.getRegionStates();
     master = TEST_UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
     assignmentManager = master.getAssignmentManager(); // Refresh after master restart
 
@@ -135,6 +136,11 @@ public class TestBalancer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = TEST_UTIL.getMiniHBaseCluster().getMaster();
+    regionStates = assignmentManager.getRegionStates();
+    assignmentManager = master.getAssignmentManager();
+    tableStateManager = master.getTableStateManager();
+    serverManager = master.getServerManager();
 
     assertFalse(assignments.containsKey(disableTableName));
     assertTrue(assignments.containsKey(tableName));

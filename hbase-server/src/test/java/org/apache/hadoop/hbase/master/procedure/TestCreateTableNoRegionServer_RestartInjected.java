@@ -145,6 +145,7 @@ public class TestCreateTableNoRegionServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = UTIL.getAdmin();
 
     ARRIVE = new CountDownLatch(1);
     RESUME = new CountDownLatch(1);
@@ -155,6 +156,7 @@ public class TestCreateTableNoRegionServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = UTIL.getAdmin();
 
     Future<Void> future = admin.createTableAsync(td);
 
@@ -164,6 +166,7 @@ public class TestCreateTableNoRegionServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = UTIL.getAdmin();
 
     ARRIVE.await();
 
@@ -173,6 +176,7 @@ public class TestCreateTableNoRegionServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = UTIL.getAdmin();
 
     UTIL.getMiniHBaseCluster().stopRegionServer(0).join();
 
@@ -182,6 +186,7 @@ public class TestCreateTableNoRegionServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = UTIL.getAdmin();
 
     // make sure we the region server is done.
     UTIL.waitFor(30000,
@@ -193,6 +198,7 @@ public class TestCreateTableNoRegionServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = UTIL.getAdmin();
 
     RESUME.countDown();
 
@@ -202,6 +208,7 @@ public class TestCreateTableNoRegionServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = UTIL.getAdmin();
 
     Thread.sleep(10000);
 
@@ -211,6 +218,7 @@ public class TestCreateTableNoRegionServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = UTIL.getAdmin();
 
     // the procedure should still be in the CREATE_TABLE_ASSIGN_REGIONS state, but here, we just
     // warn it as it may cause more serious problem later.
@@ -230,6 +238,7 @@ public class TestCreateTableNoRegionServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = UTIL.getAdmin();
 
     UTIL.getMiniHBaseCluster().startRegionServer();
 
@@ -249,6 +258,7 @@ public class TestCreateTableNoRegionServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = UTIL.getAdmin();
 
     // make sure we could put to the table
     try (Table table =

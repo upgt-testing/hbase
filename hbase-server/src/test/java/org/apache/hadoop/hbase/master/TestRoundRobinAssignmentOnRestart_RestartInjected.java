@@ -123,6 +123,7 @@ public class TestRoundRobinAssignmentOnRestart_RestartInjected extends AbstractT
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getHBaseCluster();
 
     // Restart 1 regionserver
     cluster.stopRegionServer(testServer);
@@ -134,6 +135,7 @@ public class TestRoundRobinAssignmentOnRestart_RestartInjected extends AbstractT
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getHBaseCluster();
 
     cluster.getConf().setInt(HConstants.REGIONSERVER_PORT, port);
     cluster.startRegionServer();
@@ -144,6 +146,7 @@ public class TestRoundRobinAssignmentOnRestart_RestartInjected extends AbstractT
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getHBaseCluster();
 
     HMaster master = UTIL.getMiniHBaseCluster().getMaster();
     List<ServerName> localServers = master.getServerManager().getOnlineServersList();
@@ -162,6 +165,8 @@ public class TestRoundRobinAssignmentOnRestart_RestartInjected extends AbstractT
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getHBaseCluster();
+    master = UTIL.getMiniHBaseCluster().getMaster();
 
     // Wait until all regions are assigned
     for (TableName TABLE : TABLES) {
@@ -175,6 +180,7 @@ public class TestRoundRobinAssignmentOnRestart_RestartInjected extends AbstractT
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getHBaseCluster();
 
     List<RegionInfo> newRegionInfos =
       cluster.getMaster().getAssignmentManager().getRegionsOnServer(newTestServer);

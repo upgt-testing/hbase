@@ -172,6 +172,7 @@ public class TestTableProcedureWaitingQueueCleanup_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     ProcedureTestingUtility.submitAndWait(procExec, proc);
 
@@ -181,6 +182,7 @@ public class TestTableProcedureWaitingQueueCleanup_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     assertTrue(UTIL.getAdmin().tableExists(TD.getTableName()));
 
@@ -190,6 +192,7 @@ public class TestTableProcedureWaitingQueueCleanup_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     // Without the fix in HBASE-28876, we will hang there forever, as we do not clean up the
     // TableProcedureWaitingQueue
@@ -201,6 +204,7 @@ public class TestTableProcedureWaitingQueueCleanup_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     UTIL.getAdmin().deleteTable(TD.getTableName());
 
@@ -210,6 +214,7 @@ public class TestTableProcedureWaitingQueueCleanup_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
   }
 
   @Test

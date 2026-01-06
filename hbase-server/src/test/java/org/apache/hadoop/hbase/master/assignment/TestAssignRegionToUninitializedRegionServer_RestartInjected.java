@@ -171,6 +171,7 @@ public class TestAssignRegionToUninitializedRegionServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    src = UTIL.getRSForFirstRegionInTable(NAME);
 
     try {
       UTIL.getAdmin().move(UTIL.getAdmin().getRegions(NAME).get(0).getEncodedNameAsBytes(),
@@ -197,6 +198,7 @@ public class TestAssignRegionToUninitializedRegionServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    src = UTIL.getRSForFirstRegionInTable(NAME);
 
     // wait the new region server online
     assertSame(dst, regionServerFuture.get());
@@ -218,6 +220,7 @@ public class TestAssignRegionToUninitializedRegionServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    src = UTIL.getRSForFirstRegionInTable(NAME);
 
     // this time the region should be on the new region server
     assertSame(dst, UTIL.getRSForFirstRegionInTable(NAME));

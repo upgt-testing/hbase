@@ -160,6 +160,7 @@ public class TestMasterCoprocessorExceptionWithRemove_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getHBaseCluster();
     master = cluster.getMaster(); // Refresh after master restart
 
     // Set a watch on the zookeeper /hbase/master node. If the master dies,

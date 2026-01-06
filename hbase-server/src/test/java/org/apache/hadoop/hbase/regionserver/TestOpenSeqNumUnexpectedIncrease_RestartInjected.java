@@ -120,6 +120,7 @@ public class TestOpenSeqNumUnexpectedIncrease_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    src = UTIL.getRSForFirstRegionInTable(TABLE_NAME);
 
     // will fail two times, and then verify that the open sequence number is still openSeqNum + 2
     FAILED_OPEN.set(2);
@@ -132,6 +133,7 @@ public class TestOpenSeqNumUnexpectedIncrease_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    src = UTIL.getRSForFirstRegionInTable(TABLE_NAME);
 
     HRegion region1 = UTIL.getMiniHBaseCluster().getRegions(TABLE_NAME).get(0);
     long openSeqNum1 = region1.getOpenSeqNum();

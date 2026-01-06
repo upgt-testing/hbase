@@ -90,6 +90,7 @@ public class TestRefreshPeerWhileRegionServerRestarts_RestartInjected extends Te
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL1.getMiniHBaseCluster();
     CountDownLatch arrive = new CountDownLatch(1);
     ARRIVE = arrive;
     RESUME = new CountDownLatch(1);
@@ -103,6 +104,7 @@ public class TestRefreshPeerWhileRegionServerRestarts_RestartInjected extends Te
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL1.getMiniHBaseCluster();
     ARRIVE.await();
     RestartFramework.at("after_arrive_latch_await")
         .on(cluster)
@@ -110,6 +112,7 @@ public class TestRefreshPeerWhileRegionServerRestarts_RestartInjected extends Te
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL1.getMiniHBaseCluster();
     // change the peer state, wait until it reach the last state, where we have already get the
     // region server list for refreshing
     Future<Void> future = hbaseAdmin.disableReplicationPeerAsync(PEER_ID2);
@@ -119,6 +122,7 @@ public class TestRefreshPeerWhileRegionServerRestarts_RestartInjected extends Te
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL1.getMiniHBaseCluster();
     try {
       UTIL1.waitFor(30000, () -> {
         for (Procedure<?> proc : UTIL1.getMiniHBaseCluster().getMaster().getProcedures()) {
@@ -135,6 +139,7 @@ public class TestRefreshPeerWhileRegionServerRestarts_RestartInjected extends Te
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = UTIL1.getMiniHBaseCluster();
     } finally {
       // let the new region server go
       RESUME.countDown();
@@ -144,6 +149,7 @@ public class TestRefreshPeerWhileRegionServerRestarts_RestartInjected extends Te
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = UTIL1.getMiniHBaseCluster();
     }
     // wait the disable peer operation to finish
     future.get();
@@ -153,6 +159,7 @@ public class TestRefreshPeerWhileRegionServerRestarts_RestartInjected extends Te
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL1.getMiniHBaseCluster();
     // assert that the peer cache on the new region server has also been refreshed
     ReplicationPeer peer = regionServerFuture.get().getReplicationSourceService()
       .getReplicationManager().getReplicationPeers().getPeer(PEER_ID2);

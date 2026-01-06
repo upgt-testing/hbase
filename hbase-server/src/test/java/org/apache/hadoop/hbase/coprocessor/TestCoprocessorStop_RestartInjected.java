@@ -120,6 +120,7 @@ public class TestCoprocessorStop_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getHBaseCluster();
 
     RestartFramework.at("after_get_cluster_rs")
         .on(cluster)
@@ -127,6 +128,7 @@ public class TestCoprocessorStop_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getHBaseCluster();
 
     LOG.info("shutdown hbase cluster...");
     cluster.shutdown();

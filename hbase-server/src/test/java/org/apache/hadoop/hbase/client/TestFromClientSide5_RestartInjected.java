@@ -1642,6 +1642,7 @@ public class TestFromClientSide5_RestartInjected extends FromClientSideBase {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+        region = TEST_UTIL.getRSForFirstRegionInTable(tableName).getRegion(regionName);
         assertTrue(Bytes.equals(table.get(new Get(ROW)).value(), data));
 
         // data was in memstore so don't expect any changes
@@ -1658,6 +1659,7 @@ public class TestFromClientSide5_RestartInjected extends FromClientSideBase {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+        region = TEST_UTIL.getRSForFirstRegionInTable(tableName).getRegion(regionName);
 
         // expect two more blocks in cache - DATA and ROOT_INDEX
         // , no change in hits/misses

@@ -121,6 +121,7 @@ public class TestServerCrashProcedureStuck_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      admin = conn.getAdmin();
       master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
       executor = master.getMasterProcedureExecutor(); // Refresh after master restart
       final ProcedureExecutor<MasterProcedureEnv> execForLambda1 = executor;
@@ -137,6 +138,7 @@ public class TestServerCrashProcedureStuck_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      admin = conn.getAdmin();
       master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
       executor = master.getMasterProcedureExecutor(); // Refresh after master restart
 
@@ -148,6 +150,7 @@ public class TestServerCrashProcedureStuck_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      admin = conn.getAdmin();
       master = UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
       executor = master.getMasterProcedureExecutor(); // Refresh after master restart
       final ProcedureExecutor<MasterProcedureEnv> execForLambda2 = executor;

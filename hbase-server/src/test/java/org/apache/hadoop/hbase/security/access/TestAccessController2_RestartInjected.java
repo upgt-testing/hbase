@@ -661,6 +661,7 @@ public class TestAccessController2_RestartInjected extends SecureTestUtil {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    cpHost = TEST_UTIL.getMiniHBaseCluster().getMaster().getMasterCoprocessorHost();
 
     AccessController ACCESS_CONTROLLER = cpHost.findCoprocessor(MyAccessController.class);
     MasterCoprocessorEnvironment CP_ENV =
@@ -672,6 +673,7 @@ public class TestAccessController2_RestartInjected extends SecureTestUtil {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    cpHost = TEST_UTIL.getMiniHBaseCluster().getMaster().getMasterCoprocessorHost();
 
     RegionServerCoprocessorHost rsHost =
       TEST_UTIL.getMiniHBaseCluster().getRegionServer(0).getRegionServerCoprocessorHost();

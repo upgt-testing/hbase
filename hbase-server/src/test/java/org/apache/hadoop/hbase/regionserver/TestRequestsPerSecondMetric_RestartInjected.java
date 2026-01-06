@@ -92,6 +92,7 @@ public class TestRequestsPerSecondMetric_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    admin = UTIL.getAdmin();
 
     Table table = admin.getConnection().getTable(TABLENAME);
     ServerName serverName = admin.getRegionServers().iterator().next();
@@ -120,6 +121,7 @@ public class TestRequestsPerSecondMetric_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    admin = UTIL.getAdmin();
 
     Thread.sleep(METRICS_PERIOD);
     metricsServer.run();

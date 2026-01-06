@@ -217,6 +217,7 @@ public class TestCompactionFileNotFound_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = util.getAdmin();
 
     try {
       // Create Multiple store files

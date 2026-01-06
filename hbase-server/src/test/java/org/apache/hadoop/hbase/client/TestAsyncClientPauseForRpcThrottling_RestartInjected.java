@@ -156,6 +156,7 @@ public class TestAsyncClientPauseForRpcThrottling_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getMiniHBaseCluster();
 
     UTIL.getMiniHBaseCluster().getConfiguration().setClass(HConstants.REGION_SERVER_IMPL,
       ThrottlingRegionServerForTest.class, HRegionServer.class);
@@ -174,6 +175,7 @@ public class TestAsyncClientPauseForRpcThrottling_RestartInjected {
         .withIndex(1)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getMiniHBaseCluster();
 
     UTIL.getAdmin().move(UTIL.getAdmin().getRegions(TABLE_NAME).get(0).getEncodedNameAsBytes(),
       regionServer.getServerName());

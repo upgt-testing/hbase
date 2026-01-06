@@ -433,7 +433,7 @@ public class TestRegionMergeTransactionOnCluster_RestartInjected {
   public void testMerge() throws Exception {
     LOG.info("Starting " + name.getMethodName());
     final TableName tableName = TableName.valueOf(name.getMethodName());
-    final Admin admin = TEST_UTIL.getAdmin();
+    Admin admin = TEST_UTIL.getAdmin();
     final int syncWaitTimeout = 10 * 60000; // 10min
     MiniHBaseCluster cluster = TEST_UTIL.getHBaseCluster();
 
@@ -462,6 +462,7 @@ public class TestRegionMergeTransactionOnCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      admin = TEST_UTIL.getAdmin();
 
       try {
         // Merge offline region. Region a is offline here
@@ -498,6 +499,7 @@ public class TestRegionMergeTransactionOnCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      admin = TEST_UTIL.getAdmin();
 
       table.close();
     } finally {
@@ -519,6 +521,7 @@ public class TestRegionMergeTransactionOnCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
 
       List<Pair<RegionInfo, ServerName>> initialRegionToServers =
         MetaTableAccessor.getTableRegionsAndLocations(TEST_UTIL.getConnection(), tableName);
@@ -529,6 +532,7 @@ public class TestRegionMergeTransactionOnCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
 
       // Merge 1st and 2nd region
       PairOfSameType<RegionInfo> mergedRegions =
@@ -540,6 +544,7 @@ public class TestRegionMergeTransactionOnCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
 
       List<Pair<RegionInfo, ServerName>> currentRegionToServers =
         MetaTableAccessor.getTableRegionsAndLocations(TEST_UTIL.getConnection(), tableName);
@@ -582,6 +587,7 @@ public class TestRegionMergeTransactionOnCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
 
       table.close();
     } finally {

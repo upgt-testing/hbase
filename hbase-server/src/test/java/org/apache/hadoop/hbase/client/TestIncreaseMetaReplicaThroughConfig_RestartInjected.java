@@ -91,6 +91,7 @@ public class TestIncreaseMetaReplicaThroughConfig_RestartInjected extends MetaWi
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    oldMaster = TEST_UTIL.getMiniHBaseCluster().getMaster();
     TEST_UTIL.waitFor(30000,
       () -> TEST_UTIL.getZooKeeperWatcher().getMetaReplicaNodes().size() == 5);
     RestartFramework.at("after_meta_replicas_ready")
@@ -99,5 +100,6 @@ public class TestIncreaseMetaReplicaThroughConfig_RestartInjected extends MetaWi
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    oldMaster = TEST_UTIL.getMiniHBaseCluster().getMaster();
   }
 }

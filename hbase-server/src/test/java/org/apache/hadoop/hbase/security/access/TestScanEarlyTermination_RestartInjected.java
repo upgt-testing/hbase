@@ -151,6 +151,7 @@ public class TestScanEarlyTermination_RestartInjected extends SecureTestUtil {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = TEST_UTIL.getAdmin();
   }
 
   @After

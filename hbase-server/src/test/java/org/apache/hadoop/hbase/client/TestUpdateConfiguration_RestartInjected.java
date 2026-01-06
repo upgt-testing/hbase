@@ -129,6 +129,7 @@ public class TestUpdateConfiguration_RestartInjected extends AbstractTestUpdateC
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = TEST_UTIL.getAdmin();
 
     // Check the configuration of the Masters
     Configuration masterConfiguration =

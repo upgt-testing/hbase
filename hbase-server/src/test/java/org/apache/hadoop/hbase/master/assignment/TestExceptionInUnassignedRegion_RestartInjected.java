@@ -82,6 +82,7 @@ public class TestExceptionInUnassignedRegion_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    procedureExecutor = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     JVMClusterUtil.RegionServerThread rsThread = null;
     for (JVMClusterUtil.RegionServerThread t : UTIL.getMiniHBaseCluster()
@@ -111,6 +112,7 @@ public class TestExceptionInUnassignedRegion_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    procedureExecutor = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     RegionStateNode regionNode = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager()
       .getRegionStates().getOrCreateRegionStateNode(hri);
@@ -122,6 +124,7 @@ public class TestExceptionInUnassignedRegion_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    procedureExecutor = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     long prodId = procedureExecutor.submitProcedure(moveRegionProcedure);
 

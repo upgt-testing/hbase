@@ -128,6 +128,7 @@ public class TestFailedMetaReplicaAssigment_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = master.getAssignmentManager();
     master = TEST_UTIL.getMiniHBaseCluster().getMaster(); // Refresh after master restart
 
     // showing master is active and running

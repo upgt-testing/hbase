@@ -181,6 +181,7 @@ public class TestMasterRepairMode_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    conn = TEST_UTIL.getConnection();
 
     try (Table table = conn.getTable(TableName.META_TABLE_NAME);
       ResultScanner scanner = table.getScanner(HConstants.TABLE_FAMILY);
@@ -195,6 +196,7 @@ public class TestMasterRepairMode_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    conn = TEST_UTIL.getConnection();
 
     try (AsyncConnection asyncConn =
       ConnectionFactory.createAsyncConnection(TEST_UTIL.getConfiguration()).get()) {

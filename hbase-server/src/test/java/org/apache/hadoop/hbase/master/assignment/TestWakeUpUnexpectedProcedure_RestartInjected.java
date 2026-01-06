@@ -282,6 +282,7 @@ public class TestWakeUpUnexpectedProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager();
 
     ARRIVE_EXEC_PROC.await();
 
@@ -306,6 +307,7 @@ public class TestWakeUpUnexpectedProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager();
 
     // wait until we are going to open the region on a new rs
     ARRIVE_REPORT.await();
@@ -352,5 +354,6 @@ public class TestWakeUpUnexpectedProcedure_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager();
   }
 }

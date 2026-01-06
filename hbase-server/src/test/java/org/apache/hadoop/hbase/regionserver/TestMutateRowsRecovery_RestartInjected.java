@@ -113,6 +113,7 @@ public class TestMutateRowsRecovery_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      admin = connection.getAdmin();
 
       // Add a multi
       RowMutations rm = new RowMutations(row1);
@@ -153,6 +154,7 @@ public class TestMutateRowsRecovery_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      rs1 = TESTING_UTIL.getRSForFirstRegionInTable(tableName);
 
       // Kill the RS to trigger wal replay
       cluster.killRegionServer(rs1.serverName);
@@ -163,6 +165,7 @@ public class TestMutateRowsRecovery_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      admin = connection.getAdmin();
 
       // Ensure correct data exists
       Get g1 = new Get(row1);

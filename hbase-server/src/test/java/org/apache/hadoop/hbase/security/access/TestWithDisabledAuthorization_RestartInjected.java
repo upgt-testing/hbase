@@ -188,6 +188,7 @@ public class TestWithDisabledAuthorization_RestartInjected extends SecureTestUti
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cpHost = TEST_UTIL.getMiniHBaseCluster().getMaster().getMasterCoprocessorHost();
   }
 
   @AfterClass
@@ -212,6 +213,7 @@ public class TestWithDisabledAuthorization_RestartInjected extends SecureTestUti
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = TEST_UTIL.getAdmin();
 
     HRegion region = TEST_UTIL.getHBaseCluster().getRegions(testTable.getTableName()).get(0);
     RegionCoprocessorHost rcpHost = region.getCoprocessorHost();

@@ -66,6 +66,7 @@ public class TestMasterFailoverBalancerPersistence_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     // check that the balancer is on by default for the active master
     ClusterMetrics clusterStatus = active.getClusterMetrics();
@@ -77,6 +78,7 @@ public class TestMasterFailoverBalancerPersistence_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     active = killActiveAndWaitForNewActive(cluster);
 
@@ -86,6 +88,7 @@ public class TestMasterFailoverBalancerPersistence_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     // ensure the load balancer is still running on new master
     clusterStatus = active.getClusterMetrics();
@@ -97,6 +100,7 @@ public class TestMasterFailoverBalancerPersistence_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     // turn off the load balancer
     active.balanceSwitch(false);
@@ -107,6 +111,7 @@ public class TestMasterFailoverBalancerPersistence_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     // once more, kill active master and wait for new active master to show up
     active = killActiveAndWaitForNewActive(cluster);
@@ -117,6 +122,7 @@ public class TestMasterFailoverBalancerPersistence_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     // ensure the load balancer is not running on the new master
     clusterStatus = active.getClusterMetrics();
@@ -128,6 +134,7 @@ public class TestMasterFailoverBalancerPersistence_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     // Stop the cluster
     TEST_UTIL.shutdownMiniCluster();

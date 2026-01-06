@@ -270,6 +270,7 @@ public class TestRecreateCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    hbaseCluster = TEST_UTIL.getHBaseCluster();
   }
 
   private int getServerNumForTableWithOnlyOneRegion(TableName tableName) throws IOException {

@@ -132,6 +132,7 @@ public class TestSnapshotFromMaster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = UTIL.getMiniHBaseCluster().getMaster();
   }
 
   private static void setupConf(Configuration conf) {

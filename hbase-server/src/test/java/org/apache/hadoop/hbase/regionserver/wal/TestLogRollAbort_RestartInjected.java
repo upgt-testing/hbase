@@ -172,6 +172,8 @@ public class TestLogRollAbort_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      server = TEST_UTIL.getRSForFirstRegionInTable(tableName);
+      log = server.getWAL(null);
 
       log.sync();
 
@@ -181,6 +183,8 @@ public class TestLogRollAbort_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      server = TEST_UTIL.getRSForFirstRegionInTable(tableName);
+      log = server.getWAL(null);
 
       p = new Put(Bytes.toBytes("row2002"));
       p.addColumn(HConstants.CATALOG_FAMILY, Bytes.toBytes("col"), Bytes.toBytes(2002));
@@ -192,6 +196,8 @@ public class TestLogRollAbort_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      server = TEST_UTIL.getRSForFirstRegionInTable(tableName);
+      log = server.getWAL(null);
 
       dfsCluster.restartDataNodes();
       LOG.info("Restarted datanodes");
@@ -202,6 +208,8 @@ public class TestLogRollAbort_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      server = TEST_UTIL.getRSForFirstRegionInTable(tableName);
+      log = server.getWAL(null);
 
       try {
         log.rollWriter(true);

@@ -228,6 +228,7 @@ public class TestRegionAssignedToMultipleRegionServers_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    activeMaster = UTIL.getMiniHBaseCluster().getMaster();
     am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     // sleep a while to reproduce the problem, as after the fix in HBASE-21472 the execution logic
@@ -250,6 +251,7 @@ public class TestRegionAssignedToMultipleRegionServers_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    activeMaster = UTIL.getMiniHBaseCluster().getMaster();
     am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager(); // Refresh after master restart
 
     HRegionServer rs = UTIL.getMiniHBaseCluster().getRegionServer(sn);

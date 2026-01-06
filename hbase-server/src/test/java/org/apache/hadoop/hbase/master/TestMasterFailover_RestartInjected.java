@@ -262,6 +262,7 @@ public class TestMasterFailover_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
 
       HMaster activeMaster = cluster.getMaster();
       ServerName metaServerName = cluster.getServerHoldingMeta();
@@ -273,6 +274,7 @@ public class TestMasterFailover_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
 
       // Now kill master, meta should remain on rs, where we placed it before.
       LOG.info("Aborting master");
@@ -286,6 +288,7 @@ public class TestMasterFailover_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
 
       // meta should remain where it was
       RegionState metaState = MetaTableLocator.getMetaRegionState(hrs.getZooKeeper());
@@ -298,6 +301,7 @@ public class TestMasterFailover_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
 
       // Start up a new master
       LOG.info("Starting up a new master");
@@ -312,6 +316,7 @@ public class TestMasterFailover_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
       activeMaster = cluster.getMaster(); // Refresh after master restart
 
       // ensure meta is still deployed on RS
@@ -325,6 +330,7 @@ public class TestMasterFailover_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
 
       // Done, shutdown the cluster
     } finally {

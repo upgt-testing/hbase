@@ -1406,6 +1406,7 @@ public class TestFromClientSide4_RestartInjected extends FromClientSideBase {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      admin = TEST_UTIL.getAdmin();
 
       // add a user attribute to HTD
       desc.setValue(attrName, attrValue);
@@ -1424,6 +1425,7 @@ public class TestFromClientSide4_RestartInjected extends FromClientSideBase {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      admin = TEST_UTIL.getAdmin();
 
       // Test that attribute changes were applied
       desc = new HTableDescriptor(a.getDescriptor());

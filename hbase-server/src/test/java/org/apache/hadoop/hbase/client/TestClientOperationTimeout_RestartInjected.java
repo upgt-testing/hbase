@@ -110,6 +110,7 @@ public class TestClientOperationTimeout_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getMiniHBaseCluster();
 
     UTIL.getAdmin().createTable(TableDescriptorBuilder.newBuilder(TABLE_NAME)
       .setColumnFamily(ColumnFamilyDescriptorBuilder.of(FAMILY)).build());
@@ -120,6 +121,7 @@ public class TestClientOperationTimeout_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = UTIL.getMiniHBaseCluster();
 
     Configuration conf = new Configuration(UTIL.getConfiguration());
     conf.setLong(HConstants.HBASE_CLIENT_OPERATION_TIMEOUT, 500);

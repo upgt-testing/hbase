@@ -146,5 +146,6 @@ public class TestTableStateManager_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    master = TEST_UTIL.getMiniHBaseCluster().getMaster();
   }
 }

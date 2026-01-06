@@ -291,7 +291,7 @@ public class TestQuotaObserverChoreWithMiniCluster_RestartInjected {
   @Test
   public void testTableQuotaOverridesNamespaceQuota() throws Exception {
     final String namespace = testName.getMethodName();
-    final Admin admin = TEST_UTIL.getAdmin();
+    Admin admin = TEST_UTIL.getAdmin();
     // Ensure the namespace exists
     try {
       admin.getNamespaceDescriptor(namespace);
@@ -305,6 +305,7 @@ public class TestQuotaObserverChoreWithMiniCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = TEST_UTIL.getAdmin();
 
     TableName tn1 = helper.createTableWithRegions(namespace, 5);
     TableName tn2 = helper.createTableWithRegions(namespace, 5);
@@ -314,6 +315,7 @@ public class TestQuotaObserverChoreWithMiniCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = TEST_UTIL.getAdmin();
 
     final long namespaceSizeLimit = 3L * SpaceQuotaHelperForTests.ONE_MEGABYTE;
     final SpaceViolationPolicy namespaceViolationPolicy = SpaceViolationPolicy.DISABLE;
@@ -326,6 +328,7 @@ public class TestQuotaObserverChoreWithMiniCluster_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = TEST_UTIL.getAdmin();
 
     helper.writeData(tn1, 2L * SpaceQuotaHelperForTests.ONE_MEGABYTE);
     admin.flush(tn1);

@@ -94,6 +94,7 @@ public class TestNewStartedRegionServerVersion_RestartInjected {
             .withIndex(0)
             .withMode(RestartMode.GRACEFUL)
             .execute();
+        master = UTIL.getMiniHBaseCluster().getMaster();
       }
       checkCount++;
       Thread.sleep(100);

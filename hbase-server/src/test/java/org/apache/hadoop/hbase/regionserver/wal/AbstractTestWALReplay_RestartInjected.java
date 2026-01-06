@@ -246,6 +246,7 @@ public abstract class AbstractTestWALReplay_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    hbaseCluster = TEST_UTIL.getMiniHBaseCluster();
 
     // delete the row
     Delete del = new Delete(Bytes.toBytes("r1"));
@@ -274,6 +275,7 @@ public abstract class AbstractTestWALReplay_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    hbaseCluster = TEST_UTIL.getMiniHBaseCluster();
 
     // move region to origin regionserver
     TEST_UTIL.moveRegionAndWait(destRegion.getRegionInfo(), originServer.getServerName());

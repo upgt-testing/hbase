@@ -111,6 +111,7 @@ public class TestRegionServerCoprocessorExceptionWithAbort_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
       // When we try to write to TEST_TABLE, the buggy coprocessor will
       // cause a NullPointerException, which will cause the regionserver (which
       // hosts the region we attempted to write to) to abort.
@@ -123,6 +124,7 @@ public class TestRegionServerCoprocessorExceptionWithAbort_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
       TEST_UTIL.waitUntilAllRegionsAssigned(TABLE_NAME);
       RestartFramework.at("after_regions_assigned")
         .on(cluster)
@@ -130,6 +132,7 @@ public class TestRegionServerCoprocessorExceptionWithAbort_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
 
       // Note which regionServer will abort (after put is attempted).
       final HRegionServer regionServer = TEST_UTIL.getRSForFirstRegionInTable(TABLE_NAME);

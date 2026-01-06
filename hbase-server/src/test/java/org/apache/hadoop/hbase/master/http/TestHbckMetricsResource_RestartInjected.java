@@ -253,6 +253,7 @@ public class TestHbckMetricsResource_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      admin = conn.getAdmin();
 
       final String baseUrl =
         admin.getMaster().thenApply(ServerName::getHostname).thenCombine(admin.getMasterInfoPort(),

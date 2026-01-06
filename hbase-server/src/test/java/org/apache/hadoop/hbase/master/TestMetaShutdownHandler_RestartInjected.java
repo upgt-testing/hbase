@@ -95,6 +95,7 @@ public class TestMetaShutdownHandler_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     master = cluster.getMaster(); // Refresh after master restart
     regionStates = master.getAssignmentManager().getRegionStates(); // Refresh after master restart
 
@@ -116,6 +117,7 @@ public class TestMetaShutdownHandler_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getHBaseCluster();
     }
     RegionState metaState = MetaTableLocator.getMetaRegionState(master.getZooKeeper());
     assertEquals("Wrong state for meta!", RegionState.State.OPEN, metaState.getState());
@@ -128,6 +130,7 @@ public class TestMetaShutdownHandler_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     master = cluster.getMaster(); // Refresh after master restart
     regionStates = master.getAssignmentManager().getRegionStates(); // Refresh after master restart
 
@@ -144,6 +147,7 @@ public class TestMetaShutdownHandler_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
 
     // Wait for SSH to finish
     ServerManager serverManager = master.getServerManager();
@@ -156,6 +160,7 @@ public class TestMetaShutdownHandler_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     master = cluster.getMaster(); // Refresh after master restart
     serverManager = master.getServerManager(); // Refresh after master restart
     final ServerManager finalServerManager = serverManager;

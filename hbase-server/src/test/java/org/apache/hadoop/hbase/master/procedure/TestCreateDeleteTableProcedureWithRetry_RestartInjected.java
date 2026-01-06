@@ -81,6 +81,7 @@ public class TestCreateDeleteTableProcedureWithRetry_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     ProcedureTestingUtility.submitAndWait(procExec, createProc);
 
@@ -90,6 +91,7 @@ public class TestCreateDeleteTableProcedureWithRetry_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     Assert.assertTrue(UTIL.getAdmin().tableExists(TABLE_NAME));
 
@@ -99,6 +101,7 @@ public class TestCreateDeleteTableProcedureWithRetry_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     MasterProcedureTestingUtility.validateTableCreation(UTIL.getMiniHBaseCluster().getMaster(),
       TABLE_NAME, regions, CF);
@@ -109,6 +112,7 @@ public class TestCreateDeleteTableProcedureWithRetry_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     UTIL.getAdmin().disableTable(TABLE_NAME);
 
@@ -118,6 +122,7 @@ public class TestCreateDeleteTableProcedureWithRetry_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     DeleteTableProcedure deleteProc =
       new DeleteTableProcedure(procExec.getEnvironment(), TABLE_NAME);
@@ -128,6 +133,7 @@ public class TestCreateDeleteTableProcedureWithRetry_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     ProcedureTestingUtility.submitAndWait(procExec, deleteProc);
 
@@ -137,6 +143,7 @@ public class TestCreateDeleteTableProcedureWithRetry_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     Assert.assertFalse(UTIL.getAdmin().tableExists(TABLE_NAME));
 
@@ -146,6 +153,7 @@ public class TestCreateDeleteTableProcedureWithRetry_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    procExec = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     MasterProcedureTestingUtility.validateTableDeletion(UTIL.getMiniHBaseCluster().getMaster(),
       TABLE_NAME);

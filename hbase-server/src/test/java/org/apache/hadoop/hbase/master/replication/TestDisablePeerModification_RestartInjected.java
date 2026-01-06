@@ -140,6 +140,7 @@ public class TestDisablePeerModification_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = CONN.getAdmin();
 
     ReplicationPeerConfig rpc =
       ReplicationPeerConfig.newBuilder().setClusterKey(UTIL.getClusterKey() + "-test")
@@ -151,6 +152,7 @@ public class TestDisablePeerModification_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = CONN.getAdmin();
 
     CompletableFuture<Void> addFuture = admin.addReplicationPeer("test_peer_" + async, rpc);
 
@@ -160,6 +162,7 @@ public class TestDisablePeerModification_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = CONN.getAdmin();
 
     ARRIVE.await();
 
@@ -169,6 +172,7 @@ public class TestDisablePeerModification_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = CONN.getAdmin();
 
     // we have a pending add peer procedure which has already passed the first state, let's issue a
     // peer modification switch request to disable peer modification and set drainProcs to true
@@ -192,6 +196,7 @@ public class TestDisablePeerModification_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = CONN.getAdmin();
 
     // sleep a while, the switchFuture should not finish yet
     // the sleep is necessary as we can not join on the switchFuture, so there is no stable way to
@@ -206,6 +211,7 @@ public class TestDisablePeerModification_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = CONN.getAdmin();
 
     // also verify that we can not schedule a new peer modification procedure
     AddPeerProcedure proc = new AddPeerProcedure("failure", rpc, true);
@@ -217,6 +223,7 @@ public class TestDisablePeerModification_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = CONN.getAdmin();
 
     UTIL.waitFor(15000, () -> proc.isFinished());
 
@@ -226,6 +233,7 @@ public class TestDisablePeerModification_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = CONN.getAdmin();
 
     // make sure the procedure is failed because of peer modification disabled
     assertTrue(proc.isFailed());
@@ -238,6 +246,7 @@ public class TestDisablePeerModification_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = CONN.getAdmin();
 
     // sleep a while and check again, make sure the switchFuture is still not done
     Thread.sleep(5000);
@@ -249,6 +258,7 @@ public class TestDisablePeerModification_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = CONN.getAdmin();
 
     // resume the add peer procedure and wait it done
     RESUME.countDown();
@@ -259,6 +269,7 @@ public class TestDisablePeerModification_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = CONN.getAdmin();
 
     addFuture.get();
 
@@ -268,6 +279,7 @@ public class TestDisablePeerModification_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = CONN.getAdmin();
 
     // this time the switchFuture should be able to finish
     assertTrue(switchFuture.get());
@@ -278,5 +290,6 @@ public class TestDisablePeerModification_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = CONN.getAdmin();
   }
 }

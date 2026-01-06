@@ -271,7 +271,7 @@ public class TestClusterScopeQuotaThrottle_RestartInjected {
 
   @Test
   public void testUserTableClusterScopeQuota() throws Exception {
-    final Admin admin = TEST_UTIL.getAdmin();
+    Admin admin = TEST_UTIL.getAdmin();
     final String userName = User.getCurrent().getShortName();
     admin.setQuota(QuotaSettingsFactory.throttleUser(userName, TABLE_NAME, ThrottleType.READ_NUMBER,
       20, TimeUnit.HOURS, QuotaScope.CLUSTER));
@@ -282,6 +282,7 @@ public class TestClusterScopeQuotaThrottle_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    admin = TEST_UTIL.getAdmin();
 
     triggerUserCacheRefresh(TEST_UTIL, false, TABLE_NAME);
     for (RegionServerThread rst : TEST_UTIL.getMiniHBaseCluster().getRegionServerThreads()) {

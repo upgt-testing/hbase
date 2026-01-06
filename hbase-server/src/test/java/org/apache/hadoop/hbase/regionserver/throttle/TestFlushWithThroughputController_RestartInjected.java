@@ -213,6 +213,7 @@ public class TestFlushWithThroughputController_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = hbtu.getMiniHBaseCluster();
     Connection conn = ConnectionFactory.createConnection(conf);
     hbtu.getAdmin()
       .createTable(TableDescriptorBuilder.newBuilder(tableName)
@@ -225,6 +226,7 @@ public class TestFlushWithThroughputController_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = hbtu.getMiniHBaseCluster();
     HRegionServer regionServer = hbtu.getRSForFirstRegionInTable(tableName);
     double pressure = regionServer.getFlushPressure();
     LOG.debug("Flush pressure before flushing: " + pressure);
@@ -239,6 +241,8 @@ public class TestFlushWithThroughputController_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = hbtu.getMiniHBaseCluster();
+    regionServer = hbtu.getRSForFirstRegionInTable(tableName);
     // We used to assert that the flush pressure is zero but after HBASE-15787 or HBASE-18294 we
     // changed to use heapSize instead of dataSize to calculate the flush pressure, and since
     // heapSize will never be zero, so flush pressure will never be zero either. So we changed the
@@ -265,6 +269,8 @@ public class TestFlushWithThroughputController_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = hbtu.getMiniHBaseCluster();
+    regionServer = hbtu.getRSForFirstRegionInTable(tableName);
     Thread.sleep(5000);
     double expectedThroughPut = 10L * 1024 * 1024 * (1 + regionServer.getFlushPressure());
     assertEquals(expectedThroughPut, throughputController.getMaxThroughput(), EPSILON);

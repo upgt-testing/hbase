@@ -281,6 +281,7 @@ public class TestCompactionWithThroughputController_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      regionServer = TEST_UTIL.getRSForFirstRegionInTable(tableName);
       Thread.sleep(2000);
       assertEquals(15L * 1024 * 1024, throughputController.getMaxThroughput(), EPSILON);
 
@@ -293,6 +294,7 @@ public class TestCompactionWithThroughputController_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      regionServer = TEST_UTIL.getRSForFirstRegionInTable(tableName);
       Thread.sleep(2000);
       assertEquals(20L * 1024 * 1024, throughputController.getMaxThroughput(), EPSILON);
 
@@ -305,6 +307,7 @@ public class TestCompactionWithThroughputController_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      regionServer = TEST_UTIL.getRSForFirstRegionInTable(tableName);
       Thread.sleep(2000);
       assertEquals(Double.MAX_VALUE, throughputController.getMaxThroughput(), EPSILON);
 
@@ -339,6 +342,7 @@ public class TestCompactionWithThroughputController_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getMiniHBaseCluster();
     Connection conn = ConnectionFactory.createConnection(conf);
     try {
       TEST_UTIL.getAdmin()
@@ -352,6 +356,7 @@ public class TestCompactionWithThroughputController_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getMiniHBaseCluster();
       HStore store = getStoreWithName(tableName);
       assertEquals(0, store.getStorefilesCount());
       assertEquals(0.0, store.getCompactionPressure(), EPSILON);
@@ -369,6 +374,7 @@ public class TestCompactionWithThroughputController_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getMiniHBaseCluster();
       assertEquals(8, store.getStorefilesCount());
       assertEquals(0.0, store.getCompactionPressure(), EPSILON);
 
@@ -383,6 +389,7 @@ public class TestCompactionWithThroughputController_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getMiniHBaseCluster();
       assertEquals(10, store.getStorefilesCount());
       assertEquals(0.5, store.getCompactionPressure(), EPSILON);
 
@@ -397,6 +404,7 @@ public class TestCompactionWithThroughputController_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getMiniHBaseCluster();
       assertEquals(12, store.getStorefilesCount());
       assertEquals(1.0, store.getCompactionPressure(), EPSILON);
 
@@ -411,6 +419,7 @@ public class TestCompactionWithThroughputController_RestartInjected {
           .withIndex(0)
           .withMode(RestartMode.GRACEFUL)
           .execute();
+      cluster = TEST_UTIL.getMiniHBaseCluster();
       assertEquals(14, store.getStorefilesCount());
       assertEquals(2.0, store.getCompactionPressure(), EPSILON);
     } finally {

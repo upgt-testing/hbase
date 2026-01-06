@@ -285,6 +285,7 @@ public class TestMaster_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     TEST_UTIL.getMiniHBaseCluster()
       .killMaster(TEST_UTIL.getMiniHBaseCluster().getMaster().getServerName());
     assertTrue(fs.exists(hbckLockPath));
@@ -301,6 +302,7 @@ public class TestMaster_RestartInjected {
       .withIndex(0)
       .withMode(RestartMode.GRACEFUL)
       .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     fs.delete(hbckLockPath, true);
     assertFalse(fs.exists(hbckLockPath));
     // Kill all Masters.

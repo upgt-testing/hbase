@@ -300,5 +300,6 @@ public class TestReportRegionStateTransitionFromDeadServer_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    am = UTIL.getMiniHBaseCluster().getMaster().getAssignmentManager();
   }
 }

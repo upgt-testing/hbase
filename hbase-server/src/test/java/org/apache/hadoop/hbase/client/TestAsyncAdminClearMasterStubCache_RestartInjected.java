@@ -72,6 +72,7 @@ public class TestAsyncAdminClearMasterStubCache_RestartInjected extends TestAsyn
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     // stop the active master
     MasterThread mt = cluster.getMasterThread();
     ServerName sn = mt.getMaster().getServerName();
@@ -83,6 +84,7 @@ public class TestAsyncAdminClearMasterStubCache_RestartInjected extends TestAsyn
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     // wait for new active master
     assertTrue(TEST_UTIL.getHBaseCluster().waitForActiveAndReadyMaster(30000));
     RestartFramework.at("after_new_master_active")
@@ -91,6 +93,7 @@ public class TestAsyncAdminClearMasterStubCache_RestartInjected extends TestAsyn
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     // restart master on the same port, this is important for getting a RemoteException
     cluster.getConf().setInt(HConstants.MASTER_PORT, sn.getPort());
     cluster.startMaster();
@@ -100,6 +103,7 @@ public class TestAsyncAdminClearMasterStubCache_RestartInjected extends TestAsyn
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     // make sure the master is up so we will not get a connect exception
     TEST_UTIL.waitFor(30000, () -> {
       try (Socket socket = new Socket(sn.getHostname(), sn.getPort())) {
@@ -114,6 +118,7 @@ public class TestAsyncAdminClearMasterStubCache_RestartInjected extends TestAsyn
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    cluster = TEST_UTIL.getHBaseCluster();
     // we should switch to the new active master
     assertNotNull(FutureUtils.get(admin.getClusterMetrics()));
   }

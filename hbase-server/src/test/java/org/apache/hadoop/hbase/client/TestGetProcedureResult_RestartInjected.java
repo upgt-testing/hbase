@@ -137,6 +137,7 @@ public class TestGetProcedureResult_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    executor = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     p.failureSet.await();
 
@@ -146,6 +147,7 @@ public class TestGetProcedureResult_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    executor = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     assertEquals(GetProcedureResultResponse.State.RUNNING, getState(procId));
     p.canRollback.countDown();
@@ -156,6 +158,7 @@ public class TestGetProcedureResult_RestartInjected {
         .withIndex(0)
         .withMode(RestartMode.GRACEFUL)
         .execute();
+    executor = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
 
     UTIL.waitFor(30000, new Waiter.ExplainingPredicate<Exception>() {
 
