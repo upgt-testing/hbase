@@ -208,7 +208,7 @@ These may be bugs or test issues - requires investigation.
 
 ### Group 3
 
-- [ ] **Status:** Not started
+- [x] **Status:** TEST-BUG - Test uses stale ProcedureExecutor reference after master restart. The test caches procedureExecutor before restart injection point, then uses it after master restarts. See bugs/HBASE-TEST-BUG-GROUP-3.md
 - **Priority Reason:** Other exception from production code
 - **Test Executions:** 24
 
@@ -276,7 +276,7 @@ java.lang.IllegalArgumentException
 
 ### Group 7
 
-- [ ] **Status:** Not started
+- [x] **Status:** FP - FailedServerException is caused by HBase's client-side FailedServers cache (hbase-client/src/main/java/org/apache/hadoop/hbase/ipc/AbstractRpcClient.java:354-362). After regionserver restart, the server comes back at the same address, but the client refuses to reconnect within the 2-second failed server expiry window (configurable via hbase.ipc.client.failed.servers.expiry). This is expected client-side behavior, not a source code bug. The restart framework should wait for the expiry period or configure a shorter timeout.
 - **Priority Reason:** Other exception from production code
 - **Test Executions:** 13
 
@@ -367,7 +367,7 @@ Caused by: org.apache.hadoop.hbase.ipc.FailedServerException: This server is in 
 
 ### Group 9
 
-- [ ] **Status:** Not started
+- [x] **Status:** TEST-BUG - Test uses stale ProcedureFuture reference after master restart. The test creates a Future from am.moveAsync() before restart injection point, then uses it after master restarts. The ProcedureFuture holds a reference to the old ProcedureExecutor which is no longer running. See bugs/HBASE-TEST-BUG-GROUP-9.md
 - **Priority Reason:** Other exception from production code
 - **Test Executions:** 9
 
@@ -438,7 +438,7 @@ Caused by: java.io.IOException: The Master is Aborting
 
 ### Group 10
 
-- [ ] **Status:** Not started
+- [x] **Status:** TEST-BUG - Test uses stale ServerName after RegionServer restart. The test adds WAL with original ServerName in @BeforeClass, but after restart injection, updatePushedSeqId() uses the new ServerName (with different startcode). ZK node was created with old ServerName path, causing NoNodeException. See bugs/HBASE-TEST-BUG-GROUP-10.md
 - **Priority Reason:** Other exception from production code
 - **Test Executions:** 8
 
