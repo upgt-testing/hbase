@@ -37,6 +37,7 @@
     <license.bundles.vega>true</license.bundles.vega>
     <hbase.webapps.dir>hbase-webapps</hbase.webapps.dir>
     <restart.config>${project.basedir}/restarts-config/restart-config.json</restart.config>
+      <restart.tracking.agent>/workspace/RestartTestingFramework/restart-tracking-agent/target/restart-tracking-agent-1.0.0-SNAPSHOT.jar</restart.tracking.agent>
   </properties>
   <dependencies>
     <!-- Restart Testing Framework - Core -->
@@ -440,7 +441,8 @@
                 <bundled-vega>${license.bundles.vega}</bundled-vega>
                 <bundled-logo>${license.bundles.logo}</bundled-logo>
                 <bundled-bootstrap>${license.bundles.bootstrap}</bundled-bootstrap>
-              </properties>
+                  <restart.tracking.agent>/workspace/RestartTestingFramework/restart-tracking-agent/target/restart-tracking-agent-1.0.0-SNAPSHOT.jar</restart.tracking.agent>
+  </properties>
               <resourceBundles>
                 <resourceBundle>${project.groupId}:hbase-resource-bundle:${project.version}</resourceBundle>
               </resourceBundles>
@@ -611,6 +613,7 @@
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
+          <argLine>-javaagent:${restart.tracking.agent}</argLine>
           <systemPropertyVariables>
             <test.build.webapps>target/test-classes/webapps</test.build.webapps>
           </systemPropertyVariables>
@@ -778,7 +781,8 @@
       <properties>
         <surefire.skipFirstPart>true</surefire.skipFirstPart>
         <surefire.skipSecondPart>true</surefire.skipSecondPart>
-      </properties>
+          <restart.tracking.agent>/workspace/RestartTestingFramework/restart-tracking-agent/target/restart-tracking-agent-1.0.0-SNAPSHOT.jar</restart.tracking.agent>
+  </properties>
     </profile>
     <!-- Special builds -->
     <profile>
