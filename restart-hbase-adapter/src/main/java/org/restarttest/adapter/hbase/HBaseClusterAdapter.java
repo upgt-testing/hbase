@@ -225,6 +225,12 @@ public class HBaseClusterAdapter implements ClusterAdapter<MiniHBaseCluster> {
                 Thread.sleep(100);
 
                 cluster.startRegionServerAndWait(60000);
+
+                // Wait for regions to be reassigned and for the RPC client's failed servers list
+                // to expire (default 2 seconds). This prevents FailedServerException when tests
+                // immediately call Admin operations after restart.
+                // See TEST-BUG-GROUP-4.md for detailed analysis.
+                Thread.sleep(6000);
                 break;
 
             case CRASH:
@@ -232,6 +238,11 @@ public class HBaseClusterAdapter implements ClusterAdapter<MiniHBaseCluster> {
                 cluster.abortRegionServer(rsIndex);
                 cluster.waitOnRegionServer(rsIndex);
                 cluster.startRegionServerAndWait(60000);
+
+                // Wait for regions to be reassigned and for the RPC client's failed servers list
+                // to expire (default 2 seconds). This prevents FailedServerException when tests
+                // immediately call Admin operations after restart.
+                Thread.sleep(6000);
                 break;
 
             case DELAYED_CRASH:
@@ -240,6 +251,11 @@ public class HBaseClusterAdapter implements ClusterAdapter<MiniHBaseCluster> {
                 cluster.waitOnRegionServer(rsIndex);
                 Thread.sleep(500); // Allow some state propagation
                 cluster.startRegionServerAndWait(60000);
+
+                // Wait for regions to be reassigned and for the RPC client's failed servers list
+                // to expire (default 2 seconds). This prevents FailedServerException when tests
+                // immediately call Admin operations after restart.
+                Thread.sleep(6000);
                 break;
 
             default:
