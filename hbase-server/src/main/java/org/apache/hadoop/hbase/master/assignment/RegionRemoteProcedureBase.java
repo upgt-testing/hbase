@@ -275,8 +275,26 @@ public abstract class RegionRemoteProcedureBase extends Procedure<MasterProcedur
   }
 
   private TransitRegionStateProcedure getParent(MasterProcedureEnv env) {
-    return (TransitRegionStateProcedure) env.getMasterServices().getMasterProcedureExecutor()
-      .getProcedure(getParentProcId());
+    long parentProcId = getParentProcId();
+    Procedure<?> parentProc = env.getMasterServices().getMasterProcedureExecutor()
+      .getProcedure(parentProcId);
+    if (parentProc == null) {
+      LOG.error("DEBUG-GROUP55: getParent() returning null for child proc {} (procId={}), "
+          + "parentProcId={}, region={}, targetServer={}, state={}, "
+          + "hasParent={}, rootProcId={}",
+          this.getClass().getSimpleName(), getProcId(), parentProcId,
+          region != null ? region.getEncodedName() : "null",
+          targetServer, state, hasParent(), getRootProcId());
+      // Also check if parent is in completed procedures
+      env.getMasterServices().getMasterProcedureExecutor().getProcedures().forEach(p -> {
+        if (p.getProcId() == parentProcId) {
+          LOG.error("DEBUG-GROUP55: Found parent {} in getProcedures() but not in procedures map!",
+              p);
+        }
+      });
+      return null;
+    }
+    return (TransitRegionStateProcedure) parentProc;
   }
 
   private void unattach(MasterProcedureEnv env) {
@@ -389,7 +407,29 @@ public abstract class RegionRemoteProcedureBase extends Procedure<MasterProcedur
 
   @Override
   protected void afterReplay(MasterProcedureEnv env) {
-    getParent(env).attachRemoteProc(this);
+    LOG.info("DEBUG-GROUP55: afterReplay called for {} (procId={}), parentProcId={}, "
+        + "region={}, state={}", this.getClass().getSimpleName(), getProcId(),
+        getParentProcId(), region != null ? region.getEncodedName() : "null", state);
+
+    TransitRegionStateProcedure parent = getParent(env);
+    if (parent == null) {
+      LOG.error("DEBUG-GROUP55: afterReplay - parent is NULL for child {} (procId={}), "
+          + "parentProcId={}. This will cause NPE! Dumping all procedures:",
+          this.getClass().getSimpleName(), getProcId(), getParentProcId());
+
+      // Dump all active procedures
+      env.getMasterServices().getMasterProcedureExecutor().getProcedures().forEach(p -> {
+        LOG.error("DEBUG-GROUP55: Active proc: procId={}, class={}, state={}, parentProcId={}, "
+            + "hasParent={}, isFinished={}",
+            p.getProcId(), p.getClass().getSimpleName(), p.getState(),
+            p.hasParent() ? p.getParentProcId() : -1, p.hasParent(), p.isFinished());
+      });
+
+      // Throw with detailed message
+      throw new NullPointerException("DEBUG-GROUP55: Parent procedure " + getParentProcId()
+          + " not found for child " + getProcId() + " (" + this.getClass().getSimpleName() + ")");
+    }
+    parent.attachRemoteProc(this);
   }
 
   @Override

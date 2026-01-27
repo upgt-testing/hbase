@@ -183,6 +183,22 @@ public class TestRollbackSCP_RestartInjected {
     };
   }
 
+  private void dumpAllProcedures(String label, ProcedureExecutor<MasterProcedureEnv> procExec) {
+    System.out.println("DEBUG-GROUP55: ======== " + label + " ========");
+    System.out.println("DEBUG-GROUP55: ProcedureExecutor isRunning=" + procExec.isRunning());
+    procExec.getProcedures().forEach(p -> {
+      System.out.println("DEBUG-GROUP55: [" + label + "] Proc: procId=" + p.getProcId()
+          + ", class=" + p.getClass().getSimpleName()
+          + ", state=" + p.getState()
+          + ", hasParent=" + p.hasParent()
+          + ", parentProcId=" + (p.hasParent() ? p.getParentProcId() : -1)
+          + ", rootProcId=" + p.getRootProcId()
+          + ", isFinished=" + p.isFinished()
+          + ", wasExecuted=" + p.wasExecuted());
+    });
+    System.out.println("DEBUG-GROUP55: ======== END " + label + " ========");
+  }
+
   @Test
   public void testFailAndRollback() throws Exception {
     HRegionServer rsWithMeta = UTIL.getRSForFirstRegionInTable(TableName.META_TABLE_NAME);
@@ -209,8 +225,11 @@ public class TestRollbackSCP_RestartInjected {
     ServerCrashProcedure scp = getSCPForServer(rsWithMeta.getServerName());
     ProcedureExecutor<MasterProcedureEnv> procExec =
       UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
+    System.out.println("DEBUG-GROUP55: SCP created with procId=" + scp.getProcId());
+    dumpAllProcedures("AFTER_SCP_CREATED", procExec);
     // wait for the procedure to stop, as we inject a code bug and also set kill before store update
     UTIL.waitFor(30000, () -> !procExec.isRunning());
+    dumpAllProcedures("AFTER_PROCEXEC_STOPPED", procExec);
     RestartFramework.at("after_procedure_stop")
         .on(UTIL.getMiniHBaseCluster())
         .restart("regionserver")
@@ -220,8 +239,15 @@ public class TestRollbackSCP_RestartInjected {
     // make sure that finally we could successfully rollback the procedure
     // Use fresh procExec reference inside loop since master may be restarted
     ProcedureExecutor<MasterProcedureEnv> currentProcExec = procExec;
+    int iteration = 0;
     while (scp.getState() != ProcedureState.FAILED || !currentProcExec.isRunning()) {
+      iteration++;
+      System.out.println("DEBUG-GROUP55: *** BEFORE RESTART ITERATION " + iteration + " ***");
+      System.out.println("DEBUG-GROUP55: SCP state=" + scp.getState()
+          + ", procExec.isRunning=" + currentProcExec.isRunning());
+      dumpAllProcedures("BEFORE_RESTART_ITER_" + iteration, currentProcExec);
       MasterProcedureTestingUtility.restartMasterProcedureExecutor(currentProcExec);
+      System.out.println("DEBUG-GROUP55: *** AFTER RESTART ITERATION " + iteration + " ***");
       RestartFramework.at("after_procedure_restart")
           .on(UTIL.getMiniHBaseCluster())
           .restart("master")

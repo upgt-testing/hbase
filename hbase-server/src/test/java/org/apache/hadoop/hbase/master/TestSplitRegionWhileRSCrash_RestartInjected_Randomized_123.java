@@ -1,0 +1,116 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.hadoop.hbase.master;
+
+import java.util.List;
+import org.apache.hadoop.hbase.HBaseClassTestRule;
+import org.apache.hadoop.hbase.HBaseTestingUtility;
+import org.apache.hadoop.hbase.TableName;
+import org.apache.hadoop.hbase.client.Admin;
+import org.apache.hadoop.hbase.client.Put;
+import org.apache.hadoop.hbase.client.RegionInfo;
+import org.apache.hadoop.hbase.client.ResultScanner;
+import org.apache.hadoop.hbase.client.Scan;
+import org.apache.hadoop.hbase.client.Table;
+import org.apache.hadoop.hbase.master.assignment.SplitTableRegionProcedure;
+import org.apache.hadoop.hbase.master.assignment.TransitRegionStateProcedure;
+import org.apache.hadoop.hbase.master.procedure.MasterProcedureEnv;
+import org.apache.hadoop.hbase.procedure2.ProcedureExecutor;
+import org.apache.hadoop.hbase.testclassification.MasterTests;
+import org.apache.hadoop.hbase.testclassification.MediumTests;
+import org.apache.hadoop.hbase.util.Bytes;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.restarttest.api.RestartFramework;
+import org.restarttest.core.RestartMode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.hbase.thirdparty.com.google.common.io.Closeables;
+
+@Category({ MasterTests.class, MediumTests.class })
+public class TestSplitRegionWhileRSCrash_RestartInjected_Randomized_123 {
+
+    @ClassRule
+    public static final HBaseClassTestRule CLASS_RULE = HBaseClassTestRule.forClass(TestSplitRegionWhileRSCrash_RestartInjected.class);
+
+    private static final Logger LOG = LoggerFactory.getLogger(TestSplitRegionWhileRSCrash_RestartInjected.class);
+
+    protected static final HBaseTestingUtility UTIL = new HBaseTestingUtility();
+
+    private static TableName TABLE_NAME = TableName.valueOf("test");
+
+    private static Admin ADMIN;
+
+    private static byte[] CF = Bytes.toBytes("cf");
+
+    private static Table TABLE;
+
+    @BeforeClass
+    public static void setupCluster() throws Exception {
+        UTIL.startMiniCluster(1);
+        ADMIN = UTIL.getAdmin();
+        TABLE = UTIL.createTable(TABLE_NAME, CF);
+        UTIL.waitTableAvailable(TABLE_NAME);
+    }
+
+    @AfterClass
+    public static void cleanupTest() throws Exception {
+        Closeables.close(TABLE, true);
+        UTIL.shutdownMiniCluster();
+    }
+
+    @Test
+    public void test() throws Exception {
+        RestartFramework.at("after_regions_stabilize").on(UTIL.getMiniHBaseCluster()).restart("regionserver").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        RestartFramework.at("after_start_new_region_server").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        MasterProcedureEnv env = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor().getEnvironment();
+        final ProcedureExecutor<MasterProcedureEnv> executor = UTIL.getMiniHBaseCluster().getMaster().getMasterProcedureExecutor();
+        List<RegionInfo> regionInfos = ADMIN.getRegions(TABLE_NAME);
+        SplitTableRegionProcedure splitProcedure = new SplitTableRegionProcedure(env, regionInfos.get(0), Bytes.toBytes("row5"));
+        RestartFramework.at("after_submit_split_procedure").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        LOG.info("Begin to put data");
+        RestartFramework.at("after_write_data").on(UTIL.getMiniHBaseCluster()).restart("regionserver").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        for (int i = 0; i < 10; i++) {
+            byte[] row = Bytes.toBytes("row" + i);
+            Put put = new Put(row);
+            put.addColumn(CF, CF, CF);
+            TABLE.put(put);
+        }
+        RestartFramework.at("after_data_verification").on(UTIL.getMiniHBaseCluster()).restart("regionserver").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        RestartFramework.at("after_create_split_procedure").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        executor.submitProcedure(splitProcedure);
+        LOG.info("SplitProcedure submitted");
+        RestartFramework.at("after_kill_region_server").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        UTIL.waitFor(30000, () -> executor.getProcedures().stream().filter(p -> p instanceof TransitRegionStateProcedure).map(p -> (TransitRegionStateProcedure) p).anyMatch(p -> TABLE_NAME.equals(p.getTableName())));
+        UTIL.getMiniHBaseCluster().killRegionServer(UTIL.getMiniHBaseCluster().getRegionServer(0).getServerName());
+        UTIL.getMiniHBaseCluster().startRegionServer();
+        UTIL.waitUntilNoRegionsInTransition();
+        RestartFramework.at("after_transit_procedure_started").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        Scan scan = new Scan();
+        ResultScanner results = TABLE.getScanner(scan);
+        int count = 0;
+        while (results.next() != null) {
+            count++;
+        }
+        Assert.assertEquals("There should be 10 rows!", 10, count);
+    }
+}

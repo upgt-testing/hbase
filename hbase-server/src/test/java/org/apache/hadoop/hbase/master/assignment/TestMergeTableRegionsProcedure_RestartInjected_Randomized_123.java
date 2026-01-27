@@ -1,0 +1,500 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.hadoop.hbase.master.assignment;
+
+import static org.apache.hadoop.hbase.procedure2.ProcedureTestingUtility.assertProcFailed;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.hbase.HBaseClassTestRule;
+import org.apache.hadoop.hbase.HBaseTestingUtility;
+import org.apache.hadoop.hbase.HConstants;
+import org.apache.hadoop.hbase.MetaTableAccessor;
+import org.apache.hadoop.hbase.TableName;
+import org.apache.hadoop.hbase.client.Admin;
+import org.apache.hadoop.hbase.client.ColumnFamilyDescriptorBuilder;
+import org.apache.hadoop.hbase.client.Put;
+import org.apache.hadoop.hbase.client.RegionInfo;
+import org.apache.hadoop.hbase.client.SnapshotDescription;
+import org.apache.hadoop.hbase.client.SnapshotType;
+import org.apache.hadoop.hbase.client.Table;
+import org.apache.hadoop.hbase.client.TableDescriptor;
+import org.apache.hadoop.hbase.client.TableDescriptorBuilder;
+import org.apache.hadoop.hbase.master.procedure.MasterProcedureConstants;
+import org.apache.hadoop.hbase.master.procedure.MasterProcedureEnv;
+import org.apache.hadoop.hbase.master.procedure.MasterProcedureTestingUtility;
+import org.apache.hadoop.hbase.master.procedure.ModifyTableProcedure;
+import org.apache.hadoop.hbase.master.procedure.TestSnapshotProcedure;
+import org.apache.hadoop.hbase.procedure2.ProcedureExecutor;
+import org.apache.hadoop.hbase.procedure2.ProcedureMetrics;
+import org.apache.hadoop.hbase.procedure2.ProcedureTestingUtility;
+import org.apache.hadoop.hbase.regionserver.HRegion;
+import org.apache.hadoop.hbase.snapshot.SnapshotDescriptionUtils;
+import org.apache.hadoop.hbase.testclassification.LargeTests;
+import org.apache.hadoop.hbase.testclassification.MasterTests;
+import org.apache.hadoop.hbase.util.Bytes;
+import org.apache.hadoop.hbase.util.Threads;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.junit.rules.TestName;
+import org.restarttest.api.RestartFramework;
+import org.restarttest.core.RestartMode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.hadoop.hbase.shaded.protobuf.ProtobufUtil;
+import org.apache.hadoop.hbase.shaded.protobuf.generated.SnapshotProtos;
+
+@Category({ MasterTests.class, LargeTests.class })
+public class TestMergeTableRegionsProcedure_RestartInjected_Randomized_123 {
+
+    @ClassRule
+    public static final HBaseClassTestRule CLASS_RULE = HBaseClassTestRule.forClass(TestMergeTableRegionsProcedure_RestartInjected.class);
+
+    private static final Logger LOG = LoggerFactory.getLogger(TestMergeTableRegionsProcedure.class);
+
+    @Rule
+    public final TestName name = new TestName();
+
+    private static final HBaseTestingUtility UTIL = new HBaseTestingUtility();
+
+    private static final int initialRegionCount = 4;
+
+    private final static byte[] FAMILY = Bytes.toBytes("FAMILY");
+
+    private static Admin admin;
+
+    private ProcedureMetrics mergeProcMetrics;
+
+    private ProcedureMetrics assignProcMetrics;
+
+    private ProcedureMetrics unassignProcMetrics;
+
+    private long mergeSubmittedCount = 0;
+
+    private long mergeFailedCount = 0;
+
+    private long assignSubmittedCount = 0;
+
+    private long assignFailedCount = 0;
+
+    private long unassignSubmittedCount = 0;
+
+    private long unassignFailedCount = 0;
+
+    private static void setupConf(Configuration conf) {
+        // Reduce the maximum attempts to speed up the test
+        conf.setInt("hbase.assignment.maximum.attempts", 3);
+        conf.setInt("hbase.master.maximum.ping.server.attempts", 3);
+        conf.setInt("hbase.master.ping.server.retry.sleep.interval", 1);
+        conf.setInt(MasterProcedureConstants.MASTER_PROCEDURE_THREADS, 1);
+        conf.set("hbase.coprocessor.region.classes", RegionServerHostingReplicaSlowOpenCoprocessor.class.getName());
+    }
+
+    @BeforeClass
+    public static void setupCluster() throws Exception {
+        setupConf(UTIL.getConfiguration());
+        UTIL.startMiniCluster(1);
+        admin = UTIL.getAdmin();
+    }
+
+    @AfterClass
+    public static void cleanupTest() throws Exception {
+        UTIL.shutdownMiniCluster();
+    }
+
+    @Before
+    public void setup() throws Exception {
+        resetProcExecutorTestingKillFlag();
+        MasterProcedureTestingUtility.generateNonceGroup(UTIL.getHBaseCluster().getMaster());
+        MasterProcedureTestingUtility.generateNonce(UTIL.getHBaseCluster().getMaster());
+        // Turn off balancer so it doesn't cut in and mess up our placements.
+        admin.balancerSwitch(false, true);
+        // Turn off the meta scanner so it don't remove parent on us.
+        UTIL.getHBaseCluster().getMaster().setCatalogJanitorEnabled(false);
+        resetProcExecutorTestingKillFlag();
+        AssignmentManager am = UTIL.getHBaseCluster().getMaster().getAssignmentManager();
+        mergeProcMetrics = am.getAssignmentManagerMetrics().getMergeProcMetrics();
+        assignProcMetrics = am.getAssignmentManagerMetrics().getAssignProcMetrics();
+        unassignProcMetrics = am.getAssignmentManagerMetrics().getUnassignProcMetrics();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        resetProcExecutorTestingKillFlag();
+        for (TableDescriptor htd : admin.listTableDescriptors()) {
+            LOG.info("Tear down, remove table=" + htd.getTableName());
+            UTIL.deleteTable(htd.getTableName());
+        }
+    }
+
+    private void resetProcExecutorTestingKillFlag() {
+        final ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+        ProcedureTestingUtility.setKillAndToggleBeforeStoreUpdate(procExec, false);
+        assertTrue("expected executor to be running", procExec.isRunning());
+    }
+
+    private int loadARowPerRegion(final Table t, List<RegionInfo> ris) throws IOException {
+        List<Put> puts = new ArrayList<>();
+        for (RegionInfo ri : ris) {
+            Put put = new Put(ri.getStartKey() == null || ri.getStartKey().length == 0 ? new byte[] { 'a' } : ri.getStartKey());
+            put.addColumn(HConstants.CATALOG_FAMILY, HConstants.CATALOG_FAMILY, HConstants.CATALOG_FAMILY);
+            puts.add(put);
+        }
+        t.put(puts);
+        return puts.size();
+    }
+
+    /**
+     * This tests two region merges
+     */
+    @Test
+    public void testMergeTwoRegions() throws Exception {
+        RestartFramework.at("after_create_table_merge_two").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        final TableName tableName = TableName.valueOf(this.name.getMethodName());
+        UTIL.createTable(tableName, new byte[][] { HConstants.CATALOG_FAMILY }, new byte[][] { new byte[] { 'b' }, new byte[] { 'c' }, new byte[] { 'd' }, new byte[] { 'e' } });
+        RestartFramework.at("after_test_merge_two").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        testMerge(tableName, 2);
+    }
+
+    private void testMerge(TableName tableName, int mergeCount) throws IOException {
+        List<RegionInfo> ris = MetaTableAccessor.getTableRegions(UTIL.getConnection(), tableName);
+        RestartFramework.at("after_submit_merge_proc").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        RestartFramework.at("after_verify_region_count").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        int originalRegionCount = ris.size();
+        assertTrue(originalRegionCount > mergeCount);
+        RegionInfo[] regionsToMerge = ris.subList(0, mergeCount).toArray(new RegionInfo[] {});
+        int countOfRowsLoaded = 0;
+        try (Table table = UTIL.getConnection().getTable(tableName)) {
+            countOfRowsLoaded = loadARowPerRegion(table, ris);
+        }
+        assertEquals(countOfRowsLoaded, UTIL.countRows(tableName));
+        // collect AM metrics before test
+        collectAssignmentManagerMetrics();
+        ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+        RestartFramework.at("after_disable_table").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        MergeTableRegionsProcedure proc = new MergeTableRegionsProcedure(procExec.getEnvironment(), regionsToMerge, true);
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        long procId = procExec.submitProcedure(proc);
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        ProcedureTestingUtility.waitProcedure(procExec, procId);
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        RestartFramework.at("after_wait_cleanup").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        RestartFramework.at("after_wait_merge_proc").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        RestartFramework.at("after_create_merge_proc").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        ProcedureTestingUtility.assertProcNotFailed(procExec, procId);
+        MetaTableAccessor.fullScanMetaAndPrint(UTIL.getConnection());
+        RestartFramework.at("after_verify_metrics").on(UTIL.getMiniHBaseCluster()).restart("regionserver").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        assertEquals(originalRegionCount - mergeCount + 1, MetaTableAccessor.getTableRegions(UTIL.getConnection(), tableName).size());
+        RestartFramework.at("after_get_regions").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        assertEquals(mergeSubmittedCount + 1, mergeProcMetrics.getSubmittedCounter().getCount());
+        assertEquals(mergeFailedCount, mergeProcMetrics.getFailedCounter().getCount());
+        assertEquals(assignSubmittedCount + 1, assignProcMetrics.getSubmittedCounter().getCount());
+        assertEquals(assignFailedCount, assignProcMetrics.getFailedCounter().getCount());
+        assertEquals(unassignSubmittedCount + mergeCount, unassignProcMetrics.getSubmittedCounter().getCount());
+        assertEquals(unassignFailedCount, unassignProcMetrics.getFailedCounter().getCount());
+        // Need to get the references cleaned out. Close of region will move them
+        // to archive so disable and reopen just to get rid of references to later
+        // when the catalogjanitor runs, it can do merged region cleanup.
+        admin.disableTable(tableName);
+        admin.enableTable(tableName);
+        RestartFramework.at("after_trigger_catalog_janitor").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        RestartFramework.at("after_load_rows").on(UTIL.getMiniHBaseCluster()).restart("regionserver").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        // Can I purge the merged regions from hbase:meta? Check that all went
+        // well by looking at the merged row up in hbase:meta. It should have no
+        // more mention of the merged regions; they are purged as last step in
+        // the merged regions cleanup.
+        UTIL.getHBaseCluster().getMaster().setCatalogJanitorEnabled(true);
+        UTIL.getHBaseCluster().getMaster().getCatalogJanitor().triggerNow();
+        RestartFramework.at("after_enable_table").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        RegionInfo mergedRegion = proc.getMergedRegion();
+        while (ris != null && ris.get(0) != null && ris.get(1) != null) {
+            ris = MetaTableAccessor.getMergeRegions(UTIL.getConnection(), mergedRegion);
+            LOG.info("{} {}", Bytes.toStringBinary(mergedRegion.getRegionName()), ris);
+            Threads.sleep(1000);
+        }
+        assertEquals(countOfRowsLoaded, UTIL.countRows(tableName));
+    }
+
+    /**
+     * This tests ten region merges in one go.
+     */
+    @Test
+    public void testMergeTenRegions() throws Exception {
+        RestartFramework.at("after_test_merge_ten").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        final TableName tableName = TableName.valueOf(this.name.getMethodName());
+        RestartFramework.at("after_create_table_merge_ten").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        // Note: procExec is not used in this method after the restart
+        UTIL.createMultiRegionTable(tableName, HConstants.CATALOG_FAMILY);
+        testMerge(tableName, 10);
+    }
+
+    /**
+     * This tests two concurrent region merges
+     */
+    @Test
+    public void testMergeRegionsConcurrently() throws Exception {
+        final TableName tableName = TableName.valueOf("testMergeRegionsConcurrently");
+        ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+        List<RegionInfo> tableRegions = createTable(tableName);
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        RegionInfo[] regionsToMerge1 = new RegionInfo[2];
+        RegionInfo[] regionsToMerge2 = new RegionInfo[2];
+        regionsToMerge1[0] = tableRegions.get(0);
+        regionsToMerge1[1] = tableRegions.get(1);
+        regionsToMerge2[0] = tableRegions.get(2);
+        RestartFramework.at("after_verify_concurrent_merge").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        regionsToMerge2[1] = tableRegions.get(3);
+        // collect AM metrics before test
+        collectAssignmentManagerMetrics();
+        RestartFramework.at("after_submit_concurrent_procs").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        long procId1 = procExec.submitProcedure(new MergeTableRegionsProcedure(procExec.getEnvironment(), regionsToMerge1, true));
+        long procId2 = procExec.submitProcedure(new MergeTableRegionsProcedure(procExec.getEnvironment(), regionsToMerge2, true));
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        ProcedureTestingUtility.waitProcedure(procExec, procId1);
+        ProcedureTestingUtility.waitProcedure(procExec, procId2);
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        RestartFramework.at("after_collect_metrics_concurrent").on(UTIL.getMiniHBaseCluster()).restart("regionserver").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        ProcedureTestingUtility.assertProcNotFailed(procExec, procId1);
+        ProcedureTestingUtility.assertProcNotFailed(procExec, procId2);
+        RestartFramework.at("after_wait_concurrent_procs").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        assertRegionCount(tableName, initialRegionCount - 2);
+        RestartFramework.at("after_create_table_concurrent").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        assertEquals(mergeSubmittedCount + 2, mergeProcMetrics.getSubmittedCounter().getCount());
+        assertEquals(mergeFailedCount, mergeProcMetrics.getFailedCounter().getCount());
+        assertEquals(assignSubmittedCount + 2, assignProcMetrics.getSubmittedCounter().getCount());
+        assertEquals(assignFailedCount, assignProcMetrics.getFailedCounter().getCount());
+        assertEquals(unassignSubmittedCount + 4, unassignProcMetrics.getSubmittedCounter().getCount());
+        assertEquals(unassignFailedCount, unassignProcMetrics.getFailedCounter().getCount());
+    }
+
+    @Test
+    public void testRecoveryAndDoubleExecution() throws Exception {
+        final TableName tableName = TableName.valueOf("testRecoveryAndDoubleExecution");
+        ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+        List<RegionInfo> tableRegions = createTable(tableName);
+        RestartFramework.at("after_recovery_test").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        RestartFramework.at("after_verify_recovery").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        ProcedureTestingUtility.waitNoProcedureRunning(procExec);
+        RestartFramework.at("after_create_table_recovery").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        ProcedureTestingUtility.setKillIfHasParent(procExec, false);
+        ProcedureTestingUtility.setKillAndToggleBeforeStoreUpdate(procExec, true);
+        RestartFramework.at("after_submit_recovery_proc").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        RegionInfo[] regionsToMerge = new RegionInfo[2];
+        regionsToMerge[0] = tableRegions.get(0);
+        regionsToMerge[1] = tableRegions.get(1);
+        RestartFramework.at("after_setup_recovery_test").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        long procId = procExec.submitProcedure(new MergeTableRegionsProcedure(procExec.getEnvironment(), regionsToMerge, true));
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        // Restart the executor and execute the step twice
+        MasterProcedureTestingUtility.testRecoveryAndDoubleExecution(procExec, procId);
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        ProcedureTestingUtility.assertProcNotFailed(procExec, procId);
+        assertRegionCount(tableName, initialRegionCount - 1);
+    }
+
+    @Test
+    public void testRollbackAndDoubleExecution() throws Exception {
+        final TableName tableName = TableName.valueOf("testRollbackAndDoubleExecution");
+        RestartFramework.at("after_submit_rollback_proc").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+        List<RegionInfo> tableRegions = createTable(tableName);
+        RestartFramework.at("after_setup_rollback_test").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        RestartFramework.at("after_rollback_test").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        RestartFramework.at("after_verify_rollback").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        ProcedureTestingUtility.waitNoProcedureRunning(procExec);
+        ProcedureTestingUtility.setKillAndToggleBeforeStoreUpdate(procExec, true);
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        RegionInfo[] regionsToMerge = new RegionInfo[2];
+        RestartFramework.at("after_create_table_rollback").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        regionsToMerge[0] = tableRegions.get(0);
+        regionsToMerge[1] = tableRegions.get(1);
+        long procId = procExec.submitProcedure(new MergeTableRegionsProcedure(procExec.getEnvironment(), regionsToMerge, true));
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        RestartFramework.at("after_wait_regions_assigned").on(UTIL.getMiniHBaseCluster()).restart("regionserver").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        // Failing before MERGE_TABLE_REGIONS_UPDATE_META we should trigger the rollback
+        // NOTE: the 8 (number of MERGE_TABLE_REGIONS_UPDATE_META step) is
+        // hardcoded, so you have to look at this test at least once when you add a new step.
+        int lastStep = 8;
+        MasterProcedureTestingUtility.testRollbackAndDoubleExecution(procExec, procId, lastStep, true);
+        assertEquals(initialRegionCount, UTIL.getAdmin().getRegions(tableName).size());
+        UTIL.waitUntilAllRegionsAssigned(tableName);
+        List<HRegion> regions = UTIL.getMiniHBaseCluster().getRegions(tableName);
+        assertEquals(initialRegionCount, regions.size());
+    }
+
+    @Test
+    public void testMergeWithoutPONR() throws Exception {
+        RestartFramework.at("after_setup_without_ponr_test").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        final TableName tableName = TableName.valueOf("testMergeWithoutPONR");
+        ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+        RestartFramework.at("after_create_table_without_ponr").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        RestartFramework.at("after_submit_without_ponr_proc").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        List<RegionInfo> tableRegions = createTable(tableName);
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        RestartFramework.at("after_wait_without_ponr_proc").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        ProcedureTestingUtility.waitNoProcedureRunning(procExec);
+        ProcedureTestingUtility.setKillAndToggleBeforeStoreUpdate(procExec, true);
+        RestartFramework.at("after_recovery_without_ponr").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        RegionInfo[] regionsToMerge = new RegionInfo[2];
+        regionsToMerge[0] = tableRegions.get(0);
+        regionsToMerge[1] = tableRegions.get(1);
+        long procId = procExec.submitProcedure(new MergeTableRegionsProcedure(procExec.getEnvironment(), regionsToMerge, true));
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        // Execute until step 9 of split procedure
+        // NOTE: step 9 is after step MERGE_TABLE_REGIONS_UPDATE_META
+        MasterProcedureTestingUtility.testRecoveryAndDoubleExecution(procExec, procId, 9, false);
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        // Unset Toggle Kill and make ProcExec work correctly
+        ProcedureTestingUtility.setKillAndToggleBeforeStoreUpdate(procExec, false);
+        MasterProcedureTestingUtility.restartMasterProcedureExecutor(procExec);
+        ProcedureTestingUtility.waitProcedure(procExec, procId);
+        RestartFramework.at("after_verify_without_ponr").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        assertRegionCount(tableName, initialRegionCount - 1);
+    }
+
+    @Test
+    public void testMergingRegionWhileTakingSnapshot() throws Exception {
+        final TableName tableName = TableName.valueOf("testMergingRegionWhileTakingSnapshot");
+        ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+        List<RegionInfo> tableRegions = createTable(tableName);
+        RestartFramework.at("after_submit_merge_with_snapshot").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        RestartFramework.at("after_verify_snapshot_conflict").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        ProcedureTestingUtility.waitNoProcedureRunning(procExec);
+        SnapshotDescription snapshot = new SnapshotDescription("SnapshotProcedureTest", tableName, SnapshotType.FLUSH);
+        SnapshotProtos.SnapshotDescription snapshotProto = ProtobufUtil.createHBaseProtosSnapshotDesc(snapshot);
+        snapshotProto = SnapshotDescriptionUtils.validate(snapshotProto, UTIL.getHBaseCluster().getMaster().getConfiguration());
+        long snapshotProcId = procExec.submitProcedure(new TestSnapshotProcedure.DelaySnapshotProcedure(procExec.getEnvironment(), snapshotProto));
+        UTIL.getHBaseCluster().getMaster().getSnapshotManager().registerSnapshotProcedure(snapshotProto, snapshotProcId);
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        RestartFramework.at("after_create_table_with_snapshot").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        RegionInfo[] regionsToMerge = new RegionInfo[2];
+        RestartFramework.at("after_submit_snapshot_proc").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        regionsToMerge[0] = tableRegions.get(0);
+        regionsToMerge[1] = tableRegions.get(1);
+        long mergeProcId = procExec.submitProcedure(new MergeTableRegionsProcedure(procExec.getEnvironment(), regionsToMerge, true));
+        RestartFramework.at("after_wait_merge_and_snapshot").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        ProcedureTestingUtility.waitProcedure(UTIL.getHBaseCluster().getMaster().getMasterProcedureExecutor(), mergeProcId);
+        ProcedureTestingUtility.waitProcedure(UTIL.getHBaseCluster().getMaster().getMasterProcedureExecutor(), snapshotProcId);
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        assertProcFailed(procExec, mergeProcId);
+        assertEquals(initialRegionCount, UTIL.getAdmin().getRegions(tableName).size());
+    }
+
+    @Test
+    public void testMergeDetectsModifyTableProcedure() throws Exception {
+        final TableName tableName = TableName.valueOf(name.getMethodName());
+        ProcedureExecutor<MasterProcedureEnv> procExec = getMasterProcedureExecutor();
+        List<RegionInfo> regions = createTable(tableName);
+        RestartFramework.at("after_verify_modify_conflict").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        RestartFramework.at("after_submit_merge_with_modify").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        RegionServerHostingReplicaSlowOpenCoprocessor.slowDownReplicaOpen = true;
+        TableDescriptor td = TableDescriptorBuilder.newBuilder(admin.getDescriptor(tableName)).setRegionReplication(2).build();
+        long modifyProcId = procExec.submitProcedure(new ModifyTableProcedure(procExec.getEnvironment(), td));
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        // Merge regions of the table, the MergeTableRegionsProcedure will fail because there is a
+        // ModifyTableProcedure in progress
+        MergeTableRegionsProcedure mergeProcedure = new MergeTableRegionsProcedure(procExec.getEnvironment(), regions.toArray(new RegionInfo[0]), false);
+        long mergeProcId = procExec.submitProcedure(mergeProcedure);
+        RestartFramework.at("after_wait_merge_with_modify").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        ProcedureTestingUtility.waitProcedure(procExec, mergeProcId);
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        ProcedureTestingUtility.assertProcFailed(procExec, mergeProcId);
+        RestartFramework.at("after_create_table_modify").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        RestartFramework.at("after_submit_modify_proc").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        RegionServerHostingReplicaSlowOpenCoprocessor.slowDownReplicaOpen = false;
+        ProcedureTestingUtility.waitProcedure(procExec, modifyProcId);
+        RestartFramework.at("after_wait_modify_proc").on(UTIL.getMiniHBaseCluster()).restart("master").withIndex(0).withMode(RestartMode.GRACEFUL).execute();
+        // Refresh after master restart
+        procExec = getMasterProcedureExecutor();
+        ProcedureTestingUtility.assertProcNotFailed(procExec, modifyProcId);
+    }
+
+    private List<RegionInfo> createTable(final TableName tableName) throws Exception {
+        TableDescriptor desc = TableDescriptorBuilder.newBuilder(tableName).setColumnFamily(ColumnFamilyDescriptorBuilder.of(FAMILY)).build();
+        byte[][] splitRows = new byte[initialRegionCount - 1][];
+        for (int i = 0; i < splitRows.length; ++i) {
+            splitRows[i] = Bytes.toBytes(String.format("%d", i));
+        }
+        admin.createTable(desc, splitRows);
+        return assertRegionCount(tableName, initialRegionCount);
+    }
+
+    public List<RegionInfo> assertRegionCount(final TableName tableName, final int nregions) throws Exception {
+        UTIL.waitUntilNoRegionsInTransition();
+        List<RegionInfo> tableRegions = admin.getRegions(tableName);
+        assertEquals(nregions, tableRegions.size());
+        return tableRegions;
+    }
+
+    private ProcedureExecutor<MasterProcedureEnv> getMasterProcedureExecutor() {
+        return UTIL.getHBaseCluster().getMaster().getMasterProcedureExecutor();
+    }
+
+    private void collectAssignmentManagerMetrics() {
+        mergeSubmittedCount = mergeProcMetrics.getSubmittedCounter().getCount();
+        mergeFailedCount = mergeProcMetrics.getFailedCounter().getCount();
+        assignSubmittedCount = assignProcMetrics.getSubmittedCounter().getCount();
+        assignFailedCount = assignProcMetrics.getFailedCounter().getCount();
+        unassignSubmittedCount = unassignProcMetrics.getSubmittedCounter().getCount();
+        unassignFailedCount = unassignProcMetrics.getFailedCounter().getCount();
+    }
+}

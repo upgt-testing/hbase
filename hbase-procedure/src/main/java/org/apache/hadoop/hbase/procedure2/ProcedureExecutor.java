@@ -525,7 +525,13 @@ public class ProcedureExecutor<TEnvironment> {
         }
       }
     });
+    LOG.info("DEBUG-GROUP55: About to call afterReplay on {} runnable procedures. "
+        + "Total procedures in map: {}, completed: {}",
+        runnableList.size(), procedures.size(), completed.size());
     runnableList.forEach(p -> {
+      LOG.info("DEBUG-GROUP55: Calling afterReplay on procId={}, class={}, hasParent={}, parentProcId={}",
+          p.getProcId(), p.getClass().getSimpleName(), p.hasParent(),
+          p.hasParent() ? p.getParentProcId() : -1);
       p.afterReplay(getEnvironment());
       if (!p.hasParent()) {
         sendProcedureLoadedNotification(p.getProcId());
@@ -550,6 +556,11 @@ public class ProcedureExecutor<TEnvironment> {
       if (finished) {
         completed.put(proc.getProcId(), new CompletedProcedureRetainer<>(proc));
         LOG.debug("Completed {}", proc);
+        // DEBUG-GROUP55: Log completed procedures that might be parents
+        LOG.info("DEBUG-GROUP55: Loading COMPLETED proc: procId={}, class={}, state={}, "
+            + "hasParent={}, parentProcId={}",
+            proc.getProcId(), proc.getClass().getSimpleName(), proc.getState(),
+            proc.hasParent(), proc.hasParent() ? proc.getParentProcId() : -1);
       } else {
         if (!proc.hasParent()) {
           assert !proc.isFinished() : "unexpected finished procedure";
@@ -559,6 +570,12 @@ public class ProcedureExecutor<TEnvironment> {
         // add the procedure to the map
         proc.beforeReplay(getEnvironment());
         procedures.put(proc.getProcId(), proc);
+        // DEBUG-GROUP55: Log active procedures being loaded
+        LOG.info("DEBUG-GROUP55: Loading ACTIVE proc: procId={}, class={}, state={}, "
+            + "hasParent={}, parentProcId={}, rootProcId={}",
+            proc.getProcId(), proc.getClass().getSimpleName(), proc.getState(),
+            proc.hasParent(), proc.hasParent() ? proc.getParentProcId() : -1,
+            proc.getRootProcId());
         switch (proc.getState()) {
           case RUNNABLE:
             runnableCount++;
